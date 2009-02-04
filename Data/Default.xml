@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+
+<OpenGC>
+
+<!-- This is the main XML file that configures the application and sets up
+the main window, the layout of the gauges, the data source, and custom 
+preferences. -->
+
+<!-- PREFERENCES -->
+	<Preferences>
+		<Zoom>1.0</Zoom>
+	</Preferences>
+
+<!-- DATA SOURCE -->
+	<DataSource type="Test"/>
+<!--
+	<DataSource type="FlightGear">
+		<Host>192.168.2.1</Host>
+		<Port>5800</Port>
+	</DataSource>
+-->
+
+<!-- MAIN WINDOW-->
+	<Window>
+		<Title>Albatross Glass Cockpit</Title>
+
+		<Geometry>
+			<Position>0,0</Position>
+			<Size>1127,785</Size>
+		</Geometry>
+
+		<Gauge type="PFD">
+			<Position>-4.0,58.0</Position>
+			<Scale>1.0,1.0</Scale>
+		</Gauge>
+
+		<Gauge type="NavDisplay">
+			<Position>146.0,0.0</Position>
+			<Scale>1.0,1.0</Scale>
+		</Gauge>
+
+		<Gauge type="EngineInstruments">
+			<Position>0.0,0.0</Position>
+			<Scale>1.0,1.0</Scale>
+			<Outline>true</Outline>
+		</Gauge>
+	</Window>
+
+</OpenGC>
+

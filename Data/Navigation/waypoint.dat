@@ -1,0 +1,7 @@
+# Waypoint test Hugo Vincent 22060418
+# Format is:
+# lat       long        elev  style  id
+38.087769 -077.324919    284    396  One
+57.083819  009.680092      0    398  Two
+56.318625  010.459331      0    324  Three
+

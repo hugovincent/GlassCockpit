@@ -1,0 +1,90 @@
+﻿Last Updated:	2006.09.20
+Updated By:		Hugo Vincent
+_______________________________________________________________________________
+
+	1.	Enhancements and Changes
+_______________________________________________________________________________
+
+* XML-described Gauges built using GaugeComponents (deprecate the Gauge class)
+* FlightCourse is compeltely incomplete and broken
+* FlightGear data source needs to be finished, and remove the dependency on Plib
+* Navigation display
+	* compass text
+	* overlay text area:
+		* time & distance to waypoint
+		* GPS lat/long (as Degrees:Minutes:Seconds for decimal?)
+* XML <Window> description needs some way of describing dividor lines
+* GaugeComponents:
+	* new: plain text component (only arguments would be font size and text - it would compute its size automatically)
+	* new: line component
+	* new: frames-per-second gauge, code in EngineInstruments
+	* rename EngineDial to PieDial
+	* rename GenericDial to MarkedDial
+	* tidy up inheritance and code sharing
+* Data that needs displaying
+	* trends?
+	* G-meter (Accel_Body_{Fwd,Down,Right})
+	* mixture
+	* flight director vertical speed
+	* AGL altitude on altitude tape
+	* pressure
+	* external temperature
+	* engine health, downlink RSSI
+	* old data warning
+* Dynamically loaded GaugeComponents and DataSources using dlopen() et al.
+* Binary navigation databases loaded via mmap (faster loading etc)
+
+_______________________________________________________________________________
+
+	2.	New Features:
+_______________________________________________________________________________
+
+* Navigation display
+	* course, showing way points
+	* correct and useful display of wind information
+	* rotating airplane symbol when heading differs from ground track
+	* Hover mouse over a waypoint, navaid or airport for more information
+* Waypoint interpolation - shouldn't depend on anything in OpenGC so we can use it onboard also.
+
+_______________________________________________________________________________
+
+	3.	Bugs:
+_______________________________________________________________________________
+
+* Fix NavDisplay::PlotGeoObjs() template
+* Engine instruments: tachometer needs to look different from temperature gauges
+* Nav display:
+	* more than one navigation hash-bin on screen at once.
+	* management of flight course
+* Graphics:
+	* SpeedTape, AltitudeTicker jittering
+	* Mitering at line vertexes for circles, especially in engine instruments
+* Build system:
+	* Fix Doxygen inconsistencies and tidy up documentation
+	* Fix Environment() use in SConstruct
+* MSG_APP_QUIT not handled in AppObject::OnMessage
+
+_______________________________________________________________________________
+
+	4.	Stuff to Check:
+_______________________________________________________________________________
+
+* Copyright header block
+* Pass-by-value should be pass by reference where possible (esp strings)
+* const correctness and everything that can be const is const
+* Consistency of LogPrintf, printf, cout, cerr
+* Verify use of Globals.h
+* Indentation and coding style (ongoing)
+* Fix up inconsistent inclusion of #include <string> etc and of using namespace std.
+* Change rect's drawn with GL_POLYGON to use glRectd()
+* Verify use of Messageable
+
+_______________________________________________________________________________
+
+	5. Future Features (not yet required):
+_______________________________________________________________________________
+
+* Navigation display: map shapes (will require a tesselator) or textures
+* Sounds: annunciation, speech warnings via speechd?
+* Calculations in CalcManager: low-pass-filtering/interpolation of (some) data
+

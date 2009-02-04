@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+
+<PropertyList>
+	<generic>
+		<output>
+			<binary_mode>true</binary_mode>
+			<binary_footer>magic,0x12345678</binary_footer>
+							
+			<!-- Orientation -->
+			<chunk>
+				<name>Roll</name>
+				<type>float</type>
+				<node>/orientation/roll-deg</node>
+			</chunk>
+			
+			<chunk>
+				<name>Pitch</name>
+				<type>float</type>
+				<node>/orientation/pitch-deg</node>
+			</chunk>
+			
+			<chunk>
+				<name>True_Heading</name>
+				<type>float</type>
+				<node>/orientation/heading-deg</node>
+			</chunk>
+
+			<chunk>
+				<name>Track_Heading</name>
+				<type>float</type>
+				<node>FIXME</node>
+			</chunk>
+
+			<!-- Position -->
+			<chunk>
+				<name>Latitude</name>
+				<type>float</type>
+				<node>/position/latitude-deg</node>
+			</chunk>
+			
+			<chunk>
+				<name>Longitude</name>
+				<type>float</type>
+				<node>/position/longitude-deg</node>
+			</chunk>
+			
+			<chunk>
+				<name>Altitude_MSL_Feet</name>
+				<type>float</type>
+				<node>/position/altitude-ft</node>
+			</chunk>
+
+			<chunk>
+				<name>Altitude_AGL_Feet</name>
+				<type>float</type>
+				<node>/position/altitude-agl-ft</node>
+			</chunk>
+
+			<!-- Accelerations -->
+			<chunk>
+				<name>Accel_Body_Fwd</name>
+				<type>float</type>
+				<factor>FIXME</factor>
+				<node>/accelerations/pilot/x-accel-fps_sec</node>
+			</chunk>
+
+			<chunk>
+				<name>Accel_Body_Right</name>
+				<type>float</type>
+				<factor>FIXME might be negative</factor>
+				<node>/accelerations/pilot/y-accel-fps_sec</node>
+			</chunk>
+
+			<chunk>
+				<name>Accel_Body_Down</name>
+				<type>float</type>
+				<factor>FIXME might be negative</factor>
+				<node>/accelerations/pilot/z-accel-fps_sec</node>
+			</chunk>
+
+			<!-- Velocities -->
+			<chunk>
+				<name>Airspeed_KT</name>
+				<type>float</type>
+				<node>/velocities/airspeed-kt</node>
+			</chunk>
+			
+			<chunk>
+				<name>Ground_Speed_MS</name>
+				<type>float</type>
+				<node>/velocities/FIXME</node>
+			</chunk>
+			
+			<chunk>
+				<name>Vertical_Speed_FPM</name>
+				<type>float</type>
+				<node>/velocities/vertical-speed-fps</node>
+				<factor>60.0</factor>
+			</chunk>
+			
+			<!-- Engine and Electrics -->
+			<chunk>
+				<name>Engine_RPM</name>
+				<type>float</type>
+				<node>/engines/engine/rpm</node>
+			</chunk>
+			
+			<chunk>
+				<name>Engine_CHT</name>
+				<type>float</type>
+				<node>/engines/engine/cht-degf</node>
+				<factor>FIXME</factor>
+			</chunk>
+			
+			<chunk>
+				<name>Engine_EGT</name>
+				<type>float</type>
+				<node>/engines/engine/egt-degf</node>
+				<factor>FIXME</factor>
+			</chunk>
+			
+			<chunk>
+				<name>Engine_Mixture</name>
+				<type>float</type>
+				<node>/controls/engines/engine[0]/mixture</node>
+			</chunk>
+			
+			<chunk>
+				<name>Voltage_Alternator</name>
+				<type>float</type>
+				<node>/controls/engines/engine[0]/generator</node>
+			</chunk>
+			
+			<chunk>
+				<name>Voltage_Battery</name>
+				<type>float</type>
+				<node>FIXME</node>
+			</chunk>
+			
+			<!-- Autopilot -->
+			<chunk>
+				<name>Director_Active</name>
+				<type>bool</type>
+				<node>/controls/autoflight/autopilot[0]/engage</node>
+			</chunk>
+			
+			<chunk>
+				<name>Director_Heading</name>
+				<type>float</type>
+				<node>/controls/autoflight/heading-select</node>
+			</chunk>
+			
+			<chunk>
+				<name>Director_Altitude</name>
+				<type>float</type>
+				<node>/controls/autoflight/altitude-select</node>
+			</chunk>
+			
+			<chunk>
+				<name>Director_Roll</name>
+				<type>float</type>
+				<node>/controls/autoflight/bank-angle-select</node>
+			</chunk>
+			
+			<chunk>
+				<name>Director_Vertical_Speed</name>
+				<type>float</type>
+				<node>/controls/autoflight/vertical-speed-select</node>
+			</chunk>
+			
+			<chunk>
+				<name>Director_Airspeed</name>
+				<type>float</type>
+				<node>/controls/autoflight/speed-select</node>
+			</chunk>
+
+			<!-- Atmospheric -->
+			<chunk>
+				<name>Wind_Speed</name>
+				<type>float</type>
+				<node>/environment/wind-speed-kt</node>
+			</chunk>
+
+			<chunk>
+				<name>Wind_Direction</name>
+				<type>float</type>
+				<node>/environment/wind-from-heading-deg</node>
+			</chunk>
+
+			<chunk>
+				<name>External_Temperature</name>
+				<type>float</type>
+				<node>FIXME</node>
+			</chunk>
+
+			<chunk>
+				<name>Barometric_Pressure</name>
+				<type>float</type>
+				<node>FIXME</node>
+			</chunk>
+
+		</output>
+	</generic>
+</PropertyList>

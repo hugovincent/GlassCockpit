@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+
+<GaugeSpecification>
+
+<!-- This file defines the possible Gauges, their size and shape, and the 
+internal layout of their constitutent GaugeComponents. Edit this to define
+custom gauges built from standard GaugeComponents, or to change the default
+appearance of the standard gauges. -->
+
+	<Gauge name="PFD">
+		<Size>200.0,190.0</Size>
+		<Scale>1.0,1.0</Scale>
+
+		<Component type="HeadingIndicator">
+			<Position>29.0,5.0</Position>
+		</Component>
+
+		<Component type="ArtificialHorizon">
+			<Position>42.0,52.0</Position>
+		</Component>
+
+		<Component type="AltitudeTape">
+			<Position>149.0,90.0</Position>
+		</Component>
+
+		<Component type="AltitudeTicker">
+			<Position>156.0,90.0</Position>
+		</Component>
+
+		<Component type="VSI">
+			<Position>181.0,44.0</Position>
+		</Component>
+
+		<Component type="SpeedTape">
+			<Position>8.0,32.0</Position>
+		</Component>
+
+		<Component type="SpeedTicker">
+			<Position>7.0,90.0</Position>
+		</Component>
+
+		<Component type="AlbatrossAnnunciator">
+			<Position>40.0,160.0</Position>
+		</Component>
+
+		<Component type="FlightDirector">
+			<Position>0.0,0.0</Position>
+			<Overlay>true</Overlay>
+		</Component>
+
+		<Component type="PFDOverlay">
+			<Position>0.0,0.0</Position>
+			<Overlay>true</Overlay>
+		</Component>
+
+	</Gauge>
+
+	<Gauge name="EngineInstruments">
+		<Size>195.0,80.0</Size>
+		<Scale>1.0,1.0</Scale>
+
+		<Component type="Tachometer">
+			<Position>2.0,35.0</Position>
+		</Component>
+
+		<Component type="EngineDial" name="EGT">
+			<Position>48.0,35.0</Position>
+			<Data>Engine_EGT</Data>
+			<Range>0.0,1000.0</Range>
+			<Limit colour="yellow">850.0</Limit>
+			<Limit colour="red">925.0</Limit>
+		</Component>
+
+		<Component type="EngineDial" name="CHT">
+			<Position>96.0,35.0</Position>
+			<Data>Engine_CHT</Data>
+			<Range>0.0,250.0</Range>
+			<Limit colour="yellow">180.0</Limit>
+			<Limit colour="red">230.0</Limit>
+		</Component>
+
+		<Component type="MarkedDial" name="Mixture">
+			<Position>150.0,3.0</Position>
+			<Data>Engine_Mixture</Data>
+			<Range>0.0,9.0</Range>
+			<TickSpacing>2.0</TickSpacing>
+			<TickDivisor>1.0</TickDivisor>
+		</Component>
+
+		<Component type="Bargraph" name="Battery Voltage">
+			<Position>150.0,38.0</Position>
+			<Data>Voltage_Battery</Data>
+			<Range>0.0,16.0</Range>
+			<Limit colour="yellow">11.0</Limit>
+			<Limit colour="red">9.0</Limit>
+		</Component>
+
+		<Component type="Bargraph" name="Alternator Voltage">
+			<Position>170.0,38.0</Position>
+			<Data>Voltage_Alternator</Data>
+			<Range>0.0,16.0</Range>
+			<Limit colour="yellow">11.0</Limit>
+			<Limit colour="red">9.0</Limit>
+		</Component>
+
+		<Component type="PlainText" name="RPM Text">
+			<Position>15.0,70.0</Position>
+			<Text>RPM</Text>
+		</Component>
+
+		<Component type="PlainText" name="EGT Text">
+			<Position>66.0,70.0</Position>
+			<Text>EGT</Text>
+		</Component>
+
+		<Component type="PlainText" name="CHT Text">
+			<Position>111.0,70.0</Position>
+			<Text>CHT</Text>
+		</Component>
+
+		<Component type="FPSIndicator" name="Frames per second">
+			<Position>169.0,2.0</Position>
+		</Component>
+
+	</Gauge>
+
+	<Gauge name="NavDisplay">
+		<Size>181.0,262.0</Size>
+		<Scale>1.0,1.0</Scale>
+
+		<Component type="NavComponent">
+			<Position>0.0,0.0</Position>
+			<MapScale>45.0</MapScale> <!-- initial scale of the map in nautical miles -->
+		</Component>
+	</Gauge>
+
+</GaugeSpecification>
+

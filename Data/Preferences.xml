@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<!-- This file is used to initialise the Preference Manager with the
+possible preferences, their types, and their default values. Do not
+change preferences for individual customisation in here, instead change
+them in the Preferences section of your main XML file or Default.xml -->
+
+<Preferences>
+	<Preference>
+		<Name>AppUpdateRate</Name>
+		<Type>double</Type>
+		<DefaultValue>0.04</DefaultValue> <!-- 25 Hz -->
+	</Preference>
+
+	<Preference>
+		<Name>FontPath</Name>
+		<Type>string</Type>
+		<DefaultValue>/home/hugo/Projects/Albatross/Software/Groundstation/OpenGC/Data/Fonts/</DefaultValue>
+	</Preference>
+
+	<Preference>
+		<Name>NavPath</Name>
+		<Type>string</Type>
+		<DefaultValue>/home/hugo/Projects/Albatross/Software/Groundstation/OpenGC/Data/Navigation/</DefaultValue>
+	</Preference>
+
+	<Preference>
+		<Name>Zoom</Name>
+		<Type>double</Type>
+		<DefaultValue>1.0</DefaultValue>
+	</Preference>
+
+	<Preference>
+		<Name>UnitsPerPixel</Name>
+		<Type>double</Type>
+		<DefaultValue>1.0</DefaultValue>
+	</Preference>
+
+	<Preference>
+		<Name>DefaultGaugeScale</Name>
+		<Type>double</Type>
+		<DefaultValue>0.75</DefaultValue>
+	</Preference>
+
+	<Preference>
+		<Name>FlightGearHost</Name>
+		<Type>string</Type>
+		<DefaultValue>localhost</DefaultValue>
+	</Preference>
+
+	<Preference>
+		<Name>FlightGearPort</Name>
+		<Type>integer</Type>
+		<DefaultValue>5800</DefaultValue>
+	</Preference>
+</Preferences>

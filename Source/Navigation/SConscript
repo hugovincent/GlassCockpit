@@ -1,0 +1,29 @@
+# Builds: Navigation library ('libopengc_nav')
+# Project: OpenGC for Albatross
+# Author: Hugo Vincent
+# Date: 22 March 2006
+
+# Get the top level configuration options
+Import('conf')
+
+# All the source files need to be built (none require special treatment)
+source = [
+	'AirportGeoObj.cpp',
+	'AirportList.cpp',
+	'BinaryNavData.cpp',
+	'CoursePoint.cpp',
+	'GeographicObject.cpp',
+	'FlightCourse.cpp',
+	'NavaidGeoObj.cpp',
+	'NavaidList.cpp',
+	'GeographicHash.cpp',
+	'GeographicObjectList.cpp',
+	'NavDatabase.cpp',
+	'WaypointGeoObj.cpp',
+	'WaypointList.cpp'
+]
+
+# Build the library
+Library('#Build/opengc_nav', source, CPPPATH=conf["inc_path"],
+	CCFLAGS=conf["cflags"], CXX=conf['compiler'])
+

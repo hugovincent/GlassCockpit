@@ -1,0 +1,36 @@
+# Builds: Core functions library ('libopengc_base')
+# Project: OpenGC for Albatross
+# Author: Hugo Vincent
+# Date: 22 March 2006
+
+# Get the top level configuration options
+Import('conf')
+
+# All the source files need to be built (none require special treatment)
+source = [
+	'CalcManager.cpp',
+	'CircleEvaluator.cpp',
+	'Font.cpp',
+	'FontManager.cpp',
+	'FLTKRenderWindow.cpp',
+	'Gauge.cpp',
+	'GaugeComponent.cpp',
+	'Globals.cpp',
+	'MessageableList.cpp',
+	'PrefManager.cpp',
+	'RenderWindow.cpp',
+	'RenderObject.cpp',
+	'SoundManager.cpp',
+	'XMLParser.cpp',
+	'XMLNode.cpp'
+]
+
+# FIXME use pkg-config or xml2-config for libxml2
+conf["inc_path"].append('/usr/include/libxml2')
+conf["linklibs"].append('xml2')
+conf["linklibs"].append('z')
+
+# Build the library
+Library('#Build/opengc_base', source, CPPPATH=conf["inc_path"], 
+	CCFLAGS=conf["cflags"], CXX=conf['compiler'])
+
