@@ -15,13 +15,13 @@ them in the Preferences section of your main XML file or Default.xml -->
 	<Preference>
 		<Name>FontPath</Name>
 		<Type>string</Type>
-		<DefaultValue>/home/hugo/Projects/Albatross/Software/Groundstation/OpenGC/Data/Fonts/</DefaultValue>
+		<DefaultValue>/Users/hugo/Projects/iPhone/GlassCockpit/Data/Fonts/</DefaultValue>
 	</Preference>
 
 	<Preference>
 		<Name>NavPath</Name>
 		<Type>string</Type>
-		<DefaultValue>/home/hugo/Projects/Albatross/Software/Groundstation/OpenGC/Data/Navigation/</DefaultValue>
+		<DefaultValue>/Users/hugo/Projects/iPhone/GlassCockpit/Data/Navigation/</DefaultValue>
 	</Preference>
 
 	<Preference>

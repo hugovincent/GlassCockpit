@@ -50,6 +50,8 @@ class RenderWindow
 
 		/** Initialize GL parameters. */
 		void SetupDisplay();
+	
+		void ForceIsOKToRender(bool newVal) { m_IsOKToRender = newVal; }
 
 		/** Render the entire window. */
 		void Render();

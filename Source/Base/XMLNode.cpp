@@ -45,12 +45,14 @@ string XMLNode::GetName()
 
 double XMLNode::GetTextAsDouble()
 {
-	return 0.0; // FIXME boost::lexical_cast<double>(GetText());
+	// return boost::lexical_cast<double>(GetText());
+	return strtod(GetText().c_str(), NULL);
 }
 
 int XMLNode::GetTextAsInt()
 {
-	return 0; // FIXME boost::lexical_cast<int>(GetText());
+	// return boost::lexical_cast<int>(GetText());
+	return strtol(GetText().c_str(), NULL, 0);
 }
 		
 bool XMLNode::GetTextAsBool()

@@ -6,12 +6,12 @@ int main(int argc, char **argv)
 	OpenGC::BinaryNavData ndtb;
 
 	LogPrintf("Converting airport data... ");
-	ndtb.ConvertAirportData("/home/hugo/Projects/OpenGC/Data/Navigation/apt.dat", 
-			"/home/hugo/Projects/OpenGC/Data/Navigation/apt_dat.bin");
+	ndtb.ConvertAirportData("/Users/hugo/Projects/iPhone/GlassCockpit/Data/Navigation/apt.dat", 
+			"/Users/hugo/Projects/iPhone/GlassCockpit/Data/Navigation/apt_dat.bin");
 
 	LogPrintf("Converting navaid data... ");
-	ndtb.ConvertNavaidData("/home/hugo/Projects/OpenGC/Data/Navigation/nav.dat", 
-			"/home/hugo/Projects/OpenGC/Data/Navigation/nav_dat.bin");
+	ndtb.ConvertNavaidData("/Users/hugo/Projects/iPhone/GlassCockpit/Data/Navigation/nav.dat", 
+			"/Users/hugo/Projects/iPhone/GlassCockpit/Data/Navigation/nav_dat.bin");
 
 	LogPrintf("Done\n");
 	
