@@ -70,7 +70,7 @@ void Font::Print(double x, double y, const char *string)
 
 	// Set position and size
 	glTranslated(x,y,0);
-	glScaled(0.0135*m_Size.x, 0.0135*m_Size.y, 1);
+	glScaled(0.135*m_Size.x, 0.135*m_Size.y, 1); // FIXME was 0.0135
 
 	if (m_RightAligned)
 	{
@@ -101,9 +101,9 @@ bool Font::LoadFont(char* name)
 	m_OutlineFont = new FTGLOutlineFont(name);
 
 	// The initial face size is large so that font sizing
-	// will work correctly later on
-	m_PolygonFont->FaceSize(100);
-	m_OutlineFont->FaceSize(100);
+	// will work correctly later on // FIXME was 100
+	m_PolygonFont->FaceSize(10); 
+	m_OutlineFont->FaceSize(10);
 
 	// We succeeded at opening the fonts
 	return true;

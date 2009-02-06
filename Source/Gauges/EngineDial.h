@@ -60,11 +60,11 @@ class EngineDial : public GenericDial
 		AirframeMemFn m_DataFn;
 		double m_Min, m_Max;
 		double m_MinYellow, m_MinRed;
-
-		// Drawing options
+	
+		/** Drawing options */
 		static const double R = 16.0;
 		static const double minDegrees = 90.0;
-		static const double maxDegrees = 300.0;
+		static const double maxDegrees = 300.0;	
 };
 
 } // end namespace OpenGC

@@ -49,7 +49,7 @@ FGDataSource::FGDataSource()
 
 FGDataSource::~FGDataSource()
 {
-	m_Socket.close();
+//	m_Socket.close();
 	delete[] m_Buffer;
 	delete[] m_TempMsg;
 }
@@ -76,6 +76,7 @@ bool FGDataSource::Open()
 		return false;
 	}
 
+#if 0
 	// Must call this before any other net stuff
 	netInit();
 
@@ -98,6 +99,7 @@ bool FGDataSource::Open()
 		m_ValidConnection = false;
 		return false;
 	}
+#endif
 	return true;
 }
 
@@ -106,6 +108,7 @@ bool FGDataSource::GetData()
 	if (!m_ValidConnection)
 		return false;
 
+#if 0
 	// Length of the message received from Flightgear
 	int receivedLength = 0;
 
@@ -138,7 +141,7 @@ bool FGDataSource::GetData()
 	}
 	else
 		return false;
-	
+#endif
 	return false;
 }
 

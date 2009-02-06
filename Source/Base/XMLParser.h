@@ -2,7 +2,7 @@
 #define XMLParser_h
 
 #include <string>
-#include "libxml/parser.h"
+#include <libxml/parser.h>
 #include "XMLNode.h"
 
 using namespace std;

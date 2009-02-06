@@ -33,6 +33,9 @@
 namespace OpenGC
 {
 
+const double NavDisplay::CENTER_X, NavDisplay::CENTER_Y, NavDisplay::OVERLAY_Y;
+const int NavDisplay::compass_interval;
+
 NavDisplay::NavDisplay()
 {
 	//this->SetGaugeOutline(true);

@@ -21,12 +21,12 @@
  * from the XML file, and starting the application.
  */
 
-#include <FL/Fl.H>
+//#include <FL/Fl.H>
 #include <unistd.h>
 #include <string.h>
 
 #include "Debug.h"
-#include "AppObject.h"
+//#include "AppObject.h"
 #include "Globals.h"
 #include "Messageable.h"
 #include "XMLParser.h"
@@ -40,7 +40,7 @@ using namespace OpenGC;
 Globals *OpenGC::globals;
 
 /// Construct the one and only App Object
-AppObject *theApp;
+//AppObject *theApp;
 
 /** Print usage information */
 void usage()
@@ -52,13 +52,13 @@ void usage()
 /** Global idle function to handle app updates */
 void GlobalIdle(void *)
 {
-	theApp->IdleFunction();
-	Fl::repeat_timeout(globals->m_PrefManager->GetPrefD(
-				"AppUpdateRate"), GlobalIdle);
+//	theApp->IdleFunction();
+//	Fl::repeat_timeout(globals->m_PrefManager->GetPrefD(
+//				"AppUpdateRate"), GlobalIdle);
 }
 
 /** Main entry point for the application */
-int main(int argc, char* argv[])
+int main_FIXME(int argc, char* argv[])
 {	
 	// Check the command line arguments
 	char *xmlFileName = DEFAULT_XML_FILE;
@@ -84,7 +84,7 @@ int main(int argc, char* argv[])
 	
 	// Construct the application
 	OpenGC::globals = new Globals();
-	theApp= new AppObject();
+//	theApp= new AppObject();
 	
 	// Initialise preferences manager
 	globals->m_PrefManager->InitPreferences(PREFERENCES_XML_FILE);
@@ -106,23 +106,23 @@ int main(int argc, char* argv[])
 	globals->m_PrefManager->PrintAll();
 
 	// Set the update rate in nominal seconds per frame
-	Fl::add_timeout(globals->m_PrefManager->GetPrefD(
-				"AppUpdateRate"), GlobalIdle);
+//	Fl::add_timeout(globals->m_PrefManager->GetPrefD(
+//				"AppUpdateRate"), GlobalIdle);
 
 	// Run up the application
 	int retval;
 	XMLNode rootNode = parser.GetNode("/");
-	if (theApp->Go(rootNode)) {
+/*	if (theApp->Go(rootNode)) {
 		LogPrintf("Done, exiting cleanly.\n");
 		retval = 0;
 	}
 	else {
 		LogPrintf("Error, exiting.\n");
 		retval = 1;
-	}
+	}*/
 
 	// Clean up
-	delete theApp;
+//	delete theApp;
 	delete globals;
 
 	return retval;

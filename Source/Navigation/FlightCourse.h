@@ -19,7 +19,7 @@
 #define FlightCourse_h
 
 #include <vector>
-#include <CoursePoint.h>
+#include "CoursePoint.h"
 
 namespace OpenGC
 {

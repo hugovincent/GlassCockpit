@@ -18,6 +18,8 @@
 #include <iostream>
 #include <math.h>
 
+#if 0
+
 #include <FL/Fl.H>
 #include "FLTKRenderWindow.h"
 
@@ -92,4 +94,5 @@ void FLTKRenderWindow::Render()
 }
 
 } // end namespace OpenGC
+#endif
 

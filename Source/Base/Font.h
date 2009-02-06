@@ -34,8 +34,7 @@
 // a static rather than shared version of FTGL
 #define FTGL_LIBRARY_STATIC
 
-#include "FTGLOutlineFont.h"
-#include "FTGLPolygonFont.h"
+#include <FTGL/ftgl.h>
 
 namespace OpenGC
 {

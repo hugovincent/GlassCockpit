@@ -1,10 +1,9 @@
 #include <iostream>
-#include <boost/lexical_cast.hpp>
 #include "Debug.h"
 #include "XMLNode.h"
 
 XMLNode::XMLNode()
-: m_Node(0)
+	: m_Node(0)
 {
 
 }
@@ -15,7 +14,7 @@ XMLNode::~XMLNode()
 }
 
 XMLNode::XMLNode(xmlNode *node)
-: m_Node(node)
+	: m_Node(node)
 {
 
 }
@@ -46,12 +45,12 @@ string XMLNode::GetName()
 
 double XMLNode::GetTextAsDouble()
 {
-	return boost::lexical_cast<double>(GetText());
+	return 0.0; // FIXME boost::lexical_cast<double>(GetText());
 }
 
 int XMLNode::GetTextAsInt()
 {
-	return boost::lexical_cast<int>(GetText());
+	return 0; // FIXME boost::lexical_cast<int>(GetText());
 }
 		
 bool XMLNode::GetTextAsBool()

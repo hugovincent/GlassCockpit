@@ -26,6 +26,10 @@
 
 namespace OpenGC
 {
+	
+const double EngineDial::R;
+const double EngineDial::minDegrees;
+const double EngineDial::maxDegrees;
 
 EngineDial::EngineDial()
 {

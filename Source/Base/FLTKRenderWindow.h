@@ -22,6 +22,7 @@
 #ifndef FLTKRenderWindow_h
 #define FLTKRenderWindow_h
 
+#if 0
 #include <FL/Fl_Gl_Window.H>
 #include "RenderWindow.h"
 
@@ -50,4 +51,5 @@ class FLTKRenderWindow : public Fl_Gl_Window, public RenderWindow
 
 } // end namespace OpenGC
 
+#endif
 #endif

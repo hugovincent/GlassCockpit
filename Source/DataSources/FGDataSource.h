@@ -21,7 +21,7 @@
 #include "DataSource.h"
 
 #include <string>
-#include <plib/netSocket.h>
+//#include <plib/netSocket.h>
 #include "FlightGear_Protocol.h"
 
 using namespace std;
@@ -52,7 +52,7 @@ class FGDataSource : public DataSource
 		FGData *m_FDM;
 
 		// The socket
-		netSocket m_Socket;
+//		netSocket m_Socket;
 
 		// The host and port we're receiving on
 		string m_Host;

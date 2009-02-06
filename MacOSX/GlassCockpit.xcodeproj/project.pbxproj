@@ -1,0 +1,702 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
+		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
+		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		9AAE1D000F3AEF1600B9CFFA /* XMLNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1CFC0F3AEF1600B9CFFA /* XMLNode.cpp */; };
+		9AAE1D010F3AEF1600B9CFFA /* XMLParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1CFE0F3AEF1600B9CFFA /* XMLParser.cpp */; };
+		9AAE1D3B0F3AF15000B9CFFA /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1D3A0F3AF15000B9CFFA /* libxml2.dylib */; };
+		9AAE1D4F0F3AF1A400B9CFFA /* PrefManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1D4E0F3AF1A400B9CFFA /* PrefManager.cpp */; };
+		9AAE1D550F3AF1C800B9CFFA /* MessageableList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1D520F3AF1C800B9CFFA /* MessageableList.cpp */; };
+		9AAE1D590F3AF1EF00B9CFFA /* Globals.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1D580F3AF1EF00B9CFFA /* Globals.cpp */; };
+		9AAE1D5F0F3AF24A00B9CFFA /* CalcManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1D5E0F3AF24A00B9CFFA /* CalcManager.cpp */; };
+		9AAE1D620F3AF25D00B9CFFA /* CircleEvaluator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1D610F3AF25D00B9CFFA /* CircleEvaluator.cpp */; };
+		9AAE1D670F3AF28900B9CFFA /* SoundManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1D650F3AF28900B9CFFA /* SoundManager.cpp */; };
+		9AAE1DBC0F3AF2EC00B9CFFA /* DataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1DBB0F3AF2EC00B9CFFA /* DataSource.cpp */; };
+		9AAE1DD60F3AF32D00B9CFFA /* AirframeDataContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1DD40F3AF32D00B9CFFA /* AirframeDataContainer.cpp */; };
+		9AAE1DD90F3AF33400B9CFFA /* DataContainer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1DD70F3AF33400B9CFFA /* DataContainer.cpp */; };
+		9AAE1DDD0F3AF33E00B9CFFA /* TestDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1DDC0F3AF33E00B9CFFA /* TestDataSource.cpp */; };
+		9AAE1DE90F3AF38100B9CFFA /* Main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1DE80F3AF38100B9CFFA /* Main.cpp */; };
+		9AAE1E000F3AF5B500B9CFFA /* AlbatrossDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1DFF0F3AF5B500B9CFFA /* AlbatrossDataSource.cpp */; };
+		9AAE1E040F3AF5CA00B9CFFA /* FGDataSource.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E010F3AF5CA00B9CFFA /* FGDataSource.cpp */; };
+		9AAE1E3D0F3AF68E00B9CFFA /* WaypointGeoObj.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E230F3AF68E00B9CFFA /* WaypointGeoObj.cpp */; };
+		9AAE1E3E0F3AF68E00B9CFFA /* NavaidList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E240F3AF68E00B9CFFA /* NavaidList.cpp */; };
+		9AAE1E3F0F3AF68E00B9CFFA /* GeographicHash.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E270F3AF68E00B9CFFA /* GeographicHash.cpp */; };
+		9AAE1E400F3AF68E00B9CFFA /* FlightCourse.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E280F3AF68E00B9CFFA /* FlightCourse.cpp */; };
+		9AAE1E410F3AF68E00B9CFFA /* GeographicObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E2B0F3AF68E00B9CFFA /* GeographicObject.cpp */; };
+		9AAE1E420F3AF68E00B9CFFA /* WaypointList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E2C0F3AF68E00B9CFFA /* WaypointList.cpp */; };
+		9AAE1E430F3AF68E00B9CFFA /* CoursePoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E2D0F3AF68E00B9CFFA /* CoursePoint.cpp */; };
+		9AAE1E440F3AF68E00B9CFFA /* GeographicObjectList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E2F0F3AF68E00B9CFFA /* GeographicObjectList.cpp */; };
+		9AAE1E450F3AF68E00B9CFFA /* BinaryNavData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E310F3AF68E00B9CFFA /* BinaryNavData.cpp */; };
+		9AAE1E460F3AF68E00B9CFFA /* NavaidGeoObj.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E330F3AF68E00B9CFFA /* NavaidGeoObj.cpp */; };
+		9AAE1E470F3AF68E00B9CFFA /* AirportGeoObj.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E340F3AF68E00B9CFFA /* AirportGeoObj.cpp */; };
+		9AAE1E480F3AF68E00B9CFFA /* AirportList.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E390F3AF68E00B9CFFA /* AirportList.cpp */; };
+		9AAE1E490F3AF68E00B9CFFA /* NavDatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E3B0F3AF68E00B9CFFA /* NavDatabase.cpp */; };
+		9AAE1E830F3AF87400B9CFFA /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E820F3AF87400B9CFFA /* Font.cpp */; };
+		9AAE1E860F3AF87F00B9CFFA /* FontManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E850F3AF87F00B9CFFA /* FontManager.cpp */; };
+		9AAE1ED70F3B88A200B9CFFA /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1ED60F3B88A200B9CFFA /* libftgl.a */; };
+		9AAE1EDB0F3B8AA200B9CFFA /* libfreetype.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1EDA0F3B8AA200B9CFFA /* libfreetype.dylib */; };
+		9AAE1EEE0F3B8AE600B9CFFA /* RenderWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1EEB0F3B8AE600B9CFFA /* RenderWindow.cpp */; };
+		9AAE1EEF0F3B8AE600B9CFFA /* RenderObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1EED0F3B8AE600B9CFFA /* RenderObject.cpp */; };
+		9AAE1EF70F3B8B0100B9CFFA /* GaugeComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1EF60F3B8B0100B9CFFA /* GaugeComponent.cpp */; };
+		9AAE1EFD0F3B8B0C00B9CFFA /* Gauge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1EFB0F3B8B0C00B9CFFA /* Gauge.cpp */; };
+		9AAE1F0D0F3B8B3600B9CFFA /* FLTKRenderWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1F0B0F3B8B3600B9CFFA /* FLTKRenderWindow.cpp */; };
+		9AAE1FD60F3BA86E00B9CFFA /* Tachometer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FB30F3BA86E00B9CFFA /* Tachometer.cpp */; };
+		9AAE1FD70F3BA86E00B9CFFA /* EngineInstruments.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FBA0F3BA86E00B9CFFA /* EngineInstruments.cpp */; };
+		9AAE1FD80F3BA86E00B9CFFA /* AlbatrossAnnunciator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FBB0F3BA86E00B9CFFA /* AlbatrossAnnunciator.cpp */; };
+		9AAE1FD90F3BA86E00B9CFFA /* AltitudeTape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FBD0F3BA86E00B9CFFA /* AltitudeTape.cpp */; };
+		9AAE1FDB0F3BA86E00B9CFFA /* FlightDirector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FC00F3BA86E00B9CFFA /* FlightDirector.cpp */; };
+		9AAE1FDC0F3BA86E00B9CFFA /* GenericBargraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FC20F3BA86E00B9CFFA /* GenericBargraph.cpp */; };
+		9AAE1FDD0F3BA86E00B9CFFA /* PFDOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FC30F3BA86E00B9CFFA /* PFDOverlay.cpp */; };
+		9AAE1FDE0F3BA86E00B9CFFA /* PFD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FC50F3BA86E00B9CFFA /* PFD.cpp */; };
+		9AAE1FDF0F3BA86E00B9CFFA /* GenericDial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FC60F3BA86E00B9CFFA /* GenericDial.cpp */; };
+		9AAE1FE00F3BA86E00B9CFFA /* HeadingIndicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FC70F3BA86E00B9CFFA /* HeadingIndicator.cpp */; };
+		9AAE1FE10F3BA86E00B9CFFA /* NavDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FC90F3BA86E00B9CFFA /* NavDisplay.cpp */; };
+		9AAE1FE20F3BA86E00B9CFFA /* EngineDial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FCA0F3BA86E00B9CFFA /* EngineDial.cpp */; };
+		9AAE1FE30F3BA86E00B9CFFA /* SpeedTicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FCC0F3BA86E00B9CFFA /* SpeedTicker.cpp */; };
+		9AAE1FE40F3BA86E00B9CFFA /* SpeedTape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FCE0F3BA86E00B9CFFA /* SpeedTape.cpp */; };
+		9AAE1FE50F3BA86E00B9CFFA /* ArtificialHorizon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FCF0F3BA86E00B9CFFA /* ArtificialHorizon.cpp */; };
+		9AAE1FE60F3BA86E00B9CFFA /* AltitudeTicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FD20F3BA86E00B9CFFA /* AltitudeTicker.cpp */; };
+		9AAE1FE70F3BA86E00B9CFFA /* VSI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FD30F3BA86E00B9CFFA /* VSI.cpp */; };
+		9AE411BA0F3993FD00D539E5 /* TopLevelView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9AE411B90F3993FD00D539E5 /* TopLevelView.m */; };
+		9AE411C00F39973C00D539E5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE411BF0F39973C00D539E5 /* OpenGL.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 10; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		1DDD58150DA1D0A300B32029 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		32CA4F630368D1EE00C91783 /* GlassCockpit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlassCockpit_Prefix.pch; sourceTree = "<group>"; };
+		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8D1107320486CEB800E47090 /* GlassCockpit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlassCockpit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AAE1CFC0F3AEF1600B9CFFA /* XMLNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = XMLNode.cpp; path = ../Source/Base/XMLNode.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1CFD0F3AEF1600B9CFFA /* XMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLNode.h; path = ../Source/Base/XMLNode.h; sourceTree = SOURCE_ROOT; };
+		9AAE1CFE0F3AEF1600B9CFFA /* XMLParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = XMLParser.cpp; path = ../Source/Base/XMLParser.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1CFF0F3AEF1600B9CFFA /* XMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLParser.h; path = ../Source/Base/XMLParser.h; sourceTree = SOURCE_ROOT; };
+		9AAE1D3A0F3AF15000B9CFFA /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = /usr/lib/libxml2.dylib; sourceTree = "<absolute>"; };
+		9AAE1D4D0F3AF1A400B9CFFA /* PrefManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefManager.h; path = ../Source/Base/PrefManager.h; sourceTree = SOURCE_ROOT; };
+		9AAE1D4E0F3AF1A400B9CFFA /* PrefManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PrefManager.cpp; path = ../Source/Base/PrefManager.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1D510F3AF1C800B9CFFA /* Messageable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Messageable.h; path = ../Source/Base/Messageable.h; sourceTree = SOURCE_ROOT; };
+		9AAE1D520F3AF1C800B9CFFA /* MessageableList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MessageableList.cpp; path = ../Source/Base/MessageableList.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1D530F3AF1C800B9CFFA /* MessageableList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageableList.h; path = ../Source/Base/MessageableList.h; sourceTree = SOURCE_ROOT; };
+		9AAE1D540F3AF1C800B9CFFA /* Messages.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Messages.h; path = ../Source/Base/Messages.h; sourceTree = SOURCE_ROOT; };
+		9AAE1D570F3AF1EF00B9CFFA /* Globals.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Globals.h; path = ../Source/Base/Globals.h; sourceTree = SOURCE_ROOT; };
+		9AAE1D580F3AF1EF00B9CFFA /* Globals.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Globals.cpp; path = ../Source/Base/Globals.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1D5D0F3AF24A00B9CFFA /* CalcManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CalcManager.h; path = ../Source/Base/CalcManager.h; sourceTree = SOURCE_ROOT; };
+		9AAE1D5E0F3AF24A00B9CFFA /* CalcManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CalcManager.cpp; path = ../Source/Base/CalcManager.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1D600F3AF25D00B9CFFA /* CircleEvaluator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleEvaluator.h; path = ../Source/Base/CircleEvaluator.h; sourceTree = SOURCE_ROOT; };
+		9AAE1D610F3AF25D00B9CFFA /* CircleEvaluator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CircleEvaluator.cpp; path = ../Source/Base/CircleEvaluator.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1D630F3AF26D00B9CFFA /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Constants.h; path = ../Source/Base/Constants.h; sourceTree = SOURCE_ROOT; };
+		9AAE1D640F3AF27F00B9CFFA /* OrderedPair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderedPair.h; path = ../Source/Base/OrderedPair.h; sourceTree = SOURCE_ROOT; };
+		9AAE1D650F3AF28900B9CFFA /* SoundManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SoundManager.cpp; path = ../Source/Base/SoundManager.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1D660F3AF28900B9CFFA /* SoundManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoundManager.h; path = ../Source/Base/SoundManager.h; sourceTree = SOURCE_ROOT; };
+		9AAE1D950F3AF29600B9CFFA /* GLHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GLHeaders.h; path = ../Source/Base/GLHeaders.h; sourceTree = SOURCE_ROOT; };
+		9AAE1DB20F3AF2DE00B9CFFA /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataSource.h; path = ../Source/DataSources/DataSource.h; sourceTree = SOURCE_ROOT; };
+		9AAE1DBB0F3AF2EC00B9CFFA /* DataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DataSource.cpp; path = ../Source/DataSources/DataSource.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1DD40F3AF32D00B9CFFA /* AirframeDataContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AirframeDataContainer.cpp; path = ../Source/DataSources/AirframeDataContainer.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1DD50F3AF32D00B9CFFA /* AirframeDataContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AirframeDataContainer.h; path = ../Source/DataSources/AirframeDataContainer.h; sourceTree = SOURCE_ROOT; };
+		9AAE1DD70F3AF33400B9CFFA /* DataContainer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DataContainer.cpp; path = ../Source/DataSources/DataContainer.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1DD80F3AF33400B9CFFA /* DataContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataContainer.h; path = ../Source/DataSources/DataContainer.h; sourceTree = SOURCE_ROOT; };
+		9AAE1DDA0F3AF33E00B9CFFA /* TestDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TestDataSource.h; path = ../Source/DataSources/TestDataSource.h; sourceTree = SOURCE_ROOT; };
+		9AAE1DDB0F3AF33E00B9CFFA /* DataSourceMacro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DataSourceMacro.h; path = ../Source/DataSources/DataSourceMacro.h; sourceTree = SOURCE_ROOT; };
+		9AAE1DDC0F3AF33E00B9CFFA /* TestDataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = TestDataSource.cpp; path = ../Source/DataSources/TestDataSource.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1DE80F3AF38100B9CFFA /* Main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Main.cpp; path = ../Source/Application/Main.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1DFE0F3AF5B500B9CFFA /* AlbatrossDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlbatrossDataSource.h; path = ../Source/DataSources/AlbatrossDataSource.h; sourceTree = SOURCE_ROOT; };
+		9AAE1DFF0F3AF5B500B9CFFA /* AlbatrossDataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlbatrossDataSource.cpp; path = ../Source/DataSources/AlbatrossDataSource.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1E010F3AF5CA00B9CFFA /* FGDataSource.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FGDataSource.cpp; path = ../Source/DataSources/FGDataSource.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1E020F3AF5CA00B9CFFA /* FGDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FGDataSource.h; path = ../Source/DataSources/FGDataSource.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E030F3AF5CA00B9CFFA /* FlightGear_Protocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlightGear_Protocol.h; path = ../Source/DataSources/FlightGear_Protocol.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E230F3AF68E00B9CFFA /* WaypointGeoObj.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WaypointGeoObj.cpp; path = ../Source/Navigation/WaypointGeoObj.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1E240F3AF68E00B9CFFA /* NavaidList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NavaidList.cpp; path = ../Source/Navigation/NavaidList.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1E250F3AF68E00B9CFFA /* WaypointList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaypointList.h; path = ../Source/Navigation/WaypointList.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E260F3AF68E00B9CFFA /* CoursePoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CoursePoint.h; path = ../Source/Navigation/CoursePoint.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E270F3AF68E00B9CFFA /* GeographicHash.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeographicHash.cpp; path = ../Source/Navigation/GeographicHash.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1E280F3AF68E00B9CFFA /* FlightCourse.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FlightCourse.cpp; path = ../Source/Navigation/FlightCourse.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1E290F3AF68E00B9CFFA /* WaypointGeoObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WaypointGeoObj.h; path = ../Source/Navigation/WaypointGeoObj.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E2A0F3AF68E00B9CFFA /* AirportGeoObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AirportGeoObj.h; path = ../Source/Navigation/AirportGeoObj.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E2B0F3AF68E00B9CFFA /* GeographicObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeographicObject.cpp; path = ../Source/Navigation/GeographicObject.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1E2C0F3AF68E00B9CFFA /* WaypointList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = WaypointList.cpp; path = ../Source/Navigation/WaypointList.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1E2D0F3AF68E00B9CFFA /* CoursePoint.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = CoursePoint.cpp; path = ../Source/Navigation/CoursePoint.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1E2E0F3AF68E00B9CFFA /* FlightCourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlightCourse.h; path = ../Source/Navigation/FlightCourse.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E2F0F3AF68E00B9CFFA /* GeographicObjectList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GeographicObjectList.cpp; path = ../Source/Navigation/GeographicObjectList.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1E300F3AF68E00B9CFFA /* NavaidGeoObj.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavaidGeoObj.h; path = ../Source/Navigation/NavaidGeoObj.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E310F3AF68E00B9CFFA /* BinaryNavData.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryNavData.cpp; path = ../Source/Navigation/BinaryNavData.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1E320F3AF68E00B9CFFA /* NavDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavDatabase.h; path = ../Source/Navigation/NavDatabase.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E330F3AF68E00B9CFFA /* NavaidGeoObj.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NavaidGeoObj.cpp; path = ../Source/Navigation/NavaidGeoObj.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1E340F3AF68E00B9CFFA /* AirportGeoObj.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AirportGeoObj.cpp; path = ../Source/Navigation/AirportGeoObj.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1E350F3AF68E00B9CFFA /* GeographicHash.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeographicHash.h; path = ../Source/Navigation/GeographicHash.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E360F3AF68E00B9CFFA /* AirportList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AirportList.h; path = ../Source/Navigation/AirportList.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E370F3AF68E00B9CFFA /* GeographicObjectList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeographicObjectList.h; path = ../Source/Navigation/GeographicObjectList.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E380F3AF68E00B9CFFA /* GeographicObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GeographicObject.h; path = ../Source/Navigation/GeographicObject.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E390F3AF68E00B9CFFA /* AirportList.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AirportList.cpp; path = ../Source/Navigation/AirportList.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1E3A0F3AF68E00B9CFFA /* BinaryNavData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BinaryNavData.h; path = ../Source/Navigation/BinaryNavData.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E3B0F3AF68E00B9CFFA /* NavDatabase.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NavDatabase.cpp; path = ../Source/Navigation/NavDatabase.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1E3C0F3AF68E00B9CFFA /* NavaidList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavaidList.h; path = ../Source/Navigation/NavaidList.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E800F3AF79900B9CFFA /* Debug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Debug.h; path = ../Source/Base/Debug.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E810F3AF87400B9CFFA /* Font.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Font.h; path = ../Source/Base/Font.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E820F3AF87400B9CFFA /* Font.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Font.cpp; path = ../Source/Base/Font.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1E840F3AF87F00B9CFFA /* FontManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FontManager.h; path = ../Source/Base/FontManager.h; sourceTree = SOURCE_ROOT; };
+		9AAE1E850F3AF87F00B9CFFA /* FontManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FontManager.cpp; path = ../Source/Base/FontManager.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1ED60F3B88A200B9CFFA /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libftgl.a; sourceTree = "<group>"; };
+		9AAE1EDA0F3B8AA200B9CFFA /* libfreetype.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.dylib; path = /usr/X11/lib/libfreetype.dylib; sourceTree = "<absolute>"; };
+		9AAE1EEA0F3B8AE600B9CFFA /* RenderWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderWindow.h; path = ../Source/Base/RenderWindow.h; sourceTree = SOURCE_ROOT; };
+		9AAE1EEB0F3B8AE600B9CFFA /* RenderWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderWindow.cpp; path = ../Source/Base/RenderWindow.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1EEC0F3B8AE600B9CFFA /* RenderObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderObject.h; path = ../Source/Base/RenderObject.h; sourceTree = SOURCE_ROOT; };
+		9AAE1EED0F3B8AE600B9CFFA /* RenderObject.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderObject.cpp; path = ../Source/Base/RenderObject.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1EF50F3B8B0100B9CFFA /* GaugeComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GaugeComponent.h; path = ../Source/Base/GaugeComponent.h; sourceTree = SOURCE_ROOT; };
+		9AAE1EF60F3B8B0100B9CFFA /* GaugeComponent.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GaugeComponent.cpp; path = ../Source/Base/GaugeComponent.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1EFB0F3B8B0C00B9CFFA /* Gauge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Gauge.cpp; path = ../Source/Base/Gauge.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1EFC0F3B8B0C00B9CFFA /* Gauge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gauge.h; path = ../Source/Base/Gauge.h; sourceTree = SOURCE_ROOT; };
+		9AAE1F0B0F3B8B3600B9CFFA /* FLTKRenderWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FLTKRenderWindow.cpp; path = ../Source/Base/FLTKRenderWindow.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1F0C0F3B8B3600B9CFFA /* FLTKRenderWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLTKRenderWindow.h; path = ../Source/Base/FLTKRenderWindow.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FB30F3BA86E00B9CFFA /* Tachometer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tachometer.cpp; path = ../Source/Gauges/Tachometer.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FB40F3BA86E00B9CFFA /* ArtificialHorizon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArtificialHorizon.h; path = ../Source/Gauges/ArtificialHorizon.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FB50F3BA86E00B9CFFA /* GenericDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericDial.h; path = ../Source/Gauges/GenericDial.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FB60F3BA86E00B9CFFA /* VSI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSI.h; path = ../Source/Gauges/VSI.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FB70F3BA86E00B9CFFA /* NavDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavDisplay.h; path = ../Source/Gauges/NavDisplay.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FB80F3BA86E00B9CFFA /* PFDOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PFDOverlay.h; path = ../Source/Gauges/PFDOverlay.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FB90F3BA86E00B9CFFA /* AltitudeTape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AltitudeTape.h; path = ../Source/Gauges/AltitudeTape.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FBA0F3BA86E00B9CFFA /* EngineInstruments.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EngineInstruments.cpp; path = ../Source/Gauges/EngineInstruments.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FBB0F3BA86E00B9CFFA /* AlbatrossAnnunciator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AlbatrossAnnunciator.cpp; path = ../Source/Gauges/AlbatrossAnnunciator.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FBC0F3BA86E00B9CFFA /* Tachometer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Tachometer.h; path = ../Source/Gauges/Tachometer.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FBD0F3BA86E00B9CFFA /* AltitudeTape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AltitudeTape.cpp; path = ../Source/Gauges/AltitudeTape.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FBF0F3BA86E00B9CFFA /* EngineInstruments.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EngineInstruments.h; path = ../Source/Gauges/EngineInstruments.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FC00F3BA86E00B9CFFA /* FlightDirector.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FlightDirector.cpp; path = ../Source/Gauges/FlightDirector.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FC10F3BA86E00B9CFFA /* SpeedTape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpeedTape.h; path = ../Source/Gauges/SpeedTape.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FC20F3BA86E00B9CFFA /* GenericBargraph.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GenericBargraph.cpp; path = ../Source/Gauges/GenericBargraph.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FC30F3BA86E00B9CFFA /* PFDOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PFDOverlay.cpp; path = ../Source/Gauges/PFDOverlay.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FC40F3BA86E00B9CFFA /* AlbatrossAnnunciator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlbatrossAnnunciator.h; path = ../Source/Gauges/AlbatrossAnnunciator.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FC50F3BA86E00B9CFFA /* PFD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PFD.cpp; path = ../Source/Gauges/PFD.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FC60F3BA86E00B9CFFA /* GenericDial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GenericDial.cpp; path = ../Source/Gauges/GenericDial.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FC70F3BA86E00B9CFFA /* HeadingIndicator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HeadingIndicator.cpp; path = ../Source/Gauges/HeadingIndicator.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FC80F3BA86E00B9CFFA /* SpeedTicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpeedTicker.h; path = ../Source/Gauges/SpeedTicker.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FC90F3BA86E00B9CFFA /* NavDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NavDisplay.cpp; path = ../Source/Gauges/NavDisplay.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FCA0F3BA86E00B9CFFA /* EngineDial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EngineDial.cpp; path = ../Source/Gauges/EngineDial.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FCB0F3BA86E00B9CFFA /* AltitudeTicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AltitudeTicker.h; path = ../Source/Gauges/AltitudeTicker.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FCC0F3BA86E00B9CFFA /* SpeedTicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SpeedTicker.cpp; path = ../Source/Gauges/SpeedTicker.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FCD0F3BA86E00B9CFFA /* HeadingIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeadingIndicator.h; path = ../Source/Gauges/HeadingIndicator.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FCE0F3BA86E00B9CFFA /* SpeedTape.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SpeedTape.cpp; path = ../Source/Gauges/SpeedTape.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FCF0F3BA86E00B9CFFA /* ArtificialHorizon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ArtificialHorizon.cpp; path = ../Source/Gauges/ArtificialHorizon.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FD00F3BA86E00B9CFFA /* FlightDirector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlightDirector.h; path = ../Source/Gauges/FlightDirector.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FD10F3BA86E00B9CFFA /* PFD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PFD.h; path = ../Source/Gauges/PFD.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FD20F3BA86E00B9CFFA /* AltitudeTicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AltitudeTicker.cpp; path = ../Source/Gauges/AltitudeTicker.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FD30F3BA86E00B9CFFA /* VSI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VSI.cpp; path = ../Source/Gauges/VSI.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FD40F3BA86E00B9CFFA /* GenericBargraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericBargraph.h; path = ../Source/Gauges/GenericBargraph.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FD50F3BA86E00B9CFFA /* EngineDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EngineDial.h; path = ../Source/Gauges/EngineDial.h; sourceTree = SOURCE_ROOT; };
+		9AE411B80F3993FD00D539E5 /* TopLevelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopLevelView.h; sourceTree = "<group>"; };
+		9AE411B90F3993FD00D539E5 /* TopLevelView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TopLevelView.m; sourceTree = "<group>"; };
+		9AE411BF0F39973C00D539E5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+				9AE411C00F39973C00D539E5 /* OpenGL.framework in Frameworks */,
+				9AAE1D3B0F3AF15000B9CFFA /* libxml2.dylib in Frameworks */,
+				9AAE1ED70F3B88A200B9CFFA /* libftgl.a in Frameworks */,
+				9AAE1EDB0F3B8AA200B9CFFA /* libfreetype.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		080E96DDFE201D6D7F000001 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				9AE411B80F3993FD00D539E5 /* TopLevelView.h */,
+				9AE411B90F3993FD00D539E5 /* TopLevelView.m */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9AAE1D3A0F3AF15000B9CFFA /* libxml2.dylib */,
+				9AAE1EDA0F3B8AA200B9CFFA /* libfreetype.dylib */,
+				9AE411BF0F39973C00D539E5 /* OpenGL.framework */,
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* GlassCockpit.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* GlassCockpit */ = {
+			isa = PBXGroup;
+			children = (
+				9AAE1D3D0F3AF17300B9CFFA /* Portable OpenGC */,
+				080E96DDFE201D6D7F000001 /* Classes */,
+				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = GlassCockpit;
+			sourceTree = "<group>";
+		};
+		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
+			isa = PBXGroup;
+			children = (
+				32CA4F630368D1EE00C91783 /* GlassCockpit_Prefix.pch */,
+				29B97316FDCFA39411CA2CEA /* main.m */,
+			);
+			name = "Other Sources";
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107310486CEB800E47090 /* Info.plist */,
+				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
+				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				9AAE1ED60F3B88A200B9CFFA /* libftgl.a */,
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9AAE1D3D0F3AF17300B9CFFA /* Portable OpenGC */ = {
+			isa = PBXGroup;
+			children = (
+				9AAE1F690F3BA84600B9CFFA /* Gauges */,
+				9AAE1DF20F3AF57F00B9CFFA /* Application */,
+				9AAE1DF40F3AF59F00B9CFFA /* Base */,
+				9AAE1DF30F3AF58C00B9CFFA /* Data Sources */,
+				9AAE1E210F3AF66B00B9CFFA /* Navigation */,
+			);
+			name = "Portable OpenGC";
+			sourceTree = "<group>";
+		};
+		9AAE1DF20F3AF57F00B9CFFA /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				9AAE1DE80F3AF38100B9CFFA /* Main.cpp */,
+			);
+			name = Application;
+			sourceTree = "<group>";
+		};
+		9AAE1DF30F3AF58C00B9CFFA /* Data Sources */ = {
+			isa = PBXGroup;
+			children = (
+				9AAE1DD50F3AF32D00B9CFFA /* AirframeDataContainer.h */,
+				9AAE1DD40F3AF32D00B9CFFA /* AirframeDataContainer.cpp */,
+				9AAE1DFE0F3AF5B500B9CFFA /* AlbatrossDataSource.h */,
+				9AAE1DFF0F3AF5B500B9CFFA /* AlbatrossDataSource.cpp */,
+				9AAE1DD80F3AF33400B9CFFA /* DataContainer.h */,
+				9AAE1DD70F3AF33400B9CFFA /* DataContainer.cpp */,
+				9AAE1DB20F3AF2DE00B9CFFA /* DataSource.h */,
+				9AAE1DBB0F3AF2EC00B9CFFA /* DataSource.cpp */,
+				9AAE1DDB0F3AF33E00B9CFFA /* DataSourceMacro.h */,
+				9AAE1E020F3AF5CA00B9CFFA /* FGDataSource.h */,
+				9AAE1E010F3AF5CA00B9CFFA /* FGDataSource.cpp */,
+				9AAE1E030F3AF5CA00B9CFFA /* FlightGear_Protocol.h */,
+				9AAE1DDA0F3AF33E00B9CFFA /* TestDataSource.h */,
+				9AAE1DDC0F3AF33E00B9CFFA /* TestDataSource.cpp */,
+			);
+			name = "Data Sources";
+			sourceTree = "<group>";
+		};
+		9AAE1DF40F3AF59F00B9CFFA /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				9AAE1D5D0F3AF24A00B9CFFA /* CalcManager.h */,
+				9AAE1D5E0F3AF24A00B9CFFA /* CalcManager.cpp */,
+				9AAE1D600F3AF25D00B9CFFA /* CircleEvaluator.h */,
+				9AAE1D610F3AF25D00B9CFFA /* CircleEvaluator.cpp */,
+				9AAE1D630F3AF26D00B9CFFA /* Constants.h */,
+				9AAE1E800F3AF79900B9CFFA /* Debug.h */,
+				9AAE1F0C0F3B8B3600B9CFFA /* FLTKRenderWindow.h */,
+				9AAE1F0B0F3B8B3600B9CFFA /* FLTKRenderWindow.cpp */,
+				9AAE1E810F3AF87400B9CFFA /* Font.h */,
+				9AAE1E820F3AF87400B9CFFA /* Font.cpp */,
+				9AAE1E840F3AF87F00B9CFFA /* FontManager.h */,
+				9AAE1E850F3AF87F00B9CFFA /* FontManager.cpp */,
+				9AAE1EFC0F3B8B0C00B9CFFA /* Gauge.h */,
+				9AAE1EFB0F3B8B0C00B9CFFA /* Gauge.cpp */,
+				9AAE1EF50F3B8B0100B9CFFA /* GaugeComponent.h */,
+				9AAE1EF60F3B8B0100B9CFFA /* GaugeComponent.cpp */,
+				9AAE1D950F3AF29600B9CFFA /* GLHeaders.h */,
+				9AAE1D570F3AF1EF00B9CFFA /* Globals.h */,
+				9AAE1D580F3AF1EF00B9CFFA /* Globals.cpp */,
+				9AAE1D510F3AF1C800B9CFFA /* Messageable.h */,
+				9AAE1D520F3AF1C800B9CFFA /* MessageableList.cpp */,
+				9AAE1D530F3AF1C800B9CFFA /* MessageableList.h */,
+				9AAE1D540F3AF1C800B9CFFA /* Messages.h */,
+				9AAE1D640F3AF27F00B9CFFA /* OrderedPair.h */,
+				9AAE1D4D0F3AF1A400B9CFFA /* PrefManager.h */,
+				9AAE1D4E0F3AF1A400B9CFFA /* PrefManager.cpp */,
+				9AAE1EEC0F3B8AE600B9CFFA /* RenderObject.h */,
+				9AAE1EED0F3B8AE600B9CFFA /* RenderObject.cpp */,
+				9AAE1EEA0F3B8AE600B9CFFA /* RenderWindow.h */,
+				9AAE1EEB0F3B8AE600B9CFFA /* RenderWindow.cpp */,
+				9AAE1D650F3AF28900B9CFFA /* SoundManager.cpp */,
+				9AAE1D660F3AF28900B9CFFA /* SoundManager.h */,
+				9AAE1CFF0F3AEF1600B9CFFA /* XMLParser.h */,
+				9AAE1CFE0F3AEF1600B9CFFA /* XMLParser.cpp */,
+				9AAE1CFD0F3AEF1600B9CFFA /* XMLNode.h */,
+				9AAE1CFC0F3AEF1600B9CFFA /* XMLNode.cpp */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		9AAE1E210F3AF66B00B9CFFA /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				9AAE1E2A0F3AF68E00B9CFFA /* AirportGeoObj.h */,
+				9AAE1E340F3AF68E00B9CFFA /* AirportGeoObj.cpp */,
+				9AAE1E360F3AF68E00B9CFFA /* AirportList.h */,
+				9AAE1E390F3AF68E00B9CFFA /* AirportList.cpp */,
+				9AAE1E3A0F3AF68E00B9CFFA /* BinaryNavData.h */,
+				9AAE1E310F3AF68E00B9CFFA /* BinaryNavData.cpp */,
+				9AAE1E260F3AF68E00B9CFFA /* CoursePoint.h */,
+				9AAE1E2D0F3AF68E00B9CFFA /* CoursePoint.cpp */,
+				9AAE1E2E0F3AF68E00B9CFFA /* FlightCourse.h */,
+				9AAE1E280F3AF68E00B9CFFA /* FlightCourse.cpp */,
+				9AAE1E350F3AF68E00B9CFFA /* GeographicHash.h */,
+				9AAE1E270F3AF68E00B9CFFA /* GeographicHash.cpp */,
+				9AAE1E380F3AF68E00B9CFFA /* GeographicObject.h */,
+				9AAE1E2B0F3AF68E00B9CFFA /* GeographicObject.cpp */,
+				9AAE1E370F3AF68E00B9CFFA /* GeographicObjectList.h */,
+				9AAE1E2F0F3AF68E00B9CFFA /* GeographicObjectList.cpp */,
+				9AAE1E300F3AF68E00B9CFFA /* NavaidGeoObj.h */,
+				9AAE1E330F3AF68E00B9CFFA /* NavaidGeoObj.cpp */,
+				9AAE1E3C0F3AF68E00B9CFFA /* NavaidList.h */,
+				9AAE1E240F3AF68E00B9CFFA /* NavaidList.cpp */,
+				9AAE1E320F3AF68E00B9CFFA /* NavDatabase.h */,
+				9AAE1E3B0F3AF68E00B9CFFA /* NavDatabase.cpp */,
+				9AAE1E290F3AF68E00B9CFFA /* WaypointGeoObj.h */,
+				9AAE1E230F3AF68E00B9CFFA /* WaypointGeoObj.cpp */,
+				9AAE1E250F3AF68E00B9CFFA /* WaypointList.h */,
+				9AAE1E2C0F3AF68E00B9CFFA /* WaypointList.cpp */,
+			);
+			name = Navigation;
+			sourceTree = "<group>";
+		};
+		9AAE1F690F3BA84600B9CFFA /* Gauges */ = {
+			isa = PBXGroup;
+			children = (
+				9AAE1FC40F3BA86E00B9CFFA /* AlbatrossAnnunciator.h */,
+				9AAE1FBB0F3BA86E00B9CFFA /* AlbatrossAnnunciator.cpp */,
+				9AAE1FB90F3BA86E00B9CFFA /* AltitudeTape.h */,
+				9AAE1FBD0F3BA86E00B9CFFA /* AltitudeTape.cpp */,
+				9AAE1FCB0F3BA86E00B9CFFA /* AltitudeTicker.h */,
+				9AAE1FD20F3BA86E00B9CFFA /* AltitudeTicker.cpp */,
+				9AAE1FB40F3BA86E00B9CFFA /* ArtificialHorizon.h */,
+				9AAE1FCF0F3BA86E00B9CFFA /* ArtificialHorizon.cpp */,
+				9AAE1FD50F3BA86E00B9CFFA /* EngineDial.h */,
+				9AAE1FCA0F3BA86E00B9CFFA /* EngineDial.cpp */,
+				9AAE1FBF0F3BA86E00B9CFFA /* EngineInstruments.h */,
+				9AAE1FBA0F3BA86E00B9CFFA /* EngineInstruments.cpp */,
+				9AAE1FD00F3BA86E00B9CFFA /* FlightDirector.h */,
+				9AAE1FC00F3BA86E00B9CFFA /* FlightDirector.cpp */,
+				9AAE1FD40F3BA86E00B9CFFA /* GenericBargraph.h */,
+				9AAE1FC20F3BA86E00B9CFFA /* GenericBargraph.cpp */,
+				9AAE1FB50F3BA86E00B9CFFA /* GenericDial.h */,
+				9AAE1FC60F3BA86E00B9CFFA /* GenericDial.cpp */,
+				9AAE1FCD0F3BA86E00B9CFFA /* HeadingIndicator.h */,
+				9AAE1FC70F3BA86E00B9CFFA /* HeadingIndicator.cpp */,
+				9AAE1FB70F3BA86E00B9CFFA /* NavDisplay.h */,
+				9AAE1FC90F3BA86E00B9CFFA /* NavDisplay.cpp */,
+				9AAE1FD10F3BA86E00B9CFFA /* PFD.h */,
+				9AAE1FC50F3BA86E00B9CFFA /* PFD.cpp */,
+				9AAE1FB80F3BA86E00B9CFFA /* PFDOverlay.h */,
+				9AAE1FC30F3BA86E00B9CFFA /* PFDOverlay.cpp */,
+				9AAE1FC10F3BA86E00B9CFFA /* SpeedTape.h */,
+				9AAE1FCE0F3BA86E00B9CFFA /* SpeedTape.cpp */,
+				9AAE1FC80F3BA86E00B9CFFA /* SpeedTicker.h */,
+				9AAE1FCC0F3BA86E00B9CFFA /* SpeedTicker.cpp */,
+				9AAE1FBC0F3BA86E00B9CFFA /* Tachometer.h */,
+				9AAE1FB30F3BA86E00B9CFFA /* Tachometer.cpp */,
+				9AAE1FB60F3BA86E00B9CFFA /* VSI.h */,
+				9AAE1FD30F3BA86E00B9CFFA /* VSI.cpp */,
+			);
+			name = Gauges;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8D1107260486CEB800E47090 /* GlassCockpit */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "GlassCockpit" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GlassCockpit;
+			productInstallPath = "$(HOME)/Applications";
+			productName = GlassCockpit;
+			productReference = 8D1107320486CEB800E47090 /* GlassCockpit.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GlassCockpit" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* GlassCockpit */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* GlassCockpit */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
+				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072D0486CEB800E47090 /* main.m in Sources */,
+				9AE411BA0F3993FD00D539E5 /* TopLevelView.m in Sources */,
+				9AAE1D000F3AEF1600B9CFFA /* XMLNode.cpp in Sources */,
+				9AAE1D010F3AEF1600B9CFFA /* XMLParser.cpp in Sources */,
+				9AAE1D4F0F3AF1A400B9CFFA /* PrefManager.cpp in Sources */,
+				9AAE1D550F3AF1C800B9CFFA /* MessageableList.cpp in Sources */,
+				9AAE1D590F3AF1EF00B9CFFA /* Globals.cpp in Sources */,
+				9AAE1D5F0F3AF24A00B9CFFA /* CalcManager.cpp in Sources */,
+				9AAE1D620F3AF25D00B9CFFA /* CircleEvaluator.cpp in Sources */,
+				9AAE1D670F3AF28900B9CFFA /* SoundManager.cpp in Sources */,
+				9AAE1DBC0F3AF2EC00B9CFFA /* DataSource.cpp in Sources */,
+				9AAE1DD60F3AF32D00B9CFFA /* AirframeDataContainer.cpp in Sources */,
+				9AAE1DD90F3AF33400B9CFFA /* DataContainer.cpp in Sources */,
+				9AAE1DDD0F3AF33E00B9CFFA /* TestDataSource.cpp in Sources */,
+				9AAE1DE90F3AF38100B9CFFA /* Main.cpp in Sources */,
+				9AAE1E000F3AF5B500B9CFFA /* AlbatrossDataSource.cpp in Sources */,
+				9AAE1E040F3AF5CA00B9CFFA /* FGDataSource.cpp in Sources */,
+				9AAE1E3D0F3AF68E00B9CFFA /* WaypointGeoObj.cpp in Sources */,
+				9AAE1E3E0F3AF68E00B9CFFA /* NavaidList.cpp in Sources */,
+				9AAE1E3F0F3AF68E00B9CFFA /* GeographicHash.cpp in Sources */,
+				9AAE1E400F3AF68E00B9CFFA /* FlightCourse.cpp in Sources */,
+				9AAE1E410F3AF68E00B9CFFA /* GeographicObject.cpp in Sources */,
+				9AAE1E420F3AF68E00B9CFFA /* WaypointList.cpp in Sources */,
+				9AAE1E430F3AF68E00B9CFFA /* CoursePoint.cpp in Sources */,
+				9AAE1E440F3AF68E00B9CFFA /* GeographicObjectList.cpp in Sources */,
+				9AAE1E450F3AF68E00B9CFFA /* BinaryNavData.cpp in Sources */,
+				9AAE1E460F3AF68E00B9CFFA /* NavaidGeoObj.cpp in Sources */,
+				9AAE1E470F3AF68E00B9CFFA /* AirportGeoObj.cpp in Sources */,
+				9AAE1E480F3AF68E00B9CFFA /* AirportList.cpp in Sources */,
+				9AAE1E490F3AF68E00B9CFFA /* NavDatabase.cpp in Sources */,
+				9AAE1E830F3AF87400B9CFFA /* Font.cpp in Sources */,
+				9AAE1E860F3AF87F00B9CFFA /* FontManager.cpp in Sources */,
+				9AAE1EEE0F3B8AE600B9CFFA /* RenderWindow.cpp in Sources */,
+				9AAE1EEF0F3B8AE600B9CFFA /* RenderObject.cpp in Sources */,
+				9AAE1EF70F3B8B0100B9CFFA /* GaugeComponent.cpp in Sources */,
+				9AAE1EFD0F3B8B0C00B9CFFA /* Gauge.cpp in Sources */,
+				9AAE1F0D0F3B8B3600B9CFFA /* FLTKRenderWindow.cpp in Sources */,
+				9AAE1FD60F3BA86E00B9CFFA /* Tachometer.cpp in Sources */,
+				9AAE1FD70F3BA86E00B9CFFA /* EngineInstruments.cpp in Sources */,
+				9AAE1FD80F3BA86E00B9CFFA /* AlbatrossAnnunciator.cpp in Sources */,
+				9AAE1FD90F3BA86E00B9CFFA /* AltitudeTape.cpp in Sources */,
+				9AAE1FDB0F3BA86E00B9CFFA /* FlightDirector.cpp in Sources */,
+				9AAE1FDC0F3BA86E00B9CFFA /* GenericBargraph.cpp in Sources */,
+				9AAE1FDD0F3BA86E00B9CFFA /* PFDOverlay.cpp in Sources */,
+				9AAE1FDE0F3BA86E00B9CFFA /* PFD.cpp in Sources */,
+				9AAE1FDF0F3BA86E00B9CFFA /* GenericDial.cpp in Sources */,
+				9AAE1FE00F3BA86E00B9CFFA /* HeadingIndicator.cpp in Sources */,
+				9AAE1FE10F3BA86E00B9CFFA /* NavDisplay.cpp in Sources */,
+				9AAE1FE20F3BA86E00B9CFFA /* EngineDial.cpp in Sources */,
+				9AAE1FE30F3BA86E00B9CFFA /* SpeedTicker.cpp in Sources */,
+				9AAE1FE40F3BA86E00B9CFFA /* SpeedTape.cpp in Sources */,
+				9AAE1FE50F3BA86E00B9CFFA /* ArtificialHorizon.cpp in Sources */,
+				9AAE1FE60F3BA86E00B9CFFA /* AltitudeTicker.cpp in Sources */,
+				9AAE1FE70F3BA86E00B9CFFA /* VSI.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		089C165CFE840E0CC02AAC07 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				089C165DFE840E0CC02AAC07 /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		1DDD58140DA1D0A300B32029 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				1DDD58150DA1D0A300B32029 /* English */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = GlassCockpit_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					/usr/X11/lib,
+				);
+				PRODUCT_NAME = GlassCockpit;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = GlassCockpit_Prefix.pch;
+				INFOPLIST_FILE = Info.plist;
+				INSTALL_PATH = "$(HOME)/Applications";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+					/usr/X11/lib,
+				);
+				PRODUCT_NAME = GlassCockpit;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH)";
+				GCC_AUTO_VECTORIZATION = YES;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_OBJC_CALL_CXX_CDTORS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/X11/include,
+					/usr/X11/include/freetype2,
+					"~/Projects/iPhone/GlassCockpit/FTGL_Includes",
+					/usr/include/libxml2,
+				);
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_AUTO_VECTORIZATION = YES;
+				GCC_C_LANGUAGE_STANDARD = c99;
+				GCC_ENABLE_SSE3_EXTENSIONS = YES;
+				GCC_OBJC_CALL_CXX_CDTORS = YES;
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					/usr/X11/include,
+					/usr/X11/include/freetype2,
+					"~/Projects/iPhone/GlassCockpit/FTGL_Includes",
+					/usr/include/libxml2,
+				);
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "GlassCockpit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "GlassCockpit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}

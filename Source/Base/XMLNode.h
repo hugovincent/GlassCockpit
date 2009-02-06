@@ -3,7 +3,7 @@
 
 #include <list>
 #include <string>
-#include "libxml/tree.h"
+#include <libxml/tree.h>
 
 #ifndef LIBXML_TREE_ENABLED
 #error "XMLNode requires LIBXML_TREE_ENABLED (fatal)."
