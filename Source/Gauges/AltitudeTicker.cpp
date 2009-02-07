@@ -80,7 +80,8 @@ void AltitudeTicker::Render()
 	globals->m_FontManager->SetSize(m_Font, 6.0, bigFontHeight);
 
 	// Get the data
-	long int alt = (long int) globals->m_DataSource->GetAirframe()->GetAltitude_MSL_Feet();
+	float alt_f = globals->m_DataSource->GetAirframe()->GetAltitude_MSL_Feet();
+	long int alt = (long int)alt_f;
 
 	// Draw text in white
 	glColor3ub(255,255,255);
@@ -91,6 +92,7 @@ void AltitudeTicker::Render()
 	{
 		sprintf(buffer, "%li", alt/10000);
 		globals->m_FontManager->Print(5.0, texty, buffer, m_Font);
+		alt_f = alt_f - 10000*(int)(alt/10000);
 		alt = alt-10000*(int)(alt/10000);
 	}
 	else
@@ -116,6 +118,7 @@ void AltitudeTicker::Render()
 	// 1000's
 	sprintf(buffer, "%li", alt/1000);
 	globals->m_FontManager->Print(9.5, texty, &buffer[0], m_Font);
+	alt_f = alt_f - 1000*(int)(alt/1000);
 	alt = alt-1000*(int)(alt/1000);
 
 	// The 100's, 10's, and 1's are drawn in a smaller size
@@ -125,6 +128,7 @@ void AltitudeTicker::Render()
 	// 100's
 	sprintf(buffer, "%li", alt/100);
 	globals->m_FontManager->Print(15.0, texty, &buffer[0], m_Font);
+	alt_f = alt_f - 100*(int)(alt/100);
 	alt = alt-100*(int)(alt/100);
 
 	// The 10's and 1's position (which is always 0) scroll based on altitude
@@ -152,21 +156,26 @@ void AltitudeTicker::Render()
 	double vertTranslation;
 
 	if (middle_ten != 0)
-		vertTranslation = (middle_ten * 10 - (double)alt) / 20 * littleFontHeight;
+		vertTranslation = (middle_ten * 10 - alt_f) / 20 * littleFontHeight;
 	else {
 		if (roundupnine)
-			vertTranslation = (100 - (double)alt) / 20 * littleFontHeight;
+			vertTranslation = (100 - alt_f) / 20 * littleFontHeight;
 		else
-			vertTranslation = (0 - (double)alt) / 20 * littleFontHeight;
+			vertTranslation = (0 - alt_f) / 20 * littleFontHeight;
 	}
-
 	glTranslated(0, vertTranslation, 0);
 
 	// Now figure out the digits above and below
+	int top2_ten = (middle_ten + 4) % 10;
 	int top_ten = (middle_ten + 2) % 10;
 	int bottom_ten = (middle_ten - 2 + 10) % 10;
+	int bottom2_ten = (middle_ten - 4 + 10) % 10;
 
 	// Display all of the digits
+	sprintf(buffer, "%i", top2_ten);
+	globals->m_FontManager->Print(19.0, texty + 2 * (littleFontHeight + littleFontHeight/10), &buffer[0], m_Font);
+	globals->m_FontManager->Print(23.0, texty + 2 * (littleFontHeight + littleFontHeight/10), "0", m_Font);
+	
 	sprintf(buffer, "%i", top_ten);
 	globals->m_FontManager->Print(19.0, texty + littleFontHeight + littleFontHeight/10, &buffer[0], m_Font);
 	globals->m_FontManager->Print(23.0, texty + littleFontHeight + littleFontHeight/10, "0", m_Font);
@@ -178,6 +187,10 @@ void AltitudeTicker::Render()
 	sprintf(buffer, "%i", bottom_ten);
 	globals->m_FontManager->Print(19.0, texty - littleFontHeight - littleFontHeight/10, &buffer[0], m_Font);
 	globals->m_FontManager->Print(23.0, texty - littleFontHeight - littleFontHeight/10, "0", m_Font);
+	
+	sprintf(buffer, "%i", bottom2_ten);
+	globals->m_FontManager->Print(19.0, texty - 2 * (littleFontHeight + littleFontHeight/10), &buffer[0], m_Font);
+	globals->m_FontManager->Print(23.0, texty - 2 * (littleFontHeight + littleFontHeight/10), "0", m_Font);
 }
 
 } // end namespace OpenGC

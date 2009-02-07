@@ -103,7 +103,7 @@ namespace OpenGC
 		double airspeed = t * 4;
 		double vertSpeed = 200 * sin(t/2 + 0.5); // should be calculated
 		//double alt = 200 + (30 * sin(t/6));
-		double alt = t * 25;
+		double alt = t * 15;
 
 		// ++++++ Update Data +++++++++++++++++++++++++++++++++++++++++++++++++++++
 		// -------Orientation--------------

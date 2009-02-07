@@ -291,7 +291,7 @@ void NavDisplay::OnMouseDown(int button, double physicalX, double physicalY)
 	else if ((physicalX <= 10.0)&&(physicalY>(OVERLAY_Y+10.0))&&(physicalY<(OVERLAY_Y+20.0)))
 	{
 		m_SizeNM /= 2.0;
-	}  
+	}
 }
 
 void NavDisplay::PlotWindSpeedDirection()

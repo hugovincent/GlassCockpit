@@ -74,6 +74,10 @@ void SpeedTicker::Render()
 
 	char buffer[4];
 	double airspeed = globals->m_DataSource->GetAirframe()->GetAirspeed_KT();
+	
+	if (airspeed > 999.0)
+		airspeed = 999.0; 
+	
 	// Speed for integer calculations
 	long int spd = (long int) airspeed;
 

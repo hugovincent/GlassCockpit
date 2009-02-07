@@ -53,6 +53,11 @@ NavDatabase::~NavDatabase()
 void NavDatabase::InitDatabase(const string& pathToNav)
 {
 	printf("NavDatabase: Loading navigation database... "); fflush(stdout);
+	
+	// FIXME check for cached binary copies of nav data otherwise convert and cache
+	// OpenGC::BinaryNavData ndtb;
+	// ndtb.ConvertAirportData(
+	// ndtb.ConvertNavaidData(
 
 	// Load and hash NavAid (binary) database
 	m_NavaidList = new NavaidList;

@@ -67,7 +67,6 @@
 		9AAE231A0F3BEFA800B9CFFA /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1D3A0F3AF15000B9CFFA /* libxml2.dylib */; };
 		9AAE231B0F3BEFA800B9CFFA /* libfreetype.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1EDA0F3B8AA200B9CFFA /* libfreetype.dylib */; };
 		9AAE231C0F3BEFE900B9CFFA /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1ED60F3B88A200B9CFFA /* libftgl.a */; };
-		9AAE231D0F3BF00000B9CFFA /* NavConvertMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE20930F3BB9E200B9CFFA /* NavConvertMain.cpp */; };
 		9AAE231E0F3BF00E00B9CFFA /* BinaryNavData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E310F3AF68E00B9CFFA /* BinaryNavData.cpp */; };
 		9AAE253F0F3C253200B9CFFA /* Preferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9AAE253C0F3C253200B9CFFA /* Preferences.xml */; };
 		9AAE25400F3C253200B9CFFA /* Default.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9AAE253D0F3C253200B9CFFA /* Default.xml */; };
@@ -202,7 +201,6 @@
 		9AAE1FD30F3BA86E00B9CFFA /* VSI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VSI.cpp; path = ../Source/Gauges/VSI.cpp; sourceTree = SOURCE_ROOT; };
 		9AAE1FD40F3BA86E00B9CFFA /* GenericBargraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericBargraph.h; path = ../Source/Gauges/GenericBargraph.h; sourceTree = SOURCE_ROOT; };
 		9AAE1FD50F3BA86E00B9CFFA /* EngineDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EngineDial.h; path = ../Source/Gauges/EngineDial.h; sourceTree = SOURCE_ROOT; };
-		9AAE20930F3BB9E200B9CFFA /* NavConvertMain.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NavConvertMain.cpp; path = ../Source/Application/NavConvertMain.cpp; sourceTree = SOURCE_ROOT; };
 		9AAE21A50F3BEBF200B9CFFA /* NavConvert */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NavConvert; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AAE253C0F3C253200B9CFFA /* Preferences.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Preferences.xml; path = ../Data/Preferences.xml; sourceTree = SOURCE_ROOT; };
 		9AAE253D0F3C253200B9CFFA /* Default.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Default.xml; path = ../Data/Default.xml; sourceTree = SOURCE_ROOT; };
@@ -328,20 +326,11 @@
 			isa = PBXGroup;
 			children = (
 				9AAE1F690F3BA84600B9CFFA /* Gauges */,
-				9AAE1DF20F3AF57F00B9CFFA /* Application */,
 				9AAE1DF40F3AF59F00B9CFFA /* Base */,
 				9AAE1DF30F3AF58C00B9CFFA /* Data Sources */,
 				9AAE1E210F3AF66B00B9CFFA /* Navigation */,
 			);
 			name = "Portable OpenGC";
-			sourceTree = "<group>";
-		};
-		9AAE1DF20F3AF57F00B9CFFA /* Application */ = {
-			isa = PBXGroup;
-			children = (
-				9AAE20930F3BB9E200B9CFFA /* NavConvertMain.cpp */,
-			);
-			name = Application;
 			sourceTree = "<group>";
 		};
 		9AAE1DF30F3AF58C00B9CFFA /* Data Sources */ = {
@@ -632,7 +621,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9AAE231D0F3BF00000B9CFFA /* NavConvertMain.cpp in Sources */,
 				9AAE231E0F3BF00E00B9CFFA /* BinaryNavData.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

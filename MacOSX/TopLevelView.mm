@@ -13,6 +13,7 @@
 #include "Debug.h"
 #include "Globals.h"
 #include "XMLParser.h"
+#include "BinaryNavData.h"
 
 //--------Data Sources---------
 #include "AlbatrossDataSource.h"
@@ -23,10 +24,6 @@
 #include "PFD.h"
 #include "NavDisplay.h"
 #include "EngineInstruments.h"
-
-#define PATH_PREFIX				"/Users/hugo/Projects/iPhone/GlassCockpit/"
-#define DEFAULT_XML_FILE		PATH_PREFIX "Data/Default.xml"
-#define PREFERENCES_XML_FILE	PATH_PREFIX "Data/Preferences.xml"
 
 using namespace OpenGC;
 
@@ -46,11 +43,13 @@ Globals *OpenGC::globals;
 	OpenGC::globals = new Globals();
 	
 	// Initialise preferences manager
-	globals->m_PrefManager->InitPreferences(PREFERENCES_XML_FILE);
+	NSString *prefsFileName = [[NSBundle mainBundle] pathForResource:@"Preferences" ofType:@"xml"];
+	globals->m_PrefManager->InitPreferences([prefsFileName cStringUsingEncoding:NSASCIIStringEncoding]);
 	
 	// Read the XML file and do some basic checks about its contents
 	XMLParser parser;
-	Assert(parser.ReadFile(DEFAULT_XML_FILE), "unable to read XML file");
+	NSString *xmlFileName = [[NSBundle mainBundle] pathForResource:@"Default" ofType:@"xml"];
+	Assert(parser.ReadFile([xmlFileName cStringUsingEncoding:NSASCIIStringEncoding]), "unable to read XML file");
 	Check(parser.HasNode("/"));
 	Assert(parser.HasNode("/Window"), "invalid XML, no Window node");
 	Assert(parser.HasNode("/DataSource"), "invalid XML, no DataSource node");
@@ -83,30 +82,33 @@ Globals *OpenGC::globals;
 
 - (void)reshape {
 
-	if ([self frame].size.width != size.width || [self frame].size.height != size.height) {
-		
-		m_pRenderWindow->Resize(size.width, size.height);	
-		size = [self frame].size;
-	}
+	size = [self frame].size;
+	m_pRenderWindow->Resize(size.width, size.height);
 	[self setNeedsDisplay:YES];
 }
 
 
 - (void)drawRect:(NSRect)rect {
 	
+	if ([self frame].size.width != size.width || [self frame].size.height != size.height) {
+		[self reshape];
+	}
 	NSOpenGLContext *ctx = [self openGLContext];
-//	[ctx makeCurrentContext];
+	[ctx makeCurrentContext];
 	m_pRenderWindow->Render();
 	[ctx flushBuffer];
 }
 
 - (BOOL)go:(XMLNode*)rootNode {
 	
+	const char* resourcePath = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/"]
+								cStringUsingEncoding:NSASCIIStringEncoding];
+	
 	// Font manager (global)
-	globals->m_FontManager->SetFontPath(globals->m_PrefManager->GetPrefS("FontPath").c_str());
+	globals->m_FontManager->SetFontPath(resourcePath);
 	
 	// Navigation Database (global)
-	globals->m_NavDatabase->InitDatabase(globals->m_PrefManager->GetPrefS("NavPath").c_str());
+	globals->m_NavDatabase->InitDatabase(resourcePath);
 	
 	// Create the data source
 	XMLNode dsNode = rootNode->GetChild("DataSource");
@@ -180,7 +182,6 @@ Globals *OpenGC::globals;
 	
 	// Create the render window
 	m_pRenderWindow = new RenderWindow(); //4, 0, windowX, windowY, windowTitle.c_str());
-	//	m_pRenderWindow->mode(FL_RGB | FL_DOUBLE); // FIXME
 	globals->m_PrefManager->SetPrefD("UnitsPerPixel", m_pRenderWindow->GetUnitsPerPixel());
 	
 	// Create Gauges as described by the XML file
@@ -221,6 +222,7 @@ Globals *OpenGC::globals;
 	return YES; // sucess	
 }
 
+
 - (void)IdleFunction {
 	
 	// Every time we loop we grab some new data...
@@ -236,51 +238,75 @@ Globals *OpenGC::globals;
 	}
 }
 
-@end
 
-#if 0	
-	int AGLRenderWindow::handle(int event)
-	{
-		/*	//FIXME
-		 switch(event) {
-		 case FL_PUSH:		// Mouse down
-		 {
-		 this->CallBackMouseFunc(Fl::event_button(), 0,
-		 Fl::event_x(), Fl::event_y() );
-		 return 1;
-		 }
-		 case FL_DRAG:		// Mouse drag
-		 {
-		 return 1;
-		 }
-		 case FL_RELEASE:	// Mouse up
-		 {
-		 this->CallBackMouseFunc(Fl::event_button(), 1, 
-		 Fl::event_x(), Fl::event_y() );
-		 return 1;
-		 }
-		 case FL_FOCUS :
-		 case FL_UNFOCUS :
-		 {
-		 // return 1 if you want keyboard events, 0 otherwise
-		 return 1;
-		 }
-		 case FL_KEYDOWN:	// Keyboard key pressed
-		 {
-		 int key = Fl::event_key();
-		 if (key < 128 && key >= 32)
-		 this->CallBackKeyboardFunc(key, Fl::event_state() >> 16);
-		 return 1;
-		 }
-		 default:
-		 {
-		 // pass other events to the base class, e.g. Alt+F4
-		 return Fl_Gl_Window::handle(event);
-		 }
-		 }
-		 */
+#pragma mark Event Handling
+
+- (BOOL)acceptsFirstResponder {
+
+    return YES;
+}
+
+
+- (void)mouseDown:(NSEvent *)theEvent {
+
+    NSPoint location = [theEvent locationInWindow];
+	location.y = [self frame].size.height -location.y; // hack to match FLTK
+	int buttonNumber;
+	switch ([theEvent buttonNumber]) {
+		case NSLeftMouseDown:
+			buttonNumber = 1; break;
+		case NSOtherMouseDown:
+			buttonNumber = 2; break;
+		case NSRightMouseDown:
+			buttonNumber = 3; break;
+		default:
+			[[self nextResponder] mouseUp:theEvent];
+			
 	}
-	
-} // end namespace OpenGC
+	m_pRenderWindow->CallBackMouseFunc(buttonNumber, 0, location.x, location.y);
+}
 
-#endif
+
+- (void)mouseUp:(NSEvent *)theEvent {
+	
+    NSPoint location = [theEvent locationInWindow];
+	location.y = [self frame].size.height -location.y; // hack to match FLTK
+	int buttonNumber;
+	switch ([theEvent buttonNumber]) {
+		case NSLeftMouseUp:
+			buttonNumber = 1; break;
+		case NSOtherMouseUp:
+			buttonNumber = 2; break;
+		case NSRightMouseUp:
+			buttonNumber = 3; break;
+		default:
+			[[self nextResponder] mouseUp:theEvent];
+			
+	}
+	m_pRenderWindow->CallBackMouseFunc(buttonNumber, 1, location.x, location.y);
+}
+
+
+- (void)keyDown:(NSEvent *)theEvent {
+ 
+	NSString *str = [theEvent charactersIgnoringModifiers];
+	int key = [str characterAtIndex:0];
+	
+	// modifiers: 0x01 =  shift, 0x04 = ctrl, 0x08 = alt, 0x40 = meta
+	int modifiers = 0;
+	if ([theEvent modifierFlags] & NSShiftKeyMask)
+		modifiers |= 0x01;
+	if ([theEvent modifierFlags] & NSControlKeyMask)
+		modifiers |= 0x04;
+	if ([theEvent modifierFlags] & NSAlternateKeyMask) // option - we map this as meta
+		modifiers |= 0x40;
+	if ([theEvent modifierFlags] & NSCommandKeyMask)
+		modifiers |= 0x08;
+	
+	if (key < 128 && key >= 32)
+		m_pRenderWindow->CallBackKeyboardFunc(key, modifiers);
+	else
+		[[self nextResponder] keyDown:theEvent];
+}
+
+@end

@@ -33,7 +33,7 @@ SpeedTape::SpeedTape()
 
 	m_PhysicalSize.x = 34; // make the clip region larger to handle speed bug
 	m_PhysicalSize.y = 136;
-	indent_x = m_PhysicalSize.x - 10;
+	indent_x = m_PhysicalSize.x - 11;
 
 	m_Scale.x = 1.0;
 	m_Scale.y = 1.0;
@@ -52,9 +52,9 @@ void SpeedTape::Render()
 	// Speed for floating point calculations
 	double airspeed = globals->m_DataSource->GetAirframe()->GetAirspeed_KT();
 
-	// The speed tape doesn't show speeds greater than 999 knots
-	if(airspeed > 999.0)
-		airspeed = 999.0;
+	// The speed tape doesn't show speeds greater than 1999 knots
+	if(airspeed > 1999.0)
+		airspeed = 1999.0;
 
 	// Save matrix
 	glMatrixMode(GL_MODELVIEW);
@@ -78,7 +78,7 @@ void SpeedTape::Render()
 	double tickSpacing = 11.3;
 	double tickWidth = 3.7;
 	double fontHeight = 5;
-	double fontWidth = 5;
+	double fontWidth = 4.1;
 	double fontIndent = 6;
 
 	globals->m_FontManager->SetSize(m_Font, fontHeight, fontWidth);
@@ -92,7 +92,7 @@ void SpeedTape::Render()
 	// The vertical offset is how high in physical units the next highest 10's
 	// airspeed is above the arrow. For airspeeds divisible by 10, this is 0. I.e. 120, 130
 	// etc. are all aligned with the arrow
-	double vertOffset = nextHighestAirspeed - airspeed;
+	double vertOffset = (nextHighestAirspeed - airspeed) * tickSpacing / 10.f;
 
 	// Vertical location of the tick mark
 	double tickLocation = 0;
@@ -115,12 +115,20 @@ void SpeedTape::Render()
 		glVertex2f(indent_x, tickLocation);
 		glEnd();
 
-		if( (tickSpeed % 20)==0 )
+		if( tickSpeed < 1999.0 && (tickSpeed % 20)==0 )
 		{
 			double texty = tickLocation - fontHeight / 2;
 
 			charSpd = tickSpeed;
 
+			if(charSpd >= 1000)
+			{
+				// 1000's
+				sprintf( buffer, "%i", charSpd/1000);
+				globals->m_FontManager->Print(fontIndent - fontWidth, texty, &buffer[0], m_Font);
+				charSpd = charSpd-1000*(int)(charSpd/1000);
+			}
+			
 			if(charSpd >= 100)
 			{
 				// 100's
@@ -147,10 +155,10 @@ void SpeedTape::Render()
 	{
 		tickSpeed = (int)(nextHighestAirspeed - i * 10);
 
-		// Only draw ticks if they correspond to an airspeed of > 30
-		if (tickSpeed >= 0)
+		// Only draw ticks if they correspond to an airspeed of > 0
+		if (tickSpeed < 1999.0 && tickSpeed >= 0)
 		{
-			tickLocation = (m_PhysicalSize.y/2) - ((i-1) * tickSpacing) - (10 - vertOffset);
+			tickLocation = (m_PhysicalSize.y/2) - ((i-1) * tickSpacing) - (tickSpacing - vertOffset);
 
 			glBegin(GL_LINES);
 			glVertex2f(indent_x - tickWidth, tickLocation);
@@ -162,6 +170,14 @@ void SpeedTape::Render()
 				double texty = tickLocation - fontHeight / 2;
 
 				charSpd = tickSpeed;
+				
+				if(charSpd >= 1000)
+				{
+					// 1000's
+					sprintf( buffer, "%i", charSpd/1000);
+					globals->m_FontManager->Print(fontIndent - fontWidth, texty, &buffer[0], m_Font);
+					charSpd = charSpd-1000*(int)(charSpd/1000);
+				}
 
 				if(charSpd >= 100)
 				{

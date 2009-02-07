@@ -216,14 +216,14 @@ void RenderWindow::CallBackKeyboardFunc(int keycode, int modifiers)
 				if (modifiers & 0x04)
 				{
 					globals->m_MessageableList->DispatchMessage(MSG_APP_QUIT, NULL);
+					break;
 				}
 			}
-			break;
 		default:
 			{
 				printf("Keyboard event %i \"%c\"\n", keycode, keycode);
 
-				// Its not app-global, so give the even to each gauge
+				// Its not app-global, so give the event to each gauge
 				for (it = m_GaugeList.begin(); it != m_GaugeList.end(); ++it)
 					(*it)->OnKeyboard(keycode, modifiers);
 			}
