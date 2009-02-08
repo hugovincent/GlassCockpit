@@ -55,7 +55,6 @@ Globals *OpenGC::globals;
 	Assert([paths count] == 1, "can't uniquely identify a writable path for cached resources");
 	NSString *writeableDir = [(NSString*)[paths objectAtIndex:0] stringByAppendingString:@"/GlassCockpit/"];
 	globals->m_PrefManager->SetPrefS("PathToCaches", [writeableDir cStringUsingEncoding:NSASCIIStringEncoding]);
-	NSLog(@"path to caches %@\n", writeableDir);
 	
 	// Create writable directory if necessary
 	NSFileManager *fm = [NSFileManager defaultManager];

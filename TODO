@@ -1,10 +1,11 @@
-﻿Last Updated:	2006.09.20
+Last Updated:	2006.09.20
 Updated By:		Hugo Vincent
 _______________________________________________________________________________
 
 	1.	Enhancements and Changes
 _______________________________________________________________________________
 
+* Support for fetching an updated apt.dat and nav.dat from web
 * XML-described Gauges built using GaugeComponents (deprecate the Gauge class)
 * FlightCourse is compeltely incomplete and broken
 * FlightGear data source needs to be finished, and remove the dependency on Plib
@@ -13,9 +14,9 @@ _______________________________________________________________________________
 	* overlay text area:
 		* time & distance to waypoint
 		* GPS lat/long (as Degrees:Minutes:Seconds for decimal?)
-* XML <Window> description needs some way of describing dividor lines
+* XML <Window> description needs some way of describing divider lines
 * GaugeComponents:
-	* new: plain text component (only arguments would be font size and text - it would compute its size automatically)
+	* new: plain text component (only arguments would be font size and text - it would compute its size)
 	* new: line component
 	* new: frames-per-second gauge, code in EngineInstruments
 	* rename EngineDial to PieDial

@@ -18,8 +18,11 @@
 #include "GLHeaders.h"
 #include <stdio.h>
 
-#include "Font.h"
 #include "Debug.h"
+#include "Font.h"
+
+#define FONT_TEXTURE_SIZE		40.0
+#define FONT_TEXTURE_CROSSOVER	4.0
 
 namespace OpenGC
 {
@@ -29,28 +32,18 @@ Font::Font()
 	// Default is a unit sized font
 	m_Size.x = 1.0;
 	m_Size.y = 1.0;
-	m_Spacing = 1.0; // FIXME spacing doesn't get used at all
 
-	m_PolygonFont = 0;
-	m_OutlineFont = 0;
+	m_TextureFont = NULL;
 	m_RightAligned = false;
-
-	m_Name = string("");
 }
 
 Font::~Font()
 {
-	if(m_PolygonFont != 0)
+	if(m_TextureFont != 0)
 	{
-		delete m_PolygonFont;
+		delete m_TextureFont;
 	}
-	m_PolygonFont = 0;
-
-	if(m_OutlineFont != 0)
-	{
-		delete m_OutlineFont;
-	}
-	m_OutlineFont = 0;
+	m_TextureFont = 0;
 }
 
 void Font::SetSize(double x, double y)
@@ -61,8 +54,7 @@ void Font::SetSize(double x, double y)
 
 void Font::Print(double x, double y, const char *string)
 {
-	Check(m_PolygonFont != NULL);
-	Check(m_OutlineFont != NULL);
+	Check(m_TextureFont != NULL);
 	
 	// Save the modelview matrix
 	glMatrixMode(GL_MODELVIEW);
@@ -70,23 +62,20 @@ void Font::Print(double x, double y, const char *string)
 
 	// Set position and size
 	glTranslated(x,y,0);
-	glScaled(0.135*m_Size.x, 0.135*m_Size.y, 1); // FIXME was 0.0135
-
+	glScaled(1.35 / FONT_TEXTURE_SIZE * m_Size.x, 1.35 / FONT_TEXTURE_SIZE * m_Size.y, 1);
 	if (m_RightAligned)
-	{
-		// We offset by the width of the text, so the right hand edge
-		// of the string is rendered at the provided coordinates.
-		glTranslated(-1.0 * m_PolygonFont->Advance(string), 0, 0);
-	}
+		// We offset by the width of the text, so the right hand edge of the string is at the provided coordinates.
+		glTranslated(-1.0 * m_TextureFont->Advance(string), 0, 0);
 	
-	// Draw using the triangulated font
-	glPushMatrix(); // this is a hack to fix anti-aliasing
-	m_PolygonFont->Render(string);
-	glPopMatrix(); // this is a hack to fix anti-aliasing
-
-	// Draw the outline font for smoothing
-	glLineWidth(1.0);
-	m_OutlineFont->Render(string);
+#ifdef MACOSX
+	// Hint the font to use a texture of appropriate quality for the size we're rendering at
+	if (max(m_Size.x, m_Size.y) < FONT_TEXTURE_CROSSOVER)
+		m_TextureFont->Hint_LowerResolution(true);
+	else
+		m_TextureFont->Hint_LowerResolution(false);
+#endif
+	
+	m_TextureFont->Render(string);
 
 	// Restore modelview matrix
 	glPopMatrix();
@@ -96,16 +85,13 @@ bool Font::LoadFont(const string& name)
 {
 	m_Name = name;
 
-	// Open the the font in both polygon and outline mode
-	m_PolygonFont = new FTGLPolygonFont(name.c_str());
-	m_OutlineFont = new FTGLOutlineFont(name.c_str());
+	// Open the the font in texture mode
+	m_TextureFont = new FTTextureFont(name.c_str());
+	Assert(m_TextureFont && !(m_TextureFont->Error()), "could not create font object");
 
-	// The initial face size is large so that font sizing
-	// will work correctly later on // FIXME was 100
-	m_PolygonFont->FaceSize(10); 
-	m_OutlineFont->FaceSize(10);
+	// The initial face size is large so that font sizing will work correctly later on
+	m_TextureFont->FaceSize(FONT_TEXTURE_SIZE);
 
-	// We succeeded at opening the fonts
 	return true;
 }
 

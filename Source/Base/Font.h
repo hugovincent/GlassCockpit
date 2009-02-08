@@ -17,12 +17,8 @@
 
 /**
  * Wraps the FTGL font toolkit to make its interface fit well into the
- * OpenGC environment. Font's are accessed via the FontManager object,
- * which all RenderObject's contain a pointer to (thereby eliminating
- * redundant font storage).
-
- * FTGL is capable of reading any True-Type font, allowing the generation of
- * very high quality font renderings
+ * OpenGC environment. Font's are accessed via the FontManager singleton,
+ * which is accessible Globals.h: globals->m_FontManager
  */
 
 #ifndef Font_h
@@ -31,11 +27,13 @@
 #include "OrderedPair.h"
 #include <string>
 
-// It's important to define this since we're linking against
-// a static rather than shared version of FTGL
+#ifdef MACOSX
+#include "Font_GLTexture.h"
+#define FTTextureFont Font_GLTexture
+#else
 #define FTGL_LIBRARY_STATIC
-
 #include <FTGL/ftgl.h>
+#endif
 
 namespace OpenGC
 {
@@ -54,12 +52,6 @@ class Font
 		/** Print a character string at location (x,y) */
 		void Print(double x, double y, const char *string);
 
-		/**
-		 * Set the spacing of the font in fractional character widths
-		 * I.e. spacing = 0.5 means 1/2 character width
-		 */
-		void SetSpacing(double spacing) { m_Spacing = spacing; }
-
 		/** Set the size of the font (width and height) in physical units */
 		void SetSize(double x, double y);
 
@@ -77,17 +69,11 @@ class Font
 		/** Whether to render right-aligned or not */
 		bool m_RightAligned;
 
-		/** Spacing between characters in the font, in fractional character widths */
-		double m_Spacing;
-
 		/** The size of the font in physical units */
 		OrderedPair<double> m_Size;
 
-		/** The triangulated FTGL font object */
-		FTGLPolygonFont* m_PolygonFont;
-
-		/** The outline FTGL font object used for smoothing */
-		FTGLOutlineFont* m_OutlineFont;
+		/** The font object in GL texture mapped mode */
+		FTTextureFont* m_TextureFont;
 };
 
 } // end namespace OpenGC

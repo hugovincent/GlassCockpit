@@ -71,6 +71,7 @@
 		9AAE1FE70F3BA86E00B9CFFA /* VSI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FD30F3BA86E00B9CFFA /* VSI.cpp */; };
 		9AE411BA0F3993FD00D539E5 /* TopLevelView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9AE411B90F3993FD00D539E5 /* TopLevelView.mm */; };
 		9AE411C00F39973C00D539E5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE411BF0F39973C00D539E5 /* OpenGL.framework */; };
+		9AFE33690F3E919D00164E90 /* Font_GLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AFE33680F3E919D00164E90 /* Font_GLTexture.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -203,6 +204,8 @@
 		9AE411B80F3993FD00D539E5 /* TopLevelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopLevelView.h; sourceTree = "<group>"; };
 		9AE411B90F3993FD00D539E5 /* TopLevelView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopLevelView.mm; sourceTree = "<group>"; };
 		9AE411BF0F39973C00D539E5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
+		9AFE33670F3E919D00164E90 /* Font_GLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Font_GLTexture.h; sourceTree = "<group>"; };
+		9AFE33680F3E919D00164E90 /* Font_GLTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Font_GLTexture.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -226,6 +229,8 @@
 			children = (
 				9AE411B80F3993FD00D539E5 /* TopLevelView.h */,
 				9AE411B90F3993FD00D539E5 /* TopLevelView.mm */,
+				9AFE33670F3E919D00164E90 /* Font_GLTexture.h */,
+				9AFE33680F3E919D00164E90 /* Font_GLTexture.cpp */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -573,6 +578,7 @@
 				9AAE1FE50F3BA86E00B9CFFA /* ArtificialHorizon.cpp in Sources */,
 				9AAE1FE60F3BA86E00B9CFFA /* AltitudeTicker.cpp in Sources */,
 				9AAE1FE70F3BA86E00B9CFFA /* VSI.cpp in Sources */,
+				9AFE33690F3E919D00164E90 /* Font_GLTexture.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

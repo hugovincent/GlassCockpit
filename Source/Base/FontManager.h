@@ -63,9 +63,6 @@ class FontManager
 		/** Set the size of a particular font in physical units */
 		void SetSize(int font, double x, double y);
 
-		/** Set the spacing between characters in fractions of a character width */
-		void SetSpacing(int font, double spacing);
-
 		/** Set whether to render a font right-aligned */
 		void SetRightAligned(int font, bool rightAligned);
 

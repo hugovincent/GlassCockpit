@@ -105,14 +105,6 @@ void FontManager::SetRightAligned(int font, bool rightAligned)
 	}
 }
 
-void FontManager::SetSpacing(int font, double spacing)
-{
-	if( (font >= 0) && (font < m_NumFonts) )
-	{
-		m_FontList[font]->SetSpacing(spacing);
-	}
-}
-
 void FontManager::Print(double x, double y, const char* text, int font)
 {
 	if( (font >= 0) && (font < m_NumFonts) )

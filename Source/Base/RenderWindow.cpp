@@ -82,13 +82,13 @@ void RenderWindow::SetupDisplay()
 	// Enable blending
 	glEnable(GL_BLEND);
 
-	// Select The Type Of Blending
+	// Select type Of blending
 	glBlendFunc(GL_SRC_ALPHA,GL_ONE_MINUS_SRC_ALPHA);
 
 	// Enable line and polygon smoothing
 	glEnable(GL_POINT_SMOOTH);
 	glEnable(GL_LINE_SMOOTH);
-	//glEnable(GL_POLYGON_SMOOTH); // this seems to cause problems
+	glDisable(GL_POLYGON_SMOOTH); // seems to cause problems on Linux
 
 	// We want the prettiest smooth lines possible
 	glHint(GL_POINT_SMOOTH_HINT, GL_NICEST);
@@ -173,6 +173,7 @@ void RenderWindow::AddGauge(Gauge* pGauge)
 	m_NumGauges++;
 }
 
+#if 0
 GLboolean RenderWindow::CheckExtension( char *extName )
 {
 	/*
@@ -199,6 +200,7 @@ GLboolean RenderWindow::CheckExtension( char *extName )
 	}
 	return GL_FALSE;
 }
+#endif
 
 void RenderWindow::CallBackKeyboardFunc(int keycode, int modifiers)
 {
