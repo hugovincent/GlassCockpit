@@ -102,7 +102,7 @@ void XMLParser::PrintTree(xmlNode *aNode, string indentation)
 XMLNode XMLParser::GetNode(const string& path)
 {
 	XMLNode node = XMLNode(m_XMLRootNode);
-	unsigned int start_offset = 1, end_offset = 1;
+	unsigned long start_offset = 1, end_offset = 1;
 
 	// First, check the path starts with "/"
 	// (We don't handle relative paths here)
