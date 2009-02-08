@@ -35,7 +35,7 @@ Font::Font()
 	m_OutlineFont = 0;
 	m_RightAligned = false;
 
-	m_Name = 0;
+	m_Name = string("");
 }
 
 Font::~Font()
@@ -92,13 +92,13 @@ void Font::Print(double x, double y, const char *string)
 	glPopMatrix();
 }
 
-bool Font::LoadFont(char* name)
+bool Font::LoadFont(const string& name)
 {
 	m_Name = name;
 
 	// Open the the font in both polygon and outline mode
-	m_PolygonFont = new FTGLPolygonFont(name);
-	m_OutlineFont = new FTGLOutlineFont(name);
+	m_PolygonFont = new FTGLPolygonFont(name.c_str());
+	m_OutlineFont = new FTGLOutlineFont(name.c_str());
 
 	// The initial face size is large so that font sizing
 	// will work correctly later on // FIXME was 100

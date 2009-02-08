@@ -21,13 +21,13 @@ class BinaryNavData
 public:
 	/** Parses an ASCII airport database (apt.dat) and writes to the 
 	 * binary output file */
-	void ConvertAirportData(const std::string& inFileName, 
-			const std::string& outFileName) const;
+	static void ConvertAirportData(const std::string& inFileName, 
+			const std::string& outFileName);
 
 	/** Parses an ASCII navaid database (nav.dat) and writes to the 
 	 * binary output file */
-	void ConvertNavaidData(const std::string& inFileName, 
-			const std::string& outFileName) const;
+	static void ConvertNavaidData(const std::string& inFileName, 
+			const std::string& outFileName);
 
 	/** Struct representing each navaid in the binary file format */
 	typedef struct

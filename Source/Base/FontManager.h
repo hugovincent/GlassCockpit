@@ -32,20 +32,20 @@
 #ifndef FontMangager_h
 #define FontMangager_h
 
-#include <vector> // STL vector include
+#include <vector>
+#include <string>
 #include "Font.h"
 
 namespace OpenGC
 {
+	
+using namespace std;
 
 class FontManager  
 {
 	public:
 		FontManager();
 		~FontManager();
-
-		/** Set the path for loading fonts */
-		void SetFontPath(const char* fontPath);
 
 		/**
 		 * Request that we load the default gauge font
@@ -58,7 +58,7 @@ class FontManager
 		 * Request that a new font be loaded; returns the index of the font
 		 * in the font list (vector)
 		 */
-		int LoadFont(const char* name);
+		int LoadFont(const string& name);
 
 		/** Set the size of a particular font in physical units */
 		void SetSize(int font, double x, double y);
@@ -75,13 +75,12 @@ class FontManager
 	protected:
 
 		/** Path to Truetype fonts */
-		char* m_FontPath;
+		static string m_FontPath;
 
 		/**
-		 * String used to hold the value of the path concat'd
-		 * with the font name
+		 * String used to hold the value of the font name with full path
 		 */
-		char* m_NameWithPath;
+		string m_NameWithPath;
 
 		/** How many fonts are loaded */
 		int m_NumFonts;

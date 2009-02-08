@@ -13,7 +13,7 @@ using namespace std;
 namespace OpenGC {
 
 void BinaryNavData::ConvertAirportData(const string& inFileName, 
-		const string& outFileName) const
+		const string& outFileName)
 {
 	string lineData; // Buffer used to read lines from input file
 	AirportData *apt = new AirportData; // Output struct
@@ -98,7 +98,7 @@ void BinaryNavData::ConvertAirportData(const string& inFileName,
 }
 
 void BinaryNavData::ConvertNavaidData(const string& inFileName, 
-		const string& outFileName) const
+		const string& outFileName)
 {
 	string lineData; // Buffer used to read lines from input file
 	NavaidData *nav = new NavaidData; // Output struct

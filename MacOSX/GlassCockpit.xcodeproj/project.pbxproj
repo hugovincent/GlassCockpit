@@ -11,6 +11,11 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		9AA14FDF0F3E747700DCA729 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDA0F3E747700DCA729 /* Fonts */; };
+		9AA14FE00F3E747700DCA729 /* Navigation in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDB0F3E747700DCA729 /* Navigation */; };
+		9AA14FE10F3E747700DCA729 /* Preferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDC0F3E747700DCA729 /* Preferences.xml */; };
+		9AA14FE20F3E747700DCA729 /* Gauges.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDD0F3E747700DCA729 /* Gauges.xml */; };
+		9AA14FE30F3E747700DCA729 /* Default.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDE0F3E747700DCA729 /* Default.xml */; };
 		9AAE1D000F3AEF1600B9CFFA /* XMLNode.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1CFC0F3AEF1600B9CFFA /* XMLNode.cpp */; };
 		9AAE1D010F3AEF1600B9CFFA /* XMLParser.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1CFE0F3AEF1600B9CFFA /* XMLParser.cpp */; };
 		9AAE1D3B0F3AF15000B9CFFA /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1D3A0F3AF15000B9CFFA /* libxml2.dylib */; };
@@ -64,17 +69,6 @@
 		9AAE1FE50F3BA86E00B9CFFA /* ArtificialHorizon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FCF0F3BA86E00B9CFFA /* ArtificialHorizon.cpp */; };
 		9AAE1FE60F3BA86E00B9CFFA /* AltitudeTicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FD20F3BA86E00B9CFFA /* AltitudeTicker.cpp */; };
 		9AAE1FE70F3BA86E00B9CFFA /* VSI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FD30F3BA86E00B9CFFA /* VSI.cpp */; };
-		9AAE231A0F3BEFA800B9CFFA /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1D3A0F3AF15000B9CFFA /* libxml2.dylib */; };
-		9AAE231B0F3BEFA800B9CFFA /* libfreetype.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1EDA0F3B8AA200B9CFFA /* libfreetype.dylib */; };
-		9AAE231C0F3BEFE900B9CFFA /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1ED60F3B88A200B9CFFA /* libftgl.a */; };
-		9AAE231E0F3BF00E00B9CFFA /* BinaryNavData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E310F3AF68E00B9CFFA /* BinaryNavData.cpp */; };
-		9AAE253F0F3C253200B9CFFA /* Preferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9AAE253C0F3C253200B9CFFA /* Preferences.xml */; };
-		9AAE25400F3C253200B9CFFA /* Default.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9AAE253D0F3C253200B9CFFA /* Default.xml */; };
-		9AAE25410F3C253200B9CFFA /* Gauges.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9AAE253E0F3C253200B9CFFA /* Gauges.xml */; };
-		9AAE25430F3C253800B9CFFA /* bitstream_vera.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9AAE25420F3C253800B9CFFA /* bitstream_vera.ttf */; };
-		9AAE25470F3C254000B9CFFA /* nav_dat.bin in Resources */ = {isa = PBXBuildFile; fileRef = 9AAE25440F3C254000B9CFFA /* nav_dat.bin */; };
-		9AAE25480F3C254000B9CFFA /* apt_dat.bin in Resources */ = {isa = PBXBuildFile; fileRef = 9AAE25450F3C254000B9CFFA /* apt_dat.bin */; };
-		9AAE25490F3C254000B9CFFA /* waypoint.dat in Resources */ = {isa = PBXBuildFile; fileRef = 9AAE25460F3C254000B9CFFA /* waypoint.dat */; };
 		9AE411BA0F3993FD00D539E5 /* TopLevelView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9AE411B90F3993FD00D539E5 /* TopLevelView.mm */; };
 		9AE411C00F39973C00D539E5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE411BF0F39973C00D539E5 /* OpenGL.framework */; };
 /* End PBXBuildFile section */
@@ -90,6 +84,11 @@
 		32CA4F630368D1EE00C91783 /* GlassCockpit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlassCockpit_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* GlassCockpit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlassCockpit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9AA14FDA0F3E747700DCA729 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = ../Data/Fonts; sourceTree = SOURCE_ROOT; };
+		9AA14FDB0F3E747700DCA729 /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Navigation; path = ../Data/Navigation; sourceTree = SOURCE_ROOT; };
+		9AA14FDC0F3E747700DCA729 /* Preferences.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Preferences.xml; path = ../Data/Preferences.xml; sourceTree = SOURCE_ROOT; };
+		9AA14FDD0F3E747700DCA729 /* Gauges.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Gauges.xml; path = ../Data/Gauges.xml; sourceTree = SOURCE_ROOT; };
+		9AA14FDE0F3E747700DCA729 /* Default.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Default.xml; path = ../Data/Default.xml; sourceTree = SOURCE_ROOT; };
 		9AAE1CFC0F3AEF1600B9CFFA /* XMLNode.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = XMLNode.cpp; path = ../Source/Base/XMLNode.cpp; sourceTree = SOURCE_ROOT; };
 		9AAE1CFD0F3AEF1600B9CFFA /* XMLNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XMLNode.h; path = ../Source/Base/XMLNode.h; sourceTree = SOURCE_ROOT; };
 		9AAE1CFE0F3AEF1600B9CFFA /* XMLParser.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = XMLParser.cpp; path = ../Source/Base/XMLParser.cpp; sourceTree = SOURCE_ROOT; };
@@ -201,14 +200,6 @@
 		9AAE1FD30F3BA86E00B9CFFA /* VSI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VSI.cpp; path = ../Source/Gauges/VSI.cpp; sourceTree = SOURCE_ROOT; };
 		9AAE1FD40F3BA86E00B9CFFA /* GenericBargraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericBargraph.h; path = ../Source/Gauges/GenericBargraph.h; sourceTree = SOURCE_ROOT; };
 		9AAE1FD50F3BA86E00B9CFFA /* EngineDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EngineDial.h; path = ../Source/Gauges/EngineDial.h; sourceTree = SOURCE_ROOT; };
-		9AAE21A50F3BEBF200B9CFFA /* NavConvert */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NavConvert; sourceTree = BUILT_PRODUCTS_DIR; };
-		9AAE253C0F3C253200B9CFFA /* Preferences.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Preferences.xml; path = ../Data/Preferences.xml; sourceTree = SOURCE_ROOT; };
-		9AAE253D0F3C253200B9CFFA /* Default.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Default.xml; path = ../Data/Default.xml; sourceTree = SOURCE_ROOT; };
-		9AAE253E0F3C253200B9CFFA /* Gauges.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Gauges.xml; path = ../Data/Gauges.xml; sourceTree = SOURCE_ROOT; };
-		9AAE25420F3C253800B9CFFA /* bitstream_vera.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = bitstream_vera.ttf; path = ../Data/Fonts/bitstream_vera.ttf; sourceTree = SOURCE_ROOT; };
-		9AAE25440F3C254000B9CFFA /* nav_dat.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = nav_dat.bin; path = ../Data/Navigation/nav_dat.bin; sourceTree = SOURCE_ROOT; };
-		9AAE25450F3C254000B9CFFA /* apt_dat.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = apt_dat.bin; path = ../Data/Navigation/apt_dat.bin; sourceTree = SOURCE_ROOT; };
-		9AAE25460F3C254000B9CFFA /* waypoint.dat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = waypoint.dat; path = ../Data/Navigation/waypoint.dat; sourceTree = SOURCE_ROOT; };
 		9AE411B80F3993FD00D539E5 /* TopLevelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopLevelView.h; sourceTree = "<group>"; };
 		9AE411B90F3993FD00D539E5 /* TopLevelView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopLevelView.mm; sourceTree = "<group>"; };
 		9AE411BF0F39973C00D539E5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
@@ -224,16 +215,6 @@
 				9AAE1D3B0F3AF15000B9CFFA /* libxml2.dylib in Frameworks */,
 				9AAE1ED70F3B88A200B9CFFA /* libftgl.a in Frameworks */,
 				9AAE1EDB0F3B8AA200B9CFFA /* libfreetype.dylib in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		9AAE21A30F3BEBF200B9CFFA /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9AAE231A0F3BEFA800B9CFFA /* libxml2.dylib in Frameworks */,
-				9AAE231B0F3BEFA800B9CFFA /* libfreetype.dylib in Frameworks */,
-				9AAE231C0F3BEFE900B9CFFA /* libftgl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,7 +255,6 @@
 			isa = PBXGroup;
 			children = (
 				8D1107320486CEB800E47090 /* GlassCockpit.app */,
-				9AAE21A50F3BEBF200B9CFFA /* NavConvert */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -304,7 +284,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9AAE253A0F3C252400B9CFFA /* Runtime Config + Data */,
+				9AA14FE50F3E747E00DCA729 /* App Bundle Resources */,
 				8D1107310486CEB800E47090 /* Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
@@ -320,6 +300,18 @@
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9AA14FE50F3E747E00DCA729 /* App Bundle Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9AA14FDA0F3E747700DCA729 /* Fonts */,
+				9AA14FDB0F3E747700DCA729 /* Navigation */,
+				9AA14FDC0F3E747700DCA729 /* Preferences.xml */,
+				9AA14FDD0F3E747700DCA729 /* Gauges.xml */,
+				9AA14FDE0F3E747700DCA729 /* Default.xml */,
+			);
+			name = "App Bundle Resources";
 			sourceTree = "<group>";
 		};
 		9AAE1D3D0F3AF17300B9CFFA /* Portable OpenGC */ = {
@@ -469,20 +461,6 @@
 			name = Gauges;
 			sourceTree = "<group>";
 		};
-		9AAE253A0F3C252400B9CFFA /* Runtime Config + Data */ = {
-			isa = PBXGroup;
-			children = (
-				9AAE253C0F3C253200B9CFFA /* Preferences.xml */,
-				9AAE253D0F3C253200B9CFFA /* Default.xml */,
-				9AAE253E0F3C253200B9CFFA /* Gauges.xml */,
-				9AAE25420F3C253800B9CFFA /* bitstream_vera.ttf */,
-				9AAE25440F3C254000B9CFFA /* nav_dat.bin */,
-				9AAE25450F3C254000B9CFFA /* apt_dat.bin */,
-				9AAE25460F3C254000B9CFFA /* waypoint.dat */,
-			);
-			name = "Runtime Config + Data";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -504,22 +482,6 @@
 			productReference = 8D1107320486CEB800E47090 /* GlassCockpit.app */;
 			productType = "com.apple.product-type.application";
 		};
-		9AAE21A40F3BEBF200B9CFFA /* NavConvert */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 9AAE21AC0F3BEC3B00B9CFFA /* Build configuration list for PBXNativeTarget "NavConvert" */;
-			buildPhases = (
-				9AAE21A20F3BEBF200B9CFFA /* Sources */,
-				9AAE21A30F3BEBF200B9CFFA /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = NavConvert;
-			productName = NavConvert;
-			productReference = 9AAE21A50F3BEBF200B9CFFA /* NavConvert */;
-			productType = "com.apple.product-type.tool";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -533,7 +495,6 @@
 			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* GlassCockpit */,
-				9AAE21A40F3BEBF200B9CFFA /* NavConvert */,
 			);
 		};
 /* End PBXProject section */
@@ -545,13 +506,11 @@
 			files = (
 				8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */,
 				1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */,
-				9AAE253F0F3C253200B9CFFA /* Preferences.xml in Resources */,
-				9AAE25400F3C253200B9CFFA /* Default.xml in Resources */,
-				9AAE25410F3C253200B9CFFA /* Gauges.xml in Resources */,
-				9AAE25430F3C253800B9CFFA /* bitstream_vera.ttf in Resources */,
-				9AAE25470F3C254000B9CFFA /* nav_dat.bin in Resources */,
-				9AAE25480F3C254000B9CFFA /* apt_dat.bin in Resources */,
-				9AAE25490F3C254000B9CFFA /* waypoint.dat in Resources */,
+				9AA14FDF0F3E747700DCA729 /* Fonts in Resources */,
+				9AA14FE00F3E747700DCA729 /* Navigation in Resources */,
+				9AA14FE10F3E747700DCA729 /* Preferences.xml in Resources */,
+				9AA14FE20F3E747700DCA729 /* Gauges.xml in Resources */,
+				9AA14FE30F3E747700DCA729 /* Default.xml in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,14 +576,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9AAE21A20F3BEBF200B9CFFA /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				9AAE231E0F3BF00E00B9CFFA /* BinaryNavData.cpp in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
@@ -647,46 +598,6 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		9AAE21A70F3BEBF400B9CFFA /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = NO;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_ENABLE_FIX_AND_CONTINUE = YES;
-				GCC_MODEL_TUNING = G5;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				INSTALL_PATH = /usr/local/bin;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/X11/lib,
-					"\"$(SRCROOT)\"",
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = NavConvert;
-			};
-			name = Debug;
-		};
-		9AAE21A80F3BEBF400B9CFFA /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				COPY_PHASE_STRIP = YES;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				GCC_MODEL_TUNING = G5;
-				INSTALL_PATH = /usr/local/bin;
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					/usr/X11/lib,
-					"\"$(SRCROOT)\"",
-				);
-				PREBINDING = NO;
-				PRODUCT_NAME = NavConvert;
-				ZERO_LINK = NO;
-			};
-			name = Release;
-		};
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -775,15 +686,6 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9AAE21AC0F3BEC3B00B9CFFA /* Build configuration list for PBXNativeTarget "NavConvert" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				9AAE21A70F3BEBF400B9CFFA /* Debug */,
-				9AAE21A80F3BEBF400B9CFFA /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "GlassCockpit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

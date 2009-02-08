@@ -329,7 +329,6 @@ void NavDisplay::PlotWaypoints()
 	WaypointList::iterator iter;
 	for (iter = waypointList->begin(); iter != waypointList->end(); ++iter)
 	{
-		int FIXME = 1;
 		// FIXME plot the waypoints and planned course
 	}
 }

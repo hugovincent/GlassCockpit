@@ -19,27 +19,21 @@
 #include <string.h>
 #include "Font.h"
 #include "FontManager.h"
+#include "Globals.h"
 
 namespace OpenGC
 {
 
+string FontManager::m_FontPath;
+
 FontManager::FontManager()
+	: m_NumFonts(0)
 {
-	m_NumFonts = 0;
 
-	// Allocate space for the font paths
-	m_NameWithPath = new char[512];
-	m_FontPath = new char[128];
-
-	// The default font path for all platforms is "/", which is most likely wrong
-	strcpy( m_FontPath, "/" );
 }
 
 FontManager::~FontManager()
 {
-	delete[] m_NameWithPath;
-	delete[] m_FontPath;
-
 	// Delete each font in the list
 	std::vector<Font*>::iterator iter;
 	for (iter = m_FontList.begin(); iter != m_FontList.end(); ++iter)
@@ -48,27 +42,26 @@ FontManager::~FontManager()
 	}
 }
 
-void FontManager::SetFontPath(const char* fontPath)
-{
-	strcpy(m_FontPath, fontPath);
-}
-
 /** Loads the default font, i.e. Bitstream Vera */
 int FontManager::LoadDefaultFont()
 {
 	return this->LoadFont("bitstream_vera.ttf");
 }
 
-int FontManager::LoadFont(const char* name)
+int FontManager::LoadFont(const string& name)
 {
+	if (m_FontPath == "") {
+		
+		m_FontPath = globals->m_PrefManager->GetPrefS("PathToData") + "Fonts/";
+	}
+	
 	// Concatenate the font name onto the font path
-	m_NameWithPath = strcpy(m_NameWithPath, m_FontPath);
-	strcat(m_NameWithPath, name);
+	m_NameWithPath = m_FontPath + name;
 
 	// First, check to see if the font is already loaded
 	for(int i = 0; i < m_NumFonts; i++)
 	{
-		if (m_NameWithPath == m_FontList[i]->GetName() )
+		if (m_NameWithPath == m_FontList[i]->GetName())
 		{
 			return i;
 		}

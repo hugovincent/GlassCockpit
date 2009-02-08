@@ -16,7 +16,11 @@
   =========================================================================*/
 
 #include "NavDatabase.h"
+#include "BinaryNavData.h"
+#include "Debug.h"
+#include "Globals.h"
 #include <stdio.h>
+#include <sys/stat.h> 
 
 namespace OpenGC
 {
@@ -49,31 +53,50 @@ NavDatabase::~NavDatabase()
 	if(m_FlightCourse != 0)
 		delete m_FlightCourse;
 }
-
-void NavDatabase::InitDatabase(const string& pathToNav)
-{
-	printf("NavDatabase: Loading navigation database... "); fflush(stdout);
 	
-	// FIXME check for cached binary copies of nav data otherwise convert and cache
-	// OpenGC::BinaryNavData ndtb;
-	// ndtb.ConvertAirportData(
-	// ndtb.ConvertNavaidData(
+bool fileExists(const string& filename)
+{
+	struct stat stFileInfo;
+	if(stat(filename.c_str(), &stFileInfo) == 0) 
+		return true;
+	else
+		return false;
+}
+
+void NavDatabase::InitDatabase()
+{	
+	const string& pathToNav = globals->m_PrefManager->GetPrefS("PathToData");
+	const string& pathToWritableNav = globals->m_PrefManager->GetPrefS("PathToCaches");;
+	
+	// Check for cached binary copies of nav data otherwise convert and cache
+	if (!fileExists(pathToWritableNav + "nav_dat.bin"))
+	{
+		LogPrintf("Generating binary cache of navaid data...\n");
+		BinaryNavData::ConvertNavaidData(pathToNav + "Navigation/nav.dat", pathToWritableNav + "nav_dat.bin");
+	}
+	if (!fileExists(pathToWritableNav + "apt_dat.bin"))
+	{
+		LogPrintf("Generating binary cache of airport data...\n");
+		BinaryNavData::ConvertAirportData(pathToNav + "Navigation/apt.dat", pathToWritableNav + "apt_dat.bin");
+	}
+	
+	printf("NavDatabase: Loading navigation database... "); fflush(stdout);
 
 	// Load and hash NavAid (binary) database
 	m_NavaidList = new NavaidList;
-	m_NavaidList->InitializeList(pathToNav + "nav_dat.bin");
+	m_NavaidList->InitializeList(pathToWritableNav + "nav_dat.bin");
 	m_NavaidHash = new GeographicHash;
 	m_NavaidHash->InsertGeographicList(m_NavaidList);
 
 	// Load and hash Airport (binary) database
 	m_AirportList = new AirportList;
-	m_AirportList->InitializeList(pathToNav + "apt_dat.bin");
+	m_AirportList->InitializeList(pathToWritableNav + "apt_dat.bin");
 	m_AirportHash = new GeographicHash;
 	m_AirportHash->InsertGeographicList(m_AirportList);
 
 	// Load Waypoint database
 	m_WaypointList = new WaypointList;
-	m_WaypointList->InitializeList(pathToNav + "waypoint.dat");
+	m_WaypointList->InitializeList(pathToNav + "Navigation/waypoint.dat");
 
 	// Load and hash Map database
 	// FIXME actually load the map shapes database

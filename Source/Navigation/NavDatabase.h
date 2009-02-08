@@ -41,7 +41,7 @@ class NavDatabase
 		virtual ~NavDatabase();
 
 		/** Load the nav data */
-		void InitDatabase(const string& pathToNav);
+		void InitDatabase();
 
 		/** Get the hashed navaid list */
 		GeographicHash* GetNavaidHash() {return m_NavaidHash;}

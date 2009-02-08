@@ -297,7 +297,7 @@
 			<object class="NSWindowTemplate" id="972006081">
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{89, 396}, {1081, 752}}</string>
+				<string key="NSWindowRect">{{31, 4}, {1081, 752}}</string>
 				<int key="NSWTFlags">1946157056</int>
 				<string key="NSWindowTitle">GlassCockpit</string>
 				<string key="NSWindowClass">NSWindow</string>
@@ -822,8 +822,8 @@
 					<string>{{475, 832}, {234, 43}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{89, 4}, {1081, 752}}</string>
-					<string>{{89, 4}, {1081, 752}}</string>
+					<string>{{31, 4}, {1081, 752}}</string>
+					<string>{{31, 4}, {1081, 752}}</string>
 					<reference ref="9"/>
 					<string>{{33, 99}, {480, 360}}</string>
 					<string>{3.40282e+38, 3.40282e+38}</string>

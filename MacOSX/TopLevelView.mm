@@ -13,7 +13,6 @@
 #include "Debug.h"
 #include "Globals.h"
 #include "XMLParser.h"
-#include "BinaryNavData.h"
 
 //--------Data Sources---------
 #include "AlbatrossDataSource.h"
@@ -45,6 +44,26 @@ Globals *OpenGC::globals;
 	// Initialise preferences manager
 	NSString *prefsFileName = [[NSBundle mainBundle] pathForResource:@"Preferences" ofType:@"xml"];
 	globals->m_PrefManager->InitPreferences([prefsFileName cStringUsingEncoding:NSASCIIStringEncoding]);
+	
+	// Find paths: location of read-only app resources
+	const char* resourcePath = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/"]
+								cStringUsingEncoding:NSASCIIStringEncoding];
+	globals->m_PrefManager->SetPrefS("PathToData", resourcePath);
+	
+	// Find paths: writeable directory to cache resources in
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
+	Assert([paths count] == 1, "can't uniquely identify a writable path for cached resources");
+	NSString *writeableDir = [(NSString*)[paths objectAtIndex:0] stringByAppendingString:@"/GlassCockpit/"];
+	globals->m_PrefManager->SetPrefS("PathToCaches", [writeableDir cStringUsingEncoding:NSASCIIStringEncoding]);
+	NSLog(@"path to caches %@\n", writeableDir);
+	
+	// Create writable directory if necessary
+	NSFileManager *fm = [NSFileManager defaultManager];
+	BOOL isDir = NO;
+	if (![fm fileExistsAtPath:writeableDir isDirectory:&isDir] || isDir == NO) {
+		
+		[fm createDirectoryAtPath:writeableDir attributes:nil];
+	}
 	
 	// Read the XML file and do some basic checks about its contents
 	XMLParser parser;
@@ -101,14 +120,8 @@ Globals *OpenGC::globals;
 
 - (BOOL)go:(XMLNode*)rootNode {
 	
-	const char* resourcePath = [[[[NSBundle mainBundle] resourcePath] stringByAppendingString:@"/"]
-								cStringUsingEncoding:NSASCIIStringEncoding];
-	
-	// Font manager (global)
-	globals->m_FontManager->SetFontPath(resourcePath);
-	
 	// Navigation Database (global)
-	globals->m_NavDatabase->InitDatabase(resourcePath);
+	globals->m_NavDatabase->InitDatabase();
 	
 	// Create the data source
 	XMLNode dsNode = rootNode->GetChild("DataSource");
@@ -133,7 +146,7 @@ Globals *OpenGC::globals;
 		globals->m_DataSource = new FGDataSource();
 		if (!globals->m_DataSource->Open())
 		{
-			return false;
+			return NO;
 		}
 		titleSuffix = " (FlightGear)";
 	}
@@ -150,7 +163,7 @@ Globals *OpenGC::globals;
 	else
 	{
 		printf("Invalid data source \"%s\".\n", dsName.c_str());
-		return false;
+		return NO;
 	}
 	
 	// Create the data calculations manager (CalcManager)
@@ -207,7 +220,7 @@ Globals *OpenGC::globals;
 		else
 		{
 			printf("Error: unsupported gauge type \"%s\"\n", name.c_str());
-			return false;
+			return NO;
 		}
 		
 		pGauge->InitFromXMLNode(*iter);

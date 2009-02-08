@@ -13,15 +13,17 @@ them in the Preferences section of your main XML file or Default.xml -->
 	</Preference>
 
 	<Preference>
-		<Name>FontPath</Name>
+		<Name>PathToData</Name>
 		<Type>string</Type>
-		<DefaultValue>/Users/hugo/Projects/iPhone/GlassCockpit/Data/Fonts/</DefaultValue>
+		<DefaultValue>/Users/hugo/Projects/GlassCockpit/Data/</DefaultValue>
+		<!-- Not used on Cocoa port - we use the app resource dir instead -->
 	</Preference>
 
 	<Preference>
-		<Name>NavPath</Name>
+		<Name>PathToCaches</Name>
 		<Type>string</Type>
-		<DefaultValue>/Users/hugo/Projects/iPhone/GlassCockpit/Data/Navigation/</DefaultValue>
+		<DefaultValue>/Users/hugo/Projects/GlassCockpit/Data/</DefaultValue>
+		<!-- Not used on Cocoa port - we use the ~/Library/Application Support/ instead -->
 	</Preference>
 
 	<Preference>

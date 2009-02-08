@@ -29,6 +29,7 @@
 #define Font_h
 
 #include "OrderedPair.h"
+#include <string>
 
 // It's important to define this since we're linking against
 // a static rather than shared version of FTGL
@@ -38,6 +39,8 @@
 
 namespace OpenGC
 {
+	
+using namespace std;
 
 class Font
 {
@@ -46,7 +49,7 @@ class Font
 		~Font();
 
 		/** Load a font from a specified file */
-		bool LoadFont(char* name);
+		bool LoadFont(const string& name);
 
 		/** Print a character string at location (x,y) */
 		void Print(double x, double y, const char *string);
@@ -64,12 +67,12 @@ class Font
 		void SetRightAligned(bool rightAligned) {m_RightAligned = rightAligned; }
 
 		/** Get the font name */
-		char* GetName() { return m_Name; }
+		string& GetName() { return m_Name; }
 
 	protected:
 
 		/** The name of the font */
-		char* m_Name;
+		string m_Name;
 		
 		/** Whether to render right-aligned or not */
 		bool m_RightAligned;
