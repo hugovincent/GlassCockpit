@@ -11,6 +11,10 @@
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+		9A03B1870F4006F00070A595 /* Font_FileStore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A03B1860F4006F00070A595 /* Font_FileStore.cpp */; };
+		9A03B1BD0F400ADA0070A595 /* FontStore_Make.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A03B1B20F400A940070A595 /* FontStore_Make.cpp */; };
+		9A03B1C90F400BF40070A595 /* Font_FileStore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A03B1860F4006F00070A595 /* Font_FileStore.cpp */; };
+		9A03B1CD0F400C170070A595 /* libfreetype.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1EDA0F3B8AA200B9CFFA /* libfreetype.dylib */; };
 		9AA14FDF0F3E747700DCA729 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDA0F3E747700DCA729 /* Fonts */; };
 		9AA14FE00F3E747700DCA729 /* Navigation in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDB0F3E747700DCA729 /* Navigation */; };
 		9AA14FE10F3E747700DCA729 /* Preferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDC0F3E747700DCA729 /* Preferences.xml */; };
@@ -85,6 +89,10 @@
 		32CA4F630368D1EE00C91783 /* GlassCockpit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlassCockpit_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* GlassCockpit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlassCockpit.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A03B1850F4006F00070A595 /* Font_FileStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Font_FileStore.h; sourceTree = "<group>"; };
+		9A03B1860F4006F00070A595 /* Font_FileStore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Font_FileStore.cpp; sourceTree = "<group>"; };
+		9A03B1B20F400A940070A595 /* FontStore_Make.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FontStore_Make.cpp; sourceTree = "<group>"; };
+		9A03B1B90F400AD40070A595 /* FontStore_Make */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FontStore_Make; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AA14FDA0F3E747700DCA729 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = ../Data/Fonts; sourceTree = SOURCE_ROOT; };
 		9AA14FDB0F3E747700DCA729 /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Navigation; path = ../Data/Navigation; sourceTree = SOURCE_ROOT; };
 		9AA14FDC0F3E747700DCA729 /* Preferences.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Preferences.xml; path = ../Data/Preferences.xml; sourceTree = SOURCE_ROOT; };
@@ -221,6 +229,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		9A03B1B70F400AD40070A595 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A03B1CD0F400C170070A595 /* libfreetype.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -231,6 +247,9 @@
 				9AE411B90F3993FD00D539E5 /* TopLevelView.mm */,
 				9AFE33670F3E919D00164E90 /* Font_GLTexture.h */,
 				9AFE33680F3E919D00164E90 /* Font_GLTexture.cpp */,
+				9A03B1850F4006F00070A595 /* Font_FileStore.h */,
+				9A03B1860F4006F00070A595 /* Font_FileStore.cpp */,
+				9A03B1B20F400A940070A595 /* FontStore_Make.cpp */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -260,6 +279,7 @@
 			isa = PBXGroup;
 			children = (
 				8D1107320486CEB800E47090 /* GlassCockpit.app */,
+				9A03B1B90F400AD40070A595 /* FontStore_Make */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -487,6 +507,22 @@
 			productReference = 8D1107320486CEB800E47090 /* GlassCockpit.app */;
 			productType = "com.apple.product-type.application";
 		};
+		9A03B1B80F400AD40070A595 /* FontStore_Make */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 9A03B1C30F400B170070A595 /* Build configuration list for PBXNativeTarget "FontStore_Make" */;
+			buildPhases = (
+				9A03B1B60F400AD40070A595 /* Sources */,
+				9A03B1B70F400AD40070A595 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FontStore_Make;
+			productName = FontStore_Make;
+			productReference = 9A03B1B90F400AD40070A595 /* FontStore_Make */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -500,6 +536,7 @@
 			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* GlassCockpit */,
+				9A03B1B80F400AD40070A595 /* FontStore_Make */,
 			);
 		};
 /* End PBXProject section */
@@ -579,6 +616,16 @@
 				9AAE1FE60F3BA86E00B9CFFA /* AltitudeTicker.cpp in Sources */,
 				9AAE1FE70F3BA86E00B9CFFA /* VSI.cpp in Sources */,
 				9AFE33690F3E919D00164E90 /* Font_GLTexture.cpp in Sources */,
+				9A03B1870F4006F00070A595 /* Font_FileStore.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		9A03B1B60F400AD40070A595 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9A03B1BD0F400ADA0070A595 /* FontStore_Make.cpp in Sources */,
+				9A03B1C90F400BF40070A595 /* Font_FileStore.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,6 +651,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		9A03B1BB0F400AD50070A595 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/X11/lib,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = FontStore_Make;
+			};
+			name = Debug;
+		};
+		9A03B1BC0F400AD50070A595 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/usr/X11/lib,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = FontStore_Make;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -692,6 +777,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		9A03B1C30F400B170070A595 /* Build configuration list for PBXNativeTarget "FontStore_Make" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				9A03B1BB0F400AD50070A595 /* Debug */,
+				9A03B1BC0F400AD50070A595 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "GlassCockpit" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

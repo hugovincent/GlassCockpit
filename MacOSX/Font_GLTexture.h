@@ -10,6 +10,8 @@
 #ifndef Font_GLTexture_H
 #define Font_GLTexture_H
 
+class Font_FileStore;
+
 /** This is a minimal, lightweight reimplementation of FTTextureFont from
  *  the FTGL library, for use on OpenGL ES, e.g. on the iPhone. It only
  *  provides the functionality required by OpenGC. 
@@ -25,11 +27,15 @@ class Font_GLTexture
 public:
 	Font_GLTexture(const char* filename);
 	~Font_GLTexture();
-	void FaceSize(double size);
+	void FaceSize(float size) { m_FaceSize = size; }
 	void Render(const char* str);
 	float Advance(const char* str);
 	void Hint_LowerResolution(bool lower);
 	int Error();
+
+private:
+	float m_FaceSize;
+	Font_FileStore *m_Store;
 };
 
 #endif

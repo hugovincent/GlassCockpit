@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 #if (defined(__APPLE__) && defined(__MACH__) ) || (defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE)
-//#define MACOSX
+#define MACOSX
 #endif
 
 // Global Debug flag
