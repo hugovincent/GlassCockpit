@@ -10,8 +10,13 @@
 #ifndef Font_FileStore_H
 #define Font_FileStore_H
 
+#define USE_FREETYPE2 // FIXME undef for iPhone
+
 #include <string>
 #include <OpenGL/gl.h>
+
+#define REPR_HIGHER_RES 0
+#define REPR_LOWER_RES 1
 
 class Font_FileStore
 {
@@ -28,9 +33,9 @@ public:
 	
 	// Methods for accessing the data
 	
-	GLfloat AdvanceForGlyph(char glyph);
-	GLfloat *TextureCoordsForFloat(char glyph);
-	GLbyte *TextureBitmap(unsigned int *texWidth, unsigned int *texHeight);
+	GLfloat AdvanceForGlyph(int repr, char glyph); // in texture UV coordinates
+	GLfloat *TextureCoordsForFloat(int repr, char glyph);
+	GLbyte *TextureBitmap(int repr, unsigned int *texWidth, unsigned int *texHeight);
 	
 private:
 	
@@ -40,16 +45,18 @@ private:
 	{
 	public:
 		char character;
-		GLfloat advance; // x coordinate advance of the glyph
+		GLfloat advance; // x coordinate advance of the glyph in texture UV coordinates
 	};
 	
 	class TextureRepr
 	{
 	public:
-		unsigned int rows, columns;
-		unsigned int glyphWidth, glyphHeight; // maximum size of a glyph, actual size may be smaller
-		unsigned int texWidth, texHeight;
-		GLbyte *bitmap; // length = texWidth * texHeight (note pixel format is 8-bit alpha-only)
+		int rows, columns;
+		int glyphWidth, glyphHeight; // maximum size of a glyph, actual size may be smaller
+		int texWidth, texHeight;
+		GLbyte *bitmap; // length = texWidth * texHeight
+		
+		// Note: pixel format is 8-bit alpha-only
 		
 		~TextureRepr() { delete bitmap; }
 	};
@@ -59,11 +66,11 @@ private:
 	public:
 		// Glyph info
 		char firstGlyph;
-		unsigned int numGlyphs;
+		int numGlyphs;
 		Glyph *glyphs; // length =  numGlyphs
 		
 		// Texture format info
-		unsigned int numReprs; // number of different-resolution texture representations. Always 2 for now
+		int numReprs; // number of different-resolution texture representations. Always 2 for now
 		TextureRepr *reprs[2];
 		
 		~DiskFormat() { delete glyphs; delete reprs; }
@@ -71,7 +78,6 @@ private:
 	
 	DiskFormat *store;
 	GLfloat texCoords[8]; // four (x,y) coordinates
-	unsigned int currentRepr;
 };
 
 #endif

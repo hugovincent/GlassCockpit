@@ -12,19 +12,19 @@
 #include "Font_GLTexture.h"
 #include "Font_FileStore.h"
 
-/*
- * The format is GL_ALPHA and the params are
- * GL_TEXTURE_WRAP_S = GL_CLAMP
- * GL_TEXTURE_WRAP_T = GL_CLAMP
- * GL_TEXTURE_MAG_FILTER = GL_LINEAR
- * GL_TEXTURE_MIN_FILTER = GL_LINEAR
- * Note that mipmapping is NOT used
- */
-
 Font_GLTexture::Font_GLTexture(const char* filename)
 {
-	printf("opening font %s\n", filename);
+	LogPrintf("Opening font %s\n", filename);
 	m_Store = new Font_FileStore(filename);
+	m_CurrentRepr = REPR_HIGHER_RES;
+	
+	// FIXME get bitmap and create textures in GL
+	/* The format is GL_ALPHA and the params are
+	 * GL_TEXTURE_WRAP_S = GL_CLAMP
+	 * GL_TEXTURE_WRAP_T = GL_CLAMP
+	 * GL_TEXTURE_MAG_FILTER = GL_LINEAR
+	 * GL_TEXTURE_MIN_FILTER = GL_LINEAR
+	 * Note that mipmapping is NOT used */
 }
 	
 Font_GLTexture::~Font_GLTexture()
@@ -34,10 +34,15 @@ Font_GLTexture::~Font_GLTexture()
 
 void Font_GLTexture::Render(const char* str)
 {
-	// for each character in str, this has to construct the vertices from
-	// m_FaceSize and the advance of the glyph, then get the texture coordinates 
-	// and render the fragment.
-	//GLfloat *texCoords = m_Store->TextureCoordsForFloat('a');
+	int len = strlen(str);
+	for (int i = 0; i < len; ++i)
+	{
+		glBegin(GL_QUADS);
+		// FIXME construct the vertices from m_FaceSize and the advance of the glyph
+		glEnd();
+		glTexCoordPointer(2, GL_FLOAT, 0, m_Store->TextureCoordsForFloat(m_CurrentRepr, 'a'));
+		// FIXME render fragment
+	}
 }
 		
 float Font_GLTexture::Advance(const char* str)
@@ -47,18 +52,19 @@ float Font_GLTexture::Advance(const char* str)
 	
 	for (int i = 0; i < len; ++i)
 	{
-		advance += m_Store->AdvanceForGlyph(str[i]);
+		advance += m_Store->AdvanceForGlyph(m_CurrentRepr, str[i]);
 	}
 	
-	return advance;
+	return advance * m_FaceSize;
 }
 
 void Font_GLTexture::Hint_LowerResolution(bool lower)
 {
-	// if lower == true, that means we can get away with using half the texture resolution
+	m_CurrentRepr = lower ? REPR_LOWER_RES : REPR_HIGHER_RES;
 }
 
 int Font_GLTexture::Error()
 {
+	// Unsupported.
 	return 0;
 }

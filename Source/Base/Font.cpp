@@ -21,7 +21,7 @@
 #include "Debug.h"
 #include "Font.h"
 
-#define FONT_TEXTURE_SIZE		40.0
+#define FONT_TEXTURE_SIZE		25.0
 #define FONT_TEXTURE_CROSSOVER	4.0
 
 namespace OpenGC

@@ -36,6 +36,7 @@ public:
 private:
 	float m_FaceSize;
 	Font_FileStore *m_Store;
+	int m_CurrentRepr;
 };
 
 #endif
