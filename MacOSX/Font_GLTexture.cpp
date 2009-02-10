@@ -50,9 +50,24 @@ float Font_GLTexture::Advance(const char* str)
 	int len = strlen(str);
 	float advance = 0.0;
 	
+	/*
+	 FTUnicodeStringItr<T> ustr(string);
+	 
+	 for(int i = 0; (len < 0 && *ustr) || (len >= 0 && i < len); i++)
+	 {
+	 unsigned int thisChar = *ustr++;
+	 unsigned int nextChar = *ustr;
+	 
+	 if(CheckGlyph(thisChar))
+	 {
+	 advance += glyphList->Advance(thisChar, nextChar);
+	 }
+	 }
+	 */
+	
 	for (int i = 0; i < len; ++i)
 	{
-		advance += m_Store->AdvanceForGlyph(m_CurrentRepr, str[i]);
+		advance += m_Store->Advance(m_CurrentRepr, str[i], str[i+1]); // FIXME
 	}
 	
 	return advance * m_FaceSize;

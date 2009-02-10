@@ -249,7 +249,6 @@
 				9AFE33680F3E919D00164E90 /* Font_GLTexture.cpp */,
 				9A03B1850F4006F00070A595 /* Font_FileStore.h */,
 				9A03B1860F4006F00070A595 /* Font_FileStore.cpp */,
-				9A03B1B20F400A940070A595 /* FontStore_Make.cpp */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -302,6 +301,7 @@
 			children = (
 				32CA4F630368D1EE00C91783 /* GlassCockpit_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
+				9A03B1B20F400A940070A595 /* FontStore_Make.cpp */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";

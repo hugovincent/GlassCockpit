@@ -33,7 +33,7 @@ public:
 	
 	// Methods for accessing the data
 	
-	GLfloat AdvanceForGlyph(int repr, char glyph); // in texture UV coordinates
+	GLfloat Advance(int repr, char i, char j); // for character i (followed by j, needed for kerning); in texture UV coordinates
 	GLfloat *TextureCoordsForFloat(int repr, char glyph);
 	GLbyte *TextureBitmap(int repr, unsigned int *texWidth, unsigned int *texHeight);
 	
@@ -45,7 +45,7 @@ private:
 	{
 	public:
 		char character;
-		GLfloat advance; // x coordinate advance of the glyph in texture UV coordinates
+		float advance;
 	};
 	
 	class TextureRepr
@@ -58,7 +58,7 @@ private:
 		
 		// Note: pixel format is 8-bit alpha-only
 		
-		~TextureRepr() { delete bitmap; }
+		~TextureRepr() { delete[] bitmap; }
 	};
 	
 	class DiskFormat
@@ -68,12 +68,13 @@ private:
 		char firstGlyph;
 		int numGlyphs;
 		Glyph *glyphs; // length =  numGlyphs
+		float *kerningTable; // kerning advance for character pair i,j indexed by (j * numGlyphs + i)
 		
 		// Texture format info
 		int numReprs; // number of different-resolution texture representations. Always 2 for now
 		TextureRepr *reprs[2];
-		
-		~DiskFormat() { delete glyphs; delete reprs; }
+	
+		~DiskFormat();
 	};
 	
 	DiskFormat *store;
