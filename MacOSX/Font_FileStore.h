@@ -32,7 +32,7 @@ public:
 	
 	GLfloat Advance(char i, char j); // for character i (followed by j, needed for kerning); in texture UV coordinates
 	GLfloat *TextureCoordsForFloat(char glyph);
-	GLbyte *TextureBitmap(unsigned int *texWidth, unsigned int *texHeight);
+	GLubyte *TextureBitmap(unsigned int *texWidth, unsigned int *texHeight);
 	
 private:
 	
@@ -43,7 +43,7 @@ private:
 	public:
 		char character;
 		float advance;
-		// FIXME I think we need baseline offset in here too?
+		GLbyte xOffset, yOffset;
 	};
 	
 	class DiskFormat
@@ -59,12 +59,18 @@ private:
 		int rows, columns;
 		int glyphWidth, glyphHeight; // maximum size of a glyph, actual size may be smaller
 		int texWidth, texHeight;
-		GLbyte *bitmap; // length = texWidth * texHeight
+		GLubyte *bitmap; // length = texWidth * texHeight
 		
 		// Note: pixel format is 8-bit alpha-only
 	
 		~DiskFormat();
 	};
+	
+	inline void TextureCellForCharacter(int character, int *x, int *y)
+	{
+		*x = character % store->rows;
+		*y = character / store->rows;
+	}
 	
 	DiskFormat *store;
 	GLfloat texCoords[8]; // four (x,y) coordinates

@@ -24,8 +24,8 @@ int main(int argc, char **argv)
 	
 	string basename = argv[1];
 	Font_FileStore *fileStore = Font_FileStore::CreateFromTTF(basename + ".ttf");
-	//Assert(fileStore != NULL, "error create font filestore");
-	//fileStore->SerializeToFile(basename + ".glfont");
+	Assert(fileStore != NULL, "error create font filestore");
+	fileStore->SerializeToFile(basename + ".glfont");
 	
 	delete fileStore;
 	return 0;

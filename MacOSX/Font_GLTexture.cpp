@@ -15,8 +15,8 @@
 Font_GLTexture::Font_GLTexture(const char* filename)
 {
 	LogPrintf("Opening font %s\n", filename);
-	m_Store = new Font_FileStore(filename);
-	m_CurrentRepr = REPR_HIGHER_RES;
+	//m_Store = new Font_FileStore(filename);
+	m_Store = Font_FileStore::CreateFromTTF(filename); // fixme should deserialize, obv
 	
 	// FIXME get bitmap and create textures in GL
 	/* The format is GL_ALPHA and the params are
@@ -39,8 +39,16 @@ void Font_GLTexture::Render(const char* str)
 	{
 		glBegin(GL_QUADS);
 		// FIXME construct the vertices from m_FaceSize and the advance of the glyph
+		/*
+		 // Set vertices
+		 GLfloat c = 0.5f * contentWidth, d = 0.5f * contentHeight;
+		 vertices[0] = -c; vertices[1] = -d;
+		 vertices[2] =  c; vertices[3] = -d;
+		 vertices[4] = -c; vertices[5] =  d;
+		 vertices[6] =  c; vertices[7] =  d;
+		 */
 		glEnd();
-		glTexCoordPointer(2, GL_FLOAT, 0, m_Store->TextureCoordsForFloat(m_CurrentRepr, 'a'));
+		glTexCoordPointer(2, GL_FLOAT, 0, m_Store->TextureCoordsForFloat('a'));
 		// FIXME render fragment
 	}
 }
@@ -67,15 +75,10 @@ float Font_GLTexture::Advance(const char* str)
 	
 	for (int i = 0; i < len; ++i)
 	{
-		advance += m_Store->Advance(m_CurrentRepr, str[i], str[i+1]); // FIXME
+		advance += m_Store->Advance(str[i], str[i+1]); // FIXME
 	}
 	
 	return advance * m_FaceSize;
-}
-
-void Font_GLTexture::Hint_LowerResolution(bool lower)
-{
-	m_CurrentRepr = lower ? REPR_LOWER_RES : REPR_HIGHER_RES;
 }
 
 int Font_GLTexture::Error()

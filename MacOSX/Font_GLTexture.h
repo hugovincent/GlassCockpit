@@ -18,7 +18,7 @@ class Font_FileStore;
  *
  *  We acheive this reduction in CPU and memory required by prerendering
  *  the font to a bitmap image on the development host, where we have access
- *  to the full stack including libfreetype2 and FTGL.
+ *  to the full stack, in particular libfreetype2.
  *
  *  Only 7-bit ASCII is supported, no unicode.
  */
@@ -30,13 +30,11 @@ public:
 	void FaceSize(float size) { m_FaceSize = size; }
 	void Render(const char* str);
 	float Advance(const char* str);
-	void Hint_LowerResolution(bool lower);
 	int Error();
 
 private:
 	float m_FaceSize;
 	Font_FileStore *m_Store;
-	int m_CurrentRepr;
 };
 
 #endif

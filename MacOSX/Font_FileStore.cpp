@@ -40,8 +40,8 @@ void computePowerOfTwo(GLshort inDim, GLshort *outDim)
 #include <freetype/freetype.h>
 Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 {
-	int maxGlyphWidth = 0, maxGlyphHeight = 0;
-	GLshort tmp;
+	int glyphWidth = 0, glyphHeight = 0;
+	FT_UInt *charIdx = 0;
 	
 	Font_FileStore *self = new Font_FileStore();
 	self->store = new DiskFormat;
@@ -62,7 +62,7 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 		LogPrintf("Opened.\n");
 	
 	// Get Freetype character-index mapping
-	FT_UInt *charIdx = new FT_UInt[NUM_CHARS];
+	charIdx = new FT_UInt[NUM_CHARS];
 	for (char i = 0; i < NUM_CHARS; ++i)
 	{
 		charIdx[i] = FT_Get_Char_Index(ftFace, FIRST_CHAR + i);
@@ -97,7 +97,7 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 				err = FT_Get_Kerning(ftFace, charIdx[i], charIdx[j], FT_KERNING_UNFITTED, &kernAdvance);
 				if(err)
 					goto failed;
-				
+
 				self->store->kerningTable[j * NUM_CHARS + i] = static_cast<float>(kernAdvance.x) / 64.0f;
 				// ^^^ the divide by 64.0 converts FreeType's 26.6-format fixed point into floating point
 			}
@@ -113,7 +113,7 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	for (char i = 0; i < NUM_CHARS; ++i)
 	{
 		// FIXME it's kindof wasteful prerendering the whole character set just to get the maximum
-		// glyph size, but hey, font rendering is (necessarily) very cheap these days.
+		// glyph size, but hey, font rendering is (necessarily) very cheap these days, and this is not called at runtime.
 		err = FT_Load_Glyph(ftFace, charIdx[i], FT_LOAD_NO_HINTING | FT_LOAD_RENDER);
 		if(err || glyph->format != FT_GLYPH_FORMAT_BITMAP)
 		{
@@ -122,15 +122,13 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 		}
 		
 		// Get glyph size
-		maxGlyphWidth = max(maxGlyphWidth, glyph->bitmap.width);
-		maxGlyphHeight = max(maxGlyphHeight, glyph->bitmap.rows);
+		glyphWidth = max(glyphWidth, glyph->bitmap.width);
+		glyphHeight = max(glyphHeight, glyph->bitmap.rows);
 		
 		// Store advance
 		self->store->glyphs[i].advance = glyph->linearHoriAdvance / 65535.f; // fixed point -> float
-		
-		// FIXME store baseline too?
 	}
-	LogPrintf("Computed max glyph size as %dx%d.\n", maxGlyphWidth, maxGlyphHeight);
+	LogPrintf("Computed max glyph size as %dx%d.\n", glyphWidth, glyphHeight);
 	
 	// Work out number of rows and columns
 	int rows = (int)ceilf(sqrtf((float)NUM_CHARS)), cols = (int)ceilf((float)NUM_CHARS / rows);
@@ -139,13 +137,16 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	// Create texture
 	self->store->rows = rows;
 	self->store->columns = cols;
-	self->store->glyphWidth = maxGlyphWidth;
-	self->store->glyphHeight = maxGlyphHeight;
+	self->store->glyphWidth = glyphWidth;
+	self->store->glyphHeight = glyphHeight;
+
+	GLshort tmp;
 	computePowerOfTwo(self->store->glyphWidth * rows, &tmp);
 	self->store->texWidth = tmp;
 	computePowerOfTwo(self->store->glyphHeight * cols, &tmp);
 	self->store->texHeight = tmp;
-	self->store->bitmap = new GLbyte[self->store->texWidth * self->store->texHeight];
+	
+	self->store->bitmap = new GLubyte[self->store->texWidth * self->store->texHeight];
 	LogPrintf("Texture has size %dx%d px.\n", self->store->texWidth, self->store->texHeight);
 	
 	Assert(self->store->texWidth < MAX_TEXTURE_DIMENSION && self->store->texHeight < MAX_TEXTURE_DIMENSION, "texture is too big");
@@ -153,24 +154,38 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	// Now render each glyph
 	for (char i = 0; i < NUM_CHARS; ++i)
 	{
-		LogPrintf("Rendering glyph for '%c'\n", FIRST_CHAR + i);
+		//LogPrintf("Rendering glyph for '%c'\n", FIRST_CHAR + i);
 		
-		// Render glyph
-		err = FT_Load_Glyph(ftFace, charIdx[i], FT_LOAD_NO_HINTING | FT_LOAD_RENDER);
-		if(err || glyph->format != FT_GLYPH_FORMAT_BITMAP)
+		// Load glyph into font face
+		err = FT_Load_Glyph(ftFace, charIdx[i], FT_LOAD_DEFAULT);
+		if(err)
 		{
-			LogPrintf("Error 0x%02x rendering glyph \"%c\" (%d)\n", err, i + FIRST_CHAR, charIdx[i]);
+			LogPrintf("Error 0x%02x loading glyph \"%c\" (%d)\n", err, i + FIRST_CHAR, charIdx[i]);
 			goto failed;
 		}
 		
+		// Convert the glyph to a bitmap
+		FT_Render_Glyph(ftFace->glyph, FT_RENDER_MODE_NORMAL);
+		Assert(ftFace->glyph->format == FT_GLYPH_FORMAT_BITMAP, "rendered to a bitmap, but now it's not a bitmap");
+		
+		// Get the offset of this glyph into the shared texture image
+		int tx, ty;
+		self->TextureCellForCharacter(i, &tx, &ty);
+		
 		// Copy rendered glyph into texture
-		for (int j = 0; j < glyph->bitmap.rows; ++j)
-			for (int k = 0; k < glyph->bitmap.width; ++k)
-			{
-				self->store->bitmap[j * self->store->texWidth + i] = glyph->bitmap.buffer[j * glyph->bitmap.width + k]; 
-				// ^^ FIXME bitmap offsets for current cell.
-			}
+		GLubyte *tex = self->store->bitmap; // alias for brievity
+		FT_Bitmap& bm = ftFace->glyph->bitmap; // alias for brievity
+		for (int j = 0; j < glyphHeight; ++j)
+			for(int k = 0; k < glyphWidth; ++k)
+				tex[((ty * glyphHeight) + j) * self->store->texWidth + (tx * glyphWidth) + k] = 
+					(k >= bm.width || j >= bm.rows) ? 0 : bm.buffer[(j * bm.width) + k];
+		
+		// Store pixel offset (used to sit all characters on a baseline when we render)
+		self->store->glyphs[i].xOffset = ftFace->glyph->bitmap_left;
+		self->store->glyphs[i].yOffset = ftFace->glyph->bitmap_top - bm.rows;
 	}
+	
+	LogPrintf("Sucessfully created font store.\n");
 
 	// Cleanup Freetype
 	FT_Done_Face(ftFace);
@@ -184,7 +199,7 @@ failed:
 	FT_Done_Face(ftFace);
 	FT_Done_FreeType(ftLibrary);
 	delete self;
-	delete[] charIdx;
+	if (charIdx) delete[] charIdx;
 	return NULL;
 }
 #endif
@@ -230,25 +245,21 @@ GLfloat Font_FileStore::Advance(char i, char j)
 
 GLfloat *Font_FileStore::TextureCoordsForFloat(char glyph)
 {
-/*	glMatrixMode(GL_TEXTURE);
-	glPushMatrix();
-	GLuint curRow, curCol;
-	if (storedOrientation == Orient_RowMajor) {
-		
-		curRow = (curFrame - 1) / rows;
-		curCol = (curFrame - 1) % rows;
-	} else {
-		
-		curRow = (curFrame - 1) % columns;
-		curCol = (curFrame - 1) / columns;
-	}
-	glTranslatef(curRow * (GLfloat)contentWidth / width, curCol * (GLfloat)contentHeight / height, 0.f);
-	glTexCoordPointer(2, GL_FLOAT, 0, texCoords);
- */
+	int tx, ty;
+	TextureCellForCharacter(glyph, &tx, &ty);
+	
+	GLfloat a = (GLfloat)store->glyphWidth / store->texWidth;
+	GLfloat b = (GLfloat)store->glyphHeight / store->texHeight;
+	
+	texCoords[0] = tx * a;         texCoords[1] = ty * b;
+	texCoords[2] = tx * (a + 1);   texCoords[3] = ty * b;
+	texCoords[4] = tx * a;         texCoords[5] = ty * (b + 1);
+	texCoords[6] = tx * (a + 1);   texCoords[7] = ty * (b + 1);
+	
 	return &texCoords[0];
 }
 
-GLbyte *Font_FileStore::TextureBitmap(unsigned int *texWidth, unsigned int *texHeight)
+GLubyte *Font_FileStore::TextureBitmap(unsigned int *texWidth, unsigned int *texHeight)
 {
 	if (store)
 	{
@@ -274,5 +285,9 @@ void Font_FileStore::SerializeToFile(const std::string& glfontFilename)
 
 void Font_FileStore::DeserializeFromFile(const std::string& glfontFilename)
 {
+	LogPrintf("Deserializing font %s... ", glfontFilename.c_str());
 	
+	// FIXME
+	
+	LogPrintf("Done.\n");
 }
