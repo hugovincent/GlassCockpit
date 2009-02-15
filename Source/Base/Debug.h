@@ -36,5 +36,8 @@
 #define Check(x) { if (!(x)) { LogPrintf("\n%s:%d: Check failed\n", __FILE__, __LINE__); abort(); } }
 #endif
 
+// OpenGL error checking
+#define GLassert() Assert(glGetError() == GL_NO_ERROR, "OpenGLES error occurred")
+
 #endif // ifdnef Debug_H
 

@@ -10,6 +10,8 @@
 #ifndef Font_GLTexture_H
 #define Font_GLTexture_H
 
+#include <OpenGL/gl.h>
+
 class Font_FileStore;
 
 /** This is a minimal, lightweight reimplementation of FTTextureFont from
@@ -35,6 +37,9 @@ public:
 private:
 	float m_FaceSize;
 	Font_FileStore *m_Store;
+	GLuint texName;
+	
+	void CheckOrCreateTexture();
 };
 
 #endif

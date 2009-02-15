@@ -114,7 +114,7 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	{
 		// FIXME it's kindof wasteful prerendering the whole character set just to get the maximum
 		// glyph size, but hey, font rendering is (necessarily) very cheap these days, and this is not called at runtime.
-		err = FT_Load_Glyph(ftFace, charIdx[i], FT_LOAD_NO_HINTING | FT_LOAD_RENDER);
+		err = FT_Load_Glyph(ftFace, charIdx[i], FT_LOAD_NO_HINTING | FT_LOAD_RENDER | FT_LOAD_NO_BITMAP);
 		if(err || glyph->format != FT_GLYPH_FORMAT_BITMAP)
 		{
 			LogPrintf("Error 0x%02x prerendering glyph \"%c\" (%d)\n", err, i + FIRST_CHAR, charIdx[i]);
@@ -147,6 +147,7 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	self->store->texHeight = tmp;
 	
 	self->store->bitmap = new GLubyte[self->store->texWidth * self->store->texHeight];
+    memset(self->store->bitmap, 0, self->store->texWidth * self->store->texHeight);
 	LogPrintf("Texture has size %dx%d px.\n", self->store->texWidth, self->store->texHeight);
 	
 	Assert(self->store->texWidth < MAX_TEXTURE_DIMENSION && self->store->texHeight < MAX_TEXTURE_DIMENSION, "texture is too big");
@@ -230,7 +231,11 @@ Font_FileStore::~Font_FileStore()
 
 GLfloat Font_FileStore::Advance(char i, char j)
 {
-	if (store && (store->firstGlyph < i) && (i >= (store->firstGlyph + store->numGlyphs)) 
+	if (j == 0)
+	{
+		return store->glyphs[i].advance;
+	}
+	else if (store && (store->firstGlyph < i) && (i >= (store->firstGlyph + store->numGlyphs)) 
 		&& (store->firstGlyph < j) && (j >= (store->firstGlyph + store->numGlyphs)))
 	{
 		if (store->kerningTable)
@@ -240,10 +245,12 @@ GLfloat Font_FileStore::Advance(char i, char j)
 			return store->glyphs[i].advance;
 	}
 	else
+	{
 		return 0.f;
+	}
 }
 
-GLfloat *Font_FileStore::TextureCoordsForFloat(char glyph)
+GLfloat *Font_FileStore::TextureCoordsForChar(char glyph)
 {
 	int tx, ty;
 	TextureCellForCharacter(glyph, &tx, &ty);
@@ -251,12 +258,30 @@ GLfloat *Font_FileStore::TextureCoordsForFloat(char glyph)
 	GLfloat a = (GLfloat)store->glyphWidth / store->texWidth;
 	GLfloat b = (GLfloat)store->glyphHeight / store->texHeight;
 	
-	texCoords[0] = tx * a;         texCoords[1] = ty * b;
-	texCoords[2] = tx * (a + 1);   texCoords[3] = ty * b;
-	texCoords[4] = tx * a;         texCoords[5] = ty * (b + 1);
-	texCoords[6] = tx * (a + 1);   texCoords[7] = ty * (b + 1);
-	
+	texCoords[0] = a * tx;         texCoords[1] = b * (ty + 1);
+	texCoords[2] = a * (tx + 1);   texCoords[3] = b * (ty + 1);
+	texCoords[4] = a * tx;         texCoords[5] = b * ty;
+	texCoords[6] = a * (tx + 1);   texCoords[7] = b * ty;
+
 	return &texCoords[0];
+}
+
+GLfloat *Font_FileStore::VertexCoordsForChar(char glyph)
+{
+	// FIXME do baseline offset correction
+	GLfloat xOff = store->glyphs[glyph].xOffset; // FIXME
+	GLfloat yOff = store->glyphs[glyph].yOffset; // FIXME
+
+	// FIXME construct the vertices from m_FaceSize and the advance of the glyph
+	GLfloat a = (GLfloat)store->glyphWidth / store->texWidth * 250; // FIXME
+	GLfloat b = (GLfloat)store->glyphHeight / store->texHeight * 250; // FIXME
+	
+	vertexCoords[0] = xOff;	    vertexCoords[1] = yOff;
+	vertexCoords[2] = xOff + a;	vertexCoords[3] = yOff;
+	vertexCoords[4] = xOff;	    vertexCoords[5] = yOff + b;
+	vertexCoords[6] = xOff + a;	vertexCoords[7] = yOff + b;
+	
+	return &vertexCoords[0];
 }
 
 GLubyte *Font_FileStore::TextureBitmap(unsigned int *texWidth, unsigned int *texHeight)

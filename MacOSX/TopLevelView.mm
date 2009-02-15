@@ -24,6 +24,10 @@
 #include "NavDisplay.h"
 #include "EngineInstruments.h"
 
+
+// FIXME
+#include "Font_GLTexture.h"
+
 using namespace OpenGC;
 
 // Create the Globals object
@@ -113,7 +117,21 @@ Globals *OpenGC::globals;
 	}
 	NSOpenGLContext *ctx = [self openGLContext];
 	[ctx makeCurrentContext];
-	m_pRenderWindow->Render();
+	m_pRenderWindow->Render(); // FIXME custom working directory path too
+	
+#if 1
+//	glClear(GL_COLOR_BUFFER_BIT);
+	glTranslatef(20,20, 0);
+	glScalef(500,1000,1);
+	glColor3f(1.0, 0.85, 0.35);
+
+	static Font_GLTexture *fixme = new Font_GLTexture("bitstream_vera.ttf");
+	fixme->Render("a");
+#endif
+	
+	
+	
+	
 	[ctx flushBuffer];
 }
 

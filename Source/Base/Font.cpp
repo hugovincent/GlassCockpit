@@ -67,7 +67,7 @@ void Font::Print(double x, double y, const char *string)
 		// We offset by the width of the text, so the right hand edge of the string is at the provided coordinates.
 		glTranslated(-1.0 * m_TextureFont->Advance(string), 0, 0);
 	
-#if 0 && defined(MACOSX)
+#ifdef USE_MIPMAPPING_QUESTION_MARK_FIXME
 	// Hint the font to use a texture of appropriate quality for the size we're rendering at
 	if (max(m_Size.x, m_Size.y) < FONT_TEXTURE_CROSSOVER)
 		m_TextureFont->Hint_LowerResolution(true);

@@ -31,10 +31,11 @@ public:
 	// Methods for accessing the data
 	
 	GLfloat Advance(char i, char j); // for character i (followed by j, needed for kerning); in texture UV coordinates
-	GLfloat *TextureCoordsForFloat(char glyph);
+	GLfloat *TextureCoordsForChar(char glyph);
+	GLfloat *VertexCoordsForChar(char glyph);
 	GLubyte *TextureBitmap(unsigned int *texWidth, unsigned int *texHeight);
 	
-private:
+//private:
 	
 	Font_FileStore() : store(NULL) {} // used to create from TTF for serialization
 	
@@ -73,7 +74,7 @@ private:
 	}
 	
 	DiskFormat *store;
-	GLfloat texCoords[8]; // four (x,y) coordinates
+	GLfloat texCoords[8], vertexCoords[8]; // four (x,y) coordinates
 };
 
 #endif
