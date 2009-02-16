@@ -51,13 +51,18 @@ void Font_GLTexture::Render(const char* str)
 {
 	CheckOrCreateTexture();
 
-	// FIXME why are attribute stacks so expensive??
-	glPushAttrib(GL_ENABLE_BIT | GL_COLOR_BUFFER_BIT);
-
-//	glEnable(GL_BLEND);
-//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	// Store old state for restoring afterwards
+	GLboolean oldVertex, oldTexCoords, oldBlending;
+	GLint oldBlendSrc, oldBlendDst;
+	glGetBooleanv(GL_VERTEX_ARRAY, &oldVertex);
+	glGetBooleanv(GL_TEXTURE_COORD_ARRAY, &oldTexCoords);
+	glGetBooleanv(GL_BLEND, &oldBlending);
+	glGetIntegerv(GL_BLEND_SRC, &oldBlendSrc);
+	glGetIntegerv(GL_BLEND_DST, &oldBlendDst);
 	
-	glPushClientAttrib(GL_CLIENT_VERTEX_ARRAY_BIT);
+	// Enable GL options
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 	glEnableClientState(GL_VERTEX_ARRAY);
 	
@@ -73,8 +78,15 @@ void Font_GLTexture::Render(const char* str)
 	}
 	glDisable(GL_TEXTURE_2D);
 	
-	glPopAttrib();
-	glPopClientAttrib();
+	// Restore old state
+	if (oldTexCoords == GL_FALSE)
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	if (oldVertex == GL_FALSE)
+		glDisableClientState(GL_VERTEX_ARRAY);
+	if (oldBlending == GL_FALSE)
+		glDisable(GL_BLEND);
+	if (oldBlendSrc != GL_SRC_ALPHA || oldBlendDst != GL_ONE_MINUS_SRC_ALPHA)
+		glBlendFunc(oldBlendSrc, oldBlendDst);
 }
 		
 float Font_GLTexture::Advance(const char* str)
