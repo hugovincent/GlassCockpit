@@ -37,11 +37,6 @@ void Font_GLTexture::CheckOrCreateTexture()
 	glGenTextures(1, &texName);
 	glBindTexture(GL_TEXTURE_2D, texName);
 	
-//	glPushClientAttrib(GL_CLIENT_PIXEL_STORE_BIT);
-//	glPixelStorei(GL_UNPACK_LSB_FIRST, GL_FALSE);
-//	glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
-//	glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-	
 	unsigned int texWidth, texHeight;
 	GLubyte *bitmap = m_Store->TextureBitmap(&texWidth, &texHeight);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, texWidth, texHeight, 0, GL_ALPHA, GL_UNSIGNED_BYTE, bitmap);
@@ -50,8 +45,6 @@ void Font_GLTexture::CheckOrCreateTexture()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-	
-//	glPopClientAttrib();
 }
 
 void Font_GLTexture::Render(const char* str)
@@ -61,8 +54,8 @@ void Font_GLTexture::Render(const char* str)
 	// FIXME why are attribute stacks so expensive??
 	glPushAttrib(GL_ENABLE_BIT | GL_COLOR_BUFFER_BIT);
 
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+//	glEnable(GL_BLEND);
+//	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	
 	glPushClientAttrib(GL_CLIENT_VERTEX_ARRAY_BIT);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
@@ -78,6 +71,7 @@ void Font_GLTexture::Render(const char* str)
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 		glTranslatef(m_Store->Advance(str[i], (i < len) ? str[i+1] : 0), 0.f, 0.f); // FIXME ?
 	}
+	glDisable(GL_TEXTURE_2D);
 	
 	glPopAttrib();
 	glPopClientAttrib();

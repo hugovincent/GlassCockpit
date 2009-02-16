@@ -46,6 +46,8 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	Font_FileStore *self = new Font_FileStore();
 	self->store = new DiskFormat;
 	self->store->glyphs = new Glyph[NUM_CHARS];
+	self->store->firstGlyph = FIRST_CHAR;
+	self->store->numGlyphs = NUM_CHARS;
 	
 	// Get font
 	LogPrintf("Attempting to open %s... ", ttfFilename.c_str());
@@ -229,20 +231,22 @@ Font_FileStore::~Font_FileStore()
 	}
 }
 
+#define GLYPH(x) store->glyphs[(x - store->firstGlyph)]
+#define LAST_GLYPH (store->firstGlyph + store->numGlyphs)
+
 GLfloat Font_FileStore::Advance(char i, char j)
 {
 	if (j == 0)
 	{
-		return store->glyphs[i].advance;
+		return GLYPH(i).advance;
 	}
-	else if (store && (store->firstGlyph < i) && (i >= (store->firstGlyph + store->numGlyphs)) 
-		&& (store->firstGlyph < j) && (j >= (store->firstGlyph + store->numGlyphs)))
+	else if ((i >= store->firstGlyph) && (i <= LAST_GLYPH) && (j >= store->firstGlyph) && (j <= LAST_GLYPH))
 	{
 		if (store->kerningTable)
-			return store->glyphs[i].advance +
-				store->kerningTable[(j - store->firstGlyph) * store->numGlyphs + (i - store->firstGlyph)];
+			return GLYPH(i).advance + store->kerningTable[(j - store->firstGlyph)
+											* store->numGlyphs + (i - store->firstGlyph)];
 		else
-			return store->glyphs[i].advance;
+			return GLYPH(i).advance;
 	}
 	else
 	{
@@ -253,10 +257,10 @@ GLfloat Font_FileStore::Advance(char i, char j)
 GLfloat *Font_FileStore::TextureCoordsForChar(char glyph)
 {
 	int tx, ty;
-	TextureCellForCharacter(glyph, &tx, &ty);
+	TextureCellForCharacter(glyph - store->firstGlyph, &tx, &ty);
 	
-	GLfloat a = (GLfloat)store->glyphWidth / store->texWidth;
-	GLfloat b = (GLfloat)store->glyphHeight / store->texHeight;
+	GLfloat a = (GLfloat)store->glyphWidth / store->texWidth - 0.001;
+	GLfloat b = (GLfloat)store->glyphHeight / store->texHeight - 0.001;
 	
 	texCoords[0] = a * tx;         texCoords[1] = b * (ty + 1);
 	texCoords[2] = a * (tx + 1);   texCoords[3] = b * (ty + 1);
@@ -269,8 +273,8 @@ GLfloat *Font_FileStore::TextureCoordsForChar(char glyph)
 GLfloat *Font_FileStore::VertexCoordsForChar(char glyph)
 {
 	// FIXME do baseline offset correction
-	GLfloat xOff = store->glyphs[glyph].xOffset; // FIXME
-	GLfloat yOff = store->glyphs[glyph].yOffset; // FIXME
+	GLfloat xOff = GLYPH(glyph).xOffset; // FIXME
+	GLfloat yOff = GLYPH(glyph).yOffset; // FIXME
 
 	// FIXME construct the vertices from m_FaceSize and the advance of the glyph
 	GLfloat a = (GLfloat)store->glyphWidth / store->texWidth * 250; // FIXME
