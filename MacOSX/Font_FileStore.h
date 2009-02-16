@@ -33,7 +33,7 @@ public:
 	GLfloat Advance(char i, char j); // for character i (followed by j, needed for kerning); in texture UV coordinates
 	GLfloat *TextureCoordsForChar(char glyph);
 	GLfloat *VertexCoordsForChar(char glyph);
-	GLubyte *TextureBitmap(unsigned int *texWidth, unsigned int *texHeight);
+	GLubyte *TextureBitmap(unsigned int *texWidth, unsigned int *texHeight, bool *safeToFree);
 	
 private:
 	

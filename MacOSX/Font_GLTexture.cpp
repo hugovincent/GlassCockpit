@@ -38,9 +38,10 @@ void Font_GLTexture::CheckOrCreateTexture()
 	glGenTextures(1, &texName);
 	glBindTexture(GL_TEXTURE_2D, texName);
 	
-	unsigned int texWidth, texHeight;
-	GLubyte *bitmap = m_Store->TextureBitmap(&texWidth, &texHeight);
+	unsigned int texWidth, texHeight; bool safeToFree;
+	GLubyte *bitmap = m_Store->TextureBitmap(&texWidth, &texHeight, &safeToFree);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_ALPHA, texWidth, texHeight, 0, GL_ALPHA, GL_UNSIGNED_BYTE, bitmap);
+	if (safeToFree) delete[] bitmap;
 	
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);

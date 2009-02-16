@@ -151,7 +151,6 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	self->store->texHeight = tmp;
 	
 	self->store->bitmap = new GLubyte[self->store->texWidth * self->store->texHeight];
-    memset(self->store->bitmap, 0, self->store->texWidth * self->store->texHeight);
 	LogPrintf("Texture has size %dx%d px.\n", self->store->texWidth, self->store->texHeight);
 	
 	Assert(self->store->texWidth < MAX_TEXTURE_DIMENSION && self->store->texHeight < MAX_TEXTURE_DIMENSION, "texture is too big");
@@ -290,13 +289,16 @@ GLfloat *Font_FileStore::VertexCoordsForChar(char glyph)
 	return &vertexCoords[0];
 }
 
-GLubyte *Font_FileStore::TextureBitmap(unsigned int *texWidth, unsigned int *texHeight)
+GLubyte *Font_FileStore::TextureBitmap(unsigned int *texWidth, unsigned int *texHeight, bool *safeToFree)
 {
-	if (store)
+	if (store && store->bitmap)
 	{
+		*safeToFree = true;
 		*texWidth = store->texWidth;
 		*texHeight = store->texHeight;
-		return store->bitmap;
+		GLubyte *ret = store->bitmap;
+		store->bitmap = NULL;
+		return ret;
 	}
 	else
 		return NULL;
