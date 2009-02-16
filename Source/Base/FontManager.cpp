@@ -20,6 +20,7 @@
 #include "Font.h"
 #include "FontManager.h"
 #include "Globals.h"
+#include "Debug.h"
 
 namespace OpenGC
 {
@@ -45,7 +46,11 @@ FontManager::~FontManager()
 /** Loads the default font, i.e. Bitstream Vera */
 int FontManager::LoadDefaultFont()
 {
+#ifdef MACOSX
+	return this->LoadFont("bitstream_vera.glfont");
+#else
 	return this->LoadFont("bitstream_vera.ttf");
+#endif
 }
 
 int FontManager::LoadFont(const string& name)

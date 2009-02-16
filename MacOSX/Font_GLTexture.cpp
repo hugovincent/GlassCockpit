@@ -14,9 +14,10 @@
 
 Font_GLTexture::Font_GLTexture(const char* filename)
 {
-	//LogPrintf("Opening font %s\n", filename);
-	//m_Store = new Font_FileStore(filename);
-	m_Store = Font_FileStore::CreateFromTTF(filename); // FIXME should deserialize, obviously
+	m_Store = new Font_FileStore(filename);
+
+	// For debugging, create the font FileStore fresh
+	//m_Store = Font_FileStore::CreateFromTTF(filename);
 	
 	texName = 0; // defer creating GL texture until we're sure we have a valid GL context
 }

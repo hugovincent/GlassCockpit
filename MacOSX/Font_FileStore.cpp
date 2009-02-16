@@ -11,6 +11,8 @@
 #include <math.h>
 #include "Font_FileStore.h"
 
+#include <fstream>
+
 #define FT_USE_KERNING
 
 #define FIRST_CHAR ' '
@@ -300,23 +302,41 @@ GLubyte *Font_FileStore::TextureBitmap(unsigned int *texWidth, unsigned int *tex
 		return NULL;
 }
 
-void Font_FileStore::SerializeToFile(const std::string& glfontFilename)
+void Font_FileStore::SerializeToFile(const std::string& glfontFilename) const
 {
 	if (store)
 	{
 		LogPrintf("Serializing font to %s... ", glfontFilename.c_str());
 
-		// FIXME
-
+		// FIXME robustness needs to be added here and in deserialize
+		
+		std::ofstream out(glfontFilename.c_str(), std::ios::binary);
+		out.write((char*)store, sizeof(DiskFormat));
+		out.write((char*)store->glyphs, sizeof(Glyph) * NUM_CHARS);
+		out.write((char*)store->kerningTable, sizeof(float) * NUM_CHARS * NUM_CHARS);
+		out.write((char*)store->bitmap, sizeof(GLubyte) * store->texWidth * store->texHeight);
+		out.close();
 		LogPrintf("Done.\n");
 	}
 }
 
 void Font_FileStore::DeserializeFromFile(const std::string& glfontFilename)
 {
+	if (store)
+		delete store;
+	
 	LogPrintf("Deserializing font %s... ", glfontFilename.c_str());
 	
-	// FIXME
+	DiskFormat *format = (DiskFormat*)(new char[sizeof(DiskFormat)]);
+	std::ifstream in(glfontFilename.c_str(), std::ios::binary);
+	in.read((char*)format, sizeof(DiskFormat));
+	format->glyphs = new Glyph[NUM_CHARS];
+	in.read((char*)format->glyphs, sizeof(Glyph) * NUM_CHARS);
+	format->kerningTable = new float[NUM_CHARS * NUM_CHARS];
+	in.read((char*)format->kerningTable, sizeof(float) * NUM_CHARS * NUM_CHARS);
+	format->bitmap = new GLubyte[format->texWidth * format->texHeight];
+	in.read((char*)format->bitmap, sizeof(GLubyte) * format->texWidth * format->texHeight);
+	store = format;
 	
 	LogPrintf("Done.\n");
 }

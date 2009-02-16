@@ -15,6 +15,7 @@
 		9A03B1BD0F400ADA0070A595 /* FontStore_Make.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A03B1B20F400A940070A595 /* FontStore_Make.cpp */; };
 		9A03B1C90F400BF40070A595 /* Font_FileStore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A03B1860F4006F00070A595 /* Font_FileStore.cpp */; };
 		9A03B1CD0F400C170070A595 /* libfreetype.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1EDA0F3B8AA200B9CFFA /* libfreetype.dylib */; };
+		9A3D50430F4977D200961296 /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1ED60F3B88A200B9CFFA /* libftgl.a */; };
 		9AA14FDF0F3E747700DCA729 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDA0F3E747700DCA729 /* Fonts */; };
 		9AA14FE00F3E747700DCA729 /* Navigation in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDB0F3E747700DCA729 /* Navigation */; };
 		9AA14FE10F3E747700DCA729 /* Preferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDC0F3E747700DCA729 /* Preferences.xml */; };
@@ -50,7 +51,6 @@
 		9AAE1E490F3AF68E00B9CFFA /* NavDatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E3B0F3AF68E00B9CFFA /* NavDatabase.cpp */; };
 		9AAE1E830F3AF87400B9CFFA /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E820F3AF87400B9CFFA /* Font.cpp */; };
 		9AAE1E860F3AF87F00B9CFFA /* FontManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E850F3AF87F00B9CFFA /* FontManager.cpp */; };
-		9AAE1ED70F3B88A200B9CFFA /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1ED60F3B88A200B9CFFA /* libftgl.a */; };
 		9AAE1EDB0F3B8AA200B9CFFA /* libfreetype.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1EDA0F3B8AA200B9CFFA /* libfreetype.dylib */; };
 		9AAE1EEE0F3B8AE600B9CFFA /* RenderWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1EEB0F3B8AE600B9CFFA /* RenderWindow.cpp */; };
 		9AAE1EEF0F3B8AE600B9CFFA /* RenderObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1EED0F3B8AE600B9CFFA /* RenderObject.cpp */; };
@@ -224,7 +224,6 @@
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				9AE411C00F39973C00D539E5 /* OpenGL.framework in Frameworks */,
 				9AAE1D3B0F3AF15000B9CFFA /* libxml2.dylib in Frameworks */,
-				9AAE1ED70F3B88A200B9CFFA /* libftgl.a in Frameworks */,
 				9AAE1EDB0F3B8AA200B9CFFA /* libfreetype.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -234,6 +233,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A03B1CD0F400C170070A595 /* libfreetype.dylib in Frameworks */,
+				9A3D50430F4977D200961296 /* libftgl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -664,6 +664,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/X11/lib,
+					"\"$(SRCROOT)\"",
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = FontStore_Make;
@@ -682,6 +683,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					/usr/X11/lib,
+					"\"$(SRCROOT)\"",
 				);
 				PREBINDING = NO;
 				PRODUCT_NAME = FontStore_Make;

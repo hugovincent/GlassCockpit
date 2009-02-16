@@ -26,7 +26,7 @@ public:
 	~Font_FileStore();
 
 	void DeserializeFromFile(const std::string& glfontFilename);
-	void SerializeToFile(const std::string& glfontFilename);
+	void SerializeToFile(const std::string& glfontFilename) const;
 	
 	// Methods for accessing the data
 	
@@ -35,7 +35,7 @@ public:
 	GLfloat *VertexCoordsForChar(char glyph);
 	GLubyte *TextureBitmap(unsigned int *texWidth, unsigned int *texHeight);
 	
-//private:
+private:
 	
 	Font_FileStore() : store(NULL) {} // used to create from TTF for serialization
 	
