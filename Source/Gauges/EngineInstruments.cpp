@@ -66,7 +66,7 @@ EngineInstruments::EngineInstruments()
 	pCHT->SetColourRanges(180.0, 230.0);
 	this->AddGaugeComponent(pCHT);
 
-#if 0
+#if 1
 	// EngineDial gauge for FIXME
 	EngineDial* pFIXME = new EngineDial();
 	pFIXME->SetParentRenderObject(this);
@@ -84,6 +84,15 @@ EngineInstruments::EngineInstruments()
 	pFIXME2->SetMinMax(0.0, 1000.0);
 	pFIXME2->SetColourRanges(850.0, 925.0);
 	this->AddGaugeComponent(pFIXME2);
+	
+	// EngineDial gauge for FIXME 3
+	EngineDial* pFIXME3 = new EngineDial();
+	pFIXME3->SetParentRenderObject(this);
+	pFIXME3->SetPosition(96,0);
+	pFIXME3->SetDataSource(&AirframeDataContainer::GetEngine_CHT);
+	pFIXME3->SetMinMax(0.0, 250.0);
+	pFIXME3->SetColourRanges(140.0, 185.0);
+	this->AddGaugeComponent(pFIXME3);
 #endif
 	
 	// Create a GenericDial gauge FIXME

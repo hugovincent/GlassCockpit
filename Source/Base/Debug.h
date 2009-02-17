@@ -8,8 +8,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#if (defined(__APPLE__) && defined(__MACH__) ) || (defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE)
+#if defined(__APPLE__) && defined(__MACH__)
 #define MACOSX
+#endif
+
+#if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
+#define IPHONE
 #endif
 
 // Global Debug flag

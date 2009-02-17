@@ -13,8 +13,6 @@
 
 #include <fstream>
 
-#define FT_USE_KERNING
-
 #define FIRST_CHAR ' '
 #define LAST_CHAR  '~'
 #define NUM_CHARS (unsigned int)(LAST_CHAR - FIRST_CHAR + 1)
@@ -159,8 +157,6 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	// Now render each glyph
 	for (char i = 0; i < NUM_CHARS; ++i)
 	{
-		//LogPrintf("Rendering glyph for '%c'\n", FIRST_CHAR + i);
-		
 		// Load glyph into font face
 		err = FT_Load_Glyph(ftFace, charIdx[i], FT_LOAD_DEFAULT);
 		if(err)
@@ -172,6 +168,7 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 		// Convert the glyph to a bitmap
 		FT_Render_Glyph(ftFace->glyph, FT_RENDER_MODE_NORMAL);
 		Assert(ftFace->glyph->format == FT_GLYPH_FORMAT_BITMAP, "rendered to a bitmap, but now it's not a bitmap");
+		Assert(ftFace->glyph->bitmap.pitch >= 0, "negative pitch (currently?) unsupported");
 		
 		// Get the offset of this glyph into the shared texture image
 		int tx, ty;
@@ -183,9 +180,11 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 		for (int j = 0; j < glyphHeight; ++j)
 			for(int k = 0; k < glyphWidth; ++k)
 				tex[((ty * glyphHeight) + j) * self->store->texWidth + (tx * glyphWidth) + k] = 
-					(k >= bm.width || j >= bm.rows) ? 0 : bm.buffer[(j * bm.width) + k];
+					(k >= bm.width || j >= bm.rows) ? 0 : bm.buffer[(j * bm.pitch) + k];
 		
-		// Store pixel offset (used to sit all characters on a baseline when we render)
+		// Store glyph sizes and pixel offset (used to sit all characters on a baseline when we render)
+		self->store->glyphs[i].width = bm.width;
+		self->store->glyphs[i].height = bm.rows;
 		self->store->glyphs[i].xOffset = ftFace->glyph->bitmap_left;
 		self->store->glyphs[i].yOffset = ftFace->glyph->bitmap_top - bm.rows;
 	}
@@ -200,7 +199,7 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	return self;
 
 failed:
-	LogPrintf("Failed to creat font store.\n");
+	LogPrintf("Failed to create font store.\n");
 	FT_Done_Face(ftFace);
 	FT_Done_FreeType(ftLibrary);
 	delete self;
@@ -233,7 +232,7 @@ Font_FileStore::~Font_FileStore()
 	}
 }
 
-#define GLYPH(x) store->glyphs[(x - store->firstGlyph)]
+#define GLYPH(x) (store->glyphs[(x - store->firstGlyph)])
 #define LAST_GLYPH (store->firstGlyph + store->numGlyphs)
 
 GLfloat Font_FileStore::Advance(char i, char j)
@@ -262,13 +261,15 @@ GLfloat *Font_FileStore::TextureCoordsForChar(char glyph)
 	int tx, ty;
 	TextureCellForCharacter(glyph - store->firstGlyph, &tx, &ty);
 	
-	GLfloat a = (GLfloat)store->glyphWidth / store->texWidth - 0.001;
-	GLfloat b = (GLfloat)store->glyphHeight / store->texHeight - 0.001;
+	GLfloat a = (GLfloat)store->glyphWidth / store->texWidth;
+	GLfloat b = (GLfloat)store->glyphHeight / store->texHeight;
+	GLfloat c = (GLfloat)GLYPH(glyph).width / store->glyphWidth;
+	GLfloat d = (GLfloat)GLYPH(glyph).height / store->glyphHeight;
 	
-	texCoords[0] = a * tx;         texCoords[1] = b * (ty + 1);
-	texCoords[2] = a * (tx + 1);   texCoords[3] = b * (ty + 1);
+	texCoords[0] = a * tx;         texCoords[1] = b * (ty + d);
+	texCoords[2] = a * (tx + c);   texCoords[3] = b * (ty + d);
 	texCoords[4] = a * tx;         texCoords[5] = b * ty;
-	texCoords[6] = a * (tx + 1);   texCoords[7] = b * ty;
+	texCoords[6] = a * (tx + c);   texCoords[7] = b * ty;
 
 	return &texCoords[0];
 }
@@ -280,8 +281,8 @@ GLfloat *Font_FileStore::VertexCoordsForChar(char glyph)
 	GLfloat yOff = GLYPH(glyph).yOffset; // FIXME
 
 	// FIXME construct the vertices from m_FaceSize and the advance of the glyph
-	GLfloat a = (GLfloat)store->glyphWidth / store->texWidth * 250; // FIXME
-	GLfloat b = (GLfloat)store->glyphHeight / store->texHeight * 250; // FIXME
+	GLfloat a = (GLfloat)store->glyphWidth / store->texWidth * store->faceSize * 10.f; // FIXME
+	GLfloat b = (GLfloat)store->glyphHeight / store->texHeight * store->faceSize * 10.f; // FIXME
 	
 	vertexCoords[0] = xOff;	    vertexCoords[1] = yOff;
 	vertexCoords[2] = xOff + a;	vertexCoords[3] = yOff;
@@ -314,7 +315,7 @@ void Font_FileStore::SerializeToFile(const std::string& glfontFilename) const
 
 		// FIXME robustness needs to be added here and in deserialize
 		
-		std::ofstream out(glfontFilename.c_str(), std::ios::binary);
+		std::ofstream out(glfontFilename.c_str(), std::ios::binary | std::ios::trunc);
 		out.write((char*)store, sizeof(DiskFormat));
 		out.write((char*)store->glyphs, sizeof(Glyph) * NUM_CHARS);
 		out.write((char*)store->kerningTable, sizeof(float) * NUM_CHARS * NUM_CHARS);

@@ -15,7 +15,6 @@
 		9A03B1BD0F400ADA0070A595 /* FontStore_Make.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A03B1B20F400A940070A595 /* FontStore_Make.cpp */; };
 		9A03B1C90F400BF40070A595 /* Font_FileStore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A03B1860F4006F00070A595 /* Font_FileStore.cpp */; };
 		9A03B1CD0F400C170070A595 /* libfreetype.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1EDA0F3B8AA200B9CFFA /* libfreetype.dylib */; };
-		9A3D50430F4977D200961296 /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1ED60F3B88A200B9CFFA /* libftgl.a */; };
 		9AA14FDF0F3E747700DCA729 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDA0F3E747700DCA729 /* Fonts */; };
 		9AA14FE00F3E747700DCA729 /* Navigation in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDB0F3E747700DCA729 /* Navigation */; };
 		9AA14FE10F3E747700DCA729 /* Preferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDC0F3E747700DCA729 /* Preferences.xml */; };
@@ -93,6 +92,7 @@
 		9A03B1860F4006F00070A595 /* Font_FileStore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Font_FileStore.cpp; sourceTree = "<group>"; };
 		9A03B1B20F400A940070A595 /* FontStore_Make.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FontStore_Make.cpp; sourceTree = "<group>"; };
 		9A03B1B90F400AD40070A595 /* FontStore_Make */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FontStore_Make; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A5CE0400F4A7C2A00796599 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TODO; path = ../TODO; sourceTree = SOURCE_ROOT; };
 		9AA14FDA0F3E747700DCA729 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = ../Data/Fonts; sourceTree = SOURCE_ROOT; };
 		9AA14FDB0F3E747700DCA729 /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Navigation; path = ../Data/Navigation; sourceTree = SOURCE_ROOT; };
 		9AA14FDC0F3E747700DCA729 /* Preferences.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Preferences.xml; path = ../Data/Preferences.xml; sourceTree = SOURCE_ROOT; };
@@ -233,7 +233,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9A03B1CD0F400C170070A595 /* libfreetype.dylib in Frameworks */,
-				9A3D50430F4977D200961296 /* libftgl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +285,7 @@
 		29B97314FDCFA39411CA2CEA /* GlassCockpit */ = {
 			isa = PBXGroup;
 			children = (
+				9A5CE0400F4A7C2A00796599 /* TODO */,
 				9AAE1D3D0F3AF17300B9CFFA /* Portable OpenGC */,
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,

@@ -26,8 +26,13 @@
 
 #include "OrderedPair.h"
 #include <string>
+#include "Debug.h"
 
-#ifdef MACOSX
+#if defined(MACOSX) || defined(IPHONE)
+#define USE_GL_FONTS
+#endif
+
+#ifdef USE_GL_FONTS
 #include "Font_GLTexture.h"
 #define FTTextureFont Font_GLTexture
 #else

@@ -18,7 +18,6 @@
 #include "GLHeaders.h"
 #include <stdio.h>
 
-#include "Debug.h"
 #include "Font.h"
 
 #define FONT_TEXTURE_SIZE		24.0

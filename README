@@ -1,6 +1,7 @@
 OpenGC Glass Cockpit and Groundstation for the Albatross UAV
 Hugo Vincent
-24 March 2006
+17 February 2009
+
 _______________________________________________________________________________
 
 	1.	Description
@@ -9,13 +10,8 @@ _______________________________________________________________________________
 OpenGC is part of the groundstation software for the Albatross UAV project.
 OpenGC was originally authored by Damion Shelton for use by flight simulator
 enthusiasts in 2001-2004, and has been substantially modified and improved to
-suit realtime monitoring of automomous aircraft from the ground. 
-
-FIXME this description is quite poor.
-
-For more information see the project web sites at:
-OpenGC - http://www.opengc.org
-Albatross UAV - http://www.albatross-uav.org
+suit realtime monitoring of aircraft, such as autonomous aircraft (remotely from the 
+ground), or in the cockpit of piloted aircraft. 
 
 _______________________________________________________________________________
 
@@ -23,18 +19,12 @@ _______________________________________________________________________________
 _______________________________________________________________________________
 
 Copyright (c) 2001-2004 Damion Shelton
-Copyright (c) 2005-2006 Hugo Vincent
+Copyright (c) 2005-2009 Hugo Vincent <hugo.vincent@gmail.com>
 All rights reserved.
-
-OpenGC is free software. Every source file in the implementation of OpenGC is
-available to be redistributed and/or modified under the terms of the
-GNU General Public License (GPL) version 2.0. 
-
-See COPYING file for precise terms and conditions of the license.
 
 _______________________________________________________________________________
 
-	2. How To
+	2. How To - Linux
 _______________________________________________________________________________
 
 1) Compile with Scons:
@@ -53,12 +43,17 @@ _______________________________________________________________________________
 		atasource -lGL -lftgl -lfltk -lfltk_gl -lopengc_base
 		scons: done building targets.
 2) Modify default paths in Data/Preferences.xml and Data/Default.xml
-3) Compile the navigation data to the binary representation:
-		$ ./Build/navconvert
-4) Now run it in test mode:
+3) Now run it in test mode:
 		$ ./Build/OpenGC -t
    or in flight mode:
 		$ ./Build/OpenGC
    or attach it to a running FlightGear simulator:
 		$ ./Build/OpenGC -slocalhost:5800 # format is host:port
+
+_______________________________________________________________________________
+
+	2. How To - Mac OS X
+_______________________________________________________________________________
+
+1) Open the Xcode project, build and run.
 

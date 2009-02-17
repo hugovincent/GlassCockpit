@@ -76,7 +76,7 @@ class Gauge: public RenderObject
 		bool ClickTest(int button, int state, int x, int y);
 
 		/** Determine whether or not to draw the gauge outline */
-		void SetGaugeOutline(bool outline){m_DrawGaugeOutline = outline;};
+		void SetGaugeOutline(bool outline) { m_DrawGaugeOutline = outline; }
 
 	protected:
 

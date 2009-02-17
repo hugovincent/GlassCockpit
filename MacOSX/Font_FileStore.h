@@ -10,7 +10,9 @@
 #ifndef Font_FileStore_H
 #define Font_FileStore_H
 
-#define USE_FREETYPE2 // FIXME undef for iPhone
+#ifndef IPHONE
+#define USE_FREETYPE2
+#endif
 
 #include <string>
 #include <OpenGL/gl.h>
@@ -39,14 +41,14 @@ public:
 	
 private:
 	
-	Font_FileStore() : store(NULL) {} // used to create from TTF for serialization
+	Font_FileStore() : store(NULL) {} // used to create from TrueType file, for serialization
 	
 	class Glyph
 	{
 	public:
 		char character;
 		float advance;
-		GLbyte xOffset, yOffset;
+		short xOffset, yOffset, width, height;
 	};
 	
 	class DiskFormat
@@ -56,14 +58,14 @@ private:
 		
 		// Glyph info
 		char firstGlyph;
-		int numGlyphs;
+		short numGlyphs;
 		Glyph *glyphs; // length =  numGlyphs
 		float *kerningTable; // kerning advance for character pair i,j indexed by (j * numGlyphs + i)
 		
 		// Texture format info
-		int rows, columns;
-		int glyphWidth, glyphHeight; // maximum size of a glyph, actual size may be smaller
-		int texWidth, texHeight;
+		short rows, columns;
+		short glyphWidth, glyphHeight; // maximum size of a glyph, actual size may be smaller
+		short texWidth, texHeight;
 		GLubyte *bitmap; // length = texWidth * texHeight
 		
 		// Note: pixel format is 8-bit alpha-only
