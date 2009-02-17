@@ -45,7 +45,9 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	
 	Font_FileStore *self = new Font_FileStore();
 	self->store = new DiskFormat;
+	memset(self->store, 0, sizeof(DiskFormat));
 	self->store->glyphs = new Glyph[NUM_CHARS];
+	memset(self->store->glyphs, 0, sizeof(Glyph[NUM_CHARS]));
 	self->store->firstGlyph = FIRST_CHAR;
 	self->store->numGlyphs = NUM_CHARS;
 	self->store->faceSize = FONT_TEXTURE_SIZE;
@@ -91,6 +93,7 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	if (FT_HAS_KERNING(ftFace) != 0)
 	{
 		self->store->kerningTable = new float[NUM_CHARS * NUM_CHARS];
+		memset(self->store->kerningTable, 0, sizeof(float[NUM_CHARS * NUM_CHARS]));
 		FT_Vector kernAdvance;
 		
 		for(unsigned int j = 0; j < NUM_CHARS; j++)
@@ -150,6 +153,7 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	self->store->texHeight = tmp;
 	
 	self->store->bitmap = new GLubyte[self->store->texWidth * self->store->texHeight];
+	memset(self->store->bitmap, 0, sizeof(GLubyte[self->store->texWidth * self->store->texHeight]));
 	LogPrintf("Texture has size %dx%d px.\n", self->store->texWidth, self->store->texHeight);
 	
 	Assert(self->store->texWidth < MAX_TEXTURE_DIMENSION && self->store->texHeight < MAX_TEXTURE_DIMENSION, "texture is too big");
@@ -276,13 +280,13 @@ GLfloat *Font_FileStore::TextureCoordsForChar(char glyph)
 
 GLfloat *Font_FileStore::VertexCoordsForChar(char glyph)
 {
-	// FIXME do baseline offset correction
+	// Baseline offset correction
 	GLfloat xOff = GLYPH(glyph).xOffset; // FIXME
 	GLfloat yOff = GLYPH(glyph).yOffset; // FIXME
 
-	// FIXME construct the vertices from m_FaceSize and the advance of the glyph
-	GLfloat a = (GLfloat)store->glyphWidth / store->texWidth * store->faceSize * 10.f; // FIXME
-	GLfloat b = (GLfloat)store->glyphHeight / store->texHeight * store->faceSize * 10.f; // FIXME
+	// Construct the vertices from m_FaceSize and glyph metrics
+	GLfloat a = (GLfloat)GLYPH(glyph).width / store->texWidth * store->faceSize * 10.5f; // FIXME
+	GLfloat b = (GLfloat)GLYPH(glyph).height / store->texHeight * store->faceSize * 10.5f; // FIXME
 	
 	vertexCoords[0] = xOff;	    vertexCoords[1] = yOff;
 	vertexCoords[2] = xOff + a;	vertexCoords[3] = yOff;
@@ -307,16 +311,26 @@ GLubyte *Font_FileStore::TextureBitmap(unsigned int *texWidth, unsigned int *tex
 		return NULL;
 }
 
+void Font_FileStore::CheckBinaryFormatAssumptions()
+{
+	// Because we serialize the font data, we need to be sure that our primitive type sizes are as expected.
+	Assert(sizeof(char) == 1 && sizeof(short) == 2 && sizeof(int) == 4 && sizeof(float) ==4 && \
+		   sizeof(GLubyte) == 1, "primitive data type size difference");
+	
+	Assert(sizeof(Font_FileStore::Glyph) == 16 && sizeof(Font_FileStore::DiskFormat) == 48,
+		   "font struct binary size difference");
+}
+
 void Font_FileStore::SerializeToFile(const std::string& glfontFilename) const
 {
 	if (store)
 	{
-		LogPrintf("Serializing font to %s... ", glfontFilename.c_str());
+		CheckBinaryFormatAssumptions();
 
-		// FIXME robustness needs to be added here and in deserialize
+		LogPrintf("Serializing font to %s... ", glfontFilename.c_str());
 		
 		std::ofstream out(glfontFilename.c_str(), std::ios::binary | std::ios::trunc);
-		out.write((char*)store, sizeof(DiskFormat));
+		out.write((char*)store, sizeof(DiskFormat) - 24); // remove pointers
 		out.write((char*)store->glyphs, sizeof(Glyph) * NUM_CHARS);
 		out.write((char*)store->kerningTable, sizeof(float) * NUM_CHARS * NUM_CHARS);
 		out.write((char*)store->bitmap, sizeof(GLubyte) * store->texWidth * store->texHeight);
@@ -327,14 +341,16 @@ void Font_FileStore::SerializeToFile(const std::string& glfontFilename) const
 
 void Font_FileStore::DeserializeFromFile(const std::string& glfontFilename)
 {
+	CheckBinaryFormatAssumptions();
+	
 	if (store)
 		delete store;
 	
 	LogPrintf("Deserializing font %s... ", glfontFilename.c_str());
 	
-	DiskFormat *format = (DiskFormat*)(new char[sizeof(DiskFormat)]);
+	DiskFormat *format = new DiskFormat();
 	std::ifstream in(glfontFilename.c_str(), std::ios::binary);
-	in.read((char*)format, sizeof(DiskFormat));
+	in.read((char*)format, sizeof(DiskFormat) - 24); // remove pointers
 	format->glyphs = new Glyph[NUM_CHARS];
 	in.read((char*)format->glyphs, sizeof(Glyph) * NUM_CHARS);
 	format->kerningTable = new float[NUM_CHARS * NUM_CHARS];
@@ -344,4 +360,17 @@ void Font_FileStore::DeserializeFromFile(const std::string& glfontFilename)
 	store = format;
 	
 	LogPrintf("Done.\n");
+	
+	// Check there is no more data in the file (indicating a different binary format than expected)
+	int count = 0; char tmp;
+	while (!in.eof())
+		in.read(&tmp, 1) && count++;
+
+	if (count >= 1)
+	{
+		printf("Error... %d bytes more data in file\n", count);
+		Assert(count <= 1, "excess data at end of serialized font file");
+	}
+	
+	// FIXME add some sanity checks on read-in data too
 }

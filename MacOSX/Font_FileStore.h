@@ -17,6 +17,9 @@
 #include <string>
 #include <OpenGL/gl.h>
 
+#define ALIGNED __attribute__ ((aligned (8)))
+// To ensure that it doesn't effect the disk format if pointers are 32 or 64-bits, we align to 8-byte boundaries.
+
 class Font_FileStore
 {
 public:
@@ -46,9 +49,9 @@ private:
 	class Glyph
 	{
 	public:
-		char character;
-		float advance;
+		char character, _padding_[3];
 		short xOffset, yOffset, width, height;
+		float advance;
 	};
 	
 	class DiskFormat
@@ -57,19 +60,23 @@ private:
 		float faceSize;
 		
 		// Glyph info
-		char firstGlyph;
-		short numGlyphs;
-		Glyph *glyphs; // length =  numGlyphs
-		float *kerningTable; // kerning advance for character pair i,j indexed by (j * numGlyphs + i)
+		char firstGlyph, _padding1_[3];
+		short numGlyphs, _padding2_;
 		
 		// Texture format info
 		short rows, columns;
 		short glyphWidth, glyphHeight; // maximum size of a glyph, actual size may be smaller
 		short texWidth, texHeight;
-		GLubyte *bitmap; // length = texWidth * texHeight
 		
-		// Note: pixel format is 8-bit alpha-only
-	
+		// Array of glyphs (length = numGlyphs)
+		Glyph *glyphs ALIGNED;
+
+		// Array of kerning pairs (advance for character pair i,j indexed is by [j * numGlyphs + i])
+		float *kerningTable ALIGNED;
+
+		// Texture bitmap (length = texWidth * texHeight). Pixel format is 8-bit alpha-only.
+		GLubyte *bitmap ALIGNED;
+
 		~DiskFormat();
 	};
 	
@@ -78,6 +85,8 @@ private:
 		*x = character % store->rows;
 		*y = character / store->rows;
 	}
+
+	static void Font_FileStore::CheckBinaryFormatAssumptions();
 	
 	DiskFormat *store;
 	GLfloat texCoords[8], vertexCoords[8]; // four (x,y) coordinates
