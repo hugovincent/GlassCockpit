@@ -64,10 +64,10 @@
 		9AAE1FDC0F3BA86E00B9CFFA /* GenericBargraph.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FC20F3BA86E00B9CFFA /* GenericBargraph.cpp */; };
 		9AAE1FDD0F3BA86E00B9CFFA /* PFDOverlay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FC30F3BA86E00B9CFFA /* PFDOverlay.cpp */; };
 		9AAE1FDE0F3BA86E00B9CFFA /* PFD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FC50F3BA86E00B9CFFA /* PFD.cpp */; };
-		9AAE1FDF0F3BA86E00B9CFFA /* GenericDial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FC60F3BA86E00B9CFFA /* GenericDial.cpp */; };
+		9AAE1FDF0F3BA86E00B9CFFA /* MarkedDial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FC60F3BA86E00B9CFFA /* MarkedDial.cpp */; };
 		9AAE1FE00F3BA86E00B9CFFA /* HeadingIndicator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FC70F3BA86E00B9CFFA /* HeadingIndicator.cpp */; };
 		9AAE1FE10F3BA86E00B9CFFA /* NavDisplay.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FC90F3BA86E00B9CFFA /* NavDisplay.cpp */; };
-		9AAE1FE20F3BA86E00B9CFFA /* EngineDial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FCA0F3BA86E00B9CFFA /* EngineDial.cpp */; };
+		9AAE1FE20F3BA86E00B9CFFA /* PieDial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FCA0F3BA86E00B9CFFA /* PieDial.cpp */; };
 		9AAE1FE30F3BA86E00B9CFFA /* SpeedTicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FCC0F3BA86E00B9CFFA /* SpeedTicker.cpp */; };
 		9AAE1FE40F3BA86E00B9CFFA /* SpeedTape.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FCE0F3BA86E00B9CFFA /* SpeedTape.cpp */; };
 		9AAE1FE50F3BA86E00B9CFFA /* ArtificialHorizon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FCF0F3BA86E00B9CFFA /* ArtificialHorizon.cpp */; };
@@ -178,7 +178,7 @@
 		9AAE1EFC0F3B8B0C00B9CFFA /* Gauge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Gauge.h; path = ../Source/Base/Gauge.h; sourceTree = SOURCE_ROOT; };
 		9AAE1FB30F3BA86E00B9CFFA /* Tachometer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Tachometer.cpp; path = ../Source/Gauges/Tachometer.cpp; sourceTree = SOURCE_ROOT; };
 		9AAE1FB40F3BA86E00B9CFFA /* ArtificialHorizon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArtificialHorizon.h; path = ../Source/Gauges/ArtificialHorizon.h; sourceTree = SOURCE_ROOT; };
-		9AAE1FB50F3BA86E00B9CFFA /* GenericDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericDial.h; path = ../Source/Gauges/GenericDial.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FB50F3BA86E00B9CFFA /* MarkedDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MarkedDial.h; path = ../Source/Gauges/MarkedDial.h; sourceTree = SOURCE_ROOT; };
 		9AAE1FB60F3BA86E00B9CFFA /* VSI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VSI.h; path = ../Source/Gauges/VSI.h; sourceTree = SOURCE_ROOT; };
 		9AAE1FB70F3BA86E00B9CFFA /* NavDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NavDisplay.h; path = ../Source/Gauges/NavDisplay.h; sourceTree = SOURCE_ROOT; };
 		9AAE1FB80F3BA86E00B9CFFA /* PFDOverlay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PFDOverlay.h; path = ../Source/Gauges/PFDOverlay.h; sourceTree = SOURCE_ROOT; };
@@ -194,11 +194,11 @@
 		9AAE1FC30F3BA86E00B9CFFA /* PFDOverlay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PFDOverlay.cpp; path = ../Source/Gauges/PFDOverlay.cpp; sourceTree = SOURCE_ROOT; };
 		9AAE1FC40F3BA86E00B9CFFA /* AlbatrossAnnunciator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AlbatrossAnnunciator.h; path = ../Source/Gauges/AlbatrossAnnunciator.h; sourceTree = SOURCE_ROOT; };
 		9AAE1FC50F3BA86E00B9CFFA /* PFD.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PFD.cpp; path = ../Source/Gauges/PFD.cpp; sourceTree = SOURCE_ROOT; };
-		9AAE1FC60F3BA86E00B9CFFA /* GenericDial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = GenericDial.cpp; path = ../Source/Gauges/GenericDial.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FC60F3BA86E00B9CFFA /* MarkedDial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = MarkedDial.cpp; path = ../Source/Gauges/MarkedDial.cpp; sourceTree = SOURCE_ROOT; };
 		9AAE1FC70F3BA86E00B9CFFA /* HeadingIndicator.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HeadingIndicator.cpp; path = ../Source/Gauges/HeadingIndicator.cpp; sourceTree = SOURCE_ROOT; };
 		9AAE1FC80F3BA86E00B9CFFA /* SpeedTicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SpeedTicker.h; path = ../Source/Gauges/SpeedTicker.h; sourceTree = SOURCE_ROOT; };
 		9AAE1FC90F3BA86E00B9CFFA /* NavDisplay.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = NavDisplay.cpp; path = ../Source/Gauges/NavDisplay.cpp; sourceTree = SOURCE_ROOT; };
-		9AAE1FCA0F3BA86E00B9CFFA /* EngineDial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = EngineDial.cpp; path = ../Source/Gauges/EngineDial.cpp; sourceTree = SOURCE_ROOT; };
+		9AAE1FCA0F3BA86E00B9CFFA /* PieDial.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = PieDial.cpp; path = ../Source/Gauges/PieDial.cpp; sourceTree = SOURCE_ROOT; };
 		9AAE1FCB0F3BA86E00B9CFFA /* AltitudeTicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AltitudeTicker.h; path = ../Source/Gauges/AltitudeTicker.h; sourceTree = SOURCE_ROOT; };
 		9AAE1FCC0F3BA86E00B9CFFA /* SpeedTicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = SpeedTicker.cpp; path = ../Source/Gauges/SpeedTicker.cpp; sourceTree = SOURCE_ROOT; };
 		9AAE1FCD0F3BA86E00B9CFFA /* HeadingIndicator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HeadingIndicator.h; path = ../Source/Gauges/HeadingIndicator.h; sourceTree = SOURCE_ROOT; };
@@ -209,7 +209,7 @@
 		9AAE1FD20F3BA86E00B9CFFA /* AltitudeTicker.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = AltitudeTicker.cpp; path = ../Source/Gauges/AltitudeTicker.cpp; sourceTree = SOURCE_ROOT; };
 		9AAE1FD30F3BA86E00B9CFFA /* VSI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VSI.cpp; path = ../Source/Gauges/VSI.cpp; sourceTree = SOURCE_ROOT; };
 		9AAE1FD40F3BA86E00B9CFFA /* GenericBargraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericBargraph.h; path = ../Source/Gauges/GenericBargraph.h; sourceTree = SOURCE_ROOT; };
-		9AAE1FD50F3BA86E00B9CFFA /* EngineDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EngineDial.h; path = ../Source/Gauges/EngineDial.h; sourceTree = SOURCE_ROOT; };
+		9AAE1FD50F3BA86E00B9CFFA /* PieDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PieDial.h; path = ../Source/Gauges/PieDial.h; sourceTree = SOURCE_ROOT; };
 		9AE411B80F3993FD00D539E5 /* TopLevelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopLevelView.h; sourceTree = "<group>"; };
 		9AE411B90F3993FD00D539E5 /* TopLevelView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopLevelView.mm; sourceTree = "<group>"; };
 		9AE411BF0F39973C00D539E5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
@@ -458,16 +458,16 @@
 				9AAE1FD20F3BA86E00B9CFFA /* AltitudeTicker.cpp */,
 				9AAE1FB40F3BA86E00B9CFFA /* ArtificialHorizon.h */,
 				9AAE1FCF0F3BA86E00B9CFFA /* ArtificialHorizon.cpp */,
-				9AAE1FD50F3BA86E00B9CFFA /* EngineDial.h */,
-				9AAE1FCA0F3BA86E00B9CFFA /* EngineDial.cpp */,
+				9AAE1FD50F3BA86E00B9CFFA /* PieDial.h */,
+				9AAE1FCA0F3BA86E00B9CFFA /* PieDial.cpp */,
 				9AAE1FBF0F3BA86E00B9CFFA /* EngineInstruments.h */,
 				9AAE1FBA0F3BA86E00B9CFFA /* EngineInstruments.cpp */,
 				9AAE1FD00F3BA86E00B9CFFA /* FlightDirector.h */,
 				9AAE1FC00F3BA86E00B9CFFA /* FlightDirector.cpp */,
 				9AAE1FD40F3BA86E00B9CFFA /* GenericBargraph.h */,
 				9AAE1FC20F3BA86E00B9CFFA /* GenericBargraph.cpp */,
-				9AAE1FB50F3BA86E00B9CFFA /* GenericDial.h */,
-				9AAE1FC60F3BA86E00B9CFFA /* GenericDial.cpp */,
+				9AAE1FB50F3BA86E00B9CFFA /* MarkedDial.h */,
+				9AAE1FC60F3BA86E00B9CFFA /* MarkedDial.cpp */,
 				9AAE1FCD0F3BA86E00B9CFFA /* HeadingIndicator.h */,
 				9AAE1FC70F3BA86E00B9CFFA /* HeadingIndicator.cpp */,
 				9AAE1FB70F3BA86E00B9CFFA /* NavDisplay.h */,
@@ -608,10 +608,10 @@
 				9AAE1FDC0F3BA86E00B9CFFA /* GenericBargraph.cpp in Sources */,
 				9AAE1FDD0F3BA86E00B9CFFA /* PFDOverlay.cpp in Sources */,
 				9AAE1FDE0F3BA86E00B9CFFA /* PFD.cpp in Sources */,
-				9AAE1FDF0F3BA86E00B9CFFA /* GenericDial.cpp in Sources */,
+				9AAE1FDF0F3BA86E00B9CFFA /* MarkedDial.cpp in Sources */,
 				9AAE1FE00F3BA86E00B9CFFA /* HeadingIndicator.cpp in Sources */,
 				9AAE1FE10F3BA86E00B9CFFA /* NavDisplay.cpp in Sources */,
-				9AAE1FE20F3BA86E00B9CFFA /* EngineDial.cpp in Sources */,
+				9AAE1FE20F3BA86E00B9CFFA /* PieDial.cpp in Sources */,
 				9AAE1FE30F3BA86E00B9CFFA /* SpeedTicker.cpp in Sources */,
 				9AAE1FE40F3BA86E00B9CFFA /* SpeedTape.cpp in Sources */,
 				9AAE1FE50F3BA86E00B9CFFA /* ArtificialHorizon.cpp in Sources */,
@@ -761,10 +761,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				DEAD_CODE_STRIPPING = YES;
 				GCC_AUTO_VECTORIZATION = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_OBJC_CALL_CXX_CDTORS = YES;
+				GCC_OPTIMIZATION_LEVEL = 3;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
@@ -773,7 +775,7 @@
 					"~/Projects/iPhone/GlassCockpit/FTGL_Includes",
 					/usr/include/libxml2,
 				);
-				PREBINDING = NO;
+				PREBINDING = YES;
 				SDKROOT = macosx10.5;
 			};
 			name = Release;

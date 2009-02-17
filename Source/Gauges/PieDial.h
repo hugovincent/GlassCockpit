@@ -15,10 +15,10 @@
 
 =========================================================================*/
 
-#ifndef EngineDial_H
-#define EngineDial_H
+#ifndef PieDial_H
+#define PieDial_H
 
-#include "GenericDial.h"
+#include "MarkedDial.h"
 #include "CircleEvaluator.h"
 
 namespace OpenGC
@@ -26,12 +26,12 @@ namespace OpenGC
 
 typedef double (AirframeDataContainer::*AirframeMemFn)();
 
-class EngineDial : public GenericDial
+class PieDial : public MarkedDial
 {
 	public:
 
-		EngineDial();
-		virtual ~EngineDial();
+		PieDial();
+		virtual ~PieDial();
 
 		void Render();
 

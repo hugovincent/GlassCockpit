@@ -41,7 +41,7 @@ Tachometer::~Tachometer()
 
 void Tachometer::Render()
 {
-	EngineDial::Render();
+	PieDial::Render();
 }
 
 // These Render___() Functions are overloaded to change the way the dial appears

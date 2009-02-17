@@ -63,7 +63,7 @@ appearance of the standard gauges. -->
 			<Position>2.0,35.0</Position>
 		</Component>
 
-		<Component type="EngineDial" name="EGT">
+		<Component type="PieDial" name="EGT">
 			<Position>48.0,35.0</Position>
 			<Data>Engine_EGT</Data>
 			<Range>0.0,1000.0</Range>
@@ -71,7 +71,7 @@ appearance of the standard gauges. -->
 			<Limit colour="red">925.0</Limit>
 		</Component>
 
-		<Component type="EngineDial" name="CHT">
+		<Component type="PieDial" name="CHT">
 			<Position>96.0,35.0</Position>
 			<Data>Engine_CHT</Data>
 			<Range>0.0,250.0</Range>

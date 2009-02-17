@@ -23,8 +23,8 @@
 #include "Constants.h"
 #include "DataSource.h"
 #include "EngineInstruments.h"
-#include "EngineDial.h"
-#include "GenericDial.h"
+#include "PieDial.h"
+#include "MarkedDial.h"
 #include "GenericBargraph.h"
 #include "Tachometer.h"
 
@@ -48,8 +48,8 @@ EngineInstruments::EngineInstruments()
 	pTacho->SetPosition(2,35);
 	this->AddGaugeComponent(pTacho);
 
-	// EngineDial gauge for EGT
-	EngineDial* pEGT = new EngineDial();
+	// PieDial gauge for EGT
+	PieDial* pEGT = new PieDial();
 	pEGT->SetParentRenderObject(this);
 	pEGT->SetPosition(48,35);
 	pEGT->SetDataSource(&AirframeDataContainer::GetEngine_EGT);
@@ -57,8 +57,8 @@ EngineInstruments::EngineInstruments()
 	pEGT->SetColourRanges(850.0, 925.0);
 	this->AddGaugeComponent(pEGT);
 
-	// EngineDial gauge for CHT
-	EngineDial* pCHT = new EngineDial();
+	// PieDial gauge for CHT
+	PieDial* pCHT = new PieDial();
 	pCHT->SetParentRenderObject(this);
 	pCHT->SetPosition(96,35);
 	pCHT->SetDataSource(&AirframeDataContainer::GetEngine_CHT);
@@ -67,8 +67,8 @@ EngineInstruments::EngineInstruments()
 	this->AddGaugeComponent(pCHT);
 
 #if 1
-	// EngineDial gauge for FIXME
-	EngineDial* pFIXME = new EngineDial();
+	// PieDial gauge for FIXME
+	PieDial* pFIXME = new PieDial();
 	pFIXME->SetParentRenderObject(this);
 	pFIXME->SetPosition(2,0);
 	pFIXME->SetDataSource(&AirframeDataContainer::GetEngine_CHT);
@@ -76,8 +76,8 @@ EngineInstruments::EngineInstruments()
 	pFIXME->SetColourRanges(180.0, 230.0);
 	this->AddGaugeComponent(pFIXME);
 	
-	// EngineDial gauge for FIXME 2
-	EngineDial* pFIXME2 = new EngineDial();
+	// PieDial gauge for FIXME 2
+	PieDial* pFIXME2 = new PieDial();
 	pFIXME2->SetParentRenderObject(this);
 	pFIXME2->SetPosition(48,0);
 	pFIXME2->SetDataSource(&AirframeDataContainer::GetEngine_EGT);
@@ -85,8 +85,8 @@ EngineInstruments::EngineInstruments()
 	pFIXME2->SetColourRanges(850.0, 925.0);
 	this->AddGaugeComponent(pFIXME2);
 	
-	// EngineDial gauge for FIXME 3
-	EngineDial* pFIXME3 = new EngineDial();
+	// PieDial gauge for FIXME 3
+	PieDial* pFIXME3 = new PieDial();
 	pFIXME3->SetParentRenderObject(this);
 	pFIXME3->SetPosition(96,0);
 	pFIXME3->SetDataSource(&AirframeDataContainer::GetEngine_CHT);
@@ -95,8 +95,8 @@ EngineInstruments::EngineInstruments()
 	this->AddGaugeComponent(pFIXME3);
 #endif
 	
-	// Create a GenericDial gauge FIXME
-	GenericDial* pDial = new GenericDial();
+	// Create a MarkedDial gauge FIXME
+	MarkedDial* pDial = new MarkedDial();
 	pDial->SetParentRenderObject(this);
 	pDial->SetPosition(150,3);
 	pDial->SetDataSource(&AirframeDataContainer::GetEngine_Mixture);

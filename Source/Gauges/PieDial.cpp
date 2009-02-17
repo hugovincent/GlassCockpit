@@ -19,7 +19,7 @@
 
 #include "Globals.h"
 #include "GLHeaders.h"
-#include "EngineDial.h"
+#include "PieDial.h"
 #include "Constants.h"
 
 #define CALL_MEMBER_FN(object,ptrToMember)  ((object)->*(ptrToMember))
@@ -27,11 +27,11 @@
 namespace OpenGC
 {
 	
-const double EngineDial::R;
-const double EngineDial::minDegrees;
-const double EngineDial::maxDegrees;
+const double PieDial::R;
+const double PieDial::minDegrees;
+const double PieDial::maxDegrees;
 
-EngineDial::EngineDial()
+PieDial::PieDial()
 {
 	m_Font = globals->m_FontManager->LoadDefaultFont();
 
@@ -48,12 +48,12 @@ EngineDial::EngineDial()
 	m_Min = 0.0, m_Max = 0.0;
 }
 
-EngineDial::~EngineDial()
+PieDial::~PieDial()
 {
 
 }
 
-void EngineDial::Render()
+void PieDial::Render()
 {
 	GaugeComponent::Render();
 
@@ -125,7 +125,7 @@ void EngineDial::Render()
 	glPopMatrix();
 }
 
-void EngineDial::RenderTicks(CircleEvaluator *circ)
+void PieDial::RenderTicks(CircleEvaluator *circ)
 {
 	// yellow stripe
 	double percentagey = m_MinYellow / (m_Max - m_Min) ;
@@ -148,7 +148,7 @@ void EngineDial::RenderTicks(CircleEvaluator *circ)
 	glEnd();
 }
 
-void EngineDial::RenderArc(CircleEvaluator *circ)
+void PieDial::RenderArc(CircleEvaluator *circ)
 {
 	// white partial circle 
 	glColor3ub(255, 255, 255);

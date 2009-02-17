@@ -18,7 +18,7 @@
 #include <math.h>
 
 #include "Globals.h"
-#include "GenericDial.h"
+#include "MarkedDial.h"
 #include "CircleEvaluator.h"
 #include "Constants.h"
 
@@ -27,7 +27,7 @@
 namespace OpenGC
 {
 
-GenericDial::GenericDial()
+MarkedDial::MarkedDial()
 {
 	m_Font = globals->m_FontManager->LoadDefaultFont();
 
@@ -45,12 +45,12 @@ GenericDial::GenericDial()
 	m_DataFn = 0;
 }
 
-GenericDial::~GenericDial()
+MarkedDial::~MarkedDial()
 {
 
 }
 
-void GenericDial::Render()
+void MarkedDial::Render()
 {
 	GaugeComponent::Render();
 

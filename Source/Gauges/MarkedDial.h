@@ -15,8 +15,8 @@
 
 =========================================================================*/
 
-#ifndef GenericDial_H
-#define GenericDial_H
+#ifndef MarkedDial_H
+#define MarkedDial_H
 
 #include "GaugeComponent.h"
 
@@ -25,12 +25,12 @@ namespace OpenGC
 
 typedef double (AirframeDataContainer::*AirframeMemFn)();
 
-class GenericDial : public GaugeComponent  
+class MarkedDial : public GaugeComponent  
 {
 	public:
 
-		GenericDial();
-		virtual ~GenericDial();
+		MarkedDial();
+		virtual ~MarkedDial();
 
 		void Render();
 		void SetDataSource(AirframeMemFn fn) {m_DataFn = fn; }

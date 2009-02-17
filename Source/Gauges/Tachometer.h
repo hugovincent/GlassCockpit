@@ -18,12 +18,12 @@
 #ifndef Tachometer_H
 #define Tachometer_H
 
-#include "EngineDial.h"
+#include "PieDial.h"
 
 namespace OpenGC
 {
 
-class Tachometer : public EngineDial
+class Tachometer : public PieDial
 {
 	public:
 		Tachometer();

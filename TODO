@@ -19,8 +19,6 @@ _______________________________________________________________________________
 	* new: plain text component (only arguments would be font size and text - it would compute its size)
 	* new: line component
 	* new: frames-per-second gauge, code in EngineInstruments
-	* rename EngineDial to PieDial
-	* rename GenericDial to MarkedDial
 	* tidy up inheritance and code sharing
 * Data that needs displaying
 	* trends?
@@ -32,7 +30,6 @@ _______________________________________________________________________________
 	* external temperature
 	* engine health, downlink RSSI
 	* old data warning
-* Dynamically loaded GaugeComponents and DataSources using dlopen() et al.
 * Binary navigation databases loaded via mmap (faster loading etc)
 
 _______________________________________________________________________________
@@ -58,11 +55,12 @@ _______________________________________________________________________________
 	* more than one navigation hash-bin on screen at once.
 	* management of flight course
 * Graphics:
-	* SpeedTape, AltitudeTicker jittering
+	* AltitudeTicker jittering
 	* Mitering at line vertexes for circles, especially in engine instruments
 * Build system:
 	* Fix Doxygen inconsistencies and tidy up documentation
 	* Fix Environment() use in SConstruct
+	* Get new Mac changes working on Linux again
 * MSG_APP_QUIT not handled in AppObject::OnMessage
 
 _______________________________________________________________________________
