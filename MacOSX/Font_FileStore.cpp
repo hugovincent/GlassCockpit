@@ -50,6 +50,7 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	self->store->glyphs = new Glyph[NUM_CHARS];
 	self->store->firstGlyph = FIRST_CHAR;
 	self->store->numGlyphs = NUM_CHARS;
+	self->store->faceSize = FONT_TEXTURE_SIZE;
 	
 	// Get font
 	LogPrintf("Attempting to open %s... ", ttfFilename.c_str());
@@ -253,6 +254,7 @@ GLfloat Font_FileStore::Advance(char i, char j)
 	{
 		return 0.f;
 	}
+	// FIXME scaling?
 }
 
 GLfloat *Font_FileStore::TextureCoordsForChar(char glyph)

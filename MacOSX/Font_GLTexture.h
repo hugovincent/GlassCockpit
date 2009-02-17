@@ -29,13 +29,12 @@ class Font_GLTexture
 public:
 	Font_GLTexture(const char* filename);
 	~Font_GLTexture();
-	void FaceSize(float size) { m_FaceSize = size; }
+	void FaceSize(float size);
 	void Render(const char* str);
 	float Advance(const char* str);
 	int Error();
 
 private:
-	float m_FaceSize;
 	Font_FileStore *m_Store;
 	GLuint texName;
 	

@@ -127,7 +127,8 @@ void NavDisplay::Render()
 	glBegin(GL_LINE_STRIP);
 	aCircle.Evaluate();
 	glEnd();
-	
+
+	aCircle.SetDegreesPerPoint(2.5);
 	aCircle.SetRadius(120.0);
 	aCircle.SetArcStartEnd(300.0, 60.0);
 	glBegin(GL_LINE_STRIP);

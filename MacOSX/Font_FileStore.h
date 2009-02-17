@@ -33,7 +33,9 @@ public:
 	GLfloat Advance(char i, char j); // for character i (followed by j, needed for kerning); in texture UV coordinates
 	GLfloat *TextureCoordsForChar(char glyph);
 	GLfloat *VertexCoordsForChar(char glyph);
-	GLubyte *TextureBitmap(unsigned int *texWidth, unsigned int *texHeight, bool *safeToFree);
+	GLubyte *TextureBitmap(unsigned int *texWidth, unsigned int *texHeight, bool *safeToFree); // if safeToFree is set, you must free the bitmap
+	
+	float FaceSize() { return store->faceSize; }
 	
 private:
 	
@@ -50,6 +52,8 @@ private:
 	class DiskFormat
 	{
 	public:
+		float faceSize;
+		
 		// Glyph info
 		char firstGlyph;
 		int numGlyphs;

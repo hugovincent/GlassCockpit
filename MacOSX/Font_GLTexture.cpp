@@ -76,7 +76,7 @@ void Font_GLTexture::Render(const char* str)
 		glTexCoordPointer(2, GL_FLOAT, 0, m_Store->TextureCoordsForChar(str[i]));
 		glVertexPointer(2, GL_FLOAT, 0, m_Store->VertexCoordsForChar(str[i]));
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-		glTranslatef(m_Store->Advance(str[i], (i < len) ? str[i+1] : 0), 0.f, 0.f); // FIXME ?
+		glTranslatef(m_Store->Advance(str[i], (i < len) ? str[i+1] : 0), 0.f, 0.f);
 	}
 	glDisable(GL_TEXTURE_2D);
 	
@@ -90,34 +90,23 @@ void Font_GLTexture::Render(const char* str)
 	if (oldBlendSrc != GL_SRC_ALPHA || oldBlendDst != GL_ONE_MINUS_SRC_ALPHA)
 		glBlendFunc(oldBlendSrc, oldBlendDst);
 }
+
+void Font_GLTexture::FaceSize(float size)
+{
+	Assert(m_Store && m_Store->FaceSize() == size, "prerendered font size disagreement");
+}
 		
 float Font_GLTexture::Advance(const char* str)
 {
-//	CheckOrCreateTexture(); // FIXME needed?
 	int len = strlen(str);
 	float advance = 0.0;
-	
-	/*
-	 FTUnicodeStringItr<T> ustr(string);
-	 
-	 for(int i = 0; (len < 0 && *ustr) || (len >= 0 && i < len); i++)
-	 {
-	 unsigned int thisChar = *ustr++;
-	 unsigned int nextChar = *ustr;
-	 
-	 if(CheckGlyph(thisChar))
-	 {
-	 advance += glyphList->Advance(thisChar, nextChar);
-	 }
-	 }
-	 */
-	
+
 	for (int i = 0; i < len; ++i)
 	{
-		advance += m_Store->Advance(str[i], (i < len) ? str[i+1] : 0); // FIXME
+		advance += m_Store->Advance(str[i], (i < len) ? str[i + 1] : 0);
 	}
-	
-	return advance * m_FaceSize;
+
+	return advance;
 }
 
 int Font_GLTexture::Error()

@@ -174,6 +174,12 @@ void FlightDirector::Render()
 			glVertex2f(3, radius + 7.0);
 			glVertex2f(-3, radius + 7.0);
 			glEnd();
+			glLineWidth(1.0);
+			glBegin(GL_LINE_STRIP);
+			glVertex2f(0, radius + 4.0);
+			glVertex2f(3, radius + 7.0);
+			glVertex2f(-3, radius + 7.0);
+			glEnd();
 		}
 		else {
 			// It's not visible, so draw an arrow at the edge of the window
@@ -209,21 +215,18 @@ void FlightDirector::Render()
 		// FD Set-point Text
 		char buffer[12];
 
-		globals->m_FontManager->SetSize(m_Font, 4, 4);
-		sprintf(buffer, "%.1f", fdAirspeed);
-		globals->m_FontManager->SetRightAligned(m_Font, true);
-		globals->m_FontManager->Print(32,170, buffer, m_Font);
-		globals->m_FontManager->SetRightAligned(m_Font, false);
-		
 		sprintf(buffer, "%.0f", fdAlt);
 		globals->m_FontManager->SetSize(m_Font, 4, 4);
 		globals->m_FontManager->Print(150,170, buffer, m_Font);
 		
-		globals->m_FontManager->Print(75, 13, "FD", m_Font); 
-		sprintf(buffer, "%3d", (int) fdHeading);
+		sprintf(buffer, "%.1f", fdAirspeed);
 		globals->m_FontManager->SetRightAligned(m_Font, true);
+		globals->m_FontManager->Print(32,170, buffer, m_Font);
+		
+		sprintf(buffer, "%3d", (int) fdHeading);
 		globals->m_FontManager->Print(100, 13, &buffer[0], m_Font); 
 		globals->m_FontManager->SetRightAligned(m_Font, false);
+		globals->m_FontManager->Print(75, 13, "FD", m_Font); 
 	}
 }
 

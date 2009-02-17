@@ -517,38 +517,53 @@ void ArtificialHorizon::Render()
 	// remainder of a circle subtracted from a square, and are formed
 	// by fanning out triangles from a point just off each corner
 	// to an arc descrbing the curved portion of the art. horiz.
+	
+	// Note we draw each rounded corner as a line too, for antialiasing.
 
 	glColor3ub(0,0,0);
+	glLineWidth(1.0);
 	// Lower left
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(-1.0,-1.0);
 	aCircle.SetOrigin(3.77,3.77);
 	aCircle.SetArcStartEnd(180,270);
 	aCircle.SetDegreesPerPoint(15);
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex2f(-1.0,-1.0);
+	aCircle.Evaluate();
+	glEnd();
+	glBegin(GL_LINE_STRIP);
 	aCircle.Evaluate();
 	glEnd();
 	// Upper left
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(-1.0,99.0);
 	aCircle.SetOrigin(3.77,94.23);
 	aCircle.SetArcStartEnd(270,360);
 	aCircle.SetDegreesPerPoint(15);
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex2f(-1.0,99.0);
+	aCircle.Evaluate();
+	glEnd();
+	glBegin(GL_LINE_STRIP);
 	aCircle.Evaluate();
 	glEnd();
 	// Upper right
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(95.0,99.0);
 	aCircle.SetOrigin(90.23,94.23);
 	aCircle.SetArcStartEnd(0,90);
 	aCircle.SetDegreesPerPoint(15);
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex2f(95.0,99.0);
+	aCircle.Evaluate();
+	glEnd();
+	glBegin(GL_LINE_STRIP);
 	aCircle.Evaluate();
 	glEnd();
 	//Lower right
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(95.0,-1);
 	aCircle.SetOrigin(90.23,3.77);
 	aCircle.SetArcStartEnd(90,180);
 	aCircle.SetDegreesPerPoint(15);
+	glBegin(GL_TRIANGLE_FAN);
+	glVertex2f(95.0,-1);
+	aCircle.Evaluate();
+	glEnd();
+	glBegin(GL_LINE_STRIP);
 	aCircle.Evaluate();
 	glEnd();
 

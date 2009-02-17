@@ -193,8 +193,10 @@ Globals *OpenGC::globals;
 	LogPrintf("Application: Window Size = %ix%ipx\n", windowX, windowY);
 	
 	// Create the render window
-	m_pRenderWindow = new RenderWindow(); //4, 0, windowX, windowY, windowTitle.c_str());
+	m_pRenderWindow = new RenderWindow();
 	globals->m_PrefManager->SetPrefD("UnitsPerPixel", m_pRenderWindow->GetUnitsPerPixel());
+	
+	// FIXME set windowX, windowY, windowTitle.c_str()
 	
 	// Create Gauges as described by the XML file
 	XMLNode::NodeList nodeList = windowNode.GetChildList("Gauge");

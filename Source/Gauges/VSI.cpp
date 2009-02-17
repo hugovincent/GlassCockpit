@@ -71,6 +71,14 @@ void VSI::Render()
 	glVertex2f(16.0, 27.0);
 	glVertex2f(7.0, 10.0);
 	glEnd();
+	glBegin(GL_LINE_STRIP);
+	glVertex2f(0.0, 10.0);
+	glVertex2f(0.0, 40.0);
+	glVertex2f(4.5, 44.0);
+	glVertex2f(16.0, 44.0);
+	glVertex2f(16.0, 27.0);
+	glVertex2f(7.0, 10.0);
+	glEnd();
 
 	// Center rectangle
 	glBegin(GL_POLYGON);
@@ -79,9 +87,23 @@ void VSI::Render()
 	glVertex2f(16.0, 66.0);
 	glVertex2f(16.0, 44.0);
 	glEnd();
+	glBegin(GL_LINE_STRIP);
+	glVertex2f(4.5, 44.0);
+	glVertex2f(4.5, 66.0);
+	glVertex2f(16.0, 66.0);
+	glVertex2f(16.0, 44.0);
+	glEnd();
 
 	// Top angular part
 	glBegin(GL_POLYGON);
+	glVertex2f(4.5, 66.0);
+	glVertex2f(0.0, 70.0);
+	glVertex2f(0.0, 100.0);
+	glVertex2f(7.0, 100.0);
+	glVertex2f(16.0, 83.0);
+	glVertex2f(16.0, 66.0);
+	glEnd();
+	glBegin(GL_LINE_STRIP);
 	glVertex2f(4.5, 66.0);
 	glVertex2f(0.0, 70.0);
 	glVertex2f(0.0, 100.0);
