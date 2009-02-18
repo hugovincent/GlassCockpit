@@ -15,7 +15,6 @@
 		9A03B1BD0F400ADA0070A595 /* FontStore_Make.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A03B1B20F400A940070A595 /* FontStore_Make.cpp */; };
 		9A03B1C90F400BF40070A595 /* Font_FileStore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A03B1860F4006F00070A595 /* Font_FileStore.cpp */; };
 		9A03B1CD0F400C170070A595 /* libfreetype.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1EDA0F3B8AA200B9CFFA /* libfreetype.dylib */; };
-		9A5CE1990F4AA51900796599 /* libftgl.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1ED60F3B88A200B9CFFA /* libftgl.a */; };
 		9AA14FDF0F3E747700DCA729 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDA0F3E747700DCA729 /* Fonts */; };
 		9AA14FE00F3E747700DCA729 /* Navigation in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDB0F3E747700DCA729 /* Navigation */; };
 		9AA14FE10F3E747700DCA729 /* Preferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDC0F3E747700DCA729 /* Preferences.xml */; };
@@ -166,7 +165,6 @@
 		9AAE1E820F3AF87400B9CFFA /* Font.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Font.cpp; path = ../Source/Base/Font.cpp; sourceTree = SOURCE_ROOT; };
 		9AAE1E840F3AF87F00B9CFFA /* FontManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FontManager.h; path = ../Source/Base/FontManager.h; sourceTree = SOURCE_ROOT; };
 		9AAE1E850F3AF87F00B9CFFA /* FontManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FontManager.cpp; path = ../Source/Base/FontManager.cpp; sourceTree = SOURCE_ROOT; };
-		9AAE1ED60F3B88A200B9CFFA /* libftgl.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libftgl.a; sourceTree = "<group>"; };
 		9AAE1EDA0F3B8AA200B9CFFA /* libfreetype.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libfreetype.dylib; path = /usr/X11/lib/libfreetype.dylib; sourceTree = "<absolute>"; };
 		9AAE1EEA0F3B8AE600B9CFFA /* RenderWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RenderWindow.h; path = ../Source/Base/RenderWindow.h; sourceTree = SOURCE_ROOT; };
 		9AAE1EEB0F3B8AE600B9CFFA /* RenderWindow.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RenderWindow.cpp; path = ../Source/Base/RenderWindow.cpp; sourceTree = SOURCE_ROOT; };
@@ -226,7 +224,6 @@
 				9AE411C00F39973C00D539E5 /* OpenGL.framework in Frameworks */,
 				9AAE1D3B0F3AF15000B9CFFA /* libxml2.dylib in Frameworks */,
 				9AAE1EDB0F3B8AA200B9CFFA /* libfreetype.dylib in Frameworks */,
-				9A5CE1990F4AA51900796599 /* libftgl.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -322,7 +319,6 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				9AAE1ED60F3B88A200B9CFFA /* libftgl.a */,
 				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
 				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
 			);
@@ -770,9 +766,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
-					/usr/X11/include,
 					/usr/X11/include/freetype2,
-					"~/Projects/iPhone/GlassCockpit/FTGL_Includes",
 					/usr/include/libxml2,
 				);
 				PREBINDING = YES;
