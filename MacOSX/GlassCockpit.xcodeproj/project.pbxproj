@@ -15,6 +15,8 @@
 		9A03B1BD0F400ADA0070A595 /* FontStore_Make.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A03B1B20F400A940070A595 /* FontStore_Make.cpp */; };
 		9A03B1C90F400BF40070A595 /* Font_FileStore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A03B1860F4006F00070A595 /* Font_FileStore.cpp */; };
 		9A03B1CD0F400C170070A595 /* libfreetype.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1EDA0F3B8AA200B9CFFA /* libfreetype.dylib */; };
+		9A8865AB0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */; };
+		9A8865AC0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */; };
 		9AA14FDF0F3E747700DCA729 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDA0F3E747700DCA729 /* Fonts */; };
 		9AA14FE00F3E747700DCA729 /* Navigation in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDB0F3E747700DCA729 /* Navigation */; };
 		9AA14FE10F3E747700DCA729 /* Preferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDC0F3E747700DCA729 /* Preferences.xml */; };
@@ -50,7 +52,6 @@
 		9AAE1E490F3AF68E00B9CFFA /* NavDatabase.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E3B0F3AF68E00B9CFFA /* NavDatabase.cpp */; };
 		9AAE1E830F3AF87400B9CFFA /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E820F3AF87400B9CFFA /* Font.cpp */; };
 		9AAE1E860F3AF87F00B9CFFA /* FontManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1E850F3AF87F00B9CFFA /* FontManager.cpp */; };
-		9AAE1EDB0F3B8AA200B9CFFA /* libfreetype.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1EDA0F3B8AA200B9CFFA /* libfreetype.dylib */; };
 		9AAE1EEE0F3B8AE600B9CFFA /* RenderWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1EEB0F3B8AE600B9CFFA /* RenderWindow.cpp */; };
 		9AAE1EEF0F3B8AE600B9CFFA /* RenderObject.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1EED0F3B8AE600B9CFFA /* RenderObject.cpp */; };
 		9AAE1EF70F3B8B0100B9CFFA /* GaugeComponent.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1EF60F3B8B0100B9CFFA /* GaugeComponent.cpp */; };
@@ -93,6 +94,7 @@
 		9A03B1B20F400A940070A595 /* FontStore_Make.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FontStore_Make.cpp; sourceTree = "<group>"; };
 		9A03B1B90F400AD40070A595 /* FontStore_Make */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FontStore_Make; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A5CE0400F4A7C2A00796599 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TODO; path = ../TODO; sourceTree = SOURCE_ROOT; };
+		9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Font_FileStore_BinaryIO.cpp; sourceTree = "<group>"; };
 		9AA14FDA0F3E747700DCA729 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = ../Data/Fonts; sourceTree = SOURCE_ROOT; };
 		9AA14FDB0F3E747700DCA729 /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Navigation; path = ../Data/Navigation; sourceTree = SOURCE_ROOT; };
 		9AA14FDC0F3E747700DCA729 /* Preferences.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Preferences.xml; path = ../Data/Preferences.xml; sourceTree = SOURCE_ROOT; };
@@ -223,7 +225,6 @@
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				9AE411C00F39973C00D539E5 /* OpenGL.framework in Frameworks */,
 				9AAE1D3B0F3AF15000B9CFFA /* libxml2.dylib in Frameworks */,
-				9AAE1EDB0F3B8AA200B9CFFA /* libfreetype.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -247,6 +248,7 @@
 				9AFE33680F3E919D00164E90 /* Font_GLTexture.cpp */,
 				9A03B1850F4006F00070A595 /* Font_FileStore.h */,
 				9A03B1860F4006F00070A595 /* Font_FileStore.cpp */,
+				9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -615,6 +617,7 @@
 				9AAE1FE70F3BA86E00B9CFFA /* VSI.cpp in Sources */,
 				9AFE33690F3E919D00164E90 /* Font_GLTexture.cpp in Sources */,
 				9A03B1870F4006F00070A595 /* Font_FileStore.cpp in Sources */,
+				9A8865AB0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,6 +627,7 @@
 			files = (
 				9A03B1BD0F400ADA0070A595 /* FontStore_Make.cpp in Sources */,
 				9A03B1C90F400BF40070A595 /* Font_FileStore.cpp in Sources */,
+				9A8865AC0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -677,6 +681,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
+				GCC_PREPROCESSOR_DEFINITIONS = USE_FREETYPE2;
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -719,6 +724,7 @@
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = GlassCockpit_Prefix.pch;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(HOME)/Applications";
 				LIBRARY_SEARCH_PATHS = (
@@ -756,7 +762,7 @@
 		C01FCF5008A954540054247B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				DEAD_CODE_STRIPPING = YES;
 				GCC_AUTO_VECTORIZATION = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
@@ -766,11 +772,12 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (
+					/usr/X11/include,
 					/usr/X11/include/freetype2,
 					/usr/include/libxml2,
 				);
 				PREBINDING = YES;
-				SDKROOT = macosx10.5;
+				SDKROOT = macosx10.4;
 			};
 			name = Release;
 		};

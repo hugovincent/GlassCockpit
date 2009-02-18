@@ -10,15 +10,8 @@
 #ifndef Font_FileStore_H
 #define Font_FileStore_H
 
-#ifndef IPHONE
-#define USE_FREETYPE2
-#endif
-
 #include <string>
 #include <OpenGL/gl.h>
-
-#define ALIGNED __attribute__ ((aligned (8)))
-// To ensure that it doesn't effect the disk format if pointers are 32 or 64-bits, we align to 8-byte boundaries.
 
 class Font_FileStore
 {
@@ -49,7 +42,7 @@ private:
 	class Glyph
 	{
 	public:
-		char character, _padding_[3];
+		char character;
 		short xOffset, yOffset, width, height;
 		float advance;
 	};
@@ -60,8 +53,8 @@ private:
 		float faceSize;
 		
 		// Glyph info
-		char firstGlyph, _padding1_[3];
-		short numGlyphs, _padding2_;
+		char firstGlyph;
+		short numGlyphs;
 		
 		// Texture format info
 		short rows, columns;
@@ -69,13 +62,13 @@ private:
 		short texWidth, texHeight;
 		
 		// Array of glyphs (length = numGlyphs)
-		Glyph *glyphs ALIGNED;
+		Glyph *glyphs;
 
 		// Array of kerning pairs (advance for character pair i,j indexed is by [j * numGlyphs + i])
-		float *kerningTable ALIGNED;
+		float *kerningTable;
 
 		// Texture bitmap (length = texWidth * texHeight). Pixel format is 8-bit alpha-only.
-		GLubyte *bitmap ALIGNED;
+		GLubyte *bitmap;
 
 		~DiskFormat();
 	};

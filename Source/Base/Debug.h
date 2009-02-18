@@ -8,12 +8,19 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#if defined(__APPLE__) && defined(__MACH__)
+// Check host platform
+#if defined(__GNUC__) && ( defined(__APPLE_CPP__) || defined(__APPLE_CC__) )
+
+#include <TargetConditionals.h>
+
+#if defined(TARGET_OS_MAC) && TARGET_OS_MAC
 #define MACOSX
 #endif
 
 #if defined(TARGET_OS_IPHONE) && TARGET_OS_IPHONE
 #define IPHONE
+#endif
+
 #endif
 
 // Global Debug flag

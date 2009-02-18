@@ -9,7 +9,8 @@
 
 #include "Debug.h"
 
-#define USE_FREETYPE2
+// Note: compile with USE_FREETYPE2 defined (gcc -DUSE_FREETYPE2 ...)
+
 #include "Font_FileStore.h"
 
 using namespace std;

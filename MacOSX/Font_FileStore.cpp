@@ -11,8 +11,6 @@
 #include <math.h>
 #include "Font_FileStore.h"
 
-#include <fstream>
-
 #define FIRST_CHAR ' '
 #define LAST_CHAR  '~'
 #define NUM_CHARS (unsigned int)(LAST_CHAR - FIRST_CHAR + 1)
@@ -46,11 +44,12 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	Font_FileStore *self = new Font_FileStore();
 	self->store = new DiskFormat;
 	memset(self->store, 0, sizeof(DiskFormat));
-	self->store->glyphs = new Glyph[NUM_CHARS];
-	memset(self->store->glyphs, 0, sizeof(Glyph[NUM_CHARS]));
 	self->store->firstGlyph = FIRST_CHAR;
 	self->store->numGlyphs = NUM_CHARS;
 	self->store->faceSize = FONT_TEXTURE_SIZE;
+
+	self->store->glyphs = new Glyph[self->store->numGlyphs];
+	memset(self->store->glyphs, 0, sizeof(Glyph[self->store->numGlyphs]));
 	
 	// Get font
 	LogPrintf("Attempting to open %s... ", ttfFilename.c_str());
@@ -67,8 +66,8 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 		LogPrintf("Opened.\n");
 	
 	// Get Freetype character-index mapping
-	charIdx = new FT_UInt[NUM_CHARS];
-	for (char i = 0; i < NUM_CHARS; ++i)
+	charIdx = new FT_UInt[self->store->numGlyphs];
+	for (char i = 0; i < self->store->numGlyphs; ++i)
 	{
 		charIdx[i] = FT_Get_Char_Index(ftFace, FIRST_CHAR + i);
 		if (charIdx[i] == 0) // undefined character code
@@ -92,19 +91,19 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	// Compute kerning table
 	if (FT_HAS_KERNING(ftFace) != 0)
 	{
-		self->store->kerningTable = new float[NUM_CHARS * NUM_CHARS];
-		memset(self->store->kerningTable, 0, sizeof(float[NUM_CHARS * NUM_CHARS]));
+		self->store->kerningTable = new float[self->store->numGlyphs * self->store->numGlyphs];
+		memset(self->store->kerningTable, 0, sizeof(float[self->store->numGlyphs * self->store->numGlyphs]));
 		FT_Vector kernAdvance;
 		
-		for(unsigned int j = 0; j < NUM_CHARS; j++)
+		for(unsigned int j = 0; j < self->store->numGlyphs; j++)
 		{
-			for(unsigned int i = 0; i < NUM_CHARS; i++)
+			for(unsigned int i = 0; i < self->store->numGlyphs; i++)
 			{
 				err = FT_Get_Kerning(ftFace, charIdx[i], charIdx[j], FT_KERNING_UNFITTED, &kernAdvance);
 				if(err)
 					goto failed;
 
-				self->store->kerningTable[j * NUM_CHARS + i] = static_cast<float>(kernAdvance.x) / 64.0f;
+				self->store->kerningTable[j * self->store->numGlyphs + i] = static_cast<float>(kernAdvance.x) / 64.0f;
 				// ^^^ the divide by 64.0 converts FreeType's 26.6-format fixed point into floating point
 			}
 		}
@@ -116,7 +115,7 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 
 	// Prerender characters to find maximum pixel size of a glyph, and while we're here, store the advances
 	FT_GlyphSlot glyph = ftFace->glyph;
-	for (char i = 0; i < NUM_CHARS; ++i)
+	for (char i = 0; i < self->store->numGlyphs; ++i)
 	{
 		// FIXME it's kindof wasteful prerendering the whole character set just to get the maximum
 		// glyph size, but hey, font rendering is (necessarily) very cheap these days, and this is not called at runtime.
@@ -137,8 +136,8 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	LogPrintf("Computed max glyph size as %dx%d.\n", glyphWidth, glyphHeight);
 	
 	// Work out number of rows and columns
-	int rows = (int)ceilf(sqrtf((float)NUM_CHARS)), cols = (int)ceilf((float)NUM_CHARS / rows);
-	LogPrintf("Texture has %d rows x %d cols (%d cells for %d glyphs).\n", rows, cols, rows*cols, NUM_CHARS);
+	int rows = (int)ceilf(sqrtf((float)self->store->numGlyphs)), cols = (int)ceilf((float)self->store->numGlyphs / rows);
+	LogPrintf("Texture has %d rows x %d cols (%d cells for %d glyphs).\n", rows, cols, rows*cols, self->store->numGlyphs);
 	
 	// Create texture
 	self->store->rows = rows;
@@ -159,7 +158,7 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	Assert(self->store->texWidth < MAX_TEXTURE_DIMENSION && self->store->texHeight < MAX_TEXTURE_DIMENSION, "texture is too big");
 	
 	// Now render each glyph
-	for (char i = 0; i < NUM_CHARS; ++i)
+	for (char i = 0; i < self->store->numGlyphs; ++i)
 	{
 		// Load glyph into font face
 		err = FT_Load_Glyph(ftFace, charIdx[i], FT_LOAD_DEFAULT);
@@ -309,68 +308,4 @@ GLubyte *Font_FileStore::TextureBitmap(unsigned int *texWidth, unsigned int *tex
 	}
 	else
 		return NULL;
-}
-
-void Font_FileStore::CheckBinaryFormatAssumptions()
-{
-	// Because we serialize the font data, we need to be sure that our primitive type sizes are as expected.
-	Assert(sizeof(char) == 1 && sizeof(short) == 2 && sizeof(int) == 4 && sizeof(float) ==4 && \
-		   sizeof(GLubyte) == 1, "primitive data type size difference");
-	
-	Assert(sizeof(Font_FileStore::Glyph) == 16 && sizeof(Font_FileStore::DiskFormat) == 48,
-		   "font struct binary size difference");
-}
-
-void Font_FileStore::SerializeToFile(const std::string& glfontFilename) const
-{
-	if (store)
-	{
-		CheckBinaryFormatAssumptions();
-
-		LogPrintf("Serializing font to %s... ", glfontFilename.c_str());
-		
-		std::ofstream out(glfontFilename.c_str(), std::ios::binary | std::ios::trunc);
-		out.write((char*)store, sizeof(DiskFormat) - 24); // remove pointers
-		out.write((char*)store->glyphs, sizeof(Glyph) * NUM_CHARS);
-		out.write((char*)store->kerningTable, sizeof(float) * NUM_CHARS * NUM_CHARS);
-		out.write((char*)store->bitmap, sizeof(GLubyte) * store->texWidth * store->texHeight);
-		out.close();
-		LogPrintf("Done.\n");
-	}
-}
-
-void Font_FileStore::DeserializeFromFile(const std::string& glfontFilename)
-{
-	CheckBinaryFormatAssumptions();
-	
-	if (store)
-		delete store;
-	
-	LogPrintf("Deserializing font %s... ", glfontFilename.c_str());
-	
-	DiskFormat *format = new DiskFormat();
-	std::ifstream in(glfontFilename.c_str(), std::ios::binary);
-	in.read((char*)format, sizeof(DiskFormat) - 24); // remove pointers
-	format->glyphs = new Glyph[NUM_CHARS];
-	in.read((char*)format->glyphs, sizeof(Glyph) * NUM_CHARS);
-	format->kerningTable = new float[NUM_CHARS * NUM_CHARS];
-	in.read((char*)format->kerningTable, sizeof(float) * NUM_CHARS * NUM_CHARS);
-	format->bitmap = new GLubyte[format->texWidth * format->texHeight];
-	in.read((char*)format->bitmap, sizeof(GLubyte) * format->texWidth * format->texHeight);
-	store = format;
-	
-	LogPrintf("Done.\n");
-	
-	// Check there is no more data in the file (indicating a different binary format than expected)
-	int count = 0; char tmp;
-	while (!in.eof())
-		in.read(&tmp, 1) && count++;
-
-	if (count >= 1)
-	{
-		printf("Error... %d bytes more data in file\n", count);
-		Assert(count <= 1, "excess data at end of serialized font file");
-	}
-	
-	// FIXME add some sanity checks on read-in data too
 }
