@@ -256,20 +256,19 @@ void ArtificialHorizon::Render()
 	aCircle.SetDegreesPerPoint(5);
 	aCircle.SetArcStartEnd(300.0,360.0);
 
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(0,98);
-	glVertex2f(0,72);
+	aCircle.AddVertex(0,98);
+	aCircle.AddVertex(0,72);
 	aCircle.Evaluate();
-	glVertex2f(47,98);
-	glEnd();
+	aCircle.AddVertex(47,98);
+	aCircle.Render(GL_TRIANGLE_FAN);
 
 	aCircle.SetArcStartEnd(0.0,60.0);
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(94,98);
-	glVertex2f(47,98);
+	aCircle.ResetVertices();
+	aCircle.AddVertex(94,98);
+	aCircle.AddVertex(47,98);
 	aCircle.Evaluate();
-	glVertex2f(94,72);
-	glEnd();
+	aCircle.AddVertex(94,72);
+	aCircle.Render(GL_TRIANGLE_FAN);
 #endif
 
 	//----------------The bank angle markings----------------
@@ -526,46 +525,38 @@ void ArtificialHorizon::Render()
 	aCircle.SetOrigin(3.77,3.77);
 	aCircle.SetArcStartEnd(180,270);
 	aCircle.SetDegreesPerPoint(15);
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(-1.0,-1.0);
+	aCircle.ResetVertices();
+	aCircle.AddVertex(-1.0,-1.0);
 	aCircle.Evaluate();
-	glEnd();
-	glBegin(GL_LINE_STRIP);
-	aCircle.Evaluate();
-	glEnd();
+	aCircle.Render(GL_TRIANGLE_FAN);
+	aCircle.Render(GL_LINE_STRIP);
 	// Upper left
 	aCircle.SetOrigin(3.77,94.23);
 	aCircle.SetArcStartEnd(270,360);
 	aCircle.SetDegreesPerPoint(15);
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(-1.0,99.0);
+	aCircle.ResetVertices();
+	aCircle.AddVertex(-1.0,99.0);
 	aCircle.Evaluate();
-	glEnd();
-	glBegin(GL_LINE_STRIP);
-	aCircle.Evaluate();
-	glEnd();
+	aCircle.Render(GL_TRIANGLE_FAN);
+	aCircle.Render(GL_LINE_STRIP);
 	// Upper right
 	aCircle.SetOrigin(90.23,94.23);
 	aCircle.SetArcStartEnd(0,90);
 	aCircle.SetDegreesPerPoint(15);
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(95.0,99.0);
+	aCircle.ResetVertices();
+	aCircle.AddVertex(95.0,99.0);
 	aCircle.Evaluate();
-	glEnd();
-	glBegin(GL_LINE_STRIP);
-	aCircle.Evaluate();
-	glEnd();
+	aCircle.Render(GL_TRIANGLE_FAN);
+	aCircle.Render(GL_LINE_STRIP);
 	//Lower right
 	aCircle.SetOrigin(90.23,3.77);
 	aCircle.SetArcStartEnd(90,180);
 	aCircle.SetDegreesPerPoint(15);
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(95.0,-1);
+	aCircle.ResetVertices();
+	aCircle.AddVertex(95.0,-1);
 	aCircle.Evaluate();
-	glEnd();
-	glBegin(GL_LINE_STRIP);
-	aCircle.Evaluate();
-	glEnd();
+	aCircle.Render(GL_TRIANGLE_FAN);
+	aCircle.Render(GL_LINE_STRIP);
 
 	// Finally, restore the modelview matrix to what we received
 	glPopMatrix();

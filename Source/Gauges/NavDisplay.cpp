@@ -118,28 +118,27 @@ void NavDisplay::Render()
 	aCircle.SetOrigin(CENTER_X, CENTER_Y);
 	aCircle.SetArcStartEnd(0.0, 360.0);
 	
-	glBegin(GL_LINE_STRIP);
 	aCircle.Evaluate();
-	glEnd();
+	aCircle.Render(GL_LINE_STRIP);
 	
 	aCircle.SetRadius(80.0);
 	aCircle.SetArcStartEnd(0.0, 360.0);
-	glBegin(GL_LINE_STRIP);
+	aCircle.ResetVertices();
 	aCircle.Evaluate();
-	glEnd();
+	aCircle.Render(GL_LINE_STRIP);
 
 	aCircle.SetDegreesPerPoint(2.5);
 	aCircle.SetRadius(120.0);
 	aCircle.SetArcStartEnd(300.0, 60.0);
-	glBegin(GL_LINE_STRIP);
+	aCircle.ResetVertices();
 	aCircle.Evaluate();
-	glEnd();
+	aCircle.Render(GL_LINE_STRIP);
 	
 	aCircle.SetRadius(130.0);
 	aCircle.SetArcStartEnd(300.0, 60.0);
-	glBegin(GL_LINE_STRIP);
+	aCircle.ResetVertices();
 	aCircle.Evaluate();
-	glEnd();
+	aCircle.Render(GL_LINE_STRIP);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Draw Layer 2: the Point of Interest marker (Navaids, Airports)

@@ -34,11 +34,14 @@ CircleEvaluator::CircleEvaluator()
 	m_DegreesPerPoint = 10;
 
 	m_Radius = 1;
+	
+	m_Vertices = new float[2*1024]; // max 1024 vertices (each x,y)
+	m_VertexIdx = 0;
 }
 
 CircleEvaluator::~CircleEvaluator()
 {
-
+	delete[] m_Vertices;
 }
 
 void CircleEvaluator::SetOrigin(double x, double y)
@@ -56,6 +59,24 @@ void CircleEvaluator::SetArcStartEnd(double startArc, double endArc)
 void CircleEvaluator::SetDegreesPerPoint(double degreesPerPoint)
 {
 	m_DegreesPerPoint = degreesPerPoint;
+}
+
+void CircleEvaluator::AddVertex(float x, float y)
+{
+	m_Vertices[2*m_VertexIdx]   = x;
+	m_Vertices[2*m_VertexIdx+1] = y;
+	m_VertexIdx++;
+}
+
+void CircleEvaluator::Render(GLenum mode)
+{
+	glVertexPointer(2, GL_FLOAT, 0, m_Vertices);
+	glDrawArrays(mode, 0, m_VertexIdx);
+}
+
+void CircleEvaluator::ResetVertices()
+{
+	m_VertexIdx = 0;
 }
 
 void CircleEvaluator::Evaluate()
@@ -86,7 +107,7 @@ void CircleEvaluator::Evaluate()
 		x = m_Radius*sin(currentRad) + m_XOrigin;
 		y = m_Radius*cos(currentRad) + m_YOrigin;
 
-		glVertex2d(x,y);
+		AddVertex(x,y);
 
 		currentRad += radPerPoint;
 
@@ -95,7 +116,7 @@ void CircleEvaluator::Evaluate()
 	x = m_Radius*sin(endRad) + m_XOrigin;
 	y = m_Radius*cos(endRad) + m_YOrigin;
 
-	glVertex2d(x,y);
+	AddVertex(x,y);
 }
 
 void CircleEvaluator::SetRadius(double radius)

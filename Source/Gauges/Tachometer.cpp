@@ -80,8 +80,8 @@ void Tachometer::RenderArc(CircleEvaluator *circ)
 	circ->SetArcStartEnd(minDegrees, maxDegrees);
 	// FIXME enable mitering
 	glLineWidth(3.0);
-	glBegin(GL_LINE_STRIP);
+	circ->ResetVertices();
 	circ->Evaluate();
-	glEnd();
+	circ->Render(GL_LINE_STRIP);
 }
 } // end namespace OpenGC

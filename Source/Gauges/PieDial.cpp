@@ -87,10 +87,9 @@ void PieDial::Render()
 	aCircle.SetOrigin(0.0, 0.0);
 	aCircle.SetArcStartEnd(minDegrees, value / m_Max * (maxDegrees - minDegrees) + minDegrees);
 
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(0,0);
+	aCircle.AddVertex(0,0);
 	aCircle.Evaluate();
-	glEnd();
+	aCircle.Render(GL_TRIANGLE_FAN);
 
 	// White line that is this needle of the dial
 	double degree = minDegrees + ((maxDegrees - minDegrees) * (value / (m_Max-m_Min)));
@@ -154,9 +153,9 @@ void PieDial::RenderArc(CircleEvaluator *circ)
 	circ->SetArcStartEnd(minDegrees, maxDegrees);
 	// FIXME enable mitering
 	glLineWidth(3.0);
-	glBegin(GL_LINE_STRIP);
+	circ->ResetVertices();
 	circ->Evaluate();
-	glEnd();
+	circ->Render(GL_LINE_STRIP);
 }
 
 } // end namespace OpenGC

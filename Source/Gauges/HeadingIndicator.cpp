@@ -88,14 +88,11 @@ void HeadingIndicator::Render()
 	aCircle.SetOrigin(0.0, 0.0);
 
 	// Draw the circle
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(0,0);
+	aCircle.AddVertex(0,0);
 	aCircle.Evaluate();
-	glEnd();
+	aCircle.Render(GL_TRIANGLE_FAN);
 	glLineWidth(1.0);
-	glBegin(GL_LINE_STRIP);
-	aCircle.Evaluate(); // and again for antialiasing
-	glEnd();
+	aCircle.Render(GL_LINE_STRIP); // and again for antialiasing
 
 	// Draw the center detent
 	glColor3ub(255,255,255);

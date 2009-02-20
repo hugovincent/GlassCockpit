@@ -48,8 +48,17 @@ class CircleEvaluator
 		/** Defines the center of the circle in physical units */
 		void SetOrigin(double x, double y);
 
-		/** Calls the GL code to evaluate the circle (generates points) */
+		/** Add specified vertex to vertex array at the current position */
+		void AddVertex(float x, float y);
+
+		/** Evaluate the circle, generating points into vertex cache */
 		void Evaluate();
+
+		/** Renders vertex cache in specified mode */
+		void Render(GLenum mode);
+
+		/** Clears vertex cache */
+		void ResetVertices();
 
 	protected:
 
@@ -65,6 +74,11 @@ class CircleEvaluator
 		/** How many degrees to move before generating a new point */
 		double m_DegreesPerPoint;
 
+		/** Used to hold GL generated vertices */
+		float *m_Vertices;
+
+		/** Current index into vertex array */
+		unsigned int m_VertexIdx;
 };
 
 } // end namespace OpenGC

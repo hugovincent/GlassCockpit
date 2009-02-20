@@ -93,10 +93,9 @@ void MarkedDial::Render()
 	aCircle.SetOrigin(0.0, 0.0);
 	aCircle.SetArcStartEnd(minDegrees, value / m_Max * (maxDegreesUse360 - minDegrees) + minDegrees);
 
-	glBegin(GL_TRIANGLE_FAN);
-	glVertex2f(0,0);
+	aCircle.AddVertex(0,0);
 	aCircle.Evaluate();
-	glEnd();
+	aCircle.Render(GL_TRIANGLE_FAN);
 
 	/*qobj = gluNewQuadric();
 	  gluPartialDisk(qobj, 0, R+1, 50, 1, minDegrees, value / m_Max * (maxDegreesUse360-minDegrees));
@@ -118,9 +117,9 @@ void MarkedDial::Render()
 	aCircle.SetArcStartEnd(minDegrees, maxDegrees);
 
 	// FIXME enable mitering
-	glBegin(GL_LINE_STRIP);
+	aCircle.ResetVertices();
 	aCircle.Evaluate();
-	glEnd();
+	aCircle.Render(GL_LINE_STRIP);
 
 	/*qobj = gluNewQuadric();
 	  gluPartialDisk(qobj, R, R+1, 50, 1, minDegrees, maxDegreesUse360-minDegrees);
