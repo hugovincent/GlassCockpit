@@ -51,10 +51,12 @@ void AltitudeTicker::Render()
 	// Draw black background
 	glColor3ub(0,0,0);
 	// Rectangular part
-	glRectd(3.5,0.0,28.0,18.0);
-	// Triangular part
-	float vertices[] = {0.0,9.0,   3.5,6.0,   3.5,12.0};
+	float vertices[] = {3.5,0.0,   28.0,0.0,   28.0,18.0,   3.5,18.0};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices);
+	glDrawArrays(GL_QUADS, 0, 4);
+	// Triangular part
+	float vertices1[] = {0.0,9.0,   3.5,6.0,   3.5,12.0};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices1);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	// White border around background

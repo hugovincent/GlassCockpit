@@ -108,12 +108,9 @@ void PieDial::Render()
 	// white rectangle containing the text
 	glColor3ub(255, 255, 255);
 	glLineWidth(1.0);
-	glBegin(GL_LINE_STRIP);
-	glVertex2f( 42, 20 );
-	glVertex2f( 20, 20 );
-	glVertex2f( 20, 30 );
-	glVertex2f( 42, 30 );
-	glEnd();
+	float vertices2[] = {42,20,   20,20,   20,30,   42,30};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices2);
+	glDrawArrays(GL_LINE_STRIP, 0, 4);
 
 	// text
 	globals->m_FontManager->SetSize(m_Font, 5, 5);
@@ -131,20 +128,24 @@ void PieDial::RenderTicks(CircleEvaluator *circ)
 	double degreeyellow = minDegrees + ((maxDegrees - minDegrees) * percentagey);
 	glColor3ub(247, 231, 8);
 	double radians = degreeyellow * DEG_TO_RAD;
-	glBegin(GL_LINE_STRIP);
-	glVertex2f(R * sin(radians), R * cos(radians));
-	glVertex2f((R + 4) * sin(radians), (R + 4) * cos(radians));
-	glEnd();
+	float vertices[] = {
+		R * sin(radians), R * cos(radians),
+		(R + 4) * sin(radians), (R + 4) * cos(radians)
+	};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices);
+	glDrawArrays(GL_LINE_STRIP, 0, 2);
 
 	// red stripe
 	double percentager = m_MinRed / (m_Max - m_Min) ;
 	double degreered =  minDegrees + ((maxDegrees - minDegrees) * percentager);
 	radians = degreered * DEG_TO_RAD;
 	glColor3ub(255, 0, 0);
-	glBegin(GL_LINE_STRIP);
-	glVertex2f(R * sin(radians), R * cos(radians));
-	glVertex2f((R + 4) * sin(radians), (R + 5) * cos(radians));
-	glEnd();
+	float vertices2[] = {
+		R * sin(radians), R * cos(radians),
+		(R + 4) * sin(radians), (R + 5) * cos(radians)
+	};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices2);
+	glDrawArrays(GL_LINE_STRIP, 0, 2);
 }
 
 void PieDial::RenderArc(CircleEvaluator *circ)

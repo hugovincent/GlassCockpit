@@ -73,6 +73,9 @@ void RenderWindow::SetupDisplay()
 	
 	// Enable vertex arrays
 	glEnableClientState(GL_VERTEX_ARRAY);
+	
+	// Disable depth test (for better antialiasing)
+	glDisable(GL_DEPTH_TEST);
 
 	// Set line anti-aliasing
 #if 0

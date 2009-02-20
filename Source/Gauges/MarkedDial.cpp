@@ -73,15 +73,11 @@ void MarkedDial::Render()
 	if (m_Min < 0)
 		negativeoffset = m_Min*-1.0;
 
-	double xcircle, ycircle, radians;
+	double radians;
 	char buf[10];
 	//GLUquadric *qobj;
 
-	glMatrixMode(GL_MODELVIEW);
-	glPushMatrix();
-
 	glLineWidth(2.0);
-	glEnable(GL_LINE_SMOOTH);
 
 	glTranslatef(18, 18, 0);
 
@@ -104,14 +100,11 @@ void MarkedDial::Render()
 
 	double percentage = value / (m_Max-m_Min) ;
 	double degree = minDegrees + ((maxDegreesUse360 - minDegrees) * percentage);
-	glBegin(GL_LINE_STRIP);
-	glColor3ub(255, 255, 255);
-	glVertex2f(0, 0);
 	radians = degree * DEG_TO_RAD;
-	xcircle = (R) * sin(radians);
-	ycircle = (R) * cos(radians);
-	glVertex2f(xcircle, ycircle);
-	glEnd();
+	glColor3ub(255, 255, 255);
+	float vertices[] = {0,0,   R*sin(radians),R*cos(radians)};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices);
+	glDrawArrays(GL_LINE_STRIP, 0, 2);
 
 	//circle outside
 	glColor3ub(255, 255, 255);
@@ -133,24 +126,18 @@ void MarkedDial::Render()
 	{
 		percentagev = (xs+negativeoffset) / (m_Max-m_Min) ;
 		degreev =  minDegrees+ ((maxDegreesUse360- minDegrees)*percentagev);
-		glBegin(GL_LINE_STRIP);
-		glColor3ub(255, 255, 255);
 		radians=degreev * DEG_TO_RAD;
-		xcircle = (R) * sin(radians);
-		ycircle = (R) * cos(radians);
-		glVertex2f(xcircle, ycircle);
-		xcircle = (R - 2) * sin(radians);
-		ycircle = (R - 2) * cos(radians);
-		glVertex2f(xcircle, ycircle);
-		glEnd();
-		xcircle = (R-4.5) * sin(radians);
-		ycircle = (R-4.5) * cos(radians);
+		glColor3ub(255, 255, 255);
+		float vertices[] = {R*sin(radians),R*cos(radians),   (R-2)*sin(radians),(R-2)*cos(radians)};
+		glVertexPointer(2, GL_FLOAT, 0, &vertices);
+		glDrawArrays(GL_LINE_STRIP, 0, 2);
+		
 		if ((fabs(xs) < 1.0) && (fabs(xs) > 0.01))
 			sprintf(buf, "%0.1f",xs);
 		else
 			sprintf(buf, "%.0f",xs / m_TickDivisor);
 		glTranslatef(-1.5, -2, 0);
-		globals->m_FontManager->Print(xcircle , ycircle, buf, m_Font);			
+		globals->m_FontManager->Print((R-4.5) * sin(radians) , (R-4.5) * cos(radians), buf, m_Font);			
 		glTranslatef(1.5, 2, 0);
 	}
 

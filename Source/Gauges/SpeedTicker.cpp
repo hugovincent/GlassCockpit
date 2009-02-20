@@ -51,10 +51,12 @@ void SpeedTicker::Render()
 	// Draw black background
 	glColor3ub(0,0,0);
 	// Rectangular part
-	glRectd(0.0,0.0,18.0,18.0);
-	// Triangular part
-	float vertices[] = {18.0,7.0,   21.0,9.0,   18.0,11.0};
+	float vertices[] = {0.0,0.0,   18.0,0.0,   18.0,18.0,   0.0,18.0};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices);
+	glDrawArrays(GL_QUADS, 0, 4);
+	// Triangular part
+	float vertices1[] = {18.0,7.0,   21.0,9.0,   18.0,11.0};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices1);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	// White border around background
