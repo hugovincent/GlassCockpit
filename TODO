@@ -75,7 +75,6 @@ _______________________________________________________________________________
 * Verify use of Globals.h
 * Indentation and coding style (ongoing)
 * Fix up inconsistent inclusion of #include <string> etc and of using namespace std.
-* Change rect's drawn with GL_POLYGON to use glRectd()
 * Verify use of Messageable
 
 _______________________________________________________________________________

@@ -15,6 +15,10 @@
 		9A03B1BD0F400ADA0070A595 /* FontStore_Make.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A03B1B20F400A940070A595 /* FontStore_Make.cpp */; };
 		9A03B1C90F400BF40070A595 /* Font_FileStore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A03B1860F4006F00070A595 /* Font_FileStore.cpp */; };
 		9A03B1CD0F400C170070A595 /* libfreetype.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1EDA0F3B8AA200B9CFFA /* libfreetype.dylib */; };
+		9A06B1A80F4E8EBD0003733D /* shptree.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A06B1A30F4E8EBD0003733D /* shptree.c */; };
+		9A06B1A90F4E8EBD0003733D /* ShapeLibGL.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A06B1A40F4E8EBD0003733D /* ShapeLibGL.cpp */; };
+		9A06B1AA0F4E8EBD0003733D /* shpopen.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A06B1A50F4E8EBD0003733D /* shpopen.c */; };
+		9A06B1AB0F4E8EBD0003733D /* dbfopen.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A06B1A70F4E8EBD0003733D /* dbfopen.c */; };
 		9A8865AB0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */; };
 		9A8865AC0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */; };
 		9AA14FDF0F3E747700DCA729 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDA0F3E747700DCA729 /* Fonts */; };
@@ -93,6 +97,12 @@
 		9A03B1860F4006F00070A595 /* Font_FileStore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Font_FileStore.cpp; sourceTree = "<group>"; };
 		9A03B1B20F400A940070A595 /* FontStore_Make.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FontStore_Make.cpp; sourceTree = "<group>"; };
 		9A03B1B90F400AD40070A595 /* FontStore_Make */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FontStore_Make; sourceTree = BUILT_PRODUCTS_DIR; };
+		9A06B1A30F4E8EBD0003733D /* shptree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = shptree.c; path = ../Source/Navigation/ShapeLib/shptree.c; sourceTree = SOURCE_ROOT; };
+		9A06B1A40F4E8EBD0003733D /* ShapeLibGL.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShapeLibGL.cpp; path = ../Source/Navigation/ShapeLib/ShapeLibGL.cpp; sourceTree = SOURCE_ROOT; };
+		9A06B1A50F4E8EBD0003733D /* shpopen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = shpopen.c; path = ../Source/Navigation/ShapeLib/shpopen.c; sourceTree = SOURCE_ROOT; };
+		9A06B1A60F4E8EBD0003733D /* shapefil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shapefil.h; path = ../Source/Navigation/ShapeLib/shapefil.h; sourceTree = SOURCE_ROOT; };
+		9A06B1A70F4E8EBD0003733D /* dbfopen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dbfopen.c; path = ../Source/Navigation/ShapeLib/dbfopen.c; sourceTree = SOURCE_ROOT; };
+		9A06B1AC0F4E8EDB0003733D /* ShapeLibGL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShapeLibGL.h; path = ../Source/Navigation/ShapeLib/ShapeLibGL.h; sourceTree = SOURCE_ROOT; };
 		9A5CE0400F4A7C2A00796599 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TODO; path = ../TODO; sourceTree = SOURCE_ROOT; };
 		9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Font_FileStore_BinaryIO.cpp; sourceTree = "<group>"; };
 		9AA14FDA0F3E747700DCA729 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = ../Data/Fonts; sourceTree = SOURCE_ROOT; };
@@ -327,6 +337,19 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9A06B17F0F4E87160003733D /* ShapeLib */ = {
+			isa = PBXGroup;
+			children = (
+				9A06B1A30F4E8EBD0003733D /* shptree.c */,
+				9A06B1AC0F4E8EDB0003733D /* ShapeLibGL.h */,
+				9A06B1A40F4E8EBD0003733D /* ShapeLibGL.cpp */,
+				9A06B1A50F4E8EBD0003733D /* shpopen.c */,
+				9A06B1A60F4E8EBD0003733D /* shapefil.h */,
+				9A06B1A70F4E8EBD0003733D /* dbfopen.c */,
+			);
+			name = ShapeLib;
+			sourceTree = "<group>";
+		};
 		9AA14FE50F3E747E00DCA729 /* App Bundle Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,6 +438,7 @@
 		9AAE1E210F3AF66B00B9CFFA /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				9A06B17F0F4E87160003733D /* ShapeLib */,
 				9AAE1E2A0F3AF68E00B9CFFA /* AirportGeoObj.h */,
 				9AAE1E340F3AF68E00B9CFFA /* AirportGeoObj.cpp */,
 				9AAE1E360F3AF68E00B9CFFA /* AirportList.h */,
@@ -618,6 +642,10 @@
 				9AFE33690F3E919D00164E90 /* Font_GLTexture.cpp in Sources */,
 				9A03B1870F4006F00070A595 /* Font_FileStore.cpp in Sources */,
 				9A8865AB0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp in Sources */,
+				9A06B1A80F4E8EBD0003733D /* shptree.c in Sources */,
+				9A06B1A90F4E8EBD0003733D /* ShapeLibGL.cpp in Sources */,
+				9A06B1AA0F4E8EBD0003733D /* shpopen.c in Sources */,
+				9A06B1AB0F4E8EBD0003733D /* dbfopen.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

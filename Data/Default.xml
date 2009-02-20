@@ -42,7 +42,6 @@ preferences. -->
 		<Gauge type="EngineInstruments">
 			<Position>0.0,0.0</Position>
 			<Scale>1.0,1.0</Scale>
-			<Outline>false</Outline>
 		</Gauge>
 	</Window>
 
