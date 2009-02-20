@@ -135,12 +135,11 @@ void EngineInstruments::Render()
 	glColor3ub(0,190,190); // cyan
 
 	// We want to draw the divider between the engine instruments and the PFD/Nav above
-   	glLineWidth( 2.0 );
-   	glColor3ub( 0, 190, 190 ); // cyan
-   	glBegin(GL_LINES);
-   	glVertex2f(0.0, m_PhysicalSize.y);
-   	glVertex2f(m_PhysicalSize.x, m_PhysicalSize.y);
-   	glEnd();
+	glLineWidth( 2.0 );
+	glColor3ub( 0, 190, 190 ); // cyan
+	float vertices[] = {0.0, m_PhysicalSize.y, m_PhysicalSize.x, m_PhysicalSize.y};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices);
+	glDrawArrays(GL_LINES, 0, 2);
 
 	// Draw the text labels
 	globals->m_FontManager->SetSize(m_Font, 5, 6);

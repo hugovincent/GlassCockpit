@@ -226,15 +226,16 @@ bool Gauge::ClickTest(int button, int state, int x, int y)
 
 void Gauge::DrawGaugeOutline()
 {
-	glLineWidth( 2.0 );
-	glColor3ub( 0, 190, 190 );
-
-	glBegin(GL_LINE_LOOP);
-	glVertex2f( 0.0, 0.0 );
-	glVertex2f( 0.0, m_PhysicalSize.y );
-	glVertex2f( m_PhysicalSize.x, m_PhysicalSize.y );
-	glVertex2f( m_PhysicalSize.x, 0.0 );
-	glEnd();
+	float vertices[] = {
+		0.0, 0.0,
+		0.0, m_PhysicalSize.y,
+		m_PhysicalSize.x, m_PhysicalSize.y,
+		m_PhysicalSize.x, 0.0
+	};
+	glLineWidth(2.0);
+	glColor3ub(0, 190, 190);
+	glVertexPointer(2, GL_FLOAT, 0, &vertices);
+	glDrawArrays(GL_LINE_LOOP, 0, 4);
 }
 
 } // end namespace OpenGC

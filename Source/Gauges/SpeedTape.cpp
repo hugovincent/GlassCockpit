@@ -64,13 +64,16 @@ void SpeedTape::Render()
 	glColor3ub(51,51,76);
 
 	// Draw the background rectangle
-	glBegin(GL_POLYGON);
-	glVertex2f(0.0, 0.0);
-	glVertex2f(0.0, m_PhysicalSize. y);
-	glVertex2f(indent_x, m_PhysicalSize.y);
-	glVertex2f(indent_x, 0.0);
-	glVertex2f(0.0, 0.0);
-	glEnd();
+	float vertices[] = {
+		0.0, 0.0,
+		0.0, m_PhysicalSize. y,
+		indent_x, m_PhysicalSize.y,
+		indent_x, 0.0,
+		0.0, 0.0
+	};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices);
+	glDrawArrays(GL_POLYGON, 0, 5);
+
 
 	// Tick marks are space every 10 kph vertically
 	// The tick spacing represents how far apart they are in physical
@@ -110,10 +113,9 @@ void SpeedTape::Render()
 		tickSpeed = (int)(nextHighestAirspeed + i * 10.0);
 		tickLocation = (m_PhysicalSize.y/2) + i * tickSpacing + vertOffset;
 
-		glBegin(GL_LINES);
-		glVertex2f(indent_x - tickWidth, tickLocation);
-		glVertex2f(indent_x, tickLocation);
-		glEnd();
+		float vertices[] = {indent_x - tickWidth, tickLocation, indent_x, tickLocation};
+		glVertexPointer(2, GL_FLOAT, 0, &vertices);
+		glDrawArrays(GL_LINES, 0, 2);
 
 		if( tickSpeed < 1999.0 && (tickSpeed % 20)==0 )
 		{
@@ -160,10 +162,9 @@ void SpeedTape::Render()
 		{
 			tickLocation = (m_PhysicalSize.y/2) - ((i-1) * tickSpacing) - (tickSpacing - vertOffset);
 
-			glBegin(GL_LINES);
-			glVertex2f(indent_x - tickWidth, tickLocation);
-			glVertex2f(indent_x, tickLocation);
-			glEnd();
+			float vertices[] = {indent_x - tickWidth, tickLocation, indent_x, tickLocation};
+			glVertexPointer(2, GL_FLOAT, 0, &vertices);
+			glDrawArrays(GL_LINES, 0, 2);
 
 			if( (tickSpeed % 20)==0 )
 			{

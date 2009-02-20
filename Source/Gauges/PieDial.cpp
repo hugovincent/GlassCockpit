@@ -97,10 +97,9 @@ void PieDial::Render()
 	double radians = degree * DEG_TO_RAD;
 	glColor3ub(255, 255, 255);
 	glLineWidth(2.0);
-	glBegin(GL_LINE_STRIP);
-	glVertex2f(0, 0);
-	glVertex2f(R * sin(radians), R * cos(radians));
-	glEnd();
+	float vertices[] = {0, 0, R * sin(radians), R * cos(radians)};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices);
+	glDrawArrays(GL_LINE_STRIP, 0, 2);
 
 	RenderTicks(&aCircle);
 	RenderArc(&aCircle);

@@ -70,6 +70,9 @@ void RenderWindow::SetupDisplay()
 
 	// Verify that we're drawing filled polys by default
 	glPolygonMode(GL_FRONT, GL_FILL);
+	
+	// Enable vertex arrays
+	glEnableClientState(GL_VERTEX_ARRAY);
 
 	// Set line anti-aliasing
 #if 0

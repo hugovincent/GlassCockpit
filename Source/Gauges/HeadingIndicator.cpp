@@ -99,11 +99,9 @@ void HeadingIndicator::Render()
 
 	// Draw the center detent
 	glColor3ub(255,255,255);
-	glBegin(GL_LINE_LOOP);
-	glVertex2f(0.0f,radius);
-	glVertex2f(-2.8f,radius+3.25);
-	glVertex2f(2.8f,radius+3.25);
-	glEnd();
+	float vertices[] = {0.0f,radius, -2.8f,radius+3.25, 2.8f,radius+3.25};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices);
+	glDrawArrays(GL_LINE_LOOP, 0, 3);
 
 	double heading = globals->m_DataSource->GetAirframe()->GetTrue_Heading();
 
@@ -163,10 +161,9 @@ void HeadingIndicator::Render()
 		else // Otherwise it gets a short tick
 			tickLength = 2.5;
 
-		glBegin(GL_LINES);
-		glVertex2f(0,radius);
-		glVertex2f(0,radius-tickLength);
-		glEnd();
+		float vertices[] = {0,radius,  0,radius-tickLength};
+		glVertexPointer(2, GL_FLOAT, 0, &vertices);
+		glDrawArrays(GL_LINES, 0, 2);
 
 		glRotated(5.0 * indicatorDegreesPerTrueDegrees,0,0,-1);
 	}

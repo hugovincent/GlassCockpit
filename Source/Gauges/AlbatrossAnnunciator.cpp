@@ -45,28 +45,18 @@ void AlbatrossAnnunciator::Render()
 	
 	// Draw grey-blue background rectangle
 	glColor3ub(51,51,76);
-
-	// Draw the rectangle
-	glBegin(GL_POLYGON);
-	glVertex2f(0.0, 0.0);
-	glVertex2f(0.0, 21.0);
-	glVertex2f(97.5, 21.0);
-	glVertex2f(97.5, 0.0);
-	glVertex2f(0.0, 0.0);
-	glEnd();
+	float vertices[] = {0.0,0.0,   0.0, 21.0,   97.5,21.0,   97.5,0.0,   0.0,0.0};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices);
+	glDrawArrays(GL_POLYGON, 0, 5);
 
 	if (data->GetGot_Data())
 	{
 		// Draw white separator lines
 		glLineWidth(2.0);
 		glColor3ub(255, 255, 255);
-
-		glBegin(GL_LINES);
-		glVertex2f(28.0, 2.0);
-		glVertex2f(28.0, 18.0);
-		glVertex2f(70.0, 2.0);
-		glVertex2f(70.0, 18.0);
-		glEnd();
+		float vertices[] = {28.0,2.0,   28.0,18.0,   70.0,2.0,   70.0,18.0};
+		glVertexPointer(2, GL_FLOAT, 0, &vertices);
+		glDrawArrays(GL_LINES, 0, 4);
 
 		if (data->GetStatus_Active()) {
 			globals->m_FontManager->SetSize(m_Font, 5, 6);

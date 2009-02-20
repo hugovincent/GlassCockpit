@@ -63,54 +63,25 @@ void VSI::Render()
 	glColor3ub(51,51,76);
 
 	// Bottom angular part
-	glBegin(GL_POLYGON);
-	glVertex2f(0.0, 10.0);
-	glVertex2f(0.0, 40.0);
-	glVertex2f(4.5, 44.0);
-	glVertex2f(16.0, 44.0);
-	glVertex2f(16.0, 27.0);
-	glVertex2f(7.0, 10.0);
-	glEnd();
-	glBegin(GL_LINE_STRIP);
-	glVertex2f(0.0, 10.0);
-	glVertex2f(0.0, 40.0);
-	glVertex2f(4.5, 44.0);
-	glVertex2f(16.0, 44.0);
-	glVertex2f(16.0, 27.0);
-	glVertex2f(7.0, 10.0);
-	glEnd();
+	float vertices[] = {0.0,10.0,   0.0,40.0,   4.5,44.0,   16.0,44.0,   16.0,27.0,   7.0,10.0};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices);
+	glDrawArrays(GL_POLYGON, 0, 6);
+	glVertexPointer(2, GL_FLOAT, 0, &vertices);
+	glDrawArrays(GL_LINE_STRIP, 0, 6);
 
 	// Center rectangle
-	glBegin(GL_POLYGON);
-	glVertex2f(4.5, 44.0);
-	glVertex2f(4.5, 66.0);
-	glVertex2f(16.0, 66.0);
-	glVertex2f(16.0, 44.0);
-	glEnd();
-	glBegin(GL_LINE_STRIP);
-	glVertex2f(4.5, 44.0);
-	glVertex2f(4.5, 66.0);
-	glVertex2f(16.0, 66.0);
-	glVertex2f(16.0, 44.0);
-	glEnd();
+	float vertices2[] = {4.5,44.0,   4.5,66.0,   16.0,66.0,   16.0,44.0};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices2);
+	glDrawArrays(GL_POLYGON, 0, 4);
+	glVertexPointer(2, GL_FLOAT, 0, &vertices2);
+	glDrawArrays(GL_LINE_STRIP, 0, 4);
 
 	// Top angular part
-	glBegin(GL_POLYGON);
-	glVertex2f(4.5, 66.0);
-	glVertex2f(0.0, 70.0);
-	glVertex2f(0.0, 100.0);
-	glVertex2f(7.0, 100.0);
-	glVertex2f(16.0, 83.0);
-	glVertex2f(16.0, 66.0);
-	glEnd();
-	glBegin(GL_LINE_STRIP);
-	glVertex2f(4.5, 66.0);
-	glVertex2f(0.0, 70.0);
-	glVertex2f(0.0, 100.0);
-	glVertex2f(7.0, 100.0);
-	glVertex2f(16.0, 83.0);
-	glVertex2f(16.0, 66.0);
-	glEnd();
+	float vertices3[] = {4.5,66.0,   0.0,70.0,   0.0,100.0,   7.0,100.0,   16.0,83.0,   16.0,66.0};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices3);
+	glDrawArrays(GL_POLYGON, 0, 6);
+	glVertexPointer(2, GL_FLOAT, 0, &vertices3);
+	glDrawArrays(GL_LINE_STRIP, 0, 6);
 
 	glColor3ub( 255, 255, 255 );
 
@@ -141,18 +112,20 @@ void VSI::Render()
 	globals->m_FontManager->Print( 2.0, VSpeedToNeedle(-600.0),"6-",m_Font);
 
 	glLineWidth(3.5);
-	glBegin(GL_LINES);
+	float vertices4[] = {
+		
+		// Horizontal center detent
+		5.0, VSpeedToNeedle(0.0) + 1.75,
+		10.0, VSpeedToNeedle(0.0) + 1.75,
 
-	// Horizontal center detent
-	glVertex2f(5.0, VSpeedToNeedle(0.0) + 1.75);
-	glVertex2f(10.0, VSpeedToNeedle(0.0) + 1.75);
-
-	// Next draw the angled line that indicates climb rate
-	// We need to add 1.75 to the calculated needle position because of how
-	// GL interprets the line width
-	glVertex2f( 5.0, VSpeedToNeedle(Vertical_Speed_FPM) + 1.75);
-	glVertex2f( 30.0, m_NeedleCenter + 1.75);
-	glEnd();
+		// Next draw the angled line that indicates climb rate
+		// We need to add 1.75 to the calculated needle position because of how
+		// GL interprets the line width
+		5.0, VSpeedToNeedle(Vertical_Speed_FPM) + 1.75,
+		30.0, m_NeedleCenter + 1.75
+	};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices4);
+	glDrawArrays(GL_LINES, 0, 4);
 
 	glPopMatrix();
 }

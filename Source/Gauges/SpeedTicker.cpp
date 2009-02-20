@@ -53,24 +53,16 @@ void SpeedTicker::Render()
 	// Rectangular part
 	glRectd(0.0,0.0,18.0,18.0);
 	// Triangular part
-	glBegin(GL_TRIANGLES);
-	glVertex2f(18.0,7.0);
-	glVertex2f(21.0,9.0);
-	glVertex2f(18.0,11.0);
-	glEnd();
+	float vertices[] = {18.0,7.0,   21.0,9.0,   18.0,11.0};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	// White border around background
 	glColor3ub(255,255,255);
 	glLineWidth(1.0);
-	glBegin(GL_LINE_LOOP);
-	glVertex2f(0.0,0.0);
-	glVertex2f(0.0,18.0);
-	glVertex2f(18.0,18.0);
-	glVertex2f(18.0,11.0);
-	glVertex2f(21.0,9.0);
-	glVertex2f(18.0,7.0);
-	glVertex2f(18.0,0.0);
-	glEnd();
+	float vertices2[] = {0.0,0.0,   0.0,18.0,   18.0,18.0,   18.0,11.0,   21.0,9.0,   18.0,7.0,   18.0,0.0};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices2);
+	glDrawArrays(GL_LINE_LOOP, 0, 7);
 
 	char buffer[4];
 	double airspeed = globals->m_DataSource->GetAirframe()->GetAirspeed_KT();
