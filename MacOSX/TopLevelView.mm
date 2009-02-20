@@ -38,6 +38,11 @@ Globals *OpenGC::globals;
 
 - (void)awakeFromNib {
 
+	// Force default pixel format (for some reason, Interface Builder isn't doing this reliably)
+	NSOpenGLPixelFormat *pf = [NSOpenGLView defaultPixelFormat];
+	// FIXME, might want to force NSOpenGLPFAColorSize = 32, NSOpenGLPFAAlphaSize = 8
+	[self setPixelFormat:pf];
+	
 	// Construct the application
 	OpenGC::globals = new Globals();
 	
