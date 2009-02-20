@@ -5,7 +5,6 @@ _______________________________________________________________________________
 	1.	Enhancements and Changes
 _______________________________________________________________________________
 
-* Make CircleEvaluator a singleton
 * Support for fetching an updated apt.dat and nav.dat from web
 * XML-described Gauges built using GaugeComponents (deprecate the Gauge class)
 * FlightCourse is compeltely incomplete and broken

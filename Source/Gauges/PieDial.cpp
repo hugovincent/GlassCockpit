@@ -81,15 +81,16 @@ void PieDial::Render()
 		glColor3ub(255, 20, 20); // red
 
 	// Fill of the dial from 0 to the needle
-	CircleEvaluator aCircle;
-	aCircle.SetDegreesPerPoint(10.0);
-	aCircle.SetRadius(R);
-	aCircle.SetOrigin(0.0, 0.0);
-	aCircle.SetArcStartEnd(minDegrees, value / m_Max * (maxDegrees - minDegrees) + minDegrees);
+	CircleEvaluator *aCircle = globals->m_CircleEvaluator;
+	aCircle->SetDegreesPerPoint(10.0);
+	aCircle->SetRadius(R);
+	aCircle->SetOrigin(0.0, 0.0);
+	aCircle->SetArcStartEnd(minDegrees, value / m_Max * (maxDegrees - minDegrees) + minDegrees);
 
-	aCircle.AddVertex(0,0);
-	aCircle.Evaluate();
-	aCircle.Render(GL_TRIANGLE_FAN);
+	aCircle->ResetVertices();
+	aCircle->AddVertex(0,0);
+	aCircle->Evaluate();
+	aCircle->Render(GL_TRIANGLE_FAN);
 
 	// White line that is this needle of the dial
 	double degree = minDegrees + ((maxDegrees - minDegrees) * (value / (m_Max-m_Min)));
@@ -100,8 +101,8 @@ void PieDial::Render()
 	glVertexPointer(2, GL_FLOAT, 0, &vertices);
 	glDrawArrays(GL_LINE_STRIP, 0, 2);
 
-	RenderTicks(&aCircle);
-	RenderArc(&aCircle);
+	RenderTicks(aCircle);
+	RenderArc(aCircle);
 	glTranslatef(-20, -20, 0);
 
 	// white rectangle containing the text

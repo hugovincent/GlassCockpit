@@ -7,6 +7,7 @@
 #include "NavDatabase.h"
 #include "PrefManager.h"
 #include "FontManager.h"
+#include "CircleEvaluator.h"
 #include "MessageableList.h"
 
 namespace OpenGC {
@@ -21,6 +22,7 @@ public:
 	NavDatabase		*m_NavDatabase;
 	PrefManager		*m_PrefManager;
 	FontManager		*m_FontManager;
+	CircleEvaluator *m_CircleEvaluator;
 	MessageableList	*m_MessageableList;
 };
 

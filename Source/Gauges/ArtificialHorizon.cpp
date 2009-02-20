@@ -53,7 +53,7 @@ void ArtificialHorizon::Render()
 	GaugeComponent::Render();
 
 	// For drawing circles
-	CircleEvaluator aCircle;
+	CircleEvaluator *aCircle = globals->m_CircleEvaluator;
 
 	// First, store the "root" position of the gauge component
 	glMatrixMode(GL_MODELVIEW);
@@ -251,24 +251,25 @@ void ArtificialHorizon::Render()
 	// Draw in the sky color
 	glColor3ub(0,153,204);
 
-	aCircle.SetOrigin(47,49);
-	aCircle.SetRadius(46);
-	aCircle.SetDegreesPerPoint(5);
-	aCircle.SetArcStartEnd(300.0,360.0);
+	aCircle->SetOrigin(47,49);
+	aCircle->SetRadius(46);
+	aCircle->SetDegreesPerPoint(5);
+	aCircle->SetArcStartEnd(300.0,360.0);
 
-	aCircle.AddVertex(0,98);
-	aCircle.AddVertex(0,72);
-	aCircle.Evaluate();
-	aCircle.AddVertex(47,98);
-	aCircle.Render(GL_TRIANGLE_FAN);
+	aCircle->ResetVertices();
+	aCircle->AddVertex(0,98);
+	aCircle->AddVertex(0,72);
+	aCircle->Evaluate();
+	aCircle->AddVertex(47,98);
+	aCircle->Render(GL_TRIANGLE_FAN);
 
-	aCircle.SetArcStartEnd(0.0,60.0);
-	aCircle.ResetVertices();
-	aCircle.AddVertex(94,98);
-	aCircle.AddVertex(47,98);
-	aCircle.Evaluate();
-	aCircle.AddVertex(94,72);
-	aCircle.Render(GL_TRIANGLE_FAN);
+	aCircle->SetArcStartEnd(0.0,60.0);
+	aCircle->ResetVertices();
+	aCircle->AddVertex(94,98);
+	aCircle->AddVertex(47,98);
+	aCircle->Evaluate();
+	aCircle->AddVertex(94,72);
+	aCircle->Render(GL_TRIANGLE_FAN);
 #endif
 
 	//----------------The bank angle markings----------------
@@ -509,7 +510,7 @@ void ArtificialHorizon::Render()
 	glPopMatrix();
 	glPushMatrix();
 
-	aCircle.SetRadius(3.77);
+	aCircle->SetRadius(3.77);
 	//-------------------Rounded corners------------------
 	// The corners of the artificial horizon are rounded off by
 	// drawing over them in black. The overlays are essentially the
@@ -522,41 +523,41 @@ void ArtificialHorizon::Render()
 	glColor3ub(0,0,0);
 	glLineWidth(1.0);
 	// Lower left
-	aCircle.SetOrigin(3.77,3.77);
-	aCircle.SetArcStartEnd(180,270);
-	aCircle.SetDegreesPerPoint(15);
-	aCircle.ResetVertices();
-	aCircle.AddVertex(-1.0,-1.0);
-	aCircle.Evaluate();
-	aCircle.Render(GL_TRIANGLE_FAN);
-	aCircle.Render(GL_LINE_STRIP);
+	aCircle->SetOrigin(3.77,3.77);
+	aCircle->SetArcStartEnd(180,270);
+	aCircle->SetDegreesPerPoint(15);
+	aCircle->ResetVertices();
+	aCircle->AddVertex(-1.0,-1.0);
+	aCircle->Evaluate();
+	aCircle->Render(GL_TRIANGLE_FAN);
+	aCircle->Render(GL_LINE_STRIP);
 	// Upper left
-	aCircle.SetOrigin(3.77,94.23);
-	aCircle.SetArcStartEnd(270,360);
-	aCircle.SetDegreesPerPoint(15);
-	aCircle.ResetVertices();
-	aCircle.AddVertex(-1.0,99.0);
-	aCircle.Evaluate();
-	aCircle.Render(GL_TRIANGLE_FAN);
-	aCircle.Render(GL_LINE_STRIP);
+	aCircle->SetOrigin(3.77,94.23);
+	aCircle->SetArcStartEnd(270,360);
+	aCircle->SetDegreesPerPoint(15);
+	aCircle->ResetVertices();
+	aCircle->AddVertex(-1.0,99.0);
+	aCircle->Evaluate();
+	aCircle->Render(GL_TRIANGLE_FAN);
+	aCircle->Render(GL_LINE_STRIP);
 	// Upper right
-	aCircle.SetOrigin(90.23,94.23);
-	aCircle.SetArcStartEnd(0,90);
-	aCircle.SetDegreesPerPoint(15);
-	aCircle.ResetVertices();
-	aCircle.AddVertex(95.0,99.0);
-	aCircle.Evaluate();
-	aCircle.Render(GL_TRIANGLE_FAN);
-	aCircle.Render(GL_LINE_STRIP);
+	aCircle->SetOrigin(90.23,94.23);
+	aCircle->SetArcStartEnd(0,90);
+	aCircle->SetDegreesPerPoint(15);
+	aCircle->ResetVertices();
+	aCircle->AddVertex(95.0,99.0);
+	aCircle->Evaluate();
+	aCircle->Render(GL_TRIANGLE_FAN);
+	aCircle->Render(GL_LINE_STRIP);
 	//Lower right
-	aCircle.SetOrigin(90.23,3.77);
-	aCircle.SetArcStartEnd(90,180);
-	aCircle.SetDegreesPerPoint(15);
-	aCircle.ResetVertices();
-	aCircle.AddVertex(95.0,-1);
-	aCircle.Evaluate();
-	aCircle.Render(GL_TRIANGLE_FAN);
-	aCircle.Render(GL_LINE_STRIP);
+	aCircle->SetOrigin(90.23,3.77);
+	aCircle->SetArcStartEnd(90,180);
+	aCircle->SetDegreesPerPoint(15);
+	aCircle->ResetVertices();
+	aCircle->AddVertex(95.0,-1);
+	aCircle->Evaluate();
+	aCircle->Render(GL_TRIANGLE_FAN);
+	aCircle->Render(GL_LINE_STRIP);
 
 	// Finally, restore the modelview matrix to what we received
 	glPopMatrix();

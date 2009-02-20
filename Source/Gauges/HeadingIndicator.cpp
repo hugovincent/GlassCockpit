@@ -81,18 +81,19 @@ void HeadingIndicator::Render()
 	glLineWidth( 1.5 );
 
 	// Set up the circle
-	CircleEvaluator aCircle;
-	aCircle.SetRadius(radius);
-	aCircle.SetArcStartEnd(300,60);
-	aCircle.SetDegreesPerPoint(2.5);
-	aCircle.SetOrigin(0.0, 0.0);
+	CircleEvaluator *aCircle = globals->m_CircleEvaluator;
+	aCircle->SetRadius(radius);
+	aCircle->SetArcStartEnd(300,60);
+	aCircle->SetDegreesPerPoint(2.5);
+	aCircle->SetOrigin(0.0, 0.0);
 
 	// Draw the circle
-	aCircle.AddVertex(0,0);
-	aCircle.Evaluate();
-	aCircle.Render(GL_TRIANGLE_FAN);
+	aCircle->ResetVertices();
+	aCircle->AddVertex(0,0);
+	aCircle->Evaluate();
+	aCircle->Render(GL_TRIANGLE_FAN);
 	glLineWidth(1.0);
-	aCircle.Render(GL_LINE_STRIP); // and again for antialiasing
+	aCircle->Render(GL_LINE_STRIP); // and again for antialiasing
 
 	// Draw the center detent
 	glColor3ub(255,255,255);

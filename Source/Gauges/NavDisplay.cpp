@@ -112,33 +112,34 @@ void NavDisplay::Render()
 	glLineWidth(1.5);
 	
 	// Range circles
-	CircleEvaluator aCircle;
-	aCircle.SetDegreesPerPoint(5.0);
-	aCircle.SetRadius(40.0);
-	aCircle.SetOrigin(CENTER_X, CENTER_Y);
-	aCircle.SetArcStartEnd(0.0, 360.0);
+	CircleEvaluator *aCircle = globals->m_CircleEvaluator;
+	aCircle->SetDegreesPerPoint(5.0);
+	aCircle->SetRadius(40.0);
+	aCircle->SetOrigin(CENTER_X, CENTER_Y);
+	aCircle->SetArcStartEnd(0.0, 360.0);
 	
-	aCircle.Evaluate();
-	aCircle.Render(GL_LINE_STRIP);
+	aCircle->ResetVertices();
+	aCircle->Evaluate();
+	aCircle->Render(GL_LINE_STRIP);
 	
-	aCircle.SetRadius(80.0);
-	aCircle.SetArcStartEnd(0.0, 360.0);
-	aCircle.ResetVertices();
-	aCircle.Evaluate();
-	aCircle.Render(GL_LINE_STRIP);
+	aCircle->SetRadius(80.0);
+	aCircle->SetArcStartEnd(0.0, 360.0);
+	aCircle->ResetVertices();
+	aCircle->Evaluate();
+	aCircle->Render(GL_LINE_STRIP);
 
-	aCircle.SetDegreesPerPoint(2.5);
-	aCircle.SetRadius(120.0);
-	aCircle.SetArcStartEnd(300.0, 60.0);
-	aCircle.ResetVertices();
-	aCircle.Evaluate();
-	aCircle.Render(GL_LINE_STRIP);
+	aCircle->SetDegreesPerPoint(2.5);
+	aCircle->SetRadius(120.0);
+	aCircle->SetArcStartEnd(300.0, 60.0);
+	aCircle->ResetVertices();
+	aCircle->Evaluate();
+	aCircle->Render(GL_LINE_STRIP);
 	
-	aCircle.SetRadius(130.0);
-	aCircle.SetArcStartEnd(300.0, 60.0);
-	aCircle.ResetVertices();
-	aCircle.Evaluate();
-	aCircle.Render(GL_LINE_STRIP);
+	aCircle->SetRadius(130.0);
+	aCircle->SetArcStartEnd(300.0, 60.0);
+	aCircle->ResetVertices();
+	aCircle->Evaluate();
+	aCircle->Render(GL_LINE_STRIP);
 	
 	///////////////////////////////////////////////////////////////////////////
 	// Draw Layer 2: the Point of Interest marker (Navaids, Airports)

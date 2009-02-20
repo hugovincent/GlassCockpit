@@ -87,15 +87,16 @@ void MarkedDial::Render()
 
 	// gauge
 	glColor3ub(51, 51, 76);
-	CircleEvaluator aCircle;
-	aCircle.SetDegreesPerPoint(10.0);
-	aCircle.SetRadius(R);
-	aCircle.SetOrigin(0.0, 0.0);
-	aCircle.SetArcStartEnd(minDegrees, value / m_Max * (maxDegreesUse360 - minDegrees) + minDegrees);
+	CircleEvaluator *aCircle = globals->m_CircleEvaluator;
+	aCircle->SetDegreesPerPoint(10.0);
+	aCircle->SetRadius(R);
+	aCircle->SetOrigin(0.0, 0.0);
+	aCircle->SetArcStartEnd(minDegrees, value / m_Max * (maxDegreesUse360 - minDegrees) + minDegrees);
 
-	aCircle.AddVertex(0,0);
-	aCircle.Evaluate();
-	aCircle.Render(GL_TRIANGLE_FAN);
+	aCircle->ResetVertices();
+	aCircle->AddVertex(0,0);
+	aCircle->Evaluate();
+	aCircle->Render(GL_TRIANGLE_FAN);
 
 	/*qobj = gluNewQuadric();
 	  gluPartialDisk(qobj, 0, R+1, 50, 1, minDegrees, value / m_Max * (maxDegreesUse360-minDegrees));
@@ -114,12 +115,12 @@ void MarkedDial::Render()
 
 	//circle outside
 	glColor3ub(255, 255, 255);
-	aCircle.SetArcStartEnd(minDegrees, maxDegrees);
+	aCircle->SetArcStartEnd(minDegrees, maxDegrees);
 
 	// FIXME enable mitering
-	aCircle.ResetVertices();
-	aCircle.Evaluate();
-	aCircle.Render(GL_LINE_STRIP);
+	aCircle->ResetVertices();
+	aCircle->Evaluate();
+	aCircle->Render(GL_LINE_STRIP);
 
 	/*qobj = gluNewQuadric();
 	  gluPartialDisk(qobj, R, R+1, 50, 1, minDegrees, maxDegreesUse360-minDegrees);
