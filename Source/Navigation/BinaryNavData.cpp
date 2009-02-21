@@ -115,11 +115,16 @@ void BinaryNavData::ConvertNavaidData(const string& inFileName,
 	// Throw out the first two header lines
 	getline(inputFile, lineData);
 	getline(inputFile, lineData);
+	LogPrintf("Nav Data Version: %s\n", lineData.c_str());
 
 	while (inputFile.eof() != 1)
 	{
 		// Read the line
 		getline(inputFile, lineData);
+		
+		// Skip blank lines
+		if (lineData.length() == 1 && (lineData[0] == '\r' || lineData[0] == '\n'))
+			continue;
 
 		// Find what type of navaid it is
 		int navaidType;
@@ -132,13 +137,13 @@ void BinaryNavData::ConvertNavaidData(const string& inFileName,
 		}
 
 		// Potential data that can be loaded
-		double lat, lon, elev, freq, typeSpecific;
+		float lat, lon, elev, freq, range, typeSpecific;
 		string id;
 
 		// Parse the line
 		std::istringstream inputStream(lineData);
 		inputStream >> navaidType >> lat >> lon >> elev >> freq >> 
-			typeSpecific >> id;
+			range >> typeSpecific >> id;
 
 		// Navaid specific data handling:
 		switch(navaidType)
@@ -182,7 +187,7 @@ void BinaryNavData::ConvertNavaidData(const string& inFileName,
 		numNavaids += 1;
 	}
 
-	LogPrintf("%d navaids read, %d bytes written.\n", numNavaids, outSize);
+	LogPrintf("%d navaids read, %d kBytes written.\n", numNavaids, outSize / 1024);
 
 	inputFile.close();
 	fclose(outputFile);
