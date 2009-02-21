@@ -12,6 +12,7 @@ using namespace std;
 
 namespace OpenGC {
 
+/** Tested with X-Plane APT data version 850, release 2009.1 */
 void BinaryNavData::ConvertAirportData(const string& inFileName, 
 		const string& outFileName)
 {
@@ -27,8 +28,10 @@ void BinaryNavData::ConvertAirportData(const string& inFileName,
 	FILE* outputFile = fopen(outFileName.c_str(), "w");
 	Assert(outputFile != NULL, "can't open output file");
 
-	// Throw out the first line, which is a copyright notice
+	// Throw out the first two header lines
 	getline(inputFile, lineData);
+	getline(inputFile, lineData);
+	LogPrintf("Airport Data Version: %s\n", lineData.c_str());
 
 	while (inputFile.eof() != 1)
 	{
@@ -38,9 +41,13 @@ void BinaryNavData::ConvertAirportData(const string& inFileName,
 		{
 			// Read the line
 			getline(inputFile, lineData);
-			sscanf(lineData.c_str(), "%d", &airportHeader);
+			
+			// Skip blank lines
+			if (lineData.length() == 1 && (lineData[0] == '\r' || lineData[0] == '\n'))
+				continue;
 
 			// Airports are coded as 1
+			sscanf(lineData.c_str(), "%d", &airportHeader);
 			if (airportHeader == 1)
 			{
 				foundAnAirport = true;
@@ -55,9 +62,7 @@ void BinaryNavData::ConvertAirportData(const string& inFileName,
 
 		// If we're here without finding an airport, we've reached the EOF
 		if (foundAnAirport == false)
-		{
 			continue;
-		}
 
 		// Potential data that can be loaded
 		double lat, lon, elev;
@@ -68,14 +73,44 @@ void BinaryNavData::ConvertAirportData(const string& inFileName,
 		istringstream inputStream(lineData);
 		inputStream >> airportHeader >> elev >> hasControlTower >> 
 			displayDefaultBuildings >> id;
+		Assert(airportHeader == 1, "unexpected file format");
 		
-		// Get the next line, which is one end of the first runway.
-		// This is not a great approximation of the actual airport 
-		// location, but it's simple.
-		getline(inputFile, lineData);
-		inputStream.str(lineData);
-		inputStream >> airportHeader >> lat >> lon;
-		Assert(airportHeader == 10, "unexpected file format");
+		// Search for a runway/helipad/etc
+		do
+		{
+			getline(inputFile, lineData);
+			sscanf(lineData.c_str(), "%d", &airportHeader);
+		}
+		while (airportHeader != 10 && airportHeader != 100 && airportHeader != 101 && airportHeader != 102);
+			
+		if (airportHeader == 10) // 810 version
+		{
+			// This is one end of the first runway, which is not a great 
+			// approximation of the actual airport location, but it's simple.
+			inputStream.str(lineData);
+			inputStream >> airportHeader >> lat >> lon;
+		}
+		else if (airportHeader == 100) // 850 version runway
+		{
+			inputStream.str(lineData);
+			// Info we have to parse before we get to lat/long
+			float runwayLength, smoothness;
+			int surfaceCode, shoulderCode, centerLights, edgeLights, distanceSigns;
+			string runwayNumber;
+			inputStream >> airportHeader >> runwayLength >> surfaceCode >>
+				shoulderCode >> smoothness >> centerLights >> edgeLights >>
+				distanceSigns >> runwayNumber >> lat >> lon;
+		}
+		else if (airportHeader == 101) // 850 version seaplane water runway
+		{
+			printf("Ignoring v850 seaplane water runway\n");
+			continue; // FIXME
+		}
+		else if (airportHeader == 102) // 850 version helipad
+		{
+			printf("Ignoring v850 helipad\n");
+			continue; // FIXME
+		}
 		
 		// Store the data in the struct
 		apt->elev = elev / OpenGC::METERS_TO_FEET;
@@ -97,6 +132,7 @@ void BinaryNavData::ConvertAirportData(const string& inFileName,
 	delete apt;
 }
 
+/** Tested with X-Plane NAV data version 810, release 2009.1 */
 void BinaryNavData::ConvertNavaidData(const string& inFileName, 
 		const string& outFileName)
 {
