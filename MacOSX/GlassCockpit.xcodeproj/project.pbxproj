@@ -16,7 +16,6 @@
 		9A03B1C90F400BF40070A595 /* Font_FileStore.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A03B1860F4006F00070A595 /* Font_FileStore.cpp */; };
 		9A03B1CD0F400C170070A595 /* libfreetype.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AAE1EDA0F3B8AA200B9CFFA /* libfreetype.dylib */; };
 		9A06B1A80F4E8EBD0003733D /* shptree.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A06B1A30F4E8EBD0003733D /* shptree.c */; };
-		9A06B1A90F4E8EBD0003733D /* ShapeFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A06B1A40F4E8EBD0003733D /* ShapeFile.cpp */; };
 		9A06B1AA0F4E8EBD0003733D /* shpopen.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A06B1A50F4E8EBD0003733D /* shpopen.c */; };
 		9A06B1AB0F4E8EBD0003733D /* dbfopen.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A06B1A70F4E8EBD0003733D /* dbfopen.c */; };
 		9A8865AB0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */; };
@@ -77,6 +76,7 @@
 		9AAE1FE50F3BA86E00B9CFFA /* ArtificialHorizon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FCF0F3BA86E00B9CFFA /* ArtificialHorizon.cpp */; };
 		9AAE1FE60F3BA86E00B9CFFA /* AltitudeTicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FD20F3BA86E00B9CFFA /* AltitudeTicker.cpp */; };
 		9AAE1FE70F3BA86E00B9CFFA /* VSI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FD30F3BA86E00B9CFFA /* VSI.cpp */; };
+		9AC7C2090F500D3100F87CAE /* ShapeFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AC7C2070F500D3100F87CAE /* ShapeFile.cpp */; };
 		9AE411BA0F3993FD00D539E5 /* TopLevelView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9AE411B90F3993FD00D539E5 /* TopLevelView.mm */; };
 		9AE411C00F39973C00D539E5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE411BF0F39973C00D539E5 /* OpenGL.framework */; };
 		9AFE33690F3E919D00164E90 /* Font_GLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AFE33680F3E919D00164E90 /* Font_GLTexture.cpp */; };
@@ -93,18 +93,16 @@
 		32CA4F630368D1EE00C91783 /* GlassCockpit_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlassCockpit_Prefix.pch; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* GlassCockpit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlassCockpit.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		9A03B1850F4006F00070A595 /* Font_FileStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Font_FileStore.h; sourceTree = "<group>"; };
-		9A03B1860F4006F00070A595 /* Font_FileStore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Font_FileStore.cpp; sourceTree = "<group>"; };
-		9A03B1B20F400A940070A595 /* FontStore_Make.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FontStore_Make.cpp; sourceTree = "<group>"; };
+		9A03B1850F4006F00070A595 /* Font_FileStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Font_FileStore.h; path = ../Source/Base/Font_FileStore.h; sourceTree = "<group>"; };
+		9A03B1860F4006F00070A595 /* Font_FileStore.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Font_FileStore.cpp; path = ../Source/Base/Font_FileStore.cpp; sourceTree = "<group>"; };
+		9A03B1B20F400A940070A595 /* FontStore_Make.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = FontStore_Make.cpp; path = ../Source/Base/FontStore_Make.cpp; sourceTree = "<group>"; };
 		9A03B1B90F400AD40070A595 /* FontStore_Make */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = FontStore_Make; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A06B1A30F4E8EBD0003733D /* shptree.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = shptree.c; path = ../Source/Navigation/ShapeLib/shptree.c; sourceTree = SOURCE_ROOT; };
-		9A06B1A40F4E8EBD0003733D /* ShapeFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShapeFile.cpp; path = ../Source/Navigation/ShapeLib/ShapeFile.cpp; sourceTree = SOURCE_ROOT; };
 		9A06B1A50F4E8EBD0003733D /* shpopen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = shpopen.c; path = ../Source/Navigation/ShapeLib/shpopen.c; sourceTree = SOURCE_ROOT; };
 		9A06B1A60F4E8EBD0003733D /* shapefil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shapefil.h; path = ../Source/Navigation/ShapeLib/shapefil.h; sourceTree = SOURCE_ROOT; };
 		9A06B1A70F4E8EBD0003733D /* dbfopen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dbfopen.c; path = ../Source/Navigation/ShapeLib/dbfopen.c; sourceTree = SOURCE_ROOT; };
-		9A06B1AC0F4E8EDB0003733D /* ShapeFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShapeFile.h; path = ../Source/Navigation/ShapeLib/ShapeFile.h; sourceTree = SOURCE_ROOT; };
 		9A5CE0400F4A7C2A00796599 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TODO; path = ../TODO; sourceTree = SOURCE_ROOT; };
-		9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Font_FileStore_BinaryIO.cpp; sourceTree = "<group>"; };
+		9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Font_FileStore_BinaryIO.cpp; path = ../Source/Base/Font_FileStore_BinaryIO.cpp; sourceTree = "<group>"; };
 		9AA14FDA0F3E747700DCA729 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = ../Data/Fonts; sourceTree = SOURCE_ROOT; };
 		9AA14FDB0F3E747700DCA729 /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Navigation; path = ../Data/Navigation; sourceTree = SOURCE_ROOT; };
 		9AA14FDC0F3E747700DCA729 /* Preferences.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Preferences.xml; path = ../Data/Preferences.xml; sourceTree = SOURCE_ROOT; };
@@ -220,11 +218,13 @@
 		9AAE1FD30F3BA86E00B9CFFA /* VSI.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = VSI.cpp; path = ../Source/Gauges/VSI.cpp; sourceTree = SOURCE_ROOT; };
 		9AAE1FD40F3BA86E00B9CFFA /* GenericBargraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GenericBargraph.h; path = ../Source/Gauges/GenericBargraph.h; sourceTree = SOURCE_ROOT; };
 		9AAE1FD50F3BA86E00B9CFFA /* PieDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PieDial.h; path = ../Source/Gauges/PieDial.h; sourceTree = SOURCE_ROOT; };
+		9AC7C2070F500D3100F87CAE /* ShapeFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShapeFile.cpp; path = ../Source/Navigation/ShapeFile.cpp; sourceTree = SOURCE_ROOT; };
+		9AC7C2080F500D3100F87CAE /* ShapeFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShapeFile.h; path = ../Source/Navigation/ShapeFile.h; sourceTree = SOURCE_ROOT; };
 		9AE411B80F3993FD00D539E5 /* TopLevelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopLevelView.h; sourceTree = "<group>"; };
 		9AE411B90F3993FD00D539E5 /* TopLevelView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopLevelView.mm; sourceTree = "<group>"; };
 		9AE411BF0F39973C00D539E5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
-		9AFE33670F3E919D00164E90 /* Font_GLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Font_GLTexture.h; sourceTree = "<group>"; };
-		9AFE33680F3E919D00164E90 /* Font_GLTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Font_GLTexture.cpp; sourceTree = "<group>"; };
+		9AFE33670F3E919D00164E90 /* Font_GLTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Font_GLTexture.h; path = ../Source/Base/Font_GLTexture.h; sourceTree = "<group>"; };
+		9AFE33680F3E919D00164E90 /* Font_GLTexture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Font_GLTexture.cpp; path = ../Source/Base/Font_GLTexture.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,11 +254,6 @@
 			children = (
 				9AE411B80F3993FD00D539E5 /* TopLevelView.h */,
 				9AE411B90F3993FD00D539E5 /* TopLevelView.mm */,
-				9AFE33670F3E919D00164E90 /* Font_GLTexture.h */,
-				9AFE33680F3E919D00164E90 /* Font_GLTexture.cpp */,
-				9A03B1850F4006F00070A595 /* Font_FileStore.h */,
-				9A03B1860F4006F00070A595 /* Font_FileStore.cpp */,
-				9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -312,7 +307,6 @@
 			children = (
 				32CA4F630368D1EE00C91783 /* GlassCockpit_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
-				9A03B1B20F400A940070A595 /* FontStore_Make.cpp */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -341,8 +335,6 @@
 			isa = PBXGroup;
 			children = (
 				9A06B1A30F4E8EBD0003733D /* shptree.c */,
-				9A06B1AC0F4E8EDB0003733D /* ShapeFile.h */,
-				9A06B1A40F4E8EBD0003733D /* ShapeFile.cpp */,
 				9A06B1A50F4E8EBD0003733D /* shpopen.c */,
 				9A06B1A60F4E8EBD0003733D /* shapefil.h */,
 				9A06B1A70F4E8EBD0003733D /* dbfopen.c */,
@@ -405,8 +397,14 @@
 				9AAE1E800F3AF79900B9CFFA /* Debug.h */,
 				9AAE1E810F3AF87400B9CFFA /* Font.h */,
 				9AAE1E820F3AF87400B9CFFA /* Font.cpp */,
+				9AFE33670F3E919D00164E90 /* Font_GLTexture.h */,
+				9AFE33680F3E919D00164E90 /* Font_GLTexture.cpp */,
+				9A03B1850F4006F00070A595 /* Font_FileStore.h */,
+				9A03B1860F4006F00070A595 /* Font_FileStore.cpp */,
+				9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */,
 				9AAE1E840F3AF87F00B9CFFA /* FontManager.h */,
 				9AAE1E850F3AF87F00B9CFFA /* FontManager.cpp */,
+				9A03B1B20F400A940070A595 /* FontStore_Make.cpp */,
 				9AAE1EFC0F3B8B0C00B9CFFA /* Gauge.h */,
 				9AAE1EFB0F3B8B0C00B9CFFA /* Gauge.cpp */,
 				9AAE1EF50F3B8B0100B9CFFA /* GaugeComponent.h */,
@@ -461,6 +459,8 @@
 				9AAE1E240F3AF68E00B9CFFA /* NavaidList.cpp */,
 				9AAE1E320F3AF68E00B9CFFA /* NavDatabase.h */,
 				9AAE1E3B0F3AF68E00B9CFFA /* NavDatabase.cpp */,
+				9AC7C2080F500D3100F87CAE /* ShapeFile.h */,
+				9AC7C2070F500D3100F87CAE /* ShapeFile.cpp */,
 				9AAE1E290F3AF68E00B9CFFA /* WaypointGeoObj.h */,
 				9AAE1E230F3AF68E00B9CFFA /* WaypointGeoObj.cpp */,
 				9AAE1E250F3AF68E00B9CFFA /* WaypointList.h */,
@@ -643,9 +643,9 @@
 				9A03B1870F4006F00070A595 /* Font_FileStore.cpp in Sources */,
 				9A8865AB0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp in Sources */,
 				9A06B1A80F4E8EBD0003733D /* shptree.c in Sources */,
-				9A06B1A90F4E8EBD0003733D /* ShapeFile.cpp in Sources */,
 				9A06B1AA0F4E8EBD0003733D /* shpopen.c in Sources */,
 				9A06B1AB0F4E8EBD0003733D /* dbfopen.c in Sources */,
+				9AC7C2090F500D3100F87CAE /* ShapeFile.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

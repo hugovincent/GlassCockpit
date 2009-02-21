@@ -10,6 +10,8 @@ _______________________________________________________________________________
 * FlightCourse is compeltely incomplete and broken
 * FlightGear data source needs to be finished, and remove the dependency on Plib
 * Navigation display
+	* raster maps
+	* vector maps/geography using ShapeLib
 	* compass text
 	* overlay text area:
 		* time & distance to waypoint
