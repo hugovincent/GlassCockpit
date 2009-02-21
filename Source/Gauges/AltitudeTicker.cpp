@@ -51,18 +51,18 @@ void AltitudeTicker::Render()
 	// Draw black background
 	glColor3ub(0,0,0);
 	// Rectangular part
-	float vertices[] = {3.5,0.0,   28.0,0.0,   28.0,18.0,   3.5,18.0};
+	static const float vertices[] = {3.5,0.0,   28.0,0.0,   28.0,18.0,   3.5,18.0};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices);
 	glDrawArrays(GL_QUADS, 0, 4);
 	// Triangular part
-	float vertices1[] = {0.0,9.0,   3.5,6.0,   3.5,12.0};
+	static const float vertices1[] = {0.0,9.0,   3.5,6.0,   3.5,12.0};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices1);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	// White border around background
 	glColor3ub(255,255,255);
 	glLineWidth(1.0);
-	float vertices2[] = {
+	static const float vertices2[] = {
 		0.0,9.0,   3.5,12.0,   3.5,18.0,   28.0,18.0,
 		28.0,0.0,  3.5,0.0,    3.5,6.0
 	};
@@ -97,8 +97,8 @@ void AltitudeTicker::Render()
 		// Draw a cross-hatched box
 		glColor3ub(0,179,0); // green
 		glLineWidth(2.0);
-		float vertices[] = {5.0,7.6666, 6.0,5.0, 5.0,10.3333, 7.0,5.0, 5.0,13.0,
-			8.0,5.0, 6.0,13.0, 8.0,7.6666, 7.0,13.0, 8.0,10.3333};
+		static const float vertices[] = {5.0,7.6666, 6.0,5.0, 5.0,10.3333, 7.0,5.0,
+			5.0,13.0, 8.0,5.0, 6.0,13.0, 8.0,7.6666, 7.0,13.0, 8.0,10.3333};
 		glVertexPointer(2, GL_FLOAT, 0, &vertices);
 		glDrawArrays(GL_LINES, 0, 10);
 		glColor3ub(255,255,255);

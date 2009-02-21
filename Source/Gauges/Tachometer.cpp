@@ -53,7 +53,7 @@ void Tachometer::RenderTicks(CircleEvaluator *circ)
 	double degreeyellow = minDegrees + ((maxDegrees - minDegrees) * percentagey);
 	glColor3ub(247, 231, 8);
 	double radians = degreeyellow * DEG_TO_RAD;
-	float vertices[] = {
+	const float vertices[] = {
 		R * sin(radians), R * cos(radians),
 		(R + 4) * sin(radians), (R + 4) * cos(radians)
 	};
@@ -65,7 +65,7 @@ void Tachometer::RenderTicks(CircleEvaluator *circ)
 	double degreered =  minDegrees + ((maxDegrees - minDegrees) * percentager);
 	radians = degreered * DEG_TO_RAD;
 	glColor3ub(255, 0, 0);
-	float vertices2[] = {
+	const float vertices2[] = {
 		R * sin(radians), R * cos(radians),
 		(R + 4) * sin(radians), (R + 5) * cos(radians)
 	};

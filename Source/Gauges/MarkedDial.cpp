@@ -102,7 +102,7 @@ void MarkedDial::Render()
 	double degree = minDegrees + ((maxDegreesUse360 - minDegrees) * percentage);
 	radians = degree * DEG_TO_RAD;
 	glColor3ub(255, 255, 255);
-	float vertices[] = {0,0,   R*sin(radians),R*cos(radians)};
+	const float vertices[] = {0,0,   R*sin(radians),R*cos(radians)};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices);
 	glDrawArrays(GL_LINE_STRIP, 0, 2);
 
@@ -128,7 +128,7 @@ void MarkedDial::Render()
 		degreev =  minDegrees+ ((maxDegreesUse360- minDegrees)*percentagev);
 		radians=degreev * DEG_TO_RAD;
 		glColor3ub(255, 255, 255);
-		float vertices[] = {R*sin(radians),R*cos(radians),   (R-2)*sin(radians),(R-2)*cos(radians)};
+		const float vertices[] = {R*sin(radians),R*cos(radians),   (R-2)*sin(radians),(R-2)*cos(radians)};
 		glVertexPointer(2, GL_FLOAT, 0, &vertices);
 		glDrawArrays(GL_LINE_STRIP, 0, 2);
 		

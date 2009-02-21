@@ -51,18 +51,18 @@ void SpeedTicker::Render()
 	// Draw black background
 	glColor3ub(0,0,0);
 	// Rectangular part
-	float vertices[] = {0.0,0.0,   18.0,0.0,   18.0,18.0,   0.0,18.0};
+	static const float vertices[] = {0.0,0.0,   18.0,0.0,   18.0,18.0,   0.0,18.0};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices);
 	glDrawArrays(GL_QUADS, 0, 4);
 	// Triangular part
-	float vertices1[] = {18.0,7.0,   21.0,9.0,   18.0,11.0};
+	static const float vertices1[] = {18.0,7.0,   21.0,9.0,   18.0,11.0};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices1);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	// White border around background
 	glColor3ub(255,255,255);
 	glLineWidth(1.0);
-	float vertices2[] = {0.0,0.0,   0.0,18.0,   18.0,18.0,   18.0,11.0,   21.0,9.0,   18.0,7.0,   18.0,0.0};
+	static const float vertices2[] = {0.0,0.0,   0.0,18.0,   18.0,18.0,   18.0,11.0,   21.0,9.0,   18.0,7.0,   18.0,0.0};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices2);
 	glDrawArrays(GL_LINE_LOOP, 0, 7);
 

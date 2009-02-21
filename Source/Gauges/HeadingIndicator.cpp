@@ -97,7 +97,7 @@ void HeadingIndicator::Render()
 
 	// Draw the center detent
 	glColor3ub(255,255,255);
-	float vertices[] = {0.0f,radius, -2.8f,radius+3.25, 2.8f,radius+3.25};
+	const float vertices[] = {0.0f,radius, -2.8f,radius+3.25, 2.8f,radius+3.25};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices);
 	glDrawArrays(GL_LINE_LOOP, 0, 3);
 
@@ -159,7 +159,7 @@ void HeadingIndicator::Render()
 		else // Otherwise it gets a short tick
 			tickLength = 2.5;
 
-		float vertices[] = {0,radius,  0,radius-tickLength};
+		const float vertices[] = {0,radius,  0,radius-tickLength};
 		glVertexPointer(2, GL_FLOAT, 0, &vertices);
 		glDrawArrays(GL_LINES, 0, 2);
 

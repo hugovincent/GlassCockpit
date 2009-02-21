@@ -64,7 +64,7 @@ void SpeedTape::Render()
 	glColor3ub(51,51,76);
 
 	// Draw the background rectangle
-	float vertices[] = {
+	static const float vertices[] = {
 		0.0, 0.0,
 		0.0, m_PhysicalSize. y,
 		indent_x, m_PhysicalSize.y,
@@ -113,7 +113,7 @@ void SpeedTape::Render()
 		tickSpeed = (int)(nextHighestAirspeed + i * 10.0);
 		tickLocation = (m_PhysicalSize.y/2) + i * tickSpacing + vertOffset;
 
-		float vertices[] = {indent_x - tickWidth, tickLocation, indent_x, tickLocation};
+		const float vertices[] = {indent_x - tickWidth, tickLocation, indent_x, tickLocation};
 		glVertexPointer(2, GL_FLOAT, 0, &vertices);
 		glDrawArrays(GL_LINES, 0, 2);
 
@@ -162,7 +162,7 @@ void SpeedTape::Render()
 		{
 			tickLocation = (m_PhysicalSize.y/2) - ((i-1) * tickSpacing) - (tickSpacing - vertOffset);
 
-			float vertices[] = {indent_x - tickWidth, tickLocation, indent_x, tickLocation};
+			const float vertices[] = {indent_x - tickWidth, tickLocation, indent_x, tickLocation};
 			glVertexPointer(2, GL_FLOAT, 0, &vertices);
 			glDrawArrays(GL_LINES, 0, 2);
 

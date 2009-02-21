@@ -58,8 +58,7 @@ void GenericBargraph::Render()
 	if (value > m_Max)
 		value = m_Max;
 
-	//double boxY = 25.0, boxX = 6.0, stripeX = 3.0, boxOffsetX = 4.0, gapY = 1.5;
-	double boxY = 25.0, boxX = 6.0, stripeX = 3.0, boxOffsetX = 2.0, gapY = 1.5;
+	const double boxY = 25.0, boxX = 6.0, stripeX = 3.0, boxOffsetX = 2.0, gapY = 1.5;
 
 	glMatrixMode(GL_MODELVIEW);
 	glPushMatrix();
@@ -75,7 +74,7 @@ void GenericBargraph::Render()
 
 	// draw the filled box
 	double fillY = (value - m_Min) / m_Max * boxY;
-	float vertices[] = {stripeX,0.0,   boxX+stripeX,0.0,   boxX+stripeX,fillY,   stripeX,fillY};
+	const float vertices[] = {stripeX,0.0,   boxX+stripeX,0.0,   boxX+stripeX,fillY,   stripeX,fillY};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices);
 	glDrawArrays(GL_POLYGON, 0, 4);
 
@@ -83,25 +82,25 @@ void GenericBargraph::Render()
 	double yellowStripeY = (m_MaxYellow - m_Min) / m_Max * boxY;
 	glColor3ub(247, 231, 8);
 	glLineWidth(2.0);
-	float vertices2[] = {0.0,yellowStripeY,   stripeX,yellowStripeY};
+	const float vertices2[] = {0.0,yellowStripeY,   stripeX,yellowStripeY};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices2);
 	glDrawArrays(GL_LINES, 0, 2);
 
 	// red stripe
 	double redStripeY = (m_MaxRed - m_Min) / m_Max * boxY;
 	glColor3ub(255, 0, 0);
-	float vertices3[] = {0.0,redStripeY,   stripeX,redStripeY};
+	const float vertices3[] = {0.0,redStripeY,   stripeX,redStripeY};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices3);
 	glDrawArrays(GL_LINES, 0, 2);
 
 	// white indicator line
 	glColor3ub(255, 255, 255);
-	float vertices4[] = {stripeX,fillY,   boxX+stripeX,fillY};
+	const float vertices4[] = {stripeX,fillY,   boxX+stripeX,fillY};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices4);
 	glDrawArrays(GL_LINES, 0, 2);
 
 	// white outline
-	float vertices5[] = {boxX+stripeX,boxY,   boxX+stripeX,0.0,   stripeX,0.0,   stripeX,boxY};
+	static const float vertices5[] = {boxX+stripeX,boxY,   boxX+stripeX,0.0,   stripeX,0.0,   stripeX,boxY};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices5);
 	glDrawArrays(GL_LINE_STRIP, 0, 4);
 
@@ -110,7 +109,7 @@ void GenericBargraph::Render()
 	// white rectangle containing the text
 	glColor3ub(255, 255, 255);
 	glLineWidth(1.0);
-	float vertices6[] = {0.0,boxY,   0.0,boxY+8.5,   16.0,boxY+8.5,   16.0,boxY};
+	static const float vertices6[] = {0.0,boxY,   0.0,boxY+8.5,   16.0,boxY+8.5,   16.0,boxY};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices6);
 	glDrawArrays(GL_LINE_LOOP, 0, 4);
 

@@ -226,7 +226,7 @@ bool Gauge::ClickTest(int button, int state, int x, int y)
 
 void Gauge::DrawGaugeOutline()
 {
-	float vertices[] = {
+	const float vertices[] = {
 		0.0, 0.0,
 		0.0, m_PhysicalSize.y,
 		m_PhysicalSize.x, m_PhysicalSize.y,

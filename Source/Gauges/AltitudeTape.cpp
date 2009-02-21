@@ -59,7 +59,7 @@ void AltitudeTape::Render()
 	glColor3ub(51,51,76);
 
 	// Draw the background rectangle
-	float vertices[] = {
+	const float vertices[] = {
 		0.0, 0.0,
 		0.0, m_PhysicalSize. y,
 		m_PhysicalSize.x, m_PhysicalSize.y,
@@ -108,7 +108,7 @@ void AltitudeTape::Render()
 		tickLocation = (m_PhysicalSize.y/2) + i*tickSpacing+vertOffset;
 		double texty = tickLocation - fontHeight / 2;
 
-		float vertices[] = {0, tickLocation, tickWidth, tickLocation};
+		const float vertices[] = {0, tickLocation, tickWidth, tickLocation};
 		glVertexPointer(2, GL_FLOAT, 0, &vertices);
 		glDrawArrays(GL_LINES, 0, 2);
 		
@@ -176,7 +176,7 @@ void AltitudeTape::Render()
 
 		if (tickAlt >= 0)
 		{
-			float vertices[] = {0, tickLocation, tickWidth, tickLocation};
+			const float vertices[] = {0, tickLocation, tickWidth, tickLocation};
 			glVertexPointer(2, GL_FLOAT, 0, &vertices);
 			glDrawArrays(GL_LINES, 0, 2);
 		}

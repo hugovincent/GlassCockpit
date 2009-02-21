@@ -63,21 +63,21 @@ void VSI::Render()
 	glColor3ub(51,51,76);
 
 	// Bottom angular part
-	float vertices[] = {0.0,10.0,   0.0,40.0,   4.5,44.0,   16.0,44.0,   16.0,27.0,   7.0,10.0};
+	static const float vertices[] = {0.0,10.0,   0.0,40.0,   4.5,44.0,   16.0,44.0,   16.0,27.0,   7.0,10.0};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices);
 	glDrawArrays(GL_POLYGON, 0, 6);
 	glVertexPointer(2, GL_FLOAT, 0, &vertices);
 	glDrawArrays(GL_LINE_STRIP, 0, 6);
 
 	// Center rectangle
-	float vertices2[] = {4.5,44.0,   4.5,66.0,   16.0,66.0,   16.0,44.0};
+	static const float vertices2[] = {4.5,44.0,   4.5,66.0,   16.0,66.0,   16.0,44.0};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices2);
 	glDrawArrays(GL_POLYGON, 0, 4);
 	glVertexPointer(2, GL_FLOAT, 0, &vertices2);
 	glDrawArrays(GL_LINE_STRIP, 0, 4);
 
 	// Top angular part
-	float vertices3[] = {4.5,66.0,   0.0,70.0,   0.0,100.0,   7.0,100.0,   16.0,83.0,   16.0,66.0};
+	static const float vertices3[] = {4.5,66.0,   0.0,70.0,   0.0,100.0,   7.0,100.0,   16.0,83.0,   16.0,66.0};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices3);
 	glDrawArrays(GL_POLYGON, 0, 6);
 	glVertexPointer(2, GL_FLOAT, 0, &vertices3);
@@ -112,8 +112,7 @@ void VSI::Render()
 	globals->m_FontManager->Print( 2.0, VSpeedToNeedle(-600.0),"6-",m_Font);
 
 	glLineWidth(3.5);
-	float vertices4[] = {
-		
+	const float vertices4[] = {
 		// Horizontal center detent
 		5.0, VSpeedToNeedle(0.0) + 1.75,
 		10.0, VSpeedToNeedle(0.0) + 1.75,

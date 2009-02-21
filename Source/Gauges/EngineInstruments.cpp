@@ -111,7 +111,7 @@ EngineInstruments::EngineInstruments()
 	pBattVoltage->SetPosition(150,38);
 	pBattVoltage->SetDataSource(&AirframeDataContainer::GetEngine_Mixture);
 	pBattVoltage->SetMinMax(0.0, 16.0);
-	pBattVoltage->SetColourRanges(11.0, 9.0);
+	pBattVoltage->SetColourRanges(10.0, 6.0);
 	this->AddGaugeComponent(pBattVoltage);
 
 	GenericBargraph* pGenVoltage = new GenericBargraph();
@@ -137,7 +137,7 @@ void EngineInstruments::Render()
 	// We want to draw the divider between the engine instruments and the PFD/Nav above
 	glLineWidth( 2.0 );
 	glColor3ub( 0, 190, 190 ); // cyan
-	float vertices[] = {0.0, m_PhysicalSize.y, m_PhysicalSize.x, m_PhysicalSize.y};
+	static const float vertices[] = {0.0, m_PhysicalSize.y, m_PhysicalSize.x, m_PhysicalSize.y};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices);
 	glDrawArrays(GL_LINES, 0, 2);
 

@@ -97,7 +97,7 @@ void PieDial::Render()
 	double radians = degree * DEG_TO_RAD;
 	glColor3ub(255, 255, 255);
 	glLineWidth(2.0);
-	float vertices[] = {0, 0, R * sin(radians), R * cos(radians)};
+	const float vertices[] = {0, 0, R * sin(radians), R * cos(radians)};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices);
 	glDrawArrays(GL_LINE_STRIP, 0, 2);
 
@@ -108,7 +108,7 @@ void PieDial::Render()
 	// white rectangle containing the text
 	glColor3ub(255, 255, 255);
 	glLineWidth(1.0);
-	float vertices2[] = {42,20,   20,20,   20,30,   42,30};
+	static const float vertices2[] = {42,20,   20,20,   20,30,   42,30};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices2);
 	glDrawArrays(GL_LINE_STRIP, 0, 4);
 
@@ -128,7 +128,7 @@ void PieDial::RenderTicks(CircleEvaluator *circ)
 	double degreeyellow = minDegrees + ((maxDegrees - minDegrees) * percentagey);
 	glColor3ub(247, 231, 8);
 	double radians = degreeyellow * DEG_TO_RAD;
-	float vertices[] = {
+	const float vertices[] = {
 		R * sin(radians), R * cos(radians),
 		(R + 4) * sin(radians), (R + 4) * cos(radians)
 	};
@@ -140,7 +140,7 @@ void PieDial::RenderTicks(CircleEvaluator *circ)
 	double degreered =  minDegrees + ((maxDegrees - minDegrees) * percentager);
 	radians = degreered * DEG_TO_RAD;
 	glColor3ub(255, 0, 0);
-	float vertices2[] = {
+	const float vertices2[] = {
 		R * sin(radians), R * cos(radians),
 		(R + 4) * sin(radians), (R + 5) * cos(radians)
 	};

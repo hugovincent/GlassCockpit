@@ -45,7 +45,7 @@ void AlbatrossAnnunciator::Render()
 	
 	// Draw grey-blue background rectangle
 	glColor3ub(51,51,76);
-	float vertices[] = {0.0,0.0,   0.0, 21.0,   97.5,21.0,   97.5,0.0,   0.0,0.0};
+	static const float vertices[] = {0.0,0.0,   0.0, 21.0,   97.5,21.0,   97.5,0.0,   0.0,0.0};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices);
 	glDrawArrays(GL_POLYGON, 0, 5);
 
@@ -54,7 +54,7 @@ void AlbatrossAnnunciator::Render()
 		// Draw white separator lines
 		glLineWidth(2.0);
 		glColor3ub(255, 255, 255);
-		float vertices[] = {28.0,2.0,   28.0,18.0,   70.0,2.0,   70.0,18.0};
+		static const float vertices[] = {28.0,2.0,   28.0,18.0,   70.0,2.0,   70.0,18.0};
 		glVertexPointer(2, GL_FLOAT, 0, &vertices);
 		glDrawArrays(GL_LINES, 0, 4);
 
