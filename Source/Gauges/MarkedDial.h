@@ -23,7 +23,7 @@
 namespace OpenGC
 {
 
-typedef double (AirframeDataContainer::*AirframeMemFn)();
+typedef float (AirframeDataContainer::*AirframeMemFn)();
 
 class MarkedDial : public GaugeComponent  
 {

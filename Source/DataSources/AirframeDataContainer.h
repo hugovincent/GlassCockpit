@@ -31,16 +31,16 @@ class AirframeDataContainer : public DataContainer
 	//
 
 	/** Roll in degrees around the axis of flight, right roll + */
-	DataMacro(Roll, double);
+	DataMacro(Roll, float);
 
 	/** Pitch in degrees from horizontal, pitch up + */
-	DataMacro(Pitch, double);
+	DataMacro(Pitch, float);
 
 	/** True heading in degrees */
-	DataMacro(True_Heading, double);
+	DataMacro(True_Heading, float);
 
 	/** Track over ground heading in degrees */
-	DataMacro(Track_Heading, double);
+	DataMacro(Track_Heading, float);
 
 	/** Latitude in degrees (with fractional degrees) North +, South - */
 	DataMacro(Latitude, double);
@@ -49,57 +49,57 @@ class AirframeDataContainer : public DataContainer
 	DataMacro(Longitude, double); 
 
 	/** Accelerations in body frame (used for turn coordinator), G's. */
-	DataMacro(Accel_Body_Fwd, double);
-	DataMacro(Accel_Body_Right, double);
-	DataMacro(Accel_Body_Down, double);
+	DataMacro(Accel_Body_Fwd, float);
+	DataMacro(Accel_Body_Right, float);
+	DataMacro(Accel_Body_Down, float);
 
 	//
 	//--------------Speed--------------- 
 	//
 
 	/** True airspeed in knots */
-	DataMacro(Airspeed_KT, double);
+	DataMacro(Airspeed_KT, float);
 
 	/** Ground speed in meters/sec */
-	DataMacro(Ground_Speed_MS, double);
+	DataMacro(Ground_Speed_MS, float);
 
 	/** Rate of climb or descent, in feet per minute */
-	DataMacro(Vertical_Speed_FPM, double);
+	DataMacro(Vertical_Speed_FPM, float);
 
 	//
 	//------------Altitude---------------
 	//
 
 	/** Altitude in feet above ground level */
-	DataMacro(Altitude_AGL_Feet, double);
+	DataMacro(Altitude_AGL_Feet, float);
 
 	/** Altitude in feet above sea level */
-	DataMacro(Altitude_MSL_Feet, double);
+	DataMacro(Altitude_MSL_Feet, float);
 
 	/** Barometric pressure hPa */
-	DataMacro(Barometric_Pressure, double);
+	DataMacro(Barometric_Pressure, float);
 
 	//
 	//--------------Engine Parameters-----------------
 	//
 
 	/** Engine revolutions per minute */
-	DataMacro(Engine_RPM, double);
+	DataMacro(Engine_RPM, float);
 
 	/** Engine cylinder head temperature (deg. C) */
-	DataMacro(Engine_CHT, double);
+	DataMacro(Engine_CHT, float);
 
 	/** Engine exhaust gas temperature (deg. C) */
-	DataMacro(Engine_EGT, double);
+	DataMacro(Engine_EGT, float);
 
 	/** Engine mixture (as a percentage, 0 for lean, 100 for rich) */
-	DataMacro(Engine_Mixture, double);
+	DataMacro(Engine_Mixture, float);
 
 	/** Alternator voltage */
-	DataMacro(Voltage_Alternator, double);
+	DataMacro(Voltage_Alternator, float);
 
 	/** Battery voltage */
-	DataMacro(Voltage_Battery, double);
+	DataMacro(Voltage_Battery, float);
 
 	//
 	//--------------Flight Director-------------------
@@ -109,22 +109,22 @@ class AirframeDataContainer : public DataContainer
 	DataMacro(Director_Active, bool);
 
 	/** Flight director Bank */
-	DataMacro(Director_Roll, double);
+	DataMacro(Director_Roll, float);
 
 	/** Flight director Pitch */
-	DataMacro(Director_Pitch, double);
+	DataMacro(Director_Pitch, float);
 
 	/** Flight director Heading */
-	DataMacro(Director_Heading, double);
+	DataMacro(Director_Heading, float);
 
 	/** Flight director Altitude */
-	DataMacro(Director_Altitude, double);
+	DataMacro(Director_Altitude, float);
 
 	/** Flight director Airspeed */
-	DataMacro(Director_Airspeed, double);
+	DataMacro(Director_Airspeed, float);
 
 	/** Flight director Vertical Speed (FPM) */
-	DataMacro(Director_Vertical_Speed, double);
+	DataMacro(Director_Vertical_Speed, float);
 
 	//
 	//--------------Albatross Specific Stuff----------
@@ -143,16 +143,16 @@ class AirframeDataContainer : public DataContainer
 	DataMacro(GPS_Sats, int);
 
 	/** Albatross internal temperature */
-	DataMacro(Internal_Temp, double);
+	DataMacro(Internal_Temp, float);
 
 	/** Albatross external temperature */
-	DataMacro(External_Temp, double);
+	DataMacro(External_Temp, float);
 
 	/** Albatross wind direction estimate */
-	DataMacro(Wind_Direction, double);
+	DataMacro(Wind_Direction, float);
 
 	/** Albatross wind speed estimate */
-	DataMacro(Wind_Speed, double);
+	DataMacro(Wind_Speed, float);
 
 	/** Albatross status text strings (max 3 chars) */
 	DataMacro(Status_Text1, char *);
@@ -168,6 +168,9 @@ class AirframeDataContainer : public DataContainer
 
 	/** Text area for when we have no incoming data */
 	DataMacro(Status_Text_NoData, char *);
+	
+	/** Time stamp */
+	DataMacro(TimeStamp, double);
 
 	public:
 

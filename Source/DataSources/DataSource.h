@@ -18,13 +18,12 @@
 #ifndef DataSource_h
 #define DataSource_h
 
-//#include "Object.h"
 #include "AirframeDataContainer.h"
 
 namespace OpenGC
 {
 
-class DataSource// : public Object FIXME
+class DataSource
 {
 	public:
 		
