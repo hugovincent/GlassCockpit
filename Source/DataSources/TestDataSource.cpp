@@ -128,8 +128,10 @@ namespace OpenGC
 		m_Airframe->SetBarometric_Pressure(1010.0);
 
 		// -------Position-----------------
-		m_Airframe->SetLatitude(37.621134 + 0.005 * t);
-		m_Airframe->SetLongitude(-122.374530);
+		m_Airframe->SetLatitude(-43.479 + 0.005 * t); // }
+		m_Airframe->SetLongitude(172.523);            // } Christchurch
+//		m_Airframe->SetLatitude(37.621134 + 0.005 * t); // }
+//		m_Airframe->SetLongitude(-122.374530);          // } San Francisco
 		
 		// -------Engine-------------------
 		m_Airframe->SetEngine_RPM(4500.0 + 4500.0 * sin(t/2.2));

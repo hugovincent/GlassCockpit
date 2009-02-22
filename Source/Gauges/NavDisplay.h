@@ -44,9 +44,8 @@ class NavDisplay : public Gauge
 		void PlotWindSpeedDirection();
 		void PlotMap();
 
-		/** This template defines a set of functions for displaying geographic
-		 *  objects such as airports or navaids on the map */
-		template<int i> void PlotGeoObjs(); // FIXME
+		/** Display geographic objects such as airports or navaids on the map */
+		void PlotGeoObjs(std::list<GeographicObject*>& geoList);
 
 		//////////// Helper functions /////////////////////////////////////////
 		

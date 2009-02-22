@@ -15,20 +15,6 @@
 
   =========================================================================*/
 
-/**
- * GeographicHash stores geographic objects in 1x1 degree bins for
- * efficient rendering access. Bins are numbered as:
- *                    PM
- *     -180------------0------------180
- *  -90  0            180           360
- *   |  361...etc
- *   |
- *   EQ 0
- *   |
- *   |
- *   90
- */
-
 #ifndef GeographicHash_h
 #define GeographicHash_h
 
@@ -37,40 +23,37 @@
 #include <list>
 #include <vector>
 
+#define NUM_BINS_LAT	90
+#define NUM_BINS_LONG	180
+
 namespace OpenGC
 {
 
+/* GeographicHash stores geographic objects in 2x2 degree bins for
+ * efficient rendering access. */
 class GeographicHash  
 {
-
 	public:
 
-		GeographicHash();
-		virtual ~GeographicHash();
+		GeographicHash() {}
+		virtual ~GeographicHash() {}
 
 		/** Type of linked list used to store all geo objects in each degree block */
 		typedef std::list<GeographicObject*> GeoListType;
 
-		/** Type of vector used to store the hash */
-		typedef std::vector<GeoListType*> GeoVectorType;
-
 		/** Insert all of the members of a geographics list into the hash */
 		void InsertGeographicList(GeographicObjectList* pList);
 
-		/** Get the object list at a particular lat/lon */
-		GeoListType* GetListAtLatLon(double lat, double lon);
+		/** Get the object list for a bin containing lat/lon */
+		GeoListType& GetListAtLatLon(double lat, double lon);
 
 	protected:
-
-		/** Convert a lat/lon pair to an index into the hash */
-		int LatLonToBin(double lat, double lon);
 
 		/** Add a geographic object to the hash - for internal use */
 		void InsertGeographicObject(GeographicObject* pObj);
 
 		/** The spatial hash of geographic objects */
-		GeoVectorType m_GeoHash;
-
+		GeoListType m_GeoHash[NUM_BINS_LAT][NUM_BINS_LONG];
 };
 
 } // end namespace OpenGC

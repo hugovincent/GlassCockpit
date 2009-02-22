@@ -75,12 +75,13 @@ void NavDisplay::Render()
 	aircraftLat = globals->m_DataSource->GetAirframe()->GetLatitude();
 	aircraftLon = globals->m_DataSource->GetAirframe()->GetLongitude();
 
-	bool isInSouthernHemisphere = false;
-	if(aircraftLat < 0)
-	{
-		isInSouthernHemisphere = true;
-		aircraftLat = aircraftLat * -1;
-	}
+// FIXME what was this all about??
+//	bool isInSouthernHemisphere = false;
+//	if(aircraftLat < 0)
+//	{
+//		isInSouthernHemisphere = true;
+//		aircraftLat = aircraftLat * -1;
+//	}
 	
 	// Northing and Easting in nautical miles (Mercator Coordinates)
 	GeographicObject::LatLonToMercator(aircraftLat, aircraftLon, 
@@ -88,8 +89,8 @@ void NavDisplay::Render()
 	mercatorNorthing /= METER_PER_NM;
 	mercatorEasting /= METER_PER_NM;
 
-	if(isInSouthernHemisphere)
-		mercatorNorthing = mercatorNorthing * -1.0;
+//	if(isInSouthernHemisphere)
+//		mercatorNorthing = mercatorNorthing * -1.0;
 
 	glMatrixMode(GL_MODELVIEW);
 	
@@ -177,11 +178,11 @@ void NavDisplay::Render()
 		
 		// Naviads (blue)
 		glColor3f(0.0, 0.0, 1.0);
-		PlotGeoObjs<0>();
+		PlotGeoObjs(globals->m_NavDatabase->GetNavaidHash()->GetListAtLatLon(aircraftLat, aircraftLon));
 		
 		// Airports (red)
 		glColor3f(1.0, 0.0, 0.0);
-		PlotGeoObjs<1>();
+		PlotGeoObjs(globals->m_NavDatabase->GetAirportHash()->GetListAtLatLon(aircraftLat, aircraftLon));
 		
 		PlotWaypoints();
 	glPopMatrix();
@@ -357,22 +358,12 @@ void NavDisplay::PlotCourse()
 */
 }
 
-template<int i> void NavDisplay::PlotGeoObjs()
+void NavDisplay::PlotGeoObjs(std::list<GeographicObject*>& geoList)
 {
-	// Get the Navaid list bins from the hash
-	std::list<GeographicObject*> *geoList;
-	if (i == 0)
-		geoList = globals->m_NavDatabase->GetNavaidHash()->GetListAtLatLon(aircraftLat, aircraftLon);
-	else if (i == 1)
-		geoList = globals->m_NavDatabase->GetAirportHash()->GetListAtLatLon(aircraftLat, aircraftLon);
-
 	std::list<GeographicObject*>::iterator iter;
 	double objNorthing, objEasting;
 
-	// Point drawing parameters
-	glPointSize(2.0);
-
-	for (iter = geoList->begin(); iter != geoList->end(); ++iter)
+	for (iter = geoList.begin(); iter != geoList.end(); ++iter)
 	{
 		// Get mercator coordinates in meters
 		(*iter)->GetMercatorMeters(objNorthing, objEasting);

@@ -5,7 +5,6 @@ _______________________________________________________________________________
 	1.	Enhancements and Changes
 _______________________________________________________________________________
 
-* Support for fetching an updated apt.dat and nav.dat from web
 * XML-described Gauges built using GaugeComponents (deprecate the Gauge class)
 * FlightCourse is compeltely incomplete and broken
 * FlightGear data source needs to be finished, and remove the dependency on Plib
@@ -51,7 +50,7 @@ _______________________________________________________________________________
 	3.	Bugs:
 _______________________________________________________________________________
 
-* Fix NavDisplay::PlotGeoObjs() template
+* GeographicHash seems to fail in the souther hemisphere?
 * Engine instruments: tachometer needs to look different from temperature gauges
 * Nav display:
 	* more than one navigation hash-bin on screen at once.
@@ -60,7 +59,6 @@ _______________________________________________________________________________
 	* AltitudeTicker jittering
 	* Mitering at line vertexes for circles, especially in engine instruments
 * Build system:
-	* Fix Doxygen inconsistencies and tidy up documentation
 	* Fix Environment() use in SConstruct
 	* Get new Mac changes working on Linux again
 * MSG_APP_QUIT not handled in AppObject::OnMessage
@@ -70,12 +68,9 @@ _______________________________________________________________________________
 	4.	Stuff to Check:
 _______________________________________________________________________________
 
-* Copyright header block
+* apt.dat parsing
 * Pass-by-value should be pass by reference where possible (esp strings)
-* const correctness and everything that can be const is const
 * Consistency of LogPrintf, printf, cout, cerr
-* Verify use of Globals.h
-* Indentation and coding style (ongoing)
 * Fix up inconsistent inclusion of #include <string> etc and of using namespace std.
 * Verify use of Messageable
 
@@ -85,6 +80,6 @@ _______________________________________________________________________________
 _______________________________________________________________________________
 
 * Navigation display: map shapes (will require a tesselator) or textures
-* Sounds: annunciation, speech warnings via speechd?
+* Sounds: annunciation, speech warnings
 * Calculations in CalcManager: low-pass-filtering/interpolation of (some) data
-
+* Logging of data (in CalcManager for now)
