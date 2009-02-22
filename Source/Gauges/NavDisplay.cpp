@@ -142,7 +142,30 @@ void NavDisplay::Render()
 	aCircle->Render(GL_LINE_STRIP);
 	
 	///////////////////////////////////////////////////////////////////////////
-	// Draw Layer 2: the Point of Interest marker (Navaids, Airports)
+	// Draw Layer 3: Compass Markings
+	///////////////////////////////////////////////////////////////////////////
+	
+	// Compass markings
+
+	glColor3ub(255, 255, 255);
+	glLineWidth(1.5);
+	double heading_offset = fmod(aircraftHeading, compass_interval);
+
+	static float vertices1[2*10];
+	unsigned int vertexIdx = 0;
+	for (int i = -30; i <= (30 + compass_interval); i += compass_interval)
+	{
+		float angle = (i - heading_offset) * DEG_TO_RAD;
+		vertices1[2 * vertexIdx]       = CENTER_X + 120.0 * sinf(angle); 
+		vertices1[2 * vertexIdx++ + 1] = CENTER_Y + 120.0 * cosf(angle);
+		vertices1[2 * vertexIdx]       = CENTER_X + 130.0 * sinf(angle); 
+		vertices1[2 * vertexIdx++ + 1] = CENTER_Y + 130.0 * cosf(angle);
+	}
+	glVertexPointer(2, GL_FLOAT, 0, &vertices1);
+	glDrawArrays(GL_LINES, 0, 10);
+	
+	///////////////////////////////////////////////////////////////////////////
+	// Draw Layer 4: the Point of Interest marker (Navaids, Airports)
 	///////////////////////////////////////////////////////////////////////////
 
 	// Rotate graphics context about the heading
@@ -164,79 +187,61 @@ void NavDisplay::Render()
 	glPopMatrix();
 	
 	///////////////////////////////////////////////////////////////////////////
-	// Draw Layer 4: Compass Markings
-	///////////////////////////////////////////////////////////////////////////
-
-	// Compass markings
-	glPushMatrix();
-		glColor3ub(255, 255, 255);
-		glLineWidth(1.5);
-		
-		double heading_offset = fmod(aircraftHeading, compass_interval);
-		glTranslatef(CENTER_X, CENTER_Y, 0.0);
-		glRotatef(heading_offset+50, 0, 0, 1);
-		
-		for (int i = -50; i < 50; i += compass_interval)
-		{
-			glRotatef(compass_interval, 0, 0, -1);
-			glBegin(GL_LINES);
-				glVertex2f(0.0, 120.0);
-				glVertex2f(0.0, 130.0);
-			glEnd();
-		}
-	glPopMatrix();
-	
-	///////////////////////////////////////////////////////////////////////////
 	// Draw Layer 5: Textual data, zoom buttons, aircraft icon, wind est.
 	///////////////////////////////////////////////////////////////////////////
 	
 	// Black background
 	glColor4f(0.0, 0.0, 0.0, 0.8); // 80% alpha
-	glBegin(GL_POLYGON); // behind zoom buttons
-		glVertex2f(0.0, OVERLAY_Y);
-		glVertex2f(0.0, OVERLAY_Y+20.5);
-		glVertex2f(10.5, OVERLAY_Y+20.5);
-		glVertex2f(10.5, OVERLAY_Y);
-	glEnd();
-	glBegin(GL_POLYGON); // behind main overlay
-		glVertex2f(0.0, 0.0);
-		glVertex2f(0.0, OVERLAY_Y+0.5);
-		glVertex2f(m_PhysicalSize.x, OVERLAY_Y+0.5);
-		glVertex2f(m_PhysicalSize.x, 0.0);
-	glEnd();
+	static const float vertices2[] = {
+		// behind zoom buttons
+		0.0, OVERLAY_Y,
+		0.0, OVERLAY_Y+20,
+		10.5, OVERLAY_Y+20,
+		10.5, OVERLAY_Y,
+		// behind bottom part
+		0.0, 0.0,
+		0.0, OVERLAY_Y,
+		m_PhysicalSize.x, OVERLAY_Y,
+		m_PhysicalSize.x, 0.0
+	};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices2);
+	glDrawArrays(GL_QUADS, 0, 8);
 
 	// Lines dividing up the space in the gauge
-	glColor3f(0.7, 0.7, 0.7);
+	glColor3f(0.7, 0.7, 0.6);
 	glLineWidth(1.0);
-	glBegin(GL_LINES);
+	static const float vertices3[] = {
 		// lines around the zoom buttons
-		glVertex2f(0.0,  OVERLAY_Y+10.5);
-		glVertex2f(10.5, OVERLAY_Y+10.5);
-		glVertex2f(10.5, OVERLAY_Y+0.5);
-		glVertex2f(10.5, OVERLAY_Y+20.5);
-		glVertex2f(0.0,  OVERLAY_Y+20.5);
-		glVertex2f(10.5, OVERLAY_Y+20.5);
-		glVertex2f(10.5, OVERLAY_Y+0.5);
-		glVertex2f(10.5, OVERLAY_Y+20.5);
+		0.0,  OVERLAY_Y+10,
+		10.5, OVERLAY_Y+10,
+		10.5, OVERLAY_Y,
+		10.5, OVERLAY_Y+20.1,
+		0.0,  OVERLAY_Y+20.1,
+		10.5, OVERLAY_Y+20.1,
+		10.5, OVERLAY_Y,
+		10.5, OVERLAY_Y+20,
 		// line along top edge of overlay
-		glVertex2f(0.0, OVERLAY_Y+0.5);
-		glVertex2f(m_PhysicalSize.x, OVERLAY_Y+0.5);
-		// insert more here...
-	glEnd();
+		0.0, OVERLAY_Y,
+		m_PhysicalSize.x, OVERLAY_Y
+	};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices3);
+	glDrawArrays(GL_LINES, 0, 12);
 
 	// Zoom +/- buttons
 	glLineWidth(2.0);
 	glColor3f(1.0, 1.0, 1.0);
-	glBegin(GL_LINES);
+	static float vertices4[] = {
 		// Plus symbol
-		glVertex2f(2.5, OVERLAY_Y+15.0);
-		glVertex2f(7.5, OVERLAY_Y+15.0);
-		glVertex2f(5.0, OVERLAY_Y+12.5);
-		glVertex2f(5.0, OVERLAY_Y+17.5);
+		2.5, OVERLAY_Y+15.0,
+		7.5, OVERLAY_Y+15.0,
+		5.0, OVERLAY_Y+12.5,
+		5.0, OVERLAY_Y+17.5,
 		// Minus symbol
-		glVertex2f(2.5, OVERLAY_Y+5.0);
-		glVertex2f(7.5, OVERLAY_Y+5.0);
-	glEnd();
+		2.5, OVERLAY_Y+5.0,
+		7.5, OVERLAY_Y+5.0
+	};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices4);
+   	glDrawArrays(GL_LINES, 0, 6);
 
 	// Ground speed and track text
 	char buffer[20];
@@ -258,28 +263,29 @@ void NavDisplay::Render()
 	glColor3ub(255,255,255);
 	glLineWidth(2.0);
 	const float width = 1.0;
-	glBegin(GL_LINES);
-		glVertex2f(CENTER_X-width, CENTER_Y-6);
-		glVertex2f(CENTER_X-width, CENTER_Y+6);
-		glVertex2f(CENTER_X+width, CENTER_Y-6);
-		glVertex2f(CENTER_X+width, CENTER_Y+6);
-		glVertex2f(CENTER_X-4,     CENTER_Y-6);
-		glVertex2f(CENTER_X-width, CENTER_Y-6);
-		glVertex2f(CENTER_X-8,     CENTER_Y);
-		glVertex2f(CENTER_X-width, CENTER_Y);
-		glVertex2f(CENTER_X+4,     CENTER_Y-6);
-		glVertex2f(CENTER_X+width, CENTER_Y-6);
-		glVertex2f(CENTER_X+8,     CENTER_Y);
-		glVertex2f(CENTER_X+width, CENTER_Y);
-	glEnd();
+	static float vertices5[] = {
+		CENTER_X-width, CENTER_Y-6,
+		CENTER_X-width, CENTER_Y+6,
+		CENTER_X+width, CENTER_Y-6,
+		CENTER_X+width, CENTER_Y+6,
+		CENTER_X-4,     CENTER_Y-6,
+		CENTER_X-width, CENTER_Y-6,
+		CENTER_X-8,     CENTER_Y,
+		CENTER_X-width, CENTER_Y,
+		CENTER_X+4,     CENTER_Y-6,
+		CENTER_X+width, CENTER_Y-6,
+		CENTER_X+8,     CENTER_Y,
+		CENTER_X+width, CENTER_Y
+	};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices5);
+   	glDrawArrays(GL_LINES, 0, 12);
 	
 	// Divider between the PFD and the Nav Display
    	glLineWidth(2.0);
    	glColor3ub(0, 190, 190); // cyan
-   	glBegin(GL_LINES);
-		glVertex2f(0.0, m_PhysicalSize.y);
-		glVertex2f(0.0, 0.0);
-   	glEnd();
+	static const float vertices6[] = {0.0,m_PhysicalSize.y,   0.0,0.0};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices6);
+   	glDrawArrays(GL_LINES, 0, 2);
 }
 
 /** Mouse event handler for zoom in/out buttons. */
@@ -298,7 +304,7 @@ void NavDisplay::OnMouseDown(int button, double physicalX, double physicalY)
 void NavDisplay::PlotWindSpeedDirection()
 {
 	// Get the data
-	//double windSpeed = globals->m_DataSource->GetAirframe()->GetWind_Speed();
+//	double windSpeed = globals->m_DataSource->GetAirframe()->GetWind_Speed();
 	double windDirection = globals->m_DataSource->GetAirframe()->GetWind_Direction();
 	
 	glPushMatrix();
@@ -311,14 +317,9 @@ void NavDisplay::PlotWindSpeedDirection()
 
 		glLineWidth(1.5);
 		glColor3f(0.0, 1.0, 1.0); // sky blue
-		glBegin(GL_LINES);
-			glVertex2f(0.0, 4.0);
-			glVertex2f(0.0, -4.0);
-			glVertex2f(-2.0, 2.0);
-			glVertex2f(0.0, 4.0);
-			glVertex2f(2.0, 2.0);
-			glVertex2f(0.0, 4.0);
-		glEnd();
+		static const float vertices[] = {0.0,4.0,   0.0,-4.0,   -2.0,2.0,   0.0,4.0,   2.0,2.0,   0.0,4.0};
+		glVertexPointer(2, GL_FLOAT, 0, &vertices);
+		glDrawArrays(GL_LINES, 0, 6);
 	glPopMatrix();
 }
 
@@ -336,6 +337,7 @@ void NavDisplay::PlotWaypoints()
 
 void NavDisplay::PlotCourse()
 {
+/*
 	// Get the vector of CoursePoints
 	FlightCourse *course = globals->m_NavDatabase->GetFlightCourse();
 	FlightCourse::iterator iter;
@@ -352,6 +354,7 @@ void NavDisplay::PlotCourse()
 		glVertex2f(xPos, yPos);
 	}
 	glEnd();
+*/
 }
 
 template<int i> void NavDisplay::PlotGeoObjs()
@@ -389,12 +392,9 @@ template<int i> void NavDisplay::PlotGeoObjs()
 				glTranslatef(xPos, yPos, 0.0);
 				glRotatef(-1.0 * aircraftHeading, 0, 0, 1);
 
-				glBegin(GL_POLYGON);
-					glVertex2f(-1.0, 0.0);
-					glVertex2f(0.0, 1.0);
-					glVertex2f(1.0, 0.0);
-					glVertex2f(0.0, -1.0);
-				glEnd();
+				static const float vertices[] = {-1.0,0.0,   0.0,1.0,   1.0,0.0,   0.0,-1.0};
+				glVertexPointer(2, GL_FLOAT, 0, &vertices);
+				glDrawArrays(GL_POLYGON, 0, 4);
 
 				globals->m_FontManager->SetSize(m_Font, 4.0, 4.0);
 				globals->m_FontManager->Print(1.5, -2.0, (*iter)->GetIdentification().c_str(), m_Font);
@@ -405,7 +405,7 @@ template<int i> void NavDisplay::PlotGeoObjs()
 
 void NavDisplay::PlotMap()
 {
-#if 0
+/*
 	// FIXME actually plot some kind of map!! For now, random points:
 	const double points[][2] = {
 		{1000, 1000},
@@ -428,7 +428,7 @@ void NavDisplay::PlotMap()
 			glVertex2f(points[i][0] / m_SizeNM, points[i][1] / m_SizeNM); // FIXME remove this and uncomment the two above lines
 		}
 	glEnd();
-#endif
+*/
 }
 
 void NavDisplay::PointToPixelCoord(double objNorthing, double objEasting, double &xPos, double &yPos)
