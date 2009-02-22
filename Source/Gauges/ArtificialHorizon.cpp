@@ -22,9 +22,6 @@
 #include "CircleEvaluator.h"
 #include "ArtificialHorizon.h"
 
-// Use the alternative "Gradient" colour scheme?
-#define GRADIENT
-
 namespace OpenGC
 {
 
@@ -79,7 +76,6 @@ void ArtificialHorizon::Render()
 
 	glBegin(GL_POLYGON);
 
-#ifdef GRADIENT
 #define GROUND_COLOUR1()	glColor3ub(195,82,0)
 #define GROUND_COLOUR2()	glColor3ub(253,88,0)
 	GROUND_COLOUR1();
@@ -96,14 +92,6 @@ void ArtificialHorizon::Render()
 
 	GROUND_COLOUR1();
 	glVertex2f(-75,-75);
-#else
-	glColor3ub(179,102,0);
-	glVertex2f(-300,-300);
-	glVertex2f(-300,0);
-	glVertex2f(300,0);
-	glVertex2f(300,-300);
-	glVertex2f(-300,-300);
-#endif
 	glEnd();
 
 	// The "sky" rectangle
@@ -111,7 +99,6 @@ void ArtificialHorizon::Render()
 
 	glBegin(GL_POLYGON);
 
-#ifdef GRADIENT
 #define SKY_COLOUR1()	glColor3ub(68,195,255)
 #define SKY_COLOUR2()	glColor3ub(30,71,247)
 	SKY_COLOUR1();
@@ -128,121 +115,45 @@ void ArtificialHorizon::Render()
 
 	SKY_COLOUR1();
 	glVertex2f(-75,0);
-#else
-	glColor3ub(0,153,204);
-	glVertex2f(-300,0);
-	glVertex2f(-300,300);
-	glVertex2f(300,300);
-	glVertex2f(300,0);
-	glVertex2f(-300,0);
-#endif
 	glEnd();
 
 	//------------Draw the pitch markings--------------
 
-	// Draw in white
 	glColor3ub(255,255,255);
-	// Specify line width
 	glLineWidth(1.0);
-	// The size for all pitch text
+	static const float vertices2[] = {
+		-100,0,   100,0,   // The dividing line between sky and ground
+		 -5,5,      5,5,   // +2.5 degrees
+		-10,10,    10,10,  // +5.0 degrees
+		 -5,15,     5,15,  // +7.5 degrees
+		-20,20,    20,20,  // +10.0 degrees
+		 -5,25,     5,25,  // +12.5 degrees
+		-10,30,    10,30,  // +15.0 degrees
+		 -5,35,      5,35, // +17.5 degrees
+		-20,40,    20,40,  // +20.0 degrees
+		 -5,-5,     5,-5,  // -2.5 degrees
+		-10,-10,   10,-10, // -5.0 degrees
+		 -5,-15,    5,-15, // -7.5 degrees
+		-20,-20,   20,-20, // -10.0 degrees
+		 -5,-25,    5,-25, // -12.5 degrees
+		-10,-30,   10,-30, // -15.0 degrees
+		 -5,-35,    5,-35, // -17.5 degrees
+		-20,-40,   20,-40  // -20.0 degrees
+	};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices2);
+	glDrawArrays(GL_LINES, 0, 34);
+
 	globals->m_FontManager->SetSize(m_Font,4.0, 4.0);
-
-	glBegin(GL_LINES);
-
-	// The dividing line between sky and ground
-//#ifdef GRADIENT
-//	  glColor3ub(0,0,0);
-//#endif
-	glVertex2f(-100,0);
-	glVertex2f(100,0);
-
-//#ifdef GRADIENT
-//	  glColor3ub(255,255,255);
-//#endif
-
-	// +2.5 degrees
-	glVertex2f(-5,5);
-	glVertex2f(5,5);
-
-	// +5.0 degrees
-	glVertex2f(-10,10);
-	glVertex2f(10,10);
-
-	// +7.5 degrees
-	glVertex2f(-5,15);
-	glVertex2f(5,15);
-
-	// +10.0 degrees
-	glVertex2f(-20,20);
-	glVertex2f(20,20);
-
-	// +12.5 degrees
-	glVertex2f(-5,25);
-	glVertex2f(5,25);
-
-	// +15.0 degrees
-	glVertex2f(-10,30);
-	glVertex2f(10,30);
-
-	// +17.5 degrees
-	glVertex2f(-5,35);
-	glVertex2f(5,35);
-
-	// +20.0 degrees
-	glVertex2f(-20,40);
-	glVertex2f(20,40);
-
-	// -2.5 degrees
-	glVertex2f(-5,-5);
-	glVertex2f(5,-5);
-
-	// -5.0 degrees
-	glVertex2f(-10,-10);
-	glVertex2f(10,-10);
-
-	// -7.5 degrees
-	glVertex2f(-5,-15);
-	glVertex2f(5,-15);
-
-	// -10.0 degrees
-	glVertex2f(-20,-20);
-	glVertex2f(20,-20);
-
-	// -12.5 degrees
-	glVertex2f(-5,-25);
-	glVertex2f(5,-25);
-
-	// -15.0 degrees
-	glVertex2f(-10,-30);
-	glVertex2f(10,-30);
-
-	// -17.5 degrees
-	glVertex2f(-5,-35);
-	glVertex2f(5,-35);
-
-	// -20.0 degrees
-	glVertex2f(-20,-40);
-	glVertex2f(20,-40);
-
-	glEnd();
-
-	// +10
 	globals->m_FontManager->Print(-27.5,18.0,"10",m_Font);
 	globals->m_FontManager->Print(21.0,18.0,"10",m_Font);
-
-	// -10
 	globals->m_FontManager->Print(-27.5,-22.0,"10",m_Font);
 	globals->m_FontManager->Print(21.0,-22.0,"10",m_Font);
-
-	// +20
 	globals->m_FontManager->Print(-27.5,38.0,"20",m_Font);
 	globals->m_FontManager->Print(21.0,38.0,"20",m_Font);
-
-	// -20
 	globals->m_FontManager->Print(-27.5,-42.0,"20",m_Font);
 	globals->m_FontManager->Print(21.0,-42.0,"20",m_Font);
 
-#ifndef GRADIENT
+#if 0 // FIXME this should work in gradient mode too
 	//-----The background behind the bank angle markings-------
 	// Reset the modelview matrix
 	glPopMatrix();
@@ -518,7 +429,7 @@ void ArtificialHorizon::Render()
 	// by fanning out triangles from a point just off each corner
 	// to an arc descrbing the curved portion of the art. horiz.
 	
-	// Note we draw each rounded corner as a line too, for antialiasing.
+	// Note we draw each rounded corner as a line strip too, for antialiasing.
 
 	glColor3ub(0,0,0);
 	glLineWidth(1.0);

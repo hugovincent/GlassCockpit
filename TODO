@@ -50,7 +50,6 @@ _______________________________________________________________________________
 	3.	Bugs:
 _______________________________________________________________________________
 
-* GeographicHash seems to fail in the souther hemisphere?
 * Engine instruments: tachometer needs to look different from temperature gauges
 * Nav display:
 	* more than one navigation hash-bin on screen at once.
@@ -68,6 +67,7 @@ _______________________________________________________________________________
 	4.	Stuff to Check:
 _______________________________________________________________________________
 
+* isSouthernHemisphere stuff in NavDisplay
 * apt.dat parsing
 * Pass-by-value should be pass by reference where possible (esp strings)
 * Consistency of LogPrintf, printf, cout, cerr

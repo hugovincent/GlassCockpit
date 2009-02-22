@@ -21,6 +21,7 @@
 		9A21DA090F50DC7F0024B0F9 /* RasterMapTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A21DA080F50DC7F0024B0F9 /* RasterMapTile.cpp */; };
 		9A8865AB0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */; };
 		9A8865AC0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */; };
+		9A8B76AE0F51366F002A87F1 /* RasterMapManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A8B76AD0F51366F002A87F1 /* RasterMapManager.cpp */; };
 		9AA14FDF0F3E747700DCA729 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDA0F3E747700DCA729 /* Fonts */; };
 		9AA14FE00F3E747700DCA729 /* Navigation in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDB0F3E747700DCA729 /* Navigation */; };
 		9AA14FE10F3E747700DCA729 /* Preferences.xml in Resources */ = {isa = PBXBuildFile; fileRef = 9AA14FDC0F3E747700DCA729 /* Preferences.xml */; };
@@ -106,6 +107,8 @@
 		9A21DA080F50DC7F0024B0F9 /* RasterMapTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RasterMapTile.cpp; path = ../Source/Navigation/RasterMapTile.cpp; sourceTree = SOURCE_ROOT; };
 		9A5CE0400F4A7C2A00796599 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TODO; path = ../TODO; sourceTree = SOURCE_ROOT; };
 		9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Font_FileStore_BinaryIO.cpp; path = ../Source/Base/Font_FileStore_BinaryIO.cpp; sourceTree = "<group>"; };
+		9A8B76AC0F51366F002A87F1 /* RasterMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RasterMapManager.h; path = ../Source/Navigation/RasterMapManager.h; sourceTree = SOURCE_ROOT; };
+		9A8B76AD0F51366F002A87F1 /* RasterMapManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RasterMapManager.cpp; path = ../Source/Navigation/RasterMapManager.cpp; sourceTree = SOURCE_ROOT; };
 		9AA14FDA0F3E747700DCA729 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = ../Data/Fonts; sourceTree = SOURCE_ROOT; };
 		9AA14FDB0F3E747700DCA729 /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Navigation; path = ../Data/Navigation; sourceTree = SOURCE_ROOT; };
 		9AA14FDC0F3E747700DCA729 /* Preferences.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Preferences.xml; path = ../Data/Preferences.xml; sourceTree = SOURCE_ROOT; };
@@ -464,6 +467,8 @@
 				9AAE1E3B0F3AF68E00B9CFFA /* NavDatabase.cpp */,
 				9A21DA070F50DC7F0024B0F9 /* RasterMapTile.h */,
 				9A21DA080F50DC7F0024B0F9 /* RasterMapTile.cpp */,
+				9A8B76AC0F51366F002A87F1 /* RasterMapManager.h */,
+				9A8B76AD0F51366F002A87F1 /* RasterMapManager.cpp */,
 				9AC7C2080F500D3100F87CAE /* ShapeFile.h */,
 				9AC7C2070F500D3100F87CAE /* ShapeFile.cpp */,
 				9AAE1E290F3AF68E00B9CFFA /* WaypointGeoObj.h */,
@@ -652,6 +657,7 @@
 				9A06B1AB0F4E8EBD0003733D /* dbfopen.c in Sources */,
 				9AC7C2090F500D3100F87CAE /* ShapeFile.cpp in Sources */,
 				9A21DA090F50DC7F0024B0F9 /* RasterMapTile.cpp in Sources */,
+				9A8B76AE0F51366F002A87F1 /* RasterMapManager.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
