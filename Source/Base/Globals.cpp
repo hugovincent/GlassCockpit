@@ -10,6 +10,7 @@ Globals::Globals()
 	m_NavDatabase = new NavDatabase();
 	m_FontManager = new FontManager();
 	m_CircleEvaluator = new CircleEvaluator();
+	m_RasterMapManager = new RasterMapManager();
 	m_MessageableList = new MessageableList();
 	m_DataSource = 0;
 }
@@ -38,6 +39,12 @@ Globals::~Globals()
 	{
 		delete m_NavDatabase;
 		m_NavDatabase = 0;
+	}
+
+	if (m_RasterMapManager != 0)
+	{
+		delete m_RasterMapManager;
+		m_RasterMapManager = 0;
 	}
 
 	if (m_CircleEvaluator != 0)

@@ -7,6 +7,7 @@
 #include "NavDatabase.h"
 #include "PrefManager.h"
 #include "FontManager.h"
+#include "RasterMapManager.h"
 #include "CircleEvaluator.h"
 #include "MessageableList.h"
 
@@ -18,12 +19,13 @@ public:
 	Globals();
 	~Globals();
 
-	DataSource		*m_DataSource;
-	NavDatabase		*m_NavDatabase;
-	PrefManager		*m_PrefManager;
-	FontManager		*m_FontManager;
-	CircleEvaluator *m_CircleEvaluator;
-	MessageableList	*m_MessageableList;
+	DataSource			*m_DataSource;
+	NavDatabase			*m_NavDatabase;
+	PrefManager			*m_PrefManager;
+	FontManager			*m_FontManager;
+	RasterMapManager	*m_RasterMapManager;
+	CircleEvaluator		*m_CircleEvaluator;
+	MessageableList		*m_MessageableList;
 };
 
 extern Globals *globals;

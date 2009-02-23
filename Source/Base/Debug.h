@@ -48,7 +48,7 @@
 #endif
 
 // OpenGL error checking
-#define GLassert() Assert(glGetError() == GL_NO_ERROR, "OpenGLES error occurred")
+#define GLassert() Assert(glGetError() == GL_NO_ERROR, "OpenGL error occurred")
 
 #endif // ifdnef Debug_H
 

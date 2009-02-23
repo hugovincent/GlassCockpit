@@ -396,6 +396,31 @@ void NavDisplay::PlotGeoObjs(std::list<GeographicObject*>& geoList)
 
 void NavDisplay::PlotMap()
 {
+	////////////////////////////////////////////////////////////////////// FIXME
+	static bool once = false;
+	static GLuint texture;
+	if (!once)
+	{
+		RasterMapTile *tile = globals->m_RasterMapManager->GetTile(0, 0, 0);
+		glGenTextures(1, &texture);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tile->Width(), tile->Height(), 0, GL_RGB, GL_UNSIGNED_BYTE, tile->Image());
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		once = true;
+		delete tile;
+	}
+	glLoadIdentity();
+	static const float vertices[] = {20,20,   150,20,   20,150,   150,150};
+	static const float texCoords[] = {0,1,   1,1,   0,0,   1,0};
+	glColor3f(1, 1, 1);
+	glEnable(GL_TEXTURE_2D);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	glTexCoordPointer(2, GL_FLOAT, 0, &texCoords);
+	glVertexPointer(2, GL_FLOAT, 0, &vertices);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 /*
 	// FIXME actually plot some kind of map!! For now, random points:
 	const double points[][2] = {

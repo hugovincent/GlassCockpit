@@ -19,6 +19,9 @@
 		9A06B1AA0F4E8EBD0003733D /* shpopen.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A06B1A50F4E8EBD0003733D /* shpopen.c */; };
 		9A06B1AB0F4E8EBD0003733D /* dbfopen.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A06B1A70F4E8EBD0003733D /* dbfopen.c */; };
 		9A21DA090F50DC7F0024B0F9 /* RasterMapTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A21DA080F50DC7F0024B0F9 /* RasterMapTile.cpp */; };
+		9A62EB570F5279A700030A68 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A62EB560F5279A700030A68 /* libz.dylib */; };
+		9A62EF420F52A72B00030A68 /* jidctflt.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A62EF3E0F52A72B00030A68 /* jidctflt.c */; };
+		9A62EF430F52A72B00030A68 /* tinyjpeg.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A62EF3F0F52A72B00030A68 /* tinyjpeg.c */; };
 		9A8865AB0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */; };
 		9A8865AC0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */; };
 		9A8B76AE0F51366F002A87F1 /* RasterMapManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A8B76AD0F51366F002A87F1 /* RasterMapManager.cpp */; };
@@ -106,6 +109,11 @@
 		9A21DA070F50DC7F0024B0F9 /* RasterMapTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RasterMapTile.h; path = ../Source/Navigation/RasterMapTile.h; sourceTree = SOURCE_ROOT; };
 		9A21DA080F50DC7F0024B0F9 /* RasterMapTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RasterMapTile.cpp; path = ../Source/Navigation/RasterMapTile.cpp; sourceTree = SOURCE_ROOT; };
 		9A5CE0400F4A7C2A00796599 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TODO; path = ../TODO; sourceTree = SOURCE_ROOT; };
+		9A62EB560F5279A700030A68 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
+		9A62EF3E0F52A72B00030A68 /* jidctflt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jidctflt.c; path = ../Source/Base/JPEGDecoder/jidctflt.c; sourceTree = SOURCE_ROOT; };
+		9A62EF3F0F52A72B00030A68 /* tinyjpeg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tinyjpeg.c; path = ../Source/Base/JPEGDecoder/tinyjpeg.c; sourceTree = SOURCE_ROOT; };
+		9A62EF400F52A72B00030A68 /* tinyjpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tinyjpeg.h; path = ../Source/Base/JPEGDecoder/tinyjpeg.h; sourceTree = SOURCE_ROOT; };
+		9A62EF410F52A72B00030A68 /* tinyjpeg-internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "tinyjpeg-internal.h"; path = "../Source/Base/JPEGDecoder/tinyjpeg-internal.h"; sourceTree = SOURCE_ROOT; };
 		9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Font_FileStore_BinaryIO.cpp; path = ../Source/Base/Font_FileStore_BinaryIO.cpp; sourceTree = "<group>"; };
 		9A8B76AC0F51366F002A87F1 /* RasterMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RasterMapManager.h; path = ../Source/Navigation/RasterMapManager.h; sourceTree = SOURCE_ROOT; };
 		9A8B76AD0F51366F002A87F1 /* RasterMapManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RasterMapManager.cpp; path = ../Source/Navigation/RasterMapManager.cpp; sourceTree = SOURCE_ROOT; };
@@ -241,6 +249,7 @@
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				9AE411C00F39973C00D539E5 /* OpenGL.framework in Frameworks */,
 				9AAE1D3B0F3AF15000B9CFFA /* libxml2.dylib in Frameworks */,
+				9A62EB570F5279A700030A68 /* libz.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,6 +276,7 @@
 		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9A62EB560F5279A700030A68 /* libz.dylib */,
 				9AAE1D3A0F3AF15000B9CFFA /* libxml2.dylib */,
 				9AAE1EDA0F3B8AA200B9CFFA /* libfreetype.dylib */,
 				9AE411BF0F39973C00D539E5 /* OpenGL.framework */,
@@ -348,6 +358,17 @@
 			name = ShapeLib;
 			sourceTree = "<group>";
 		};
+		9A62EF2E0F52A71F00030A68 /* JPEGDecoder */ = {
+			isa = PBXGroup;
+			children = (
+				9A62EF400F52A72B00030A68 /* tinyjpeg.h */,
+				9A62EF410F52A72B00030A68 /* tinyjpeg-internal.h */,
+				9A62EF3F0F52A72B00030A68 /* tinyjpeg.c */,
+				9A62EF3E0F52A72B00030A68 /* jidctflt.c */,
+			);
+			name = JPEGDecoder;
+			sourceTree = "<group>";
+		};
 		9AA14FE50F3E747E00DCA729 /* App Bundle Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -395,6 +416,7 @@
 		9AAE1DF40F3AF59F00B9CFFA /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				9A62EF2E0F52A71F00030A68 /* JPEGDecoder */,
 				9AAE1D5D0F3AF24A00B9CFFA /* CalcManager.h */,
 				9AAE1D5E0F3AF24A00B9CFFA /* CalcManager.cpp */,
 				9AAE1D600F3AF25D00B9CFFA /* CircleEvaluator.h */,
@@ -658,6 +680,8 @@
 				9AC7C2090F500D3100F87CAE /* ShapeFile.cpp in Sources */,
 				9A21DA090F50DC7F0024B0F9 /* RasterMapTile.cpp in Sources */,
 				9A8B76AE0F51366F002A87F1 /* RasterMapManager.cpp in Sources */,
+				9A62EF420F52A72B00030A68 /* jidctflt.c in Sources */,
+				9A62EF430F52A72B00030A68 /* tinyjpeg.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -702,6 +726,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = "USE_FREETYPE2=1";
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -721,7 +746,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
-				GCC_PREPROCESSOR_DEFINITIONS = USE_FREETYPE2;
+				GCC_PREPROCESSOR_DEFINITIONS = "USE_FREETYPE2=1";
 				INSTALL_PATH = /usr/local/bin;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -739,6 +764,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/Frameworks/ApplicationServices.framework/Frameworks\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -761,6 +790,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SDKROOT)$(SYSTEM_LIBRARY_DIR)/Frameworks/ApplicationServices.framework/Frameworks\"",
+				);
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = GlassCockpit_Prefix.pch;

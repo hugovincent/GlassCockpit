@@ -11,7 +11,8 @@
 
 namespace OpenGC {
 
-RasterMapTile::RasterMapTile()
+RasterMapTile::RasterMapTile(unsigned char *image, unsigned int width, unsigned int height)
+	: m_Image(image), m_Width(width), m_Height(height)
 {
 
 }
