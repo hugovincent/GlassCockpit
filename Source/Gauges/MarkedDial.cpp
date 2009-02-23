@@ -140,10 +140,6 @@ void MarkedDial::Render()
 		globals->m_FontManager->Print((R-4.5) * sin(radians) , (R-4.5) * cos(radians), buf, m_Font);			
 		glTranslatef(1.5, 2, 0);
 	}
-
-
-	glPopMatrix();
-
 }
 
 } // end namespace OpenGC
