@@ -55,6 +55,10 @@ Globals *OpenGC::globals;
 								cStringUsingEncoding:NSASCIIStringEncoding];
 	globals->m_PrefManager->SetPrefS("PathToData", resourcePath);
 	
+	// Set map cache path (map cache is read-only) // FIXME
+	globals->m_RasterMapManager->SetCachePath(RasterMapManager::RMM_CACHE_MGMAPS, 
+								"/Users/hugo/Projects/iPhone/GlassCockpit/Data/MGMapsCache", "GoogleTer");
+	
 	// Find paths: writeable directory to cache resources in
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
 	Assert([paths count] == 1, "can't uniquely identify a writable path for cached resources");

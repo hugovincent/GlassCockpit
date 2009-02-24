@@ -79,7 +79,6 @@ _______________________________________________________________________________
 	5. Future Features (not yet required):
 _______________________________________________________________________________
 
-* Navigation display: map shapes (will require a tesselator) or textures
 * Sounds: annunciation, speech warnings
 * Calculations in CalcManager: low-pass-filtering/interpolation of (some) data
 * Logging of data (in CalcManager for now)
