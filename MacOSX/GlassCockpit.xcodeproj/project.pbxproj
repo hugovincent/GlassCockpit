@@ -82,6 +82,7 @@
 		9AAE1FE60F3BA86E00B9CFFA /* AltitudeTicker.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FD20F3BA86E00B9CFFA /* AltitudeTicker.cpp */; };
 		9AAE1FE70F3BA86E00B9CFFA /* VSI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AAE1FD30F3BA86E00B9CFFA /* VSI.cpp */; };
 		9AC7C2090F500D3100F87CAE /* ShapeFile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AC7C2070F500D3100F87CAE /* ShapeFile.cpp */; };
+		9AC873BB0F53E37000294CAD /* lodepng.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AC873B90F53E37000294CAD /* lodepng.cpp */; };
 		9AE411BA0F3993FD00D539E5 /* TopLevelView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 9AE411B90F3993FD00D539E5 /* TopLevelView.mm */; };
 		9AE411C00F39973C00D539E5 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9AE411BF0F39973C00D539E5 /* OpenGL.framework */; };
 		9AFE33690F3E919D00164E90 /* Font_GLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AFE33680F3E919D00164E90 /* Font_GLTexture.cpp */; };
@@ -110,10 +111,10 @@
 		9A21DA080F50DC7F0024B0F9 /* RasterMapTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RasterMapTile.cpp; path = ../Source/Navigation/RasterMapTile.cpp; sourceTree = SOURCE_ROOT; };
 		9A5CE0400F4A7C2A00796599 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TODO; path = ../TODO; sourceTree = SOURCE_ROOT; };
 		9A62EB560F5279A700030A68 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
-		9A62EF3E0F52A72B00030A68 /* jidctflt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jidctflt.c; path = ../Source/Base/JPEGDecoder/jidctflt.c; sourceTree = SOURCE_ROOT; };
-		9A62EF3F0F52A72B00030A68 /* tinyjpeg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tinyjpeg.c; path = ../Source/Base/JPEGDecoder/tinyjpeg.c; sourceTree = SOURCE_ROOT; };
-		9A62EF400F52A72B00030A68 /* tinyjpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tinyjpeg.h; path = ../Source/Base/JPEGDecoder/tinyjpeg.h; sourceTree = SOURCE_ROOT; };
-		9A62EF410F52A72B00030A68 /* tinyjpeg-internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "tinyjpeg-internal.h"; path = "../Source/Base/JPEGDecoder/tinyjpeg-internal.h"; sourceTree = SOURCE_ROOT; };
+		9A62EF3E0F52A72B00030A68 /* jidctflt.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = jidctflt.c; path = ../Source/Base/ImageCodecs/jidctflt.c; sourceTree = SOURCE_ROOT; };
+		9A62EF3F0F52A72B00030A68 /* tinyjpeg.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tinyjpeg.c; path = ../Source/Base/ImageCodecs/tinyjpeg.c; sourceTree = SOURCE_ROOT; };
+		9A62EF400F52A72B00030A68 /* tinyjpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = tinyjpeg.h; path = ../Source/Base/ImageCodecs/tinyjpeg.h; sourceTree = SOURCE_ROOT; };
+		9A62EF410F52A72B00030A68 /* tinyjpeg-internal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "tinyjpeg-internal.h"; path = "../Source/Base/ImageCodecs/tinyjpeg-internal.h"; sourceTree = SOURCE_ROOT; };
 		9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Font_FileStore_BinaryIO.cpp; path = ../Source/Base/Font_FileStore_BinaryIO.cpp; sourceTree = "<group>"; };
 		9A8B76AC0F51366F002A87F1 /* RasterMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RasterMapManager.h; path = ../Source/Navigation/RasterMapManager.h; sourceTree = SOURCE_ROOT; };
 		9A8B76AD0F51366F002A87F1 /* RasterMapManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RasterMapManager.cpp; path = ../Source/Navigation/RasterMapManager.cpp; sourceTree = SOURCE_ROOT; };
@@ -234,6 +235,8 @@
 		9AAE1FD50F3BA86E00B9CFFA /* PieDial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PieDial.h; path = ../Source/Gauges/PieDial.h; sourceTree = SOURCE_ROOT; };
 		9AC7C2070F500D3100F87CAE /* ShapeFile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ShapeFile.cpp; path = ../Source/Navigation/ShapeFile.cpp; sourceTree = SOURCE_ROOT; };
 		9AC7C2080F500D3100F87CAE /* ShapeFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShapeFile.h; path = ../Source/Navigation/ShapeFile.h; sourceTree = SOURCE_ROOT; };
+		9AC873B90F53E37000294CAD /* lodepng.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = lodepng.cpp; path = ../Source/Base/ImageCodecs/lodepng.cpp; sourceTree = SOURCE_ROOT; };
+		9AC873BA0F53E37000294CAD /* lodepng.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lodepng.h; path = ../Source/Base/ImageCodecs/lodepng.h; sourceTree = SOURCE_ROOT; };
 		9AE411B80F3993FD00D539E5 /* TopLevelView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TopLevelView.h; sourceTree = "<group>"; };
 		9AE411B90F3993FD00D539E5 /* TopLevelView.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TopLevelView.mm; sourceTree = "<group>"; };
 		9AE411BF0F39973C00D539E5 /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = /System/Library/Frameworks/OpenGL.framework; sourceTree = "<absolute>"; };
@@ -358,15 +361,17 @@
 			name = ShapeLib;
 			sourceTree = "<group>";
 		};
-		9A62EF2E0F52A71F00030A68 /* JPEGDecoder */ = {
+		9A62EF2E0F52A71F00030A68 /* ImageCodecs */ = {
 			isa = PBXGroup;
 			children = (
 				9A62EF400F52A72B00030A68 /* tinyjpeg.h */,
 				9A62EF410F52A72B00030A68 /* tinyjpeg-internal.h */,
 				9A62EF3F0F52A72B00030A68 /* tinyjpeg.c */,
 				9A62EF3E0F52A72B00030A68 /* jidctflt.c */,
+				9AC873BA0F53E37000294CAD /* lodepng.h */,
+				9AC873B90F53E37000294CAD /* lodepng.cpp */,
 			);
-			name = JPEGDecoder;
+			name = ImageCodecs;
 			sourceTree = "<group>";
 		};
 		9AA14FE50F3E747E00DCA729 /* App Bundle Resources */ = {
@@ -416,7 +421,7 @@
 		9AAE1DF40F3AF59F00B9CFFA /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				9A62EF2E0F52A71F00030A68 /* JPEGDecoder */,
+				9A62EF2E0F52A71F00030A68 /* ImageCodecs */,
 				9AAE1D5D0F3AF24A00B9CFFA /* CalcManager.h */,
 				9AAE1D5E0F3AF24A00B9CFFA /* CalcManager.cpp */,
 				9AAE1D600F3AF25D00B9CFFA /* CircleEvaluator.h */,
@@ -682,6 +687,7 @@
 				9A8B76AE0F51366F002A87F1 /* RasterMapManager.cpp in Sources */,
 				9A62EF420F52A72B00030A68 /* jidctflt.c in Sources */,
 				9A62EF430F52A72B00030A68 /* tinyjpeg.c in Sources */,
+				9AC873BB0F53E37000294CAD /* lodepng.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

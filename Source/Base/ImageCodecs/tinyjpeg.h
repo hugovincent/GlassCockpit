@@ -1,4 +1,5 @@
-/*
+/* Release: tinyjpegdecoder-20070609
+ *
  * Small jpeg decoder library (header file)
  *
  * Copyright (c) 2006, Luc Saillard <luc@saillard.org>
