@@ -9,6 +9,7 @@
 
 #include "RasterMapManager.h"
 #include "Debug.h"
+#include "Constants.h"
 #include "tinyjpeg.h"
 #include "math.h"
 #include "lodepng.h"
@@ -42,7 +43,7 @@ void RasterMapManager::SetCachePath(CacheFormat format, const std::string& path,
 	}
 }
 
-#if 0
+/*
 int lat2pixel(float zoom, float lat)
 {
 	return -((atanh(sin(lat)) * TILE_SIZE_PIXELS * exp(zoom * M_LN2) ) / (2*M_PI)) + 
@@ -63,34 +64,49 @@ float pixel2lat(float zoom, int pixel_y)
 {
 	return asin(tanh(pixel_y - exp(zoom * M_LN2) * TILE_SIZE_PIXELS / 2) * -2 * M_PI / (TILE_SIZE_PIXELS * exp(zoom * M_LN2)));
 }
-#endif
+*/
 
-void GetTileCoordsForLatLon(unsigned int& x, unsigned int& y, double lat, double lon, const unsigned int zoom)
+#define ONE_MINUS 0.99999 // used to prevent numerical singularities at North/South poles
+void RasterMapManager::GetTileCoordsForLatLon(unsigned int& x, unsigned int& y, float& fx, float& fy, 
+											  double lat, double lon, const unsigned int zoom)
 {
-//	int mapsize = TILE_SIZE_PIXELS * 1 << zoom;
-//	int origin = mapsize / 2;
-	
-	// Make lat/lon in 0->180, 0->360 instead of +/-90, +/-180
-//	double latDef = fabs(-90.0 - lat);
-//	double lonDeg = fabs(-180.0 - lon);
-	
+	int mapsize = TILE_SIZE_PIXELS * 1 << zoom;
+	float origin = mapsize * 0.5;
+
+	// Longitude -> Pixel coords
+	float lonDeg = fabs(-180.0 - lon);
+	fx = lonDeg * mapsize / 360.0;
+
+	// Lattitude -> Pixel coords
+	float e = sin(lat * DEG_TO_RAD);
+	if (e > ONE_MINUS) e = ONE_MINUS;
+	if (e < -ONE_MINUS) e = -ONE_MINUS;
+	fy = origin + 0.5 * logf((1 + e) / (1 - e)) * (-mapsize / (2 * M_PI)); // FIXME not in desired interval
+
+	// Tile coordinates
+	x = fx / TILE_SIZE_PIXELS;
+	y = fy / TILE_SIZE_PIXELS;
+
+	// Pixel coordinates within that tile
+	// FIXME for now we just return the actual pixel coords in fx, fy
 }
 
 RasterMapTile *RasterMapManager::GetTile(const unsigned int zoom, const unsigned int x, const unsigned int y)
 {	
 	if (m_Ready)
 	{
-		// Work out what file our tile is in
+		// Compute what file our tile is in (as implemented, this is dependent on MGM_CACHE_TILES_PER_FILE == 32)
+		unsigned int absX = x >> 3, absY = y >> 2;
+		unsigned char relX = x - absX * 8, relY = y - absY * 4;
+		
+		// Work out the file name
 		static char filenameBuf[1024];
-		// FIXME munge x,y
 		if (snprintf(filenameBuf, sizeof(filenameBuf), "%s/%s_%d/%d_%d.mgm", 
-			m_CachePrefix.c_str(), m_MapType.c_str(), zoom, x, y) == sizeof(filenameBuf))
+			m_CachePrefix.c_str(), m_MapType.c_str(), zoom, absX, absY) == sizeof(filenameBuf))
 		{
 			LogPrintf("RasterMapManager: Could not work out what file the requested tile is in.\n");
 			return NULL;
 		}
-		// FIXME compute relX, relY
-		signed char relX = 7, relY = 0;
 		
 		// Get the file
 		FILE *mgmFile = fopen(filenameBuf, "rb");

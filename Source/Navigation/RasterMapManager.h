@@ -34,8 +34,10 @@ public:
 	/** Get tile at specified tile coordinates and zoom level. Note this may be map-type/format specific */
 	RasterMapTile *GetTile(const unsigned int zoom, const unsigned int x, const unsigned int y);
 
-	/** Get tile coordinates for the tile containing specified lat/long in a certain zoom level */
-	void GetTileCoordsForLatLon(unsigned int& x, unsigned int& y, double lat, double lon, const unsigned int zoom);
+	/** Get tile coordinates for the tile containing specified lat/long in a certain zoom level.
+	 *  (x, y) are the tile coordinate, (fx, fy) are the fractional coordinate within the tile. */
+	void GetTileCoordsForLatLon(unsigned int& x, unsigned int& y, float& fx, float& fy,
+								double lat, double lon, const unsigned int zoom);
 	
 	/** Set the cache of read-in tiles to be at most cacheSizeBytes (default is no cache) */
 	void SetCacheMemorySize(const unsigned int cacheSizeBytes);

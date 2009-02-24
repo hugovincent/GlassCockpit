@@ -397,11 +397,18 @@ void NavDisplay::PlotGeoObjs(std::list<GeographicObject*>& geoList)
 void NavDisplay::PlotMap()
 {
 	////////////////////////////////////////////////////////////////////// FIXME
+	unsigned int x, y; float fx, fy;
+	unsigned int z = 13;
+	globals->m_RasterMapManager->GetTileCoordsForLatLon(x, y, fx, fy, 
+														globals->m_DataSource->GetAirframe()->GetLatitude(), 
+														globals->m_DataSource->GetAirframe()->GetLongitude(), z);
+	printf("tile %d %d -- %.1f %.1f\n", x, y, fx, fy);
+	
 	static bool once = false;
 	static GLuint texture = 0;
 	if (!once)
 	{
-		RasterMapTile *tile = globals->m_RasterMapManager->GetTile(15, 4011, 5202);
+		RasterMapTile *tile = globals->m_RasterMapManager->GetTile(z, x, y);
 		if (tile != NULL)
 		{
 			glGenTextures(1, &texture);
