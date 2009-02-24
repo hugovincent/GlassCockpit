@@ -44,12 +44,10 @@ public:
 	
 private:
 	// Note: returned image pointer will be invalidated after a new image is read
-	unsigned char *ReadJPEG(FILE *fp, unsigned int offset,
-							unsigned int length, unsigned int& width, unsigned int& height);
+	unsigned char *DecodeJPEG(unsigned char *readBuffer, unsigned int length, unsigned int& width, unsigned int& height);
 
 	// Note: returned image pointer will be invalidated after a new image is read
-	unsigned char *ReadPNG(FILE *fp, unsigned int offset,
-						   unsigned int length, unsigned int& width, unsigned int& height);
+	unsigned char *DecodePNG(unsigned char *readBuffer, unsigned int length, unsigned int& width, unsigned int& height);
 
 	bool m_Ready;
 	

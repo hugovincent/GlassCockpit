@@ -135,6 +135,7 @@ RasterMapTile *RasterMapManager::GetTile(const unsigned int zoom, const unsigned
 			nextOffset = CHUNK_NEXT_OFFSET(tmp);
 			if (tmp->relX == relX && tmp->relY == relY)
 			{
+				unsigned int length = nextOffset - offset;
 				// Check that the computed length is sane
 				fseek(mgmFile, 0, SEEK_END);
 				if (ftell(mgmFile) < nextOffset)
@@ -142,11 +143,26 @@ RasterMapTile *RasterMapManager::GetTile(const unsigned int zoom, const unsigned
 					LogPrintf("RasterMapsManager: error parsing MGMaps header (bad size)\n");
 					return NULL;
 				}
-				
+
+				// Check read buffer is big enough to hold tile
+				if (length >= READ_BUFFER_SIZE)
+				{
+					LogPrintf("RasterMapManager: can't read JPEG longer than read buffer; probable malformed cache.\n");
+					return NULL;
+				}
+
 				// Get the tile from the cachefile
-				unsigned int width = 0, height = 0;
-				unsigned char *img = ReadJPEG(mgmFile, offset, nextOffset - offset, width, height);
+				fseek(mgmFile, offset, SEEK_SET);
+				if (length != fread(m_ReadBuffer, 1, length, mgmFile))
+				{
+					LogPrintf("RasterMapManager: end of file reached before JPEG was completely read, malformed cache.\n");
+					return NULL;
+				}
 				fclose(mgmFile);
+				
+				// Decode the tile
+				unsigned int width = 0, height = 0;
+				unsigned char *img = DecodeJPEG(m_ReadBuffer, length, width, height);
 				return new RasterMapTile(img, width, height);
 			}
 		}
@@ -156,22 +172,8 @@ RasterMapTile *RasterMapManager::GetTile(const unsigned int zoom, const unsigned
 	return NULL;
 }
 
-unsigned char *RasterMapManager::ReadJPEG(FILE *fp, unsigned int offset, unsigned int length, unsigned int& width, unsigned int& height)
+unsigned char *RasterMapManager::DecodeJPEG(unsigned char *readBuffer, unsigned int length, unsigned int& width, unsigned int& height)
 {
-	if (length >= READ_BUFFER_SIZE)
-	{
-		LogPrintf("RasterMapManager: Attempt to read JPEG longer than read buffer, malformed cache.\n");
-		return NULL;
-	}
-
-	fseek(fp, offset, SEEK_SET);
-	fread(m_ReadBuffer, 1, length, fp);
-	if (ftell(fp) < (offset + length))
-	{
-		LogPrintf("RasterMapManager: End of file reached before JPEG was completely read, malformed cache.\n");
-		return NULL;
-	}
-
 	unsigned char *imgComponents[3];
 	static struct jdec_private *jdec = 0;
 	if (jdec != 0) 
@@ -179,7 +181,7 @@ unsigned char *RasterMapManager::ReadJPEG(FILE *fp, unsigned int offset, unsigne
 		tinyjpeg_free(jdec);
 	}
 	jdec = tinyjpeg_init();
-	if (tinyjpeg_parse_header(jdec, m_ReadBuffer, length) < 0)
+	if (tinyjpeg_parse_header(jdec, readBuffer, length) < 0)
 	{
 		LogPrintf("RasterMapManager: JPEG codec error: %s\n", tinyjpeg_get_errorstring(jdec));
 		return NULL;
@@ -192,27 +194,13 @@ unsigned char *RasterMapManager::ReadJPEG(FILE *fp, unsigned int offset, unsigne
 	return imgComponents[0];
 }
 
-unsigned char *RasterMapManager::ReadPNG(FILE *fp, unsigned int offset, unsigned int length, unsigned int& width, unsigned int& height)
+unsigned char *RasterMapManager::DecodePNG(unsigned char *readBuffer, unsigned int length, unsigned int& width, unsigned int& height)
 {
-	if (length >= READ_BUFFER_SIZE)
-	{
-		LogPrintf("RasterMapManager: Attempt to read PNG longer than read buffer, malformed cache.\n");
-		return NULL;
-	}
-
-	fseek(fp, offset, SEEK_SET);
-	fread(m_ReadBuffer, 1, length, fp);
-	if (ftell(fp) < (offset + length))
-	{
-		LogPrintf("RasterMapManager: End of file reached before PNG was completely read, malformed cache.\n");
-		return NULL;
-	}
-
 	static unsigned char* image = 0;
 	if (image != 0)
 		free(image);
 
-	if (unsigned error = LodePNG_decode32(&image, &width, &height, &m_ReadBuffer[0], (size_t)length))
+	if (unsigned error = LodePNG_decode32(&image, &width, &height, &readBuffer[0], (size_t)length))
 	{
 		printf("RasterMapManager: JPEG codec error: %d\n", error);
 		return NULL;
