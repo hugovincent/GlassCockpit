@@ -11,6 +11,7 @@
 #include "Debug.h"
 #include "tinyjpeg.h"
 #include "math.h"
+#include "lodepng.h"
 
 /*** Header and tile information ***/
 #define MGM_CACHE_TILES_PER_FILE 32 // FIXME generalise to arbirary number of tiles per cache file using cache.conf
@@ -146,7 +147,7 @@ unsigned char *RasterMapManager::ReadJPEG(FILE *fp, unsigned int offset, unsigne
 		LogPrintf("RasterMapManager: Attempt to read JPEG longer than read buffer, malformed cache.\n");
 		return NULL;
 	}
-	
+
 	fseek(fp, offset, SEEK_SET);
 	fread(m_ReadBuffer, 1, length, fp);
 	if (ftell(fp) < (offset + length))
@@ -162,13 +163,46 @@ unsigned char *RasterMapManager::ReadJPEG(FILE *fp, unsigned int offset, unsigne
 		tinyjpeg_free(jdec);
 	}
 	jdec = tinyjpeg_init();
-	Assert(tinyjpeg_parse_header(jdec, m_ReadBuffer, length) >= 0, tinyjpeg_get_errorstring(jdec));
-	
+	if (tinyjpeg_parse_header(jdec, m_ReadBuffer, length) < 0)
+	{
+		LogPrintf("RasterMapManager: JPEG codec error: %s\n", tinyjpeg_get_errorstring(jdec));
+		return NULL;
+	}
+
 	tinyjpeg_decode(jdec, TINYJPEG_FMT_RGB24);
 	tinyjpeg_get_components(jdec, imgComponents);
 	tinyjpeg_get_size(jdec, &width, &height);
-	
+
 	return imgComponents[0];
 }
 
+unsigned char *RasterMapManager::ReadPNG(FILE *fp, unsigned int offset, unsigned int length, unsigned int& width, unsigned int& height)
+{
+	if (length >= READ_BUFFER_SIZE)
+	{
+		LogPrintf("RasterMapManager: Attempt to read PNG longer than read buffer, malformed cache.\n");
+		return NULL;
+	}
+
+	fseek(fp, offset, SEEK_SET);
+	fread(m_ReadBuffer, 1, length, fp);
+	if (ftell(fp) < (offset + length))
+	{
+		LogPrintf("RasterMapManager: End of file reached before PNG was completely read, malformed cache.\n");
+		return NULL;
+	}
+
+	static unsigned char* image = 0;
+	if (image != 0)
+		free(image);
+
+	if (unsigned error = LodePNG_decode32(&image, &width, &height, &m_ReadBuffer[0], (size_t)length))
+	{
+		printf("RasterMapManager: JPEG codec error: %d\n", error);
+		return NULL;
+	}
+
+	return image;
+}
+	
 } // end namespace OpenGC
