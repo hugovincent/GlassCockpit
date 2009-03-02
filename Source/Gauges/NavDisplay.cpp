@@ -52,7 +52,7 @@ NavDisplay::NavDisplay()
 	m_Scale.x = 1.0;
 
 	// Set initial gauge size in nautical miles per side
-	m_SizeNM = 45.0;
+	m_SizeNM = 2.0;
 }
 
 NavDisplay::~NavDisplay()
@@ -338,7 +338,7 @@ void NavDisplay::PlotWaypoints()
 
 void NavDisplay::PlotCourse()
 {
-/*
+#if 0
 	// Get the vector of CoursePoints
 	FlightCourse *course = globals->m_NavDatabase->GetFlightCourse();
 	FlightCourse::iterator iter;
@@ -355,7 +355,7 @@ void NavDisplay::PlotCourse()
 		glVertex2f(xPos, yPos);
 	}
 	glEnd();
-*/
+#endif
 }
 
 void NavDisplay::PlotGeoObjs(std::list<GeographicObject*>& geoList)
@@ -396,46 +396,87 @@ void NavDisplay::PlotGeoObjs(std::list<GeographicObject*>& geoList)
 
 void NavDisplay::PlotMap()
 {
-	////////////////////////////////////////////////////////////////////// FIXME
+#if 1
 	unsigned int x, y; float fx, fy;
 	unsigned int z = 13;
-	globals->m_RasterMapManager->GetTileCoordsForLatLon(x, y, fx, fy, 
-														globals->m_DataSource->GetAirframe()->GetLatitude(), 
-														globals->m_DataSource->GetAirframe()->GetLongitude(), z);
-	printf("tile %d %d -- %.1f %.1f\n", x, y, fx, fy);
+	static bool runonceA = false, runonceB = true;
 	
-	static bool once = false;
-	static GLuint texture = 0;
-	if (!once)
+	if (runonceA == false) {
+	globals->m_RasterMapManager->GetTileCoordsForLatLon(x, y, fx, fy, 
+		globals->m_DataSource->GetAirframe()->GetLatitude(), globals->m_DataSource->GetAirframe()->GetLongitude(), z);
+	if (x > 6000) runonceA = true;
+	}
+	
+	static GLuint textures[49];
+	bool status[49];
+	if (runonceA && runonceB)
 	{
-		RasterMapTile *tile = globals->m_RasterMapManager->GetTile(z, x, y);
-		if (tile != NULL)
+		int ident = 0;
+		glGenTextures(49, &textures[0]);
+		for (int dx = -3; dx <= 3; dx++)
 		{
-			glGenTextures(1, &texture);
-			glBindTexture(GL_TEXTURE_2D, texture);
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tile->Width(), tile->Height(), 0, GL_RGB, GL_UNSIGNED_BYTE, tile->Image());
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-			glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-			once = true;
-			delete tile;
+			for (int dy = -3; dy <= 3; dy++)
+			{
+				RasterMapTile *tile = globals->m_RasterMapManager->GetTile(z, x+dx, y+dy);
+				if (tile != NULL)
+				{
+					glBindTexture(GL_TEXTURE_2D, textures[ident]);
+					
+					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tile->Width(), tile->Height(), 0, GL_RGB, GL_UNSIGNED_BYTE, tile->Image());
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+					delete tile;
+					
+					glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+					glEnableClientState(GL_VERTEX_ARRAY);
+					status[ident] = true;
+				}
+				else
+					status[ident] = false;
+				ident++;
+			}
+		}
+		runonceB = false;
+	}
+	
+	if (runonceA && !runonceB)
+	{
+		int ident = 0;
+		for (int dx = -3; dx <= 3; dx++)
+		{
+			for (int dy = -3; dy <= 3; dy++)
+			{
+//				if (status[ident])
+				if (1)
+				{
+					// Render tile
+					glPushMatrix();
+					glLoadIdentity();
+					glTranslatef(CENTER_X, CENTER_Y, 0);
+					glRotatef(aircraftHeading, 0, 0, 1);
+					glTranslatef((dx*256 + fx - 128)/3.2, (-dy*256 - fy - 128)/3.2, 0);
+					glColor4ub(255, 255, 255, 190);
+					
+					glEnable(GL_TEXTURE_2D);
+					glBindTexture(GL_TEXTURE_2D, textures[ident]);
+						
+					static const float texCoords[] = {0,1,   1,1,   0,0,   1,0};
+					glTexCoordPointer(2, GL_FLOAT, 0, &texCoords);
+					
+					static const float vertices[] = {-40,-40,   40,-40,   -40,40,   40,40};
+					glVertexPointer(2, GL_FLOAT, 0, &vertices);
+					
+					glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+					glDisable(GL_TEXTURE_2D);
+					glPopMatrix();
+				}
+				ident++;
+			}
 		}
 	}
-	if (texture != 0)
-	{
-		glLoadIdentity();
-		static const float vertices[] = {20,20,   150,20,   20,150,   150,150};
-		static const float texCoords[] = {0,1,   1,1,   0,0,   1,0};
-		glColor4ub(255, 255, 255, 190);
-		glEnable(GL_TEXTURE_2D);
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glEnableClientState(GL_VERTEX_ARRAY);
-		glBindTexture(GL_TEXTURE_2D, texture);
-		glTexCoordPointer(2, GL_FLOAT, 0, &texCoords);
-		glVertexPointer(2, GL_FLOAT, 0, &vertices);
-		glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-		glDisable(GL_TEXTURE_2D);
-	}
-/*
+	// Cleanup
+	//glDeleteTextures(1, &texture);	
+#elif 0
 	// FIXME actually plot some kind of map!! For now, random points:
 	const double points[][2] = {
 		{1000, 1000},
@@ -458,7 +499,7 @@ void NavDisplay::PlotMap()
 			glVertex2f(points[i][0] / m_SizeNM, points[i][1] / m_SizeNM); // FIXME remove this and uncomment the two above lines
 		}
 	glEnd();
-*/
+#endif
 }
 
 void NavDisplay::PointToPixelCoord(double objNorthing, double objEasting, double &xPos, double &yPos)

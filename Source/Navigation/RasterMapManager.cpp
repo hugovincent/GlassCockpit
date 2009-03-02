@@ -88,7 +88,8 @@ void RasterMapManager::GetTileCoordsForLatLon(unsigned int& x, unsigned int& y, 
 	y = fy / TILE_SIZE_PIXELS;
 
 	// Pixel coordinates within that tile
-	// FIXME for now we just return the actual pixel coords in fx, fy
+	fx = fmodf(fx, TILE_SIZE_PIXELS);
+	fy = fmodf(fy, TILE_SIZE_PIXELS);
 }
 
 RasterMapTile *RasterMapManager::GetTile(const unsigned int zoom, const unsigned int x, const unsigned int y)

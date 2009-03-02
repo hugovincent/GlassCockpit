@@ -148,8 +148,8 @@ namespace OpenGC
 		m_Airframe->SetWind_Direction(360.0 - heading);
 
 		// -------Flight Director---------- (aka autopilot)
-		m_Airframe->SetDirector_Pitch(5.0);
-		m_Airframe->SetDirector_Roll(20.0);
+		m_Airframe->SetDirector_Pitch(0.0);
+		m_Airframe->SetDirector_Roll(0.0);
 		m_Airframe->SetDirector_Heading(10.0);
 		m_Airframe->SetDirector_Altitude(400.0);
 		m_Airframe->SetDirector_Airspeed(80.5);
