@@ -135,7 +135,7 @@ Globals *OpenGC::globals;
 	XMLNode dsNode = rootNode->GetChild("DataSource");
 	Assert(dsNode.HasProperty("type"), "DataSource node has no type property");
 	string dsName = dsNode.GetProperty("type");
-	char *titleSuffix;
+	const char *titleSuffix;
 	if (dsName == "FlightGear")
 	{
 		// Get host/port settings

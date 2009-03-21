@@ -118,7 +118,7 @@
 		9A8865AA0F4C0E3D00B8326D /* Font_FileStore_BinaryIO.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Font_FileStore_BinaryIO.cpp; path = ../Source/Base/Font_FileStore_BinaryIO.cpp; sourceTree = "<group>"; };
 		9A8B76AC0F51366F002A87F1 /* RasterMapManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RasterMapManager.h; path = ../Source/Navigation/RasterMapManager.h; sourceTree = SOURCE_ROOT; };
 		9A8B76AD0F51366F002A87F1 /* RasterMapManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RasterMapManager.cpp; path = ../Source/Navigation/RasterMapManager.cpp; sourceTree = SOURCE_ROOT; };
-		9AA14FDA0F3E747700DCA729 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = ../Data/Fonts; sourceTree = SOURCE_ROOT; };
+		9AA14FDA0F3E747700DCA729 /* Fonts */ = {isa = PBXFileReference; explicitFileType = folder; name = Fonts; path = ../Data/Fonts; sourceTree = SOURCE_ROOT; };
 		9AA14FDB0F3E747700DCA729 /* Navigation */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Navigation; path = ../Data/Navigation; sourceTree = SOURCE_ROOT; };
 		9AA14FDC0F3E747700DCA729 /* Preferences.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Preferences.xml; path = ../Data/Preferences.xml; sourceTree = SOURCE_ROOT; };
 		9AA14FDD0F3E747700DCA729 /* Gauges.xml */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; name = Gauges.xml; path = ../Data/Gauges.xml; sourceTree = SOURCE_ROOT; };
@@ -824,6 +824,7 @@
 				GCC_ENABLE_SSE3_EXTENSIONS = YES;
 				GCC_OBJC_CALL_CXX_CDTORS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_VERSION = 4.2;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				HEADER_SEARCH_PATHS = (

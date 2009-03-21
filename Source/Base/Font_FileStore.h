@@ -79,7 +79,7 @@ private:
 		*y = character / store->rows;
 	}
 
-	static void Font_FileStore::CheckBinaryFormatAssumptions();
+	static void CheckBinaryFormatAssumptions();
 	
 	DiskFormat *store;
 	GLfloat texCoords[8], vertexCoords[8]; // four (x,y) coordinates

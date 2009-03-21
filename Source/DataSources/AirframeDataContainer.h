@@ -155,10 +155,10 @@ class AirframeDataContainer : public DataContainer
 	DataMacro(Wind_Speed, float);
 
 	/** Albatross status text strings (max 3 chars) */
-	DataMacro(Status_Text1, char *);
-	DataMacro(Status_Text2, char *);
-	DataMacro(Status_Text3, char *);
-	DataMacro(Status_Text4, char *);
+	DataMacro(Status_Text1, const char *);
+	DataMacro(Status_Text2, const char *);
+	DataMacro(Status_Text3, const char *);
+	DataMacro(Status_Text4, const char *);
 
 	/** Albatross status text colour (0 = off, 1 = red, 2 = green) */
 	DataMacro(Status_Colour1, int);
@@ -167,7 +167,7 @@ class AirframeDataContainer : public DataContainer
 	DataMacro(Status_Colour4, int);
 
 	/** Text area for when we have no incoming data */
-	DataMacro(Status_Text_NoData, char *);
+	DataMacro(Status_Text_NoData, const char *);
 	
 	/** Time stamp */
 	DataMacro(TimeStamp, double);
