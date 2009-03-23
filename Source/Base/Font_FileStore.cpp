@@ -38,8 +38,9 @@ void computePowerOfTwo(GLshort inDim, GLshort *outDim)
 #include <freetype/freetype.h>
 Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 {
-	int glyphWidth = 0, glyphHeight = 0;
+	int glyphWidth = 0, glyphHeight = 0, rows, cols;
 	FT_UInt *charIdx = 0;
+	FT_GlyphSlot glyph;
 	
 	Font_FileStore *self = new Font_FileStore();
 	self->store = new DiskFormat;
@@ -114,7 +115,7 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	}
 
 	// Prerender characters to find maximum pixel size of a glyph, and while we're here, store the advances
-	FT_GlyphSlot glyph = ftFace->glyph;
+	glyph = ftFace->glyph;
 	for (char i = 0; i < self->store->numGlyphs; ++i)
 	{
 		// FIXME it's kindof wasteful prerendering the whole character set just to get the maximum
@@ -136,7 +137,7 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	LogPrintf("Computed max glyph size as %dx%d.\n", glyphWidth, glyphHeight);
 	
 	// Work out number of rows and columns
-	int rows = (int)ceilf(sqrtf((float)self->store->numGlyphs)), cols = (int)ceilf((float)self->store->numGlyphs / rows);
+	rows = (int)ceilf(sqrtf((float)self->store->numGlyphs)), cols = (int)ceilf((float)self->store->numGlyphs / rows);
 	LogPrintf("Texture has %d rows x %d cols (%d cells for %d glyphs).\n", rows, cols, rows*cols, self->store->numGlyphs);
 	
 	// Create texture
