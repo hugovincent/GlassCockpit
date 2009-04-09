@@ -31,6 +31,12 @@ them in the Preferences section of your main XML file or Default.xml -->
 		<Type>double</Type>
 		<DefaultValue>1.0</DefaultValue>
 	</Preference>
+	
+	<Preference>
+		<Name>FullScreen</Name>
+		<Type>boolean</Type>
+		<DefaultValue>false</DefaultValue>
+	</Preference>
 
 	<Preference>
 		<Name>UnitsPerPixel</Name>

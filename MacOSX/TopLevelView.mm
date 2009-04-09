@@ -8,6 +8,7 @@
 
 #import "TopLevelView.h"
 #include <OpenGL/gl.h>
+#include <OpenGL/OpenGL.h> // for CGL stuff for full-screen on OS X
 
 //--------Base-----------------
 #include "Debug.h"
@@ -97,6 +98,210 @@ Globals *OpenGC::globals;
 }
 
 
+- (void)fullScreen
+{
+	NSOpenGLContext* fullScreenContext;
+	GLint oldSwapInterval;
+	int onDisplay;
+	
+	// Take control of all the displays where we're about to go FullScreen.
+	NSArray* displays = [NSScreen screens];
+	CGDisplayErr error = CGCaptureAllDisplays();
+	if (error != CGDisplayNoErr)
+	{
+		NSLog(@"Failed to capture all displays");
+		return;
+	}
+	// turn off the animation timer -- dont want it firing for no reason
+//	[self updateAnimationTimers:FALSE];
+	
+	for (onDisplay = 0; onDisplay < [displays count] & !error; onDisplay++)
+	{
+		// Pixel Format Attributes for the FullScreen NSOpenGLContext
+		NSOpenGLPixelFormatAttribute attrs[] =
+		{
+			// Specify that we want a full-screen OpenGL context.
+			NSOpenGLPFAFullScreen,
+			
+			// We may be on a multi-display system (and each screen may be driven by a different renderer),
+			// so we need to specify which screen we want to take over.
+			NSOpenGLPFAScreenMask, CGDisplayIDToOpenGLDisplayMask(
+				(CGDirectDisplayID)[[[[displays objectAtIndex:onDisplay] deviceDescription] objectForKey:@"NSScreenNumber"] pointerValue]),
+			
+			// Attributes Common to FullScreen and non-FullScreen
+			NSOpenGLPFADoubleBuffer,
+			NSOpenGLPFAColorSize, 24,
+			NSOpenGLPFAAlphaSize, 8,
+			NSOpenGLPFADepthSize, 24,
+			
+			NSOpenGLPFANoRecovery,
+			//NSOpenGLPFAAccelerated,
+			0
+		};
+		
+		// Create the FullScreen NSOpenGLContext with the attributes listed above.
+		NSOpenGLPixelFormat* pixelFormat=[[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
+		
+		// Create an NSOpenGLContext with the FullScreen pixel format.  By specifying the non-FullScreen contexts as our "shareContexts",
+		// we automatically inherit all of the textures, display lists, and other OpenGL objects it has defined.
+		fullScreenContext = [[NSOpenGLContext alloc] initWithFormat:pixelFormat shareContext:nil]; //[self openGLContext]];
+		[pixelFormat release];
+		
+		if(fullScreenContext == nil)
+		{
+			NSLog(@"Failed to create fullScreenContext");
+			error = 1;
+			break;
+		}
+		
+		// Enter FullScreen mode and make our FullScreen context the active context for OpenGL commands.
+		[fullScreenContext setFullScreen];
+		[fullScreenContext makeCurrentContext];
+		NSLog(@"Running full screen");
+		
+		// Save the current swap interval so we can restore it later, and then set the new swap interval to lock us to the display's refresh rate.
+		CGLContextObj cglContext = CGLGetCurrentContext();
+		CGLGetParameter(cglContext, kCGLCPSwapInterval, &oldSwapInterval);
+		GLint newSwapInterval = 1;
+		CGLSetParameter(cglContext, kCGLCPSwapInterval, &newSwapInterval);
+	}
+#if 0
+	//Main Event Loop
+	// Now that we've got the screen, we enter a loop in which we alternately process input events and computer and render the next frame
+	// of our animation.  The shift here is from a model in which we passively receive events handed to us by the AppKit to one in which we
+	// are actively driving event processing.
+	[scene setFullscreen:YES];
+	while([scene fullscreen]&&!error)
+	{
+		NSAutoreleasePool* pool=[[NSAutoreleasePool alloc] init];
+		
+		// Check for and process input events.
+		NSEvent *event;
+		while(event=[NSApp nextEventMatchingMask:NSAnyEventMask untilDate:[NSDate distantPast] inMode:NSDefaultRunLoopMode dequeue:YES])
+		{
+			switch([event type])
+			{
+				case NSLeftMouseDown:
+					if([event modifierFlags]&NSControlKeyMask)
+					{
+						//fake the right mouse button... this is rather annoying...
+						[scene rightMouseDown:event];
+					}
+					else
+					{
+						[scene mouseDown:event];
+					}
+					break;
+				case NSLeftMouseUp:
+					if([event modifierFlags]&NSControlKeyMask)
+					{
+						//fake the right mouse button... this is rather annoying...
+						[scene rightMouseUp:event];
+					}
+					else
+					{
+						[scene mouseUp:event];
+					}
+					break;
+				case NSLeftMouseDragged:
+					if([event modifierFlags]&NSControlKeyMask)
+					{
+						//fake the right mouse button... this is rather annoying...
+						[scene rightMouseDragged:event];
+					}
+					else
+					{
+						[scene mouseDragged:event];
+					}
+					break;
+				case NSRightMouseDown:
+					[scene rightMouseDown:event];
+					break;
+				case NSRightMouseUp:
+					[scene rightMouseUp:event];
+					break;
+				case NSRightMouseDragged:
+					[scene rightMouseDragged:event];
+					break;
+				case NSKeyDown:
+					[scene keyDown:event];
+					break;
+				default:
+					break;
+			}
+		}
+		
+		//find min origin, max size
+		NSRect mainBounds=[displayData displays][0];
+		//int onDisplay;
+		for(onDisplay=1;onDisplay<[displays count]&!error;onDisplay++)
+		{
+			NSRect virtualBounds=[displayData displays][onDisplay];
+			mainBounds=NSUnionRect(mainBounds,virtualBounds);
+		}
+		
+		// Render a frame, and swap the front and back buffers.
+		//Render Loop
+		//int onDisplay;
+		for(onDisplay=0;onDisplay<[displays count]&!error;onDisplay++)
+		{
+			[fullScreenContext makeCurrentContext];
+			
+			NSRect bounds=[[displays objectAtIndex:onDisplay] frame];
+			NSRect virtualBounds=[displayData displays][onDisplay];
+			
+			// Render a frame, and swap the front and back buffers.
+			// Tell the scene the dimensions of the area it's going to render to, so it can set up an appropriate viewport and viewing transformation.
+			[scene setViewportRect:bounds virtualBounds:virtualBounds mainBounds:mainBounds];
+			[views[onDisplay] updateTextString:bounds virtualBounds:virtualBounds mainBounds:mainBounds];
+			
+			[scene renderWithTextureTiler:[views[onDisplay] textureTiler]
+							   helpString:[views[onDisplay] helpString]
+							   textString:[views[onDisplay] textString]];
+			[fullScreenContext flushBuffer];
+		}
+		
+		// Clean up any autoreleased objects that were created this time through the loop.
+		[pool release];
+	}
+	
+	//Cleanup
+	//int onDisplay;
+	for(onDisplay=0;onDisplay<[displays count]&!error;onDisplay++)
+	{
+		if(fullScreenContext != nil)
+		{
+			[fullScreenContext makeCurrentContext];
+			
+			// Clear the front and back framebuffers before switching out of FullScreen mode.
+			// (This is not strictly necessary, but avoids an untidy flash of garbage.)
+			glClearColor(0.0,0.0,0.0,0.0);
+			glClear(GL_COLOR_BUFFER_BIT);
+			[fullScreenContext flushBuffer];
+			glClear(GL_COLOR_BUFFER_BIT);
+			[fullScreenContext flushBuffer];
+			
+			// Restore the previously set swap interval.
+			CGLContextObj cglContext=CGLGetCurrentContext();
+			CGLSetParameter(cglContext,kCGLCPSwapInterval,&oldSwapInterval[onDisplay]);
+			
+			// Exit fullscreen mode and release our FullScreen NSOpenGLContext.
+			[NSOpenGLContext clearCurrentContext];
+			
+			[fullScreenContext clearDrawable];
+			[fullScreenContext release];
+			fullScreenContext = nil;
+		}
+	}
+	// Release control of the display
+	CGReleaseAllDisplays();
+	[self setNeedsDisplay:YES];
+	// Turn back on the animation timer
+	[self updateAnimationTimers:[scene animating]];
+#endif
+}
+
+
 - (void)dealloc {
 
 	delete m_pRenderWindow;
@@ -117,7 +322,8 @@ Globals *OpenGC::globals;
 
 - (void)drawRect:(NSRect)rect {
 	
-	if ([self frame].size.width != size.width || [self frame].size.height != size.height) {
+	if ([self frame].size.width != size.width || [self frame].size.height != size.height)
+	{
 		[self reshape];
 	}
 	NSOpenGLContext *ctx = [self openGLContext];
@@ -180,7 +386,7 @@ Globals *OpenGC::globals;
 	
 	// Set up the window title
 	XMLNode windowNode = rootNode->GetChild("Window");
-	string windowTitle = "Albatross Glass Cockpit";
+	string windowTitle = "Glass Cockpit";
 	if (windowNode.HasChild("Title"))
 	{
 		windowTitle = windowNode.GetChild("Title").GetText();
@@ -238,9 +444,22 @@ Globals *OpenGC::globals;
 	}
 	
 	m_pRenderWindow->ForceIsOKToRender(true);
+	
+	if (globals->m_PrefManager->GetPrefB("FullScreen"))
+	{
+		[self fullScreen];
+	}
+	
 	// Set the update rate in nominal seconds per frame	
 	animationInterval = globals->m_PrefManager->GetPrefD("AppUpdateRate");
-	animationTimer = [NSTimer scheduledTimerWithTimeInterval:animationInterval target:self selector:@selector(IdleFunction) userInfo:nil repeats:YES];
+	if (animationInterval > 0)
+	{
+		animationTimer = [NSTimer scheduledTimerWithTimeInterval:animationInterval
+														  target:self
+														selector:@selector(IdleFunction)
+														userInfo:nil
+														 repeats:YES];
+	}
 	
 	return YES; // sucess	
 }

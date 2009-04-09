@@ -8,7 +8,11 @@ preferences. -->
 
 <!-- PREFERENCES -->
 	<Preferences>
-		<Zoom>0.96</Zoom>
+<!--	<Zoom>0.96</Zoom> -->		<!-- for laptop builtin screen, window 1081x752 -->
+<!--	<Zoom>1.3344</Zoom> -->		<!-- for 1680x1050 fullscreen -->
+		<Zoom>0.6672</Zoom>			<!-- for devel, window 751x523 -->
+		<FullScreen>true</FullScreen>
+		<AppUpdateRate>0.04</AppUpdateRate> <!-- 0 means lock to vertical sync -->
 	</Preferences>
 
 <!-- DATA SOURCE -->
@@ -22,7 +26,7 @@ preferences. -->
 
 <!-- MAIN WINDOW-->
 	<Window>
-		<Title>Albatross Glass Cockpit</Title>
+		<Title>Test Glass Cockpit</Title>
 
 		<Geometry>
 			<Position>0,0</Position>
