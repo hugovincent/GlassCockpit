@@ -101,10 +101,8 @@ void Font_FileStore::SerializeToFile(const std::string& glfontFilename) const
 
 void Font_FileStore::DeserializeFromFile(const std::string& glfontFilename)
 {
+	if (store) delete store;
 	CheckBinaryFormatAssumptions();
-	
-	if (store)
-		delete store;
 		
 	LogPrintf("Deserializing font %s... ", glfontFilename.c_str());
 	
@@ -165,7 +163,6 @@ void Font_FileStore::DeserializeFromFile(const std::string& glfontFilename)
 	format->bitmap = new GLubyte[format->texWidth * format->texHeight];
 	in.read((char*)format->bitmap, sizeof(GLubyte) * format->texWidth * format->texHeight);
 	store = format;
-	
 	LogPrintf("Done.\n");
 	
 	// Check there is no more data in the file (indicating a different binary format than expected)

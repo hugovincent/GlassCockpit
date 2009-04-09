@@ -70,6 +70,7 @@ private:
 		// Texture bitmap (length = texWidth * texHeight). Pixel format is 8-bit alpha-only.
 		GLubyte *bitmap;
 
+		DiskFormat() : glyphs(NULL), kerningTable(NULL), bitmap(NULL) {}
 		~DiskFormat();
 	};
 	

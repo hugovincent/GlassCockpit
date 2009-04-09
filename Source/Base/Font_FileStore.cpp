@@ -214,15 +214,16 @@ failed:
 
 Font_FileStore::DiskFormat::~DiskFormat()
 {
-	delete[] glyphs;
+	if (glyphs)
+		delete[] glyphs;
 	if (kerningTable) 
 		delete[] kerningTable;
-
 	if (bitmap)
 		delete[] bitmap;
 }
 
 Font_FileStore::Font_FileStore(const std::string& glfontFilename)
+	: store(NULL)
 {
 	DeserializeFromFile(glfontFilename);
 }
