@@ -73,7 +73,7 @@ class RenderWindow
 
 		/**  Mouse callback
 		 * button: 1 = left, 2 = middle, 3 = right
-		 * state: 0 = down, 1 = up
+		 * state: 0 = down, 1 = up FIXME drag/move
 		 */
 		void CallBackMouseFunc(int button, int state, int x, int y);
 

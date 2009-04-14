@@ -57,6 +57,7 @@ _______________________________________________________________________________
 * Graphics:
 	* AltitudeTicker jittering
 	* Mitering at line vertexes for circles, especially in engine instruments
+	* Need to use double buffering
 * Build system:
 	* Fix Environment() use in SConstruct
 	* Get new Mac changes working on Linux again

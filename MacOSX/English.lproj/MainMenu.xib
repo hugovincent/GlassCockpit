@@ -8,7 +8,7 @@
 		<string key="IBDocument.HIToolboxVersion">353.00</string>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="372"/>
+			<integer value="371"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -296,7 +296,7 @@
 			<object class="NSWindowTemplate" id="972006081">
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{31, 233}, {751, 523}}</string>
+				<string key="NSWindowRect">{{203, 49}, {1351, 941}}</string>
 				<int key="NSWTFlags">1946157056</int>
 				<string key="NSWindowTitle">GlassCockpit</string>
 				<string key="NSWindowClass">NSWindow</string>
@@ -311,19 +311,19 @@
 							<reference key="NSNextResponder" ref="439893737"/>
 							<int key="NSvFlags">5394</int>
 							<object class="NSPSMatrix" key="NSDrawMatrix"/>
-							<string key="NSFrameSize">{751, 523}</string>
+							<string key="NSFrameSize">{1351, 941}</string>
 							<reference key="NSSuperview" ref="439893737"/>
 							<object class="NSOpenGLPixelFormat" key="NSPixelFormat">
 								<object class="NSMutableData" key="NSPixelAttributes">
-									<bytes key="NS.bytes">AAAABQAAAEgAAABJAAAAYAAAAAgAAAAYAAAACwAAAAgAAAAAA</bytes>
+									<bytes key="NS.bytes">AAAABQAAAEgAAABJAAAACAAAABgAAAALAAAACAAAAAA</bytes>
 								</object>
 							</object>
 						</object>
 					</object>
-					<string key="NSFrameSize">{751, 523}</string>
+					<string key="NSFrameSize">{1351, 941}</string>
 					<reference key="NSSuperview"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1280, 778}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1680, 1028}}</string>
 				<string key="NSMaxSize">{3.40282e+38, 3.40282e+38}</string>
 			</object>
 			<object class="NSCustomObject" id="755631768">
@@ -821,8 +821,8 @@
 					<string>{{475, 832}, {234, 43}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{152, 149}, {751, 523}}</string>
-					<string>{{152, 149}, {751, 523}}</string>
+					<string>{{22, 48}, {1351, 941}}</string>
+					<string>{{22, 48}, {1351, 941}}</string>
 					<reference ref="9"/>
 					<string>{{33, 99}, {480, 360}}</string>
 					<string>{3.40282e+38, 3.40282e+38}</string>

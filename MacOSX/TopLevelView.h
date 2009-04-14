@@ -20,6 +20,8 @@
 	NSSize size;
 	NSTimer *animationTimer;
     NSTimeInterval animationInterval;
+	NSOpenGLContext *glCtx;
+	BOOL isFullscreen;
 }
 
 @end

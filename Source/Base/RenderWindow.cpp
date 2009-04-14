@@ -157,9 +157,6 @@ void RenderWindow::Render()
 
 	// Draw all of the gauges
 	this->RenderGauges();
-
-	// Clean up the rendering
-	glFlush();
 }
 
 void RenderWindow::RenderGauges()
