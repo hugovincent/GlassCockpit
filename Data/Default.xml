@@ -9,7 +9,8 @@ preferences. -->
 <!-- PREFERENCES -->
 	<Preferences>
 <!--	<Zoom>0.96</Zoom> -->			<!-- for laptop builtin screen, window 1081x752 -->
-		<Zoom>1.3344</Zoom>				<!-- for 1680x1050 fullscreen -->
+		<Zoom>1.02</Zoom>				<!-- for laptop builtin screen, fullscreen -->
+<!--	<Zoom>1.3344</Zoom>	-->			<!-- for 1680x1050 fullscreen -->
 <!--	<Zoom>0.6672</Zoom>	-->			<!-- for devel, window 751x523 -->
 <!--	<Zoom>1.2</Zoom> -->			<!-- 1351x941 -->
 		<FullScreen>true</FullScreen>

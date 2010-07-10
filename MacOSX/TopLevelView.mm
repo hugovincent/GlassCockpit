@@ -8,7 +8,8 @@
 
 #import "TopLevelView.h"
 #include <OpenGL/gl.h>
-#include <OpenGL/OpenGL.h> // for CGL stuff for full-screen on OS X
+
+#include <AppKit/NSOpenGL.h>
 
 //--------Base-----------------
 #include "Debug.h"
@@ -58,7 +59,7 @@ Globals *OpenGC::globals;
 	
 	// Set map cache path (map cache is read-only) // FIXME
 	globals->m_RasterMapManager->SetCachePath(RasterMapManager::RMM_CACHE_MGMAPS, 
-								"/Users/hugo/Projects/iPhone/GlassCockpit/Data/MGMapsCache", "GoogleTer");
+								"/Users/hugo/Projects/GlassCockpit/Data/MGMapsCache", "GoogleTer");
 	
 	// Find paths: writeable directory to cache resources in
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
@@ -71,7 +72,7 @@ Globals *OpenGC::globals;
 	BOOL isDir = NO;
 	if (![fm fileExistsAtPath:writeableDir isDirectory:&isDir] || isDir == NO) {
 		
-		[fm createDirectoryAtPath:writeableDir attributes:nil];
+		[fm createDirectoryAtPath:writeableDir withIntermediateDirectories:YES attributes:nil error:NULL];
 	}
 	
 	// Read the XML file and do some basic checks about its contents
@@ -100,110 +101,21 @@ Globals *OpenGC::globals;
 
 - (void)fullScreen
 {	
-	// turn off the animation timer -- dont want it firing for no reason
-	//	[self updateAnimationTimers:FALSE];
+	NSRect mainDisplayRect = [[NSScreen mainScreen] frame];
+	NSWindow *fullScreenWindow = [[NSWindow alloc] initWithContentRect:mainDisplayRect
+															 styleMask:NSBorderlessWindowMask
+															   backing:NSBackingStoreBuffered
+																 defer:YES];
+	[fullScreenWindow setLevel:NSMainMenuWindowLevel+1];
+	[fullScreenWindow setOpaque:YES];
+	[fullScreenWindow setHidesOnDeactivate:YES];
 	
-	// Capture the display where we're about to go FullScreen.
-	Assert(CGDisplayCapture(CGMainDisplayID()) == CGDisplayNoErr, "Could not enter fullscreen: failed to capture main display");
+	NSRect viewRect = NSMakeRect(0.0, 0.0, mainDisplayRect.size.width, mainDisplayRect.size.height);
+	[self setFrame:viewRect];
+	[self reshape];
+	[fullScreenWindow setContentView:self];
 	
-	// Create the FullScreen NSOpenGLContext with these attributes
-	NSOpenGLPixelFormatAttribute attrs[] =
-	{
-		NSOpenGLPFAFullScreen,														// Full-screen OpenGL context
-		NSOpenGLPFAScreenMask, CGDisplayIDToOpenGLDisplayMask(CGMainDisplayID()),	// Specify which screen to use
-		NSOpenGLPFADoubleBuffer,													// Double-buffering to avoid ugly tearing
-		NSOpenGLPFAColorSize, 24,													// 24-bit colour
-		NSOpenGLPFAAlphaSize, 8,													// 8-bit alpha
-		NSOpenGLPFANoRecovery,														// Disable fall-backs that might cost performance
-		NSOpenGLPFAAccelerated,														// Only consider hardware-accelerated renderers
-		0																			// Terminate attribute list
-	};
-	NSOpenGLPixelFormat* pixelFormat = [[[NSOpenGLPixelFormat alloc] initWithAttributes:attrs] autorelease];
-	glCtx = [[NSOpenGLContext alloc] initWithFormat:pixelFormat shareContext:nil]; // [self openGLContext]]; // Inherit OpenGL objects from current context
-	
-	Assert(glCtx != nil, "Failed to create fullScreenContext");
-	
-	// Enter FullScreen mode and make our FullScreen context the active context for OpenGL commands.
-	[glCtx setFullScreen];
-	[glCtx makeCurrentContext];
-	LogPrintf("Running full screen\n");
-	
-	NSRect f = [[NSScreen mainScreen] frame];
-	m_pRenderWindow->Resize(f.size.width, f.size.height);
-	
-	// Main Event Loop
-	//
-	// Now that we've got the screen, we enter a loop in which we alternately process input events and computer and render the next frame
-	// of our animation.  The shift here is from a model in which we passively receive events handed to us by the AppKit to one in which we
-	// are actively driving event processing.
-	isFullscreen = YES;
-	while(isFullscreen)
-	{
-		NSAutoreleasePool* pool = [[NSAutoreleasePool alloc] init];
-		
-		// Check for and process input events
-		while (NSEvent *event = [NSApp nextEventMatchingMask:NSAnyEventMask untilDate:[NSDate distantPast] inMode:NSDefaultRunLoopMode dequeue:YES])
-		{
-			switch ([event type])
-			{
-				case NSLeftMouseDown:
-				case NSRightMouseDown:
-					[self mouseDown:event];
-					break;
-				case NSLeftMouseUp:
-				case NSRightMouseUp:
-					[self mouseUp:event];
-					break;
-				case NSLeftMouseDragged:
-				case NSRightMouseDragged:
-					NSLog(@"ignoring drag event");
-					break;
-				case NSKeyDown:
-					[self keyDown:event];
-					isFullscreen = NO; // FIXME hack
-					break;
-				default:
-					break;
-			}
-		}
-
-		// Render a frame, and swap the front and back buffers.
-		[glCtx makeCurrentContext];		
-		if ([self IdleFunction])
-			m_pRenderWindow->Render();
-		NSLog(@"drew");
-		[glCtx flushBuffer];
-		
-		// Clean up any autoreleased objects that were created this time through the loop.
-		[pool release];
-	}
-
-	// Cleanup
-	if (glCtx != nil)
-	{
-		[glCtx makeCurrentContext];
-		
-		// Clear the front and back framebuffers before switching out of FullScreen mode.
-		// (This is not strictly necessary, but avoids an untidy flash of garbage.)
-		glClearColor(0.0,0.0,0.0,0.0);
-		glClear(GL_COLOR_BUFFER_BIT);
-		[glCtx flushBuffer];
-		glClear(GL_COLOR_BUFFER_BIT);
-		[glCtx flushBuffer];
-		
-		// Exit fullscreen mode and release our FullScreen NSOpenGLContext.
-		[NSOpenGLContext clearCurrentContext];
-		
-		[glCtx clearDrawable];
-		[glCtx release];
-		glCtx = nil;
-	}
-
-	// Release control of the displays
-	CGReleaseAllDisplays();
-	[self setNeedsDisplay:YES];
-	// Turn back on the animation timer
-//	[self updateAnimationTimers:[scene animating]];
+	[fullScreenWindow makeKeyAndOrderFront:self];
 }
 
 
@@ -352,24 +264,27 @@ Globals *OpenGC::globals;
 	// This state would be set automatically on other platforms, we have to force it on OS X
 	m_pRenderWindow->ForceIsOKToRender(true);
 	
-	CGLContextObj cglContext = CGLGetCurrentContext();
-	GLint newSwapInterval = 1;
-	CGLSetParameter(cglContext, kCGLCPSwapInterval, &newSwapInterval);
-	
 	// Set the update rate in nominal seconds per frame	
 	animationInterval = globals->m_PrefManager->GetPrefD("AppUpdateRate");
-	if (animationInterval == 0 || globals->m_PrefManager->GetPrefB("FullScreen"))
-	{
-		// Set refresh rate to screen vertical sync rate
-//		CGLContextObj cglContext = CGLGetCurrentContext();
-//		GLint newSwapInterval = 1;
-//		CGLSetParameter(cglContext, kCGLCPSwapInterval, &newSwapInterval);
-	}
+	if (animationInterval < 0.005) animationInterval = 0.005;
 	animationTimer = [NSTimer scheduledTimerWithTimeInterval:animationInterval
 													  target:self
 													selector:@selector(IdleFunction)
 													userInfo:nil
 													 repeats:YES];
+	// Set vertical refesh lock (FIXME this appears broken. Still. )
+	if (animationInterval == 0.005)
+	{
+		const GLint swapInterval = 1; // request synchronization
+		[glCtx setValues:&swapInterval forParameter:NSOpenGLCPSwapInterval];
+	}
+	else if (globals->m_PrefManager->GetPrefB("FullScreen"))
+	{
+		// Set refresh rate to screen vertical sync rate
+		CGLContextObj cglContext = CGLGetCurrentContext();
+		GLint newSwapInterval = 1;
+		CGLSetParameter(cglContext, kCGLCPSwapInterval, &newSwapInterval);
+	}
 	
 	if (globals->m_PrefManager->GetPrefB("FullScreen"))
 	{
