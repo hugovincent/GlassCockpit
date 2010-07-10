@@ -70,7 +70,7 @@ void PrefManager::SetPrefsFromXML(XMLNode prefNode)
 
 void PrefManager::PrintAll() const
 {
-	printf("PrefManager: database contains %d entries:\n", m_PrefMap.size());
+	printf("PrefManager: database contains %d entries:\n", (int)m_PrefMap.size());
 
 	std::map<string, Preference*>::const_iterator iter;
 	for (iter = m_PrefMap.begin(); iter != m_PrefMap.end(); ++iter)

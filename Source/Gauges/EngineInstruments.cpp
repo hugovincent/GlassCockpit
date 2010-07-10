@@ -148,8 +148,8 @@ void EngineInstruments::Render()
 	globals->m_FontManager->Print(111, 70, "CHT", m_Font);
 
 	// Draw frames per second
-	char buffer[10];
-	sprintf(buffer, "FPS  %.1f", GetFPS());
+	char buffer[16];
+	snprintf(buffer, sizeof(buffer), "FPS  %2.1f", GetFPS());
 	globals->m_FontManager->SetSize(m_Font, 3, 3);
 	globals->m_FontManager->Print(169, 2, buffer, m_Font);
 }

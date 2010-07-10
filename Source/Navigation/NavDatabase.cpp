@@ -103,8 +103,8 @@ void NavDatabase::InitDatabase()
 
 	printf("Done\nNavDatabase: Navigation database contains:\n");
 	printf("\t%i NavAids\n\t%i Airports\n\t%i Waypoints\n\t%i Map shapes\n",
-			m_NavaidList->size(), m_AirportList->size(), 
-			m_WaypointList->size(), 0 /* m_MapShapeList->size() */);
+			(int)m_NavaidList->size(), (int)m_AirportList->size(), 
+			(int)m_WaypointList->size(), 0 /* m_MapShapeList->size() */);
 }
 
 } // end namespace OpenGC
