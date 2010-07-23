@@ -396,20 +396,21 @@ void NavDisplay::PlotGeoObjs(std::list<GeographicObject*>& geoList)
 
 void NavDisplay::PlotMap()
 {
-#if 1
 	unsigned int x, y; float fx, fy;
 	unsigned int z = 13;
-	static bool runonceA = false, runonceB = true;
+	bool inited = false;
 	
-	if (runonceA == false) {
 	globals->m_RasterMapManager->GetTileCoordsForLatLon(x, y, fx, fy, 
 		globals->m_DataSource->GetAirframe()->GetLatitude(), globals->m_DataSource->GetAirframe()->GetLongitude(), z);
-	if (x > 6000) runonceA = true;
-	}
 	
+	//----------------------------------
+	// This is a Demo Mode hack...
+	if (x < 6000) return;
+	//----------------------------------
+
 	static GLuint textures[49];
 	bool status[49];
-	if (runonceA && runonceB)
+	if (!inited)
 	{
 		int ident = 0;
 		glGenTextures(49, &textures[0]);
@@ -436,70 +437,43 @@ void NavDisplay::PlotMap()
 				ident++;
 			}
 		}
-		runonceB = false;
+		inited = true;
 	}
-	
-	if (runonceA && !runonceB)
+
+	int ident = 0;
+	for (int dx = -3; dx <= 3; dx++)
 	{
-		int ident = 0;
-		for (int dx = -3; dx <= 3; dx++)
+		for (int dy = -3; dy <= 3; dy++)
 		{
-			for (int dy = -3; dy <= 3; dy++)
+			if (status[ident])
 			{
-//				if (status[ident])
-				if (1)
-				{
-					// Render tile
-					glPushMatrix();
-					glLoadIdentity();
-					glTranslatef(CENTER_X, CENTER_Y, 0);
-					glRotatef(aircraftHeading, 0, 0, 1);
-					glTranslatef((dx*256 + fx - 128)/3.2, (-dy*256 - fy - 128)/3.2, 0);
-					glColor4ub(255, 255, 255, 190);
+				// Render tile
+				glPushMatrix();
+				glLoadIdentity();
+				glTranslatef(CENTER_X, CENTER_Y, 0);
+				glRotatef(aircraftHeading, 0, 0, 1);
+				glTranslatef((dx*256 + fx - 128)/3.2, (-dy*256 - fy - 128)/3.2, 0);
+				glColor4ub(255, 255, 255, 190);
+				
+				glEnable(GL_TEXTURE_2D);
+				glBindTexture(GL_TEXTURE_2D, textures[ident]);
 					
-					glEnable(GL_TEXTURE_2D);
-					glBindTexture(GL_TEXTURE_2D, textures[ident]);
-						
-					static const float texCoords[] = {0,1,   1,1,   0,0,   1,0};
-					glTexCoordPointer(2, GL_FLOAT, 0, &texCoords);
-					
-					static const float vertices[] = {-40,-40,   40,-40,   -40,40,   40,40};
-					glVertexPointer(2, GL_FLOAT, 0, &vertices);
-					
-					glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-					glDisable(GL_TEXTURE_2D);
-					glPopMatrix();
-				}
-				ident++;
+				static const float texCoords[] = {0,1,   1,1,   0,0,   1,0};
+				glTexCoordPointer(2, GL_FLOAT, 0, &texCoords);
+				
+				static const float vertices[] = {-40,-40,   40,-40,   -40,40,   40,40};
+				glVertexPointer(2, GL_FLOAT, 0, &vertices);
+				
+				glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+				glDisable(GL_TEXTURE_2D);
+				glPopMatrix();
 			}
+			ident++;
 		}
 	}
+
 	// Cleanup
-	//glDeleteTextures(1, &texture);	
-#elif 0
-	// FIXME actually plot some kind of map!! For now, random points:
-	const double points[][2] = {
-		{1000, 1000},
-		{2000, 2000},
-		{1000, 2000},
-		{2500, 2500},
-		{700, 2800},
-		{-1000, 3500},
-		{-3000, 0},
-		{-5000, 5000}
-	};
-	
-	//double xPos, yPos;
-	glColor3f(0.0, 0.5, 0.0); // 50% green
-	glBegin(GL_TRIANGLE_STRIP);
-		for (int i = 0; i < (int)(sizeof(points) / sizeof(double[2])); i++)
-		{
-			//PointToPixelCoord(points[i][0], points[i][1], xPos, yPos);
-			//glVertex2f(xPos, yPos);
-			glVertex2f(points[i][0] / m_SizeNM, points[i][1] / m_SizeNM); // FIXME remove this and uncomment the two above lines
-		}
-	glEnd();
-#endif
+	//glDeleteTextures(49, &textures[0]); 	// FIXME do cleanup somewhere else??
 }
 
 void NavDisplay::PointToPixelCoord(double objNorthing, double objEasting, double &xPos, double &yPos)

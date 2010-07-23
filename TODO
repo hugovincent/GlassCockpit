@@ -1,4 +1,13 @@
-Last Updated:	2009.02.17
+URGENT FIXMES:
+Fix vblank syncing and timing stuff.
+Raster tiled map display.
+Performance problems?
+
+
+
+
+
+Last Updated:	2010.07.12
 Updated By:		Hugo Vincent
 _______________________________________________________________________________
 
@@ -6,15 +15,15 @@ _______________________________________________________________________________
 _______________________________________________________________________________
 
 * XML-described Gauges built using GaugeComponents (deprecate the Gauge class)
-* FlightCourse is compeltely incomplete and broken
+* FlightCourse is hopelessly incomplete and broken
 * FlightGear data source needs to be finished, and remove the dependency on Plib
 * Navigation display
 	* raster maps
 	* vector maps/geography using ShapeLib
 	* compass text
 	* overlay text area:
-		* time & distance to waypoint
-		* GPS lat/long (as Degrees:Minutes:Seconds for decimal?)
+		* time & distance to next waypoint
+		* GPS lat/long (as Degrees:Minutes:Seconds or decimal?)
 * XML <Window> description needs some way of describing divider lines
 * GaugeComponents:
 	* new: plain text component (only arguments would be font size and text - it would compute its size)
@@ -57,7 +66,7 @@ _______________________________________________________________________________
 * Graphics:
 	* AltitudeTicker jittering
 	* Mitering at line vertexes for circles, especially in engine instruments
-	* Need to use double buffering
+	* Need to use double buffering, esp. on NavDisplay.
 * Build system:
 	* Fix Environment() use in SConstruct
 	* Get new Mac changes working on Linux again

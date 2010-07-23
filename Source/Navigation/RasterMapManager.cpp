@@ -184,7 +184,7 @@ unsigned char *RasterMapManager::DecodeJPEG(unsigned char *readBuffer, unsigned 
 	jdec = tinyjpeg_init();
 	if (tinyjpeg_parse_header(jdec, readBuffer, length) < 0)
 	{
-		LogPrintf("RasterMapManager: JPEG codec error: %s\n", tinyjpeg_get_errorstring(jdec));
+		LogPrintf("RasterMapManager: JPEG codec error: %s", tinyjpeg_get_errorstring(jdec));
 		return NULL;
 	}
 
@@ -203,7 +203,7 @@ unsigned char *RasterMapManager::DecodePNG(unsigned char *readBuffer, unsigned i
 
 	if (unsigned error = LodePNG_decode32(&image, &width, &height, &readBuffer[0], (size_t)length))
 	{
-		printf("RasterMapManager: JPEG codec error: %d\n", error);
+		printf("RasterMapManager: PNG codec error number %d\n", error);
 		return NULL;
 	}
 

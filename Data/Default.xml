@@ -14,7 +14,7 @@ preferences. -->
 <!--	<Zoom>0.6672</Zoom>	-->			<!-- for devel, window 751x523 -->
 <!--	<Zoom>1.2</Zoom> -->			<!-- 1351x941 -->
 		<FullScreen>true</FullScreen>
-		<AppUpdateRate>0</AppUpdateRate> <!-- 0 means lock to vertical sync -->
+		<AppUpdateRate>0.04</AppUpdateRate> <!-- 0 means lock to vertical sync, 25 Hz is 0.04 -->
 	</Preferences>
 
 <!-- DATA SOURCE -->

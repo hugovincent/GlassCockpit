@@ -1,6 +1,8 @@
-OpenGC Glass Cockpit and Groundstation for the Albatross UAV
-Hugo Vincent
-17 February 2009
+
+	OpenGC Glass Cockpit and Groundstation for the Albatross UAV
+	
+							Hugo Vincent
+							12 July 2010
 
 _______________________________________________________________________________
 
@@ -9,9 +11,11 @@ _______________________________________________________________________________
 
 OpenGC is part of the groundstation software for the Albatross UAV project.
 OpenGC was originally authored by Damion Shelton for use by flight simulator
-enthusiasts in 2001-2004, and has been substantially modified and improved to
-suit realtime monitoring of aircraft, such as autonomous aircraft (remotely from the 
-ground), or in the cockpit of piloted aircraft. 
+enthusiasts in 2001-2004, and subsequently has been modified and improved to
+suit realtime monitoring of aircraft, such as autonomous aircraft (remotely from
+the ground), or perhaps for use in the cockpit of piloted aircraft. 
+
+To get an idea for what does not yet work, or work correctly, see the TODO file.
 
 _______________________________________________________________________________
 
@@ -19,8 +23,23 @@ _______________________________________________________________________________
 _______________________________________________________________________________
 
 Copyright (c) 2001-2004 Damion Shelton
-Copyright (c) 2005-2009 Hugo Vincent <hugo.vincent@gmail.com>
+Copyright (c) 2005-2010 Hugo Vincent <hugo.vincent@gmail.com>
 All rights reserved.
+
+This project is distributed under the terms of the GNU General Public License
+Version 3 <http://www.gnu.org/licenses/gpl.html>. 
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, specifically version 3 of the License.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 _______________________________________________________________________________
 
@@ -56,4 +75,5 @@ _______________________________________________________________________________
 _______________________________________________________________________________
 
 1) Open the Xcode project, build and run.
+2) That's it :-)
 

@@ -116,6 +116,8 @@ Globals *OpenGC::globals;
 	[fullScreenWindow setContentView:self];
 	
 	[fullScreenWindow makeKeyAndOrderFront:self];
+	
+	// FIXME I think this might be leaky...
 }
 
 
@@ -313,14 +315,15 @@ Globals *OpenGC::globals;
 	return false;
 }
 
+@end
 
 #pragma mark Event Handling
+@implementation TopLevelView (NSResponder)
 
 - (BOOL)acceptsFirstResponder {
 
-    return YES;
+	return YES;
 }
-
 
 - (void)mouseDown:(NSEvent *)theEvent {
 
