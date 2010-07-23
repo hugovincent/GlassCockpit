@@ -66,7 +66,7 @@ void FlightDirector::Render()
 	if (data->GetDirector_Active())
 	{
 		glColor3ub(255, 0, 255); // magenta
-		glLineWidth(2.0);
+		glLineWidth(1.0);
 		
 		// Get the data
 		double fdAlt = globals->m_DataSource->GetAirframe()->GetDirector_Altitude();
@@ -89,7 +89,7 @@ void FlightDirector::Render()
 				ALT_X - 4, ALT_Y + markerOffset + 10.0
 			};
 			glVertexPointer(2, GL_FLOAT, 0, &vertices);
-			glDrawArrays(GL_TRIANGLES, 0, 3);
+			glDrawArrays(GL_LINE_LOOP, 0, 3);
 		}
 		// It's not visible, so draw an arrow at the edge of the window
 		// pointing in the correct direction.
@@ -134,7 +134,7 @@ void FlightDirector::Render()
 				AIRSPEED_X - 4, AIRSPEED_Y + markerOffset + 10.0
 			};
 			glVertexPointer(2, GL_FLOAT, 0, &vertices);
-			glDrawArrays(GL_TRIANGLES, 0, 3);
+			glDrawArrays(GL_LINE_LOOP, 0, 3);
 		}
 		// It's not visible, so draw an arrow at the edge of the window
 		// pointing in the correct direction.
@@ -183,10 +183,7 @@ void FlightDirector::Render()
 				glRotated((360.0 - deltaHeading) * indicatorDegreesPerTrueDegrees, 0,0,-1);
 			const float vertices[] = {0,radius+4.0,   3,radius+7.0,   -3,radius+7.0};
 			glVertexPointer(2, GL_FLOAT, 0, &vertices);
-			glDrawArrays(GL_TRIANGLES, 0, 3);
-			glLineWidth(1.0);
-			glVertexPointer(2, GL_FLOAT, 0, &vertices);
-			glDrawArrays(GL_LINE_STRIP, 0, 3);
+			glDrawArrays(GL_LINE_LOOP, 0, 3);
 		}
 		else {
 			// It's not visible, so draw an arrow at the edge of the window

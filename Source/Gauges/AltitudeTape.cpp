@@ -16,6 +16,7 @@
 =========================================================================*/
 
 #include <stdio.h>
+#include <math.h>
 
 #include "Globals.h"
 #include "GaugeComponent.h"
@@ -72,18 +73,12 @@ void AltitudeTape::Render()
 	// Tick marks are spaced every 100 ft. vertically
 	// The tick spacing represents how far apart they are in physical
 	// units
-	double tickSpacing = 17.0;
-	double tickWidth = 3.7;
-	double fontHeight = 4;
-	double fontWidth = 3.5;
-	double fontIndent = 4.5;
+	const double tickSpacing = 17.0, tickWidth = 3.7, fontHeight = 4, fontWidth = 3.5, fontIndent = 4.5;
+	const int numTicks = m_PhysicalSize.y / tickSpacing;
 
 	globals->m_FontManager->SetSize(m_Font, fontHeight, fontWidth);
 
-	char buffer[1];
-
 	int nextHighestAlt = (alt/100)*100;
-
 	if (nextHighestAlt < alt)
 		nextHighestAlt += 100;
 
@@ -91,151 +86,29 @@ void AltitudeTape::Render()
 	// altitude is above the arrow
 	double vertOffset = ( (double)nextHighestAlt - (double)alt)/100*tickSpacing;
 
-	// Vertical location of the tick mark
-	double tickLocation = 0;
-
 	glColor3ub(255,255,255);
 	glLineWidth(2.0);
 
-	double i = 0; // counter
-	int tickAlt; // speed represented by tick mark
-	int charAlt; // speed for computing text digits
-
 	// Draw ticks up from the center
-	for (i = 0; i <= ((m_PhysicalSize.y/2) / tickSpacing) + 1; i += 1.0)
+	for (int i = -numTicks/2; i <= numTicks/2; i++)
 	{
-		tickAlt = nextHighestAlt +(int)(i*100.0);
-		tickLocation = (m_PhysicalSize.y/2) + i*tickSpacing+vertOffset;
+		int tickAlt = nextHighestAlt + i * 100;
+		double tickLocation = (m_PhysicalSize.y/2) + i * tickSpacing + vertOffset;
 		double texty = tickLocation - fontHeight / 2;
-
-		const float vertices[] = {0, tickLocation, tickWidth, tickLocation};
-		glVertexPointer(2, GL_FLOAT, 0, &vertices);
-		glDrawArrays(GL_LINES, 0, 2);
 		
-		if( (tickAlt % 200)==0 )
-		{
-			charAlt = tickAlt;
-			bool tenk = false;
-			bool onek = false;
-
-			// 10000's
-			if(charAlt >= 10000)
-			{
-				//_itoa( charAlt / 10000, buffer, 10);
-				sprintf( buffer, "%i", charAlt/10000);
-				globals->m_FontManager->Print(fontIndent, texty, buffer, m_Font);
-				charAlt = charAlt-10000*(int)(charAlt/10000);
-
-				tenk = true;
-			}
-
-			// 1000's
-			if(charAlt >= 1000)
-			{
-				//_itoa( charAlt / 1000, buffer, 10);
-				sprintf( buffer, "%i", charAlt/1000);
-				globals->m_FontManager->Print(fontIndent + fontWidth, texty, &buffer[0], m_Font);
-				charAlt = charAlt-1000*(int)(charAlt/1000);
-
-				onek = true;
-			}
-			else if(tenk)
-			{
-				buffer[0] = '0';
-				globals->m_FontManager->Print(fontIndent + fontWidth, texty, &buffer[0], m_Font);
-			}
-
-			// 100's
-			if(charAlt >= 100)
-			{
-				//_itoa( charAlt / 100, buffer, 10);
-				sprintf( buffer, "%i", charAlt/100);
-				globals->m_FontManager->Print(fontIndent + fontWidth*2, texty, &buffer[0], m_Font);
-				charAlt = charAlt-100*(int)(charAlt/100);
-			}
-			else if(tenk || onek)
-			{
-				buffer[0] = '0';
-				globals->m_FontManager->Print(fontIndent + fontWidth*2, texty, &buffer[0], m_Font);
-			}
-
-			buffer[0] = '0';
-			globals->m_FontManager->Print(fontIndent + fontWidth*3, texty, &buffer[0], m_Font);
-
-			buffer[0] = '0';
-			globals->m_FontManager->Print(fontIndent + fontWidth*4, texty, &buffer[0], m_Font);
-		}
-	}
-
-	// Draw ticks down from the center
-	for (i = 1; i <= ((m_PhysicalSize.y/2) / tickSpacing) + 1; i += 1.0)
-	{
-		tickAlt = nextHighestAlt - (int)(i*100);
-		tickLocation = (m_PhysicalSize.y/2) - ( (i-1) * tickSpacing) - (tickSpacing - vertOffset);
-		double texty = tickLocation - fontHeight / 2;
-
 		if (tickAlt >= 0)
 		{
 			const float vertices[] = {0, tickLocation, tickWidth, tickLocation};
 			glVertexPointer(2, GL_FLOAT, 0, &vertices);
 			glDrawArrays(GL_LINES, 0, 2);
-		}
-
-		if( (tickAlt % 200)==0 )
-		{
-			charAlt = tickAlt;
-			bool tenk = false;
-			bool onek = false;
-
-			// 10000's
-			if(charAlt >= 10000)
+			
+			if ((tickAlt % 200) == 0)
 			{
-				//_itoa( charAlt / 10000, buffer, 10);
-				sprintf(buffer, "%i", charAlt/10000);
-				globals->m_FontManager->Print(fontIndent, texty, buffer, m_Font);
-				charAlt = charAlt-10000*(int)(charAlt/10000);
-
-				tenk = true;
-			}
-
-			// 1000's
-			if(charAlt >= 1000)
-			{
-				//_itoa( charAlt / 1000, buffer, 10);
-				sprintf(buffer, "%i", charAlt/1000);
-				globals->m_FontManager->Print(fontIndent + fontWidth, texty, &buffer[0], m_Font);
-				charAlt = charAlt-1000*(int)(charAlt/1000);
-
-				onek = true;
-			}
-			else if(tenk)
-			{
-				buffer[0] = '0';
-				globals->m_FontManager->Print(fontIndent + fontWidth, texty, &buffer[0], m_Font);
-			}
-
-			// 100's
-			if(charAlt >= 100)
-			{
-				//_itoa( charAlt / 100, buffer, 10);
-				sprintf(buffer, "%i", charAlt/100);
-				globals->m_FontManager->Print(fontIndent + fontWidth*2, texty, &buffer[0], m_Font);
-				charAlt = charAlt-100*(int)(charAlt/100);
-			}
-			else if(tenk || onek)
-			{
-				buffer[0] = '0';
-				globals->m_FontManager->Print(fontIndent + fontWidth*2, texty, &buffer[0], m_Font);
-			}
-
-			if(tickAlt > 0) {
-				buffer[0] = '0';
-				globals->m_FontManager->Print(fontIndent + fontWidth*3, texty, &buffer[0], m_Font);
-			}
-
-			if (tickAlt >= 0) {
-				buffer[0] = '0';
-				globals->m_FontManager->Print(fontIndent + fontWidth*4, texty, &buffer[0], m_Font);
+				globals->m_FontManager->SetRightAligned(m_Font, true);
+				static char buffer[16];
+				sprintf( buffer, "%d", tickAlt);
+				globals->m_FontManager->Print(fontIndent + fontWidth * 5, texty, &buffer[0], m_Font);
+				globals->m_FontManager->SetRightAligned(m_Font, false);
 			}
 		}
 	}

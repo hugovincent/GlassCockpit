@@ -74,19 +74,13 @@ void SpeedTape::Render()
 	glVertexPointer(2, GL_FLOAT, 0, &vertices);
 	glDrawArrays(GL_POLYGON, 0, 5);
 
-
 	// Tick marks are space every 10 kph vertically
 	// The tick spacing represents how far apart they are in physical
 	// units
-	double tickSpacing = 11.3;
-	double tickWidth = 3.7;
-	double fontHeight = 5;
-	double fontWidth = 4.1;
-	double fontIndent = 6;
+	const double tickSpacing = 11.3, tickWidth = 3.7, fontHeight = 5, fontWidth = 4.1, fontIndent = 5;
+	const int numTicks = m_PhysicalSize.y / tickSpacing;
 
 	globals->m_FontManager->SetSize(m_Font, fontHeight, fontWidth);
-
-	char buffer[1];
 
 	double nextHighestAirspeed = (((int)airspeed) / 10) * 10;
 	if (nextHighestAirspeed < airspeed)
@@ -97,107 +91,29 @@ void SpeedTape::Render()
 	// etc. are all aligned with the arrow
 	double vertOffset = (nextHighestAirspeed - airspeed) * tickSpacing / 10.f;
 
-	// Vertical location of the tick mark
-	double tickLocation = 0;
-
 	glColor3ub(255,255,255);
 	glLineWidth(2.0);
-
-	double i = 0; // counter
-	int tickSpeed; // speed represented by tick mark
-	int charSpd; // speed for computing text digits
-
+	
 	// Draw ticks up from the center
-	for (i = 0; i <= ((m_PhysicalSize.y/2) / tickSpacing) + 1; i += 1.0)
+	for (int i = -numTicks/2; i <= numTicks/2; i++)
 	{
-		tickSpeed = (int)(nextHighestAirspeed + i * 10.0);
-		tickLocation = (m_PhysicalSize.y/2) + i * tickSpacing + vertOffset;
-
-		const float vertices[] = {indent_x - tickWidth, tickLocation, indent_x, tickLocation};
-		glVertexPointer(2, GL_FLOAT, 0, &vertices);
-		glDrawArrays(GL_LINES, 0, 2);
-
-		if( tickSpeed < 1999.0 && (tickSpeed % 20)==0 )
+		int tickSpeed = nextHighestAirspeed + i * 10;
+		double tickLocation = (m_PhysicalSize.y/2) + i * tickSpacing + vertOffset;
+		double texty = tickLocation - fontHeight / 2;
+		
+		if (tickSpeed >= 0)
 		{
-			double texty = tickLocation - fontHeight / 2;
-
-			charSpd = tickSpeed;
-
-			if(charSpd >= 1000)
-			{
-				// 1000's
-				sprintf( buffer, "%i", charSpd/1000);
-				globals->m_FontManager->Print(fontIndent - fontWidth, texty, &buffer[0], m_Font);
-				charSpd = charSpd-1000*(int)(charSpd/1000);
-			}
-			
-			if(charSpd >= 100)
-			{
-				// 100's
-				sprintf( buffer, "%i", charSpd/100);
-				globals->m_FontManager->Print(fontIndent, texty, &buffer[0], m_Font);
-				charSpd = charSpd-100*(int)(charSpd/100);
-			}
-
-			// 10's
-			if(charSpd >= 10 || tickSpeed > 10)
-			{
-				sprintf( buffer, "%i", charSpd/10);
-				globals->m_FontManager->Print(fontIndent + fontWidth, texty, &buffer[0], m_Font);
-				charSpd = charSpd-10*(int)(charSpd/10);
-			}
-
-			buffer[0] = '0';
-			globals->m_FontManager->Print(fontIndent + fontWidth*2, texty, &buffer[0], m_Font);
-		}
-	}
-
-	// Draw ticks down from the center
-	for (i = 1; i <= ((m_PhysicalSize.y/2) / tickSpacing) + 1; i += 1.0)
-	{
-		tickSpeed = (int)(nextHighestAirspeed - i * 10);
-
-		// Only draw ticks if they correspond to an airspeed of > 0
-		if (tickSpeed < 1999.0 && tickSpeed >= 0)
-		{
-			tickLocation = (m_PhysicalSize.y/2) - ((i-1) * tickSpacing) - (tickSpacing - vertOffset);
-
 			const float vertices[] = {indent_x - tickWidth, tickLocation, indent_x, tickLocation};
 			glVertexPointer(2, GL_FLOAT, 0, &vertices);
 			glDrawArrays(GL_LINES, 0, 2);
-
-			if( (tickSpeed % 20)==0 )
+			
+			if ((tickSpeed % 20) == 0)
 			{
-				double texty = tickLocation - fontHeight / 2;
-
-				charSpd = tickSpeed;
-				
-				if(charSpd >= 1000)
-				{
-					// 1000's
-					sprintf( buffer, "%i", charSpd/1000);
-					globals->m_FontManager->Print(fontIndent - fontWidth, texty, &buffer[0], m_Font);
-					charSpd = charSpd-1000*(int)(charSpd/1000);
-				}
-
-				if(charSpd >= 100)
-				{
-					// 100's
-					sprintf( buffer, "%i", charSpd/100);
-					globals->m_FontManager->Print(fontIndent, texty, &buffer[0], m_Font);
-					charSpd = charSpd-100*(int)(charSpd/100);
-				}
-
-				// 10's
-				if(charSpd >= 10 || tickSpeed > 10)
-				{
-					sprintf( buffer, "%i", charSpd/10);
-					globals->m_FontManager->Print(fontIndent + fontWidth, texty, &buffer[0], m_Font);
-					charSpd = charSpd-10*(int)(charSpd/10);
-				}
-
-				buffer[0] = '0';
-				globals->m_FontManager->Print(fontIndent + fontWidth*2, texty, &buffer[0], m_Font);
+				globals->m_FontManager->SetRightAligned(m_Font, true);
+				static char buffer[16];
+				sprintf( buffer, "%d", tickSpeed);
+				globals->m_FontManager->Print(fontIndent + fontWidth*3, texty, &buffer[0], m_Font);
+				globals->m_FontManager->SetRightAligned(m_Font, false);
 			}
 		}
 	}

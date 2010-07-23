@@ -61,10 +61,14 @@ void SpeedTicker::Render()
 
 	// White border around background
 	glColor3ub(255,255,255);
-	glLineWidth(1.0);
-	static const float vertices2[] = {0.0,0.0,   0.0,18.0,   18.0,18.0,   18.0,11.0,   21.0,9.0,   18.0,7.0,   18.0,0.0};
+	glLineWidth(2);
+	static const float vertices2[] = {18.0,0.0,   0.0,0.0,   0.0,18.0,   18.0,18.0};
 	glVertexPointer(2, GL_FLOAT, 0, &vertices2);
-	glDrawArrays(GL_LINE_LOOP, 0, 7);
+	glDrawArrays(GL_LINE_STRIP, 0, 4);
+	glLineWidth(1.5);
+	static const float vertices3[] = {18.0,18.0, 18.0,11.0,   21.0,9.0,   18.0,7.0,   18.0,0.0};
+	glVertexPointer(2, GL_FLOAT, 0, &vertices3);
+	glDrawArrays(GL_LINE_STRIP, 0, 5);
 
 	char buffer[4];
 	double airspeed = globals->m_DataSource->GetAirframe()->GetAirspeed_KT();
