@@ -1,7 +1,7 @@
 /*
-LodePNG version 20080927
+LodePNG version 20100808
 
-Copyright (c) 2005-2008 Lode Vandevenne
+Copyright (c) 2005-2010 Lode Vandevenne
 
 This software is provided 'as-is', without any express or implied
 warranty. In no event will the authors be held liable for any damages
@@ -30,7 +30,7 @@ You are free to name this file lodepng.cpp or lodepng.c depending on your usage.
 
 #include "lodepng.h"
 
-#define VERSION_STRING "20080927"
+#define VERSION_STRING "20100808"
 
 /* ////////////////////////////////////////////////////////////////////////// */
 /* / Tools For C                                                            / */
@@ -209,9 +209,9 @@ static void ucvector_cleanup(void* p)
 
 static unsigned ucvector_resize(ucvector* p, size_t size) /*returns 1 if success, 0 if failure ==> nothing done*/
 {
-  if(size * sizeof(unsigned) > p->allocsize)
+  if(size * sizeof(unsigned char) > p->allocsize)
   {
-    size_t newsize = size * sizeof(unsigned) * 2;
+    size_t newsize = size * sizeof(unsigned char) * 2;
     void* data = realloc(p->data, newsize);
     if(data)
     {
@@ -2875,7 +2875,7 @@ static void decodeGeneric(LodePNG_Decoder* decoder, unsigned char** out, size_t*
       {
         if(chunkLength != 1) { decoder->error = 43; break; } /*error: this chunk must be 1 byte for indexed color image*/
         decoder->infoPng.background_defined = 1;
-        decoder->infoPng.background_r = decoder->infoPng.background_g = decoder->infoPng.background_g = data[0];
+        decoder->infoPng.background_r = decoder->infoPng.background_g = decoder->infoPng.background_b = data[0];
       }
       else if(decoder->infoPng.color.colorType == 0 || decoder->infoPng.color.colorType == 4)
       {
@@ -4045,3 +4045,294 @@ void LodePNG_Encoder_copy(LodePNG_Encoder* dest, const LodePNG_Encoder* source)
 #endif /*LODEPNG_COMPILE_ENCODER*/
 
 #endif /*LODEPNG_COMPILE_PNG*/
+
+/* ////////////////////////////////////////////////////////////////////////// */
+/* / File IO                                                                / */
+/* ////////////////////////////////////////////////////////////////////////// */
+
+#ifdef LODEPNG_COMPILE_DISK
+
+unsigned LodePNG_loadFile(unsigned char** out, size_t* outsize, const char* filename) /*designed for loading files from hard disk in a dynamically allocated buffer*/
+{
+  FILE* file;
+  long size;
+  
+  /*provide some proper output values if error will happen*/
+  *out = 0;
+  *outsize = 0;
+
+  file = fopen(filename, "rb");
+  if(!file) return 78;
+
+  /*get filesize:*/
+  fseek(file , 0 , SEEK_END);
+  size = ftell(file);
+  rewind(file);
+  
+  /*read contents of the file into the vector*/
+  *outsize = 0;
+  *out = (unsigned char*)malloc((size_t)size);
+  if(size && (*out)) (*outsize) = fread(*out, 1, (size_t)size, file);
+
+  fclose(file);
+  if(!(*out) && size) return 80; /*the above malloc failed*/
+  return 0;
+}
+
+/*write given buffer to the file, overwriting the file, it doesn't append to it.*/
+unsigned LodePNG_saveFile(const unsigned char* buffer, size_t buffersize, const char* filename)
+{
+  FILE* file;
+  file = fopen(filename, "wb" );
+  if(!file) return 79;
+  fwrite((char*)buffer , 1 , buffersize, file);
+  fclose(file);
+  return 0;
+}
+
+#endif /*LODEPNG_COMPILE_DISK*/
+
+#ifdef __cplusplus
+/* ////////////////////////////////////////////////////////////////////////// */
+/* / C++ RAII wrapper                                                       / */
+/* ////////////////////////////////////////////////////////////////////////// */
+#ifdef LODEPNG_COMPILE_ZLIB
+namespace LodeZlib
+{
+#ifdef LODEPNG_COMPILE_DECODER
+  unsigned decompress(std::vector<unsigned char>& out, const unsigned char* in, size_t insize, const LodeZlib_DecompressSettings& settings)
+  {
+    unsigned char* buffer = 0;
+    size_t buffersize = 0;
+    unsigned error = LodeZlib_decompress(&buffer, &buffersize, in, insize, &settings);
+    if(buffer)
+    {
+      out.insert(out.end(), &buffer[0], &buffer[buffersize]);
+      free(buffer);
+    }
+    return error;
+  }
+
+  unsigned decompress(std::vector<unsigned char>& out, const std::vector<unsigned char>& in, const LodeZlib_DecompressSettings& settings)
+  {
+    return decompress(out, in.empty() ? 0 : &in[0], in.size(), settings);
+  }
+#endif //LODEPNG_COMPILE_DECODER
+#ifdef LODEPNG_COMPILE_ENCODER
+  unsigned compress(std::vector<unsigned char>& out, const unsigned char* in, size_t insize, const LodeZlib_DeflateSettings& settings)
+  {
+    unsigned char* buffer = 0;
+    size_t buffersize = 0;
+    unsigned error = LodeZlib_compress(&buffer, &buffersize, in, insize, &settings);
+    if(buffer)
+    {
+      out.insert(out.end(), &buffer[0], &buffer[buffersize]);
+      free(buffer);
+    }
+    return error;
+  }
+
+  unsigned compress(std::vector<unsigned char>& out, const std::vector<unsigned char>& in, const LodeZlib_DeflateSettings& settings)
+  {
+    return compress(out, in.empty() ? 0 : &in[0], in.size(), settings);
+  }
+#endif //LODEPNG_COMPILE_ENCODER
+}
+#endif //LODEPNG_COMPILE_ZLIB
+
+namespace LodePNG
+{
+  Decoder::Decoder() { LodePNG_Decoder_init(this); }
+  Decoder::~Decoder() { LodePNG_Decoder_cleanup(this); }
+  void Decoder::operator=(const LodePNG_Decoder& other) { LodePNG_Decoder_copy(this, &other); }
+
+  bool Decoder::hasError() const { return error != 0; }
+  unsigned Decoder::getError() const { return error; }
+
+  unsigned Decoder::getWidth() const { return infoPng.width; }
+  unsigned Decoder::getHeight() const { return infoPng.height; }
+  unsigned Decoder::getBpp() { return LodePNG_InfoColor_getBpp(&infoPng.color); }
+  unsigned Decoder::getChannels() { return LodePNG_InfoColor_getChannels(&infoPng.color); }
+  unsigned Decoder::isGreyscaleType() { return LodePNG_InfoColor_isGreyscaleType(&infoPng.color); }
+  unsigned Decoder::isAlphaType() { return LodePNG_InfoColor_isAlphaType(&infoPng.color); }
+    
+  void Decoder::decode(std::vector<unsigned char>& out, const unsigned char* in, size_t insize)
+  {
+    unsigned char* buffer;
+    size_t buffersize;
+    LodePNG_decode(this, &buffer, &buffersize, in, insize);
+    if(buffer)
+    {
+      out.insert(out.end(), &buffer[0], &buffer[buffersize]);
+      free(buffer);
+    }
+  }
+  
+  void Decoder::decode(std::vector<unsigned char>& out, const std::vector<unsigned char>& in)
+  {
+    decode(out, in.empty() ? 0 : &in[0], in.size());
+  }
+  
+  void Decoder::inspect(const unsigned char* in, size_t size)
+  {
+    LodePNG_inspect(this, in, size);
+  }
+  
+  void Decoder::inspect(const std::vector<unsigned char>& in)
+  {
+    inspect(in.empty() ? 0 : &in[0], in.size());
+  }
+  
+  const LodePNG_DecodeSettings& Decoder::getSettings() const { return settings; }
+  LodePNG_DecodeSettings& Decoder::getSettings() { return settings; }
+  void Decoder::setSettings(const LodePNG_DecodeSettings& settings) { this->settings = settings; }
+  
+  const LodePNG_InfoPng& Decoder::getInfoPng() const { return infoPng; }
+  LodePNG_InfoPng& Decoder::getInfoPng() { return infoPng; }
+  void Decoder::setInfoPng(const LodePNG_InfoPng& info) { error = LodePNG_InfoPng_copy(&this->infoPng, &info); }
+  void Decoder::swapInfoPng(LodePNG_InfoPng& info) { LodePNG_InfoPng_swap(&this->infoPng, &info); }
+  
+  const LodePNG_InfoRaw& Decoder::getInfoRaw() const { return infoRaw; }
+  LodePNG_InfoRaw& Decoder::getInfoRaw() { return infoRaw; }
+  void Decoder::setInfoRaw(const LodePNG_InfoRaw& info) { error = LodePNG_InfoRaw_copy(&this->infoRaw, &info); }
+  
+  /* ////////////////////////////////////////////////////////////////////////// */
+
+#ifdef LODEPNG_COMPILE_ENCODER
+  Encoder::Encoder() { LodePNG_Encoder_init(this); }
+  Encoder::~Encoder() { LodePNG_Encoder_cleanup(this); }
+  void Encoder::operator=(const LodePNG_Encoder& other) { LodePNG_Encoder_copy(this, &other); }
+  
+  bool Encoder::hasError() const { return error != 0; }
+  unsigned Encoder::getError() const { return error; }
+  
+  void Encoder::encode(std::vector<unsigned char>& out, const unsigned char* image, unsigned w, unsigned h)
+  {
+    unsigned char* buffer;
+    size_t buffersize;
+    LodePNG_encode(this, &buffer, &buffersize, image, w, h);
+    if(buffer)
+    {
+      out.insert(out.end(), &buffer[0], &buffer[buffersize]);
+      free(buffer);
+    }
+  }
+  
+  void Encoder::encode(std::vector<unsigned char>& out, const std::vector<unsigned char>& image, unsigned w, unsigned h)
+  {
+    encode(out, image.empty() ? 0 : &image[0], w, h);
+  }
+  
+  void Encoder::clearPalette() { LodePNG_InfoColor_clearPalette(&infoPng.color); }
+  void Encoder::addPalette(unsigned char r, unsigned char g, unsigned char b, unsigned char a) { error = LodePNG_InfoColor_addPalette(&infoPng.color, r, g, b, a); }
+#ifdef LODEPNG_COMPILE_ANCILLARY_CHUNKS
+  void Encoder::clearText() { LodePNG_Text_clear(&infoPng.text); }
+  void Encoder::addText(const std::string& key, const std::string& str) { error = LodePNG_Text_add(&infoPng.text, key.c_str(), str.c_str()); }
+  void Encoder::clearIText() { LodePNG_IText_clear(&infoPng.itext); }
+  void Encoder::addIText(const std::string& key, const std::string& langtag, const std::string& transkey, const std::string& str) { error = LodePNG_IText_add(&infoPng.itext, key.c_str(), langtag.c_str(), transkey.c_str(), str.c_str()); }
+#endif /*LODEPNG_COMPILE_ANCILLARY_CHUNKS*/
+
+  const LodePNG_EncodeSettings& Encoder::getSettings() const { return settings; }
+  LodePNG_EncodeSettings& Encoder::getSettings() { return settings; }
+  void Encoder::setSettings(const LodePNG_EncodeSettings& settings) { this->settings = settings; }
+  
+  const LodePNG_InfoPng& Encoder::getInfoPng() const { return infoPng; }
+  LodePNG_InfoPng& Encoder::getInfoPng() { return infoPng; }
+  void Encoder::setInfoPng(const LodePNG_InfoPng& info) { error = LodePNG_InfoPng_copy(&this->infoPng, &info); }
+  void Encoder::swapInfoPng(LodePNG_InfoPng& info) { LodePNG_InfoPng_swap(&this->infoPng, &info); }
+  
+  const LodePNG_InfoRaw& Encoder::getInfoRaw() const { return infoRaw; }
+  LodePNG_InfoRaw& Encoder::getInfoRaw() { return infoRaw; }
+  void Encoder::setInfoRaw(const LodePNG_InfoRaw& info) { error = LodePNG_InfoRaw_copy(&this->infoRaw, &info); }
+#endif /* LODEPNG_COMPILE_ENCODER */
+  
+  /* ////////////////////////////////////////////////////////////////////////// */
+  
+#ifdef LODEPNG_COMPILE_DISK
+  
+  void loadFile(std::vector<unsigned char>& buffer, const std::string& filename) //designed for loading files from hard disk in an std::vector
+  {
+    std::ifstream file(filename.c_str(), std::ios::in|std::ios::binary|std::ios::ate);
+  
+    /*get filesize*/
+    std::streamsize size = 0;
+    if(file.seekg(0, std::ios::end).good()) size = file.tellg();
+    if(file.seekg(0, std::ios::beg).good()) size -= file.tellg();
+  
+    /*read contents of the file into the vector*/
+    buffer.resize(size_t(size));
+    if(size > 0) file.read((char*)(&buffer[0]), size);
+  }
+  
+  /*write given buffer to the file, overwriting the file, it doesn't append to it.*/
+  void saveFile(const std::vector<unsigned char>& buffer, const std::string& filename)
+  {
+    std::ofstream file(filename.c_str(), std::ios::out|std::ios::binary);
+    file.write(buffer.empty() ? 0 : (char*)&buffer[0], std::streamsize(buffer.size()));
+  }
+  
+#endif /*LODEPNG_COMPILE_DISK*/
+  
+  /* ////////////////////////////////////////////////////////////////////////// */
+  
+  unsigned decode(std::vector<unsigned char>& out, unsigned& w, unsigned& h, const unsigned char* in, unsigned size, unsigned colorType, unsigned bitDepth)
+  {
+    Decoder decoder;
+    decoder.getInfoRaw().color.colorType = colorType;
+    decoder.getInfoRaw().color.bitDepth = bitDepth;
+    decoder.decode(out, in, size);
+    w = decoder.getWidth();
+    h = decoder.getHeight();
+    return decoder.getError();
+  }
+  
+  unsigned decode(std::vector<unsigned char>& out, unsigned& w, unsigned& h, const std::vector<unsigned char>& in, unsigned colorType, unsigned bitDepth)
+  {
+    return decode(out, w, h, in.empty() ? 0 : &in[0], (unsigned)in.size(), colorType, bitDepth);
+  }
+  
+#ifdef LODEPNG_COMPILE_DISK
+  unsigned decode(std::vector<unsigned char>& out, unsigned& w, unsigned& h, const std::string& filename, unsigned colorType, unsigned bitDepth)
+  {
+    std::vector<unsigned char> buffer;
+    loadFile(buffer, filename);
+    return decode(out, w, h, buffer, colorType, bitDepth);
+  }
+#endif /*LODEPNG_COMPILE_DISK*/
+
+#ifdef LODEPNG_COMPILE_ENCODER
+  unsigned encode(std::vector<unsigned char>& out, const unsigned char* in, unsigned w, unsigned h, unsigned colorType, unsigned bitDepth)
+  {
+    Encoder encoder;
+    encoder.getInfoRaw().color.colorType = colorType;
+    encoder.getInfoRaw().color.bitDepth = bitDepth;
+    encoder.encode(out, in, w, h);
+    return encoder.getError();
+  }
+  
+  unsigned encode(std::vector<unsigned char>& out, const std::vector<unsigned char>& in, unsigned w, unsigned h, unsigned colorType, unsigned bitDepth)
+  {
+    return encode(out, in.empty() ? 0 : &in[0], w, h, colorType, bitDepth);
+  }
+#endif /* LODEPNG_COMPILE_ENCODER */
+  
+#ifdef LODEPNG_COMPILE_DISK
+  unsigned encode(const std::string& filename, const unsigned char* in, unsigned w, unsigned h, unsigned colorType, unsigned bitDepth)
+  {
+    std::vector<unsigned char> buffer;
+    Encoder encoder;
+    encoder.getInfoRaw().color.colorType = colorType;
+    encoder.getInfoRaw().color.bitDepth = bitDepth;
+    encoder.encode(buffer, in, w, h);
+    if(!encoder.hasError()) saveFile(buffer, filename);
+    return encoder.getError();
+  }
+  
+  unsigned encode(const std::string& filename, const std::vector<unsigned char>& in, unsigned w, unsigned h, unsigned colorType, unsigned bitDepth)
+  {
+    return encode(filename, in.empty() ? 0 : &in[0], w, h, colorType, bitDepth);
+  }
+#endif /*LODEPNG_COMPILE_DISK*/
+
+}
+#endif /*__cplusplus C++ RAII wrapper*/
