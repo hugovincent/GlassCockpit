@@ -1,7 +1,7 @@
 #!/usr/bin/perl
-# version 1.35
+# version 1.39
 # created by MichaelAtUVa
-# updated by Cristian Streng based on suggestions by n95_rit, Kozawa, denilsonsa, and others
+# updated by Cristian Streng based on suggestions by n95_rit, Kozawa, denilsonsa, tv-arnd and others
 # modified by Luca Bisti
 
 #Externals
@@ -659,14 +659,18 @@ sub getTileURL
 
   if($MapType eq "GoogleMap" || $MapType eq "GoogleHyb" || $MapType eq "GoogleTer")
   {
-    $url = "http://mt" . (($x+$y)&3) . ".google.com/mt/v=";
-    $url .= ($MapType eq "GoogleMap") ? "w2.89" :
-            ($MapType eq "GoogleHyb") ? "w2t.88" : "w2p.87";
+    $url = "http://mt" . (($x+$y)&1) . ".google.com/vt/lyrs=".(($MapType eq "GoogleHyb") ? "h" : "m").'@117';
+    $url .= "&hl=en&x=$x&y=$y&z=$zoomLevel";
+  }
+  elsif($MapType eq "GoogleTer")
+  {
+    $url = "http://mt" . (($x+$y)&1) . ".google.com/vt/w2p.117";
     $url .= "&hl=en&x=$x&y=$y&z=$zoomLevel";
   }
   elsif($MapType eq "GoogleChina")
   {
-    $url = "http://mt" . (($x+$y)&3) . ".google.cn/mt/v=cn1.6&hl=en&x=$x&y=$y&z=$zoomLevel";
+    $url = "http://mt" . (($x+$y)&3) . ".google.cn/vt/w2.117";
+    $url .= "&hl=en&gl=cn&x=$x&y=$y&z=$zoomLevel";
   }
   elsif($MapType eq "GoogleSat")
   {
@@ -679,46 +683,46 @@ sub getTileURL
       $url = "http://khm";
     }
 
-    $url .= (($x+$y)&3) . ".google.com/kh/v=36&hl=en&x=$x&y=$y&z=$zoomLevel";
+    $url .= (($x+$y)&1) . ".google.com/kh/v=54&x=$x&y=$y&z=$zoomLevel";
   }
   elsif(index($MapType,"YahooIn") != -1)
   {
     $url = ($MapType eq "YahooInMap") ? "http://maps.yimg.com/hw/tile?locale=en&imgtype=png&yimgv=1.2&v=4.1" :
-           "http://maps.yimg.com/hw/tile?imgtype=png&yimgv=0.95&t=p";
+           "http://maps.yimg.com/hw/tile?imgtype=png&yimgv=0.95&t=h";
     $url .= "&x=$x&y=" . (((1 << $zoomLevel) >> 1)-1-$y) . "&z=" . (17-$zoomLevel+1);
   }
   elsif(index($MapType,"Yahoo") != -1)
   {
-    $url = ($MapType eq "YahooMap") ? "http://us.tile.maps.yimg.com/tl?v=4.2" :
-       ($MapType eq "YahooSat") ? "http://aerial.maps.yimg.com/ximg?t=a&v=1.9&s=256" :
-       "http://us.tile.maps.yimg.com/tl?v=4.2&t=h";
-    $url .= "&x=$x&y=" . (((1 << $zoomLevel) >> 1)-1-$y) . "&z=" . ($zoomLevel+1) . "&r=1";
+    $url = "http://maps".(1+(($x+$y)%3)).".yimg.com/";
+    $url .= ($MapType eq "YahooMap") ? "hw/tile?" : # changed by tv-arnd
+       ($MapType eq "YahooSat") ? "ae/ximg?v=1.9&t=a&s=256" :
+       "hx/tl?v=4.2&t=h";
+    $url .= "&.intl=en&x=$x&y=" . (((1 << $zoomLevel) >> 1)-1-$y) . "&z=" . ($zoomLevel+1) . "&r=1";
   }
   elsif(index($MapType,"Microsoft") != -1)
   {
-    $digit = ((($y & 1) << 1) + ($x & 1));
     if ($MapType eq "MicrosoftBrMap") {
-      $digit++;
-      $url = "http://imak" . $digit . ".maplink3.com.br/maps.ashx?v=";
+      $digit = ((($y & 1) << 1) + ($x & 1)) + 1;
+      $url = "http://imakm" . $digit . ".maplink3.com.br/maps.ashx?v=";
     }
     else
     {
-      $url  = ($MapType eq "MicrosoftHyb") ?  "http://h" : ($MapType eq "MicrosoftSat") ?  "http://a" : "http://r";
-      $url .= $digit . ".ortho.tiles.virtualearth.net/tiles/";
-      $url .= ($MapType eq "MicrosoftHyb") ?  "h" : ($MapType eq "MicrosoftSat") ?  "a" : "r";
+      $digit = ((($y & 3) << 1) + ($x & 1));
+      $url  = "http://ecn.t".(($x+$y)&7).".tiles.virtualearth.net/tiles/";
+      $url .= ($MapType eq "MicrosoftHyb") ?  "h" : ($MapType eq "MicrosoftSat") ? "a" : "r";
     }
     for($i=$zoomLevel-1; $i >= 0; $i--)
     {
-              $url = $url . ((((($y >> $i) & 1) << 1) + (($x >> $i) & 1)));
+      $url = $url . ((((($y >> $i) & 1) << 1) + (($x >> $i) & 1)));
     }
     if ($MapType eq "MicrosoftBrMap")
     {
-      $url .= "|t&call=2.2.3";
+      $url .= "|t&call=2.2.4";
     }
     else
     {
       $url .= ($MapType eq "MicrosoftMap" || $MapType eq "MicrosoftTer") ?  ".png" : ".jpeg";
-      $url .= "?g=244&mkt=en-us";
+      $url .= "?g=409&mkt=en-us";
       if ($MapType eq "MicrosoftTer")
       {
         $url .= "&shading=hill";
