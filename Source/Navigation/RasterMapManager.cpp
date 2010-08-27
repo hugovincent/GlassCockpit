@@ -201,21 +201,21 @@ unsigned char *RasterMapManager::DecodePNG(unsigned char *readBuffer, unsigned i
 	if (image != 0)
 		free(image);
 
-	// FIXME need to set to RGB24 instead of RGBA32
-/*	size_t dummy_size;
-	LodePNG::Decoder decoder;
-	error = decoder.error;
-	*w = decoder.infoPng.width;
-	*h = decoder.infoPng.height;
+	size_t dummy_size;
+	LodePNG_Decoder decoder;
+	LodePNG_Decoder_init(&decoder);
+	decoder.infoRaw.color.colorType = 2;
+	LodePNG_decode(&decoder, &image, &dummy_size, &readBuffer[0], length);
+	unsigned int error = decoder.error;
+	width = decoder.infoPng.width;
+	height = decoder.infoPng.height;
 	LodePNG_Decoder_cleanup(&decoder);
-*/
 	
-	if (unsigned error = LodePNG_decode32(&image, &width, &height, &readBuffer[0], (size_t)length))
+	if (error)
 	{
 		printf("RasterMapManager: PNG codec error number %d\n", error);
 		return NULL;
 	}
-
 	return image;
 }
 	
