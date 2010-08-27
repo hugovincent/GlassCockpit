@@ -58,8 +58,7 @@ Globals *OpenGC::globals;
 	globals->m_PrefManager->SetPrefS("PathToData", resourcePath);
 	
 	// Set map cache path (map cache is read-only) // FIXME
-	globals->m_RasterMapManager->SetCachePath(RasterMapManager::RMM_CACHE_MGMAPS, 
-								"/Users/hugo/Projects/GlassCockpit/Data/MGMapsCache", "GoogleTer");
+	globals->m_RasterMapManager->SetCachePath(RasterMapManager::RMM_CACHE_MGMAPS, string(resourcePath) + "MGMapsCache", "GoogleTer");
 	
 	// Find paths: writeable directory to cache resources in
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);

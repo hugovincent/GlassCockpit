@@ -18,6 +18,7 @@
 		9A06B1A80F4E8EBD0003733D /* shptree.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A06B1A30F4E8EBD0003733D /* shptree.c */; };
 		9A06B1AA0F4E8EBD0003733D /* shpopen.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A06B1A50F4E8EBD0003733D /* shpopen.c */; };
 		9A06B1AB0F4E8EBD0003733D /* dbfopen.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A06B1A70F4E8EBD0003733D /* dbfopen.c */; };
+		9A0E1E771226DAC00009AA7A /* MGMapsCache in Resources */ = {isa = PBXBuildFile; fileRef = 9A0E1DC41226DAC00009AA7A /* MGMapsCache */; };
 		9A21DA090F50DC7F0024B0F9 /* RasterMapTile.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9A21DA080F50DC7F0024B0F9 /* RasterMapTile.cpp */; };
 		9A62EB570F5279A700030A68 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A62EB560F5279A700030A68 /* libz.dylib */; };
 		9A62EF420F52A72B00030A68 /* jidctflt.c in Sources */ = {isa = PBXBuildFile; fileRef = 9A62EF3E0F52A72B00030A68 /* jidctflt.c */; };
@@ -108,6 +109,7 @@
 		9A06B1A50F4E8EBD0003733D /* shpopen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = shpopen.c; path = ../Source/Navigation/ShapeLib/shpopen.c; sourceTree = SOURCE_ROOT; };
 		9A06B1A60F4E8EBD0003733D /* shapefil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = shapefil.h; path = ../Source/Navigation/ShapeLib/shapefil.h; sourceTree = SOURCE_ROOT; };
 		9A06B1A70F4E8EBD0003733D /* dbfopen.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dbfopen.c; path = ../Source/Navigation/ShapeLib/dbfopen.c; sourceTree = SOURCE_ROOT; };
+		9A0E1DC41226DAC00009AA7A /* MGMapsCache */ = {isa = PBXFileReference; lastKnownFileType = folder; name = MGMapsCache; path = ../Data/MGMapsCache; sourceTree = SOURCE_ROOT; };
 		9A21DA070F50DC7F0024B0F9 /* RasterMapTile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = RasterMapTile.h; path = ../Source/Navigation/RasterMapTile.h; sourceTree = SOURCE_ROOT; };
 		9A21DA080F50DC7F0024B0F9 /* RasterMapTile.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = RasterMapTile.cpp; path = ../Source/Navigation/RasterMapTile.cpp; sourceTree = SOURCE_ROOT; };
 		9A5CE0400F4A7C2A00796599 /* TODO */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = TODO; path = ../TODO; sourceTree = SOURCE_ROOT; };
@@ -380,6 +382,7 @@
 		9AA14FE50F3E747E00DCA729 /* App Bundle Resources */ = {
 			isa = PBXGroup;
 			children = (
+				9A0E1DC41226DAC00009AA7A /* MGMapsCache */,
 				9AA14FDA0F3E747700DCA729 /* Fonts */,
 				9AA14FDB0F3E747700DCA729 /* Navigation */,
 				9AA14FDC0F3E747700DCA729 /* Preferences.xml */,
@@ -618,6 +621,7 @@
 				9AA14FE20F3E747700DCA729 /* Gauges.xml in Resources */,
 				9AA14FE30F3E747700DCA729 /* Default.xml in Resources */,
 				9A6E6D6311EB405900E42279 /* README in Resources */,
+				9A0E1E771226DAC00009AA7A /* MGMapsCache in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

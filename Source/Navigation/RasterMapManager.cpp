@@ -163,8 +163,8 @@ RasterMapTile *RasterMapManager::GetTile(const unsigned int zoom, const unsigned
 				
 				// Decode the tile
 				unsigned int width = 0, height = 0;
-				unsigned char *img = DecodeJPEG(m_ReadBuffer, length, width, height);
-				return new RasterMapTile(img, width, height);
+				unsigned char *img = DecodePNG(m_ReadBuffer, length, width, height);
+				return img ? new RasterMapTile(img, width, height) : NULL;
 			}
 		}
 		fclose(mgmFile);
@@ -201,6 +201,15 @@ unsigned char *RasterMapManager::DecodePNG(unsigned char *readBuffer, unsigned i
 	if (image != 0)
 		free(image);
 
+	// FIXME need to set to RGB24 instead of RGBA32
+/*	size_t dummy_size;
+	LodePNG::Decoder decoder;
+	error = decoder.error;
+	*w = decoder.infoPng.width;
+	*h = decoder.infoPng.height;
+	LodePNG_Decoder_cleanup(&decoder);
+*/
+	
 	if (unsigned error = LodePNG_decode32(&image, &width, &height, &readBuffer[0], (size_t)length))
 	{
 		printf("RasterMapManager: PNG codec error number %d\n", error);
