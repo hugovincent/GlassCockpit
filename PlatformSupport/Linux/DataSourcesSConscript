@@ -1,0 +1,22 @@
+# Builds: Data sources library ('libopengc_datasource')
+# Project: OpenGC for Albatross
+# Author: Hugo Vincent
+# Date: 22 March 2006
+
+# Get the top level configuration options
+Import('conf')
+
+# All the source files need to be built (none require special treatment)
+source = [
+	'AirframeDataContainer.cpp',
+	'DataContainer.cpp',
+	'TestDataSource.cpp',
+	'AlbatrossDataSource.cpp',
+	'DataSource.cpp',
+	'FGDataSource.cpp'
+]
+
+# Build the library
+Library('#Build/opengc_datasource', source, CPPPATH=conf["inc_path"], 
+	CCFLAGS=conf["cflags"], CXX=conf['compiler'])
+
