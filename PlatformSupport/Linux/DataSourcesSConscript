@@ -1,22 +1,22 @@
 # Builds: Data sources library ('libopengc_datasource')
-# Project: OpenGC for Albatross
+# Project: GlassCockpit
 # Author: Hugo Vincent
-# Date: 22 March 2006
+# Date: 22 March 2006, updated 28 August 2010
 
 # Get the top level configuration options
 Import('conf')
 
 # All the source files need to be built (none require special treatment)
 source = [
-	'AirframeDataContainer.cpp',
-	'DataContainer.cpp',
-	'TestDataSource.cpp',
-	'AlbatrossDataSource.cpp',
-	'DataSource.cpp',
-	'FGDataSource.cpp'
+	'#../../Source/DataSources/AirframeDataContainer.cpp',
+	'#../../Source/DataSources/DataContainer.cpp',
+	'#../../Source/DataSources/TestDataSource.cpp',
+	'#../../Source/DataSources/AlbatrossDataSource.cpp',
+	'#../../Source/DataSources/DataSource.cpp',
+	'#../../Source/DataSources/FGDataSource.cpp'
 ]
 
 # Build the library
-Library('#Build/opengc_datasource', source, CPPPATH=conf["inc_path"], 
+Library('#build/opengc_datasource', source, CPPPATH=conf["inc_path"], 
 	CCFLAGS=conf["cflags"], CXX=conf['compiler'])
 

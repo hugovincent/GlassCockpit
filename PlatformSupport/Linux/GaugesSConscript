@@ -1,33 +1,33 @@
 # Builds: Gauges library ('libopengc_gauges')
-# Project: OpenGC for Albatross
+# Project: GlassCockpit
 # Author: Hugo Vincent
-# Date: 22 March 2006
+# Date: 22 March 2006, updated 28 August 2010
 
 # Get the top level configuration options
 Import('conf')
 
 # All the source files need to be built (none require special treatment)
 source = [
-	'AltitudeTape.cpp',
-	'AlbatrossAnnunciator.cpp',
-	'EngineInstruments.cpp',
-	'NavDisplay.cpp',
-	'Tachometer.cpp',
-	'AltitudeTicker.cpp',
-	'GenericBargraph.cpp',
-	'FlightDirector.cpp',
-	'PFD.cpp',
-	'PFDOverlay.cpp',
-	'VSI.cpp',
-	'ArtificialHorizon.cpp',
-	'GenericDial.cpp',
-	'SpeedTape.cpp',
-	'EngineDial.cpp',
-	'HeadingIndicator.cpp',
-	'SpeedTicker.cpp'
+	'#../../Source/Gauges/AlbatrossAnnunciator.cpp',
+	'#../../Source/Gauges/AltitudeTape.cpp',
+	'#../../Source/Gauges/AltitudeTicker.cpp',
+	'#../../Source/Gauges/ArtificialHorizon.cpp',
+	'#../../Source/Gauges/EngineInstruments.cpp',
+	'#../../Source/Gauges/GenericBargraph.cpp',
+	'#../../Source/Gauges/HeadingIndicator.cpp',
+	'#../../Source/Gauges/MarkedDial.cpp',
+	'#../../Source/Gauges/NavDisplay.cpp',
+	'#../../Source/Gauges/PFD.cpp',
+	'#../../Source/Gauges/PFDOverlay.cpp',
+	'#../../Source/Gauges/PieDial.cpp',
+	'#../../Source/Gauges/SpeedTape.cpp',
+	'#../../Source/Gauges/SpeedTicker.cpp',
+	'#../../Source/Gauges/Tachometer.cpp',
+	'#../../Source/Gauges/FlightDirector.cpp',
+	'#../../Source/Gauges/VSI.cpp'
 ]
 
 # Build the library
-Library('#Build/opengc_gauges', source, CPPPATH=conf["inc_path"],
+Library('#build/opengc_gauges', source, CPPPATH=conf["inc_path"],
 	CCFLAGS=conf["cflags"], CXX=conf['compiler'])
 

@@ -20,6 +20,7 @@
 
 =========================================================================*/
 
+#include <cmath>
 #include "GeographicObject.h"
 #include "Constants.h"
 

@@ -1,29 +1,29 @@
 # Builds: Navigation library ('libopengc_nav')
-# Project: OpenGC for Albatross
+# Project: GlassCockpit
 # Author: Hugo Vincent
-# Date: 22 March 2006
+# Date: 22 March 2006, updated 28 August 2010
 
 # Get the top level configuration options
 Import('conf')
 
 # All the source files need to be built (none require special treatment)
 source = [
-	'AirportGeoObj.cpp',
-	'AirportList.cpp',
-	'BinaryNavData.cpp',
-	'CoursePoint.cpp',
-	'GeographicObject.cpp',
-	'FlightCourse.cpp',
-	'NavaidGeoObj.cpp',
-	'NavaidList.cpp',
-	'GeographicHash.cpp',
-	'GeographicObjectList.cpp',
-	'NavDatabase.cpp',
-	'WaypointGeoObj.cpp',
-	'WaypointList.cpp'
+	'#../../Source/Navigation/AirportGeoObj.cpp',
+	'#../../Source/Navigation/AirportList.cpp',
+	'#../../Source/Navigation/BinaryNavData.cpp',
+	'#../../Source/Navigation/CoursePoint.cpp',
+	'#../../Source/Navigation/GeographicObject.cpp',
+	'#../../Source/Navigation/FlightCourse.cpp',
+	'#../../Source/Navigation/NavaidGeoObj.cpp',
+	'#../../Source/Navigation/NavaidList.cpp',
+	'#../../Source/Navigation/GeographicHash.cpp',
+	'#../../Source/Navigation/GeographicObjectList.cpp',
+	'#../../Source/Navigation/NavDatabase.cpp',
+	'#../../Source/Navigation/WaypointGeoObj.cpp',
+	'#../../Source/Navigation/WaypointList.cpp'
 ]
 
 # Build the library
-Library('#Build/opengc_nav', source, CPPPATH=conf["inc_path"],
+Library('#build/opengc_nav', source, CPPPATH=conf["inc_path"],
 	CCFLAGS=conf["cflags"], CXX=conf['compiler'])
 

@@ -1,32 +1,30 @@
-# Builds: OpenGC libraries and application (top level)
-# Project: OpenGC for Albatross
+# Builds: Libraries and application (top level)
+# Project: GlassCockpit
 # Author: Hugo Vincent
-# Date: 22 March 2006
+# Date: 22 March 2006, updated 28 August 2010
 
 import os
 
 # Utility Functions:
 
-
-CacheDir('/home/hugo/.sconscache') # Enable build object cache
+#CacheDir('/home/hugo/.sconscache') # Enable build object cache
 
 # Configuration options
 conf = {
 	"debug": False,
 	"compiler": 'g++',
 	"inc_path": [
-		'#Source/Base',
-		'#Source/Gauges',
-		'#Source/Navigation',
-		'#Source/DataSources',
-		'#Source/Application',
+		'#../../Source/Base',
+		'#../../Source/Gauges',
+		'#../../Source/Navigation',
+		'#../../Source/DataSources',
+		'#../../Source/Application',
 		'/usr/include/freetype2', 
-		'/usr/include/FTGL',
-		'/Users/hugo/Projects/MacOSX/Fltk/include'
+		'/usr/include/FTGL'
 	],
 	"cflags": '-O2 -Wall -Wformat',
 	"linkflags": '-Wl,-O2',
-	"libpath": ['#Build', '/usr/X11R6/lib'],
+	"libpath": ['#build', '/usr/X11R6/lib'],
 	"linklibs": [
 		'opengc_base',
 		'opengc_nav',
@@ -39,10 +37,10 @@ conf = {
 }
 
 # Nothing to actually build here, just recurse into the various source directories
-SConscript(['Source/Base/SConscript',
-			'Source/Gauges/SConscript',
-			'Source/Navigation/SConscript',
-			'Source/DataSources/SConscript',
-			'Source/Application/SConscript'],
+SConscript(['BaseSConscript',
+			'GaugesSConscript',
+			'NavigationSConscript',
+			'DataSourcesSConscript',
+			'LinuxSConscript'],
 			exports='conf')
 

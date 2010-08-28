@@ -31,6 +31,8 @@
 #ifndef CircleEvaluator_h
 #define CircleEvaluator_h
 
+#include "GLHeaders.h"
+
 namespace OpenGC
 {
 

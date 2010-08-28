@@ -1,7 +1,7 @@
 # Builds: Main application
-# Project: OpenGC for Albatross
+# Project: GlassCockpit
 # Author: Hugo Vincent
-# Date: 22 March 2006
+# Date: 22 March 2006, updated 28 August 2010
 
 # Get the top level configuration options
 Import('conf')
@@ -9,16 +9,17 @@ Import('conf')
 # All the source files need to be built (none require special treatment)
 source = [
 	'Main.cpp',
-	'AppObject.cpp'
+	'AppObject.cpp',
+	'#/../../Source/Base/FLTKRenderWindow.cpp',
 ]
 
 # Build the application
-Program('#Build/OpenGC', source, CPPPATH=conf["inc_path"], CXX=conf['compiler'],
+Program('#build/GlassCockpit', source, CPPPATH=conf["inc_path"], CXX=conf['compiler'],
 	CCFLAGS=conf["cflags"], LIBS=conf["linklibs"], LIBPATH=conf["libpath"],
 	LINKFLAGS=conf["linkflags"])
 
 # Build the utility program navconvert (navigation data -> binary converter)
-Program('#Build/navconvert', ['NavConvertMain.cpp',
-	'#Source/Navigation/BinaryNavData.o'], CPPPATH=conf["inc_path"], 
+Program('#build/navconvert', ['NavConvertMain.cpp',
+	'#/../../Source/Navigation/BinaryNavData.o'], CPPPATH=conf["inc_path"], 
 	CXX=conf['compiler'], CCFLAGS=conf["cflags"], LINKFLAGS=conf["linkflags"])
  

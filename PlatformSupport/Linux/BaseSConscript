@@ -1,28 +1,27 @@
 # Builds: Core functions library ('libopengc_base')
-# Project: OpenGC for Albatross
+# Project: GlassCockpit
 # Author: Hugo Vincent
-# Date: 22 March 2006
+# Date: 22 March 2006, updated 28 August 2010
 
 # Get the top level configuration options
 Import('conf')
 
 # All the source files need to be built (none require special treatment)
 source = [
-	'CalcManager.cpp',
-	'CircleEvaluator.cpp',
-	'Font.cpp',
-	'FontManager.cpp',
-	'FLTKRenderWindow.cpp',
-	'Gauge.cpp',
-	'GaugeComponent.cpp',
-	'Globals.cpp',
-	'MessageableList.cpp',
-	'PrefManager.cpp',
-	'RenderWindow.cpp',
-	'RenderObject.cpp',
-	'SoundManager.cpp',
-	'XMLParser.cpp',
-	'XMLNode.cpp'
+	'#../../Source/Base/CalcManager.cpp',
+	'#../../Source/Base/CircleEvaluator.cpp',
+	'#../../Source/Base/Font.cpp',
+	'#../../Source/Base/FontManager.cpp',
+	'#../../Source/Base/Gauge.cpp',
+	'#../../Source/Base/GaugeComponent.cpp',
+	'#../../Source/Base/Globals.cpp',
+	'#../../Source/Base/MessageableList.cpp',
+	'#../../Source/Base/PrefManager.cpp',
+	'#../../Source/Base/RenderWindow.cpp',
+	'#../../Source/Base/RenderObject.cpp',
+	'#../../Source/Base/SoundManager.cpp',
+	'#../../Source/Base/XMLParser.cpp',
+	'#../../Source/Base/XMLNode.cpp'
 ]
 
 # FIXME use pkg-config or xml2-config for libxml2
@@ -31,6 +30,6 @@ conf["linklibs"].append('xml2')
 conf["linklibs"].append('z')
 
 # Build the library
-Library('#Build/opengc_base', source, CPPPATH=conf["inc_path"], 
+Library('#build/opengc_base', source, CPPPATH=conf["inc_path"], 
 	CCFLAGS=conf["cflags"], CXX=conf['compiler'])
 
