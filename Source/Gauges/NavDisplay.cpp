@@ -35,6 +35,9 @@ namespace OpenGC
 
 const double NavDisplay::CENTER_X, NavDisplay::CENTER_Y, NavDisplay::OVERLAY_Y;
 const int NavDisplay::compass_interval;
+	
+GLuint NavDisplay::m_TileTextures[49];
+bool NavDisplay::m_TilesInitted;
 
 NavDisplay::NavDisplay()
 {
@@ -53,11 +56,13 @@ NavDisplay::NavDisplay()
 
 	// Set initial gauge size in nautical miles per side
 	m_SizeNM = 2.0;
+	
+	m_TilesInitted = false;
 }
 
 NavDisplay::~NavDisplay()
 {
-	// Destruction handled by base class
+	glDeleteTextures(49, &m_TileTextures[0]);
 }
 
 void NavDisplay::Render()
@@ -394,11 +399,11 @@ void NavDisplay::PlotGeoObjs(std::list<GeographicObject*>& geoList)
 	}
 }
 
+// FIXME this whole function is a temporary hack/placeholder for testing RasterMapManager.
 void NavDisplay::PlotMap()
 {
 	unsigned int x, y; float fx, fy;
 	unsigned int z = 13;
-	bool inited = false;
 	
 	globals->m_RasterMapManager->GetTileCoordsForLatLon(x, y, fx, fy, 
 		globals->m_DataSource->GetAirframe()->GetLatitude(), globals->m_DataSource->GetAirframe()->GetLongitude(), z);
@@ -408,12 +413,11 @@ void NavDisplay::PlotMap()
 	if (x < 6000) return;
 	//----------------------------------
 
-	static GLuint textures[49];
-	bool status[49];
-	if (!inited)
+	static bool status[49];
+	if (!m_TilesInitted)
 	{
 		int ident = 0;
-		glGenTextures(49, &textures[0]);
+		glGenTextures(49, &m_TileTextures[0]);
 		for (int dx = -3; dx <= 3; dx++)
 		{
 			for (int dy = -3; dy <= 3; dy++)
@@ -421,7 +425,7 @@ void NavDisplay::PlotMap()
 				RasterMapTile *tile = globals->m_RasterMapManager->GetTile(z, x+dx, y+dy);
 				if (tile != NULL)
 				{
-					glBindTexture(GL_TEXTURE_2D, textures[ident]);
+					glBindTexture(GL_TEXTURE_2D, m_TileTextures[ident]);
 					
 					glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, tile->Width(), tile->Height(), 0, GL_RGB, GL_UNSIGNED_BYTE, tile->Image());
 					glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
@@ -437,7 +441,7 @@ void NavDisplay::PlotMap()
 				ident++;
 			}
 		}
-		inited = true;
+		m_TilesInitted = true;
 	}
 
 	int ident = 0;
@@ -453,10 +457,10 @@ void NavDisplay::PlotMap()
 				glTranslatef(CENTER_X, CENTER_Y, 0);
 				glRotatef(aircraftHeading, 0, 0, 1);
 				glTranslatef((dx*256 + fx - 128)/3.2, (-dy*256 - fy - 128)/3.2, 0);
-				glColor4ub(255, 255, 255, 190);
+				glColor4ub(200, 200, 200, 255);
 				
 				glEnable(GL_TEXTURE_2D);
-				glBindTexture(GL_TEXTURE_2D, textures[ident]);
+				glBindTexture(GL_TEXTURE_2D, m_TileTextures[ident]);
 					
 				static const float texCoords[] = {0,1,   1,1,   0,0,   1,0};
 				glTexCoordPointer(2, GL_FLOAT, 0, &texCoords);
@@ -471,9 +475,6 @@ void NavDisplay::PlotMap()
 			ident++;
 		}
 	}
-
-	// Cleanup
-	//glDeleteTextures(49, &textures[0]); 	// FIXME do cleanup somewhere else??
 }
 
 void NavDisplay::PointToPixelCoord(double objNorthing, double objEasting, double &xPos, double &yPos)
