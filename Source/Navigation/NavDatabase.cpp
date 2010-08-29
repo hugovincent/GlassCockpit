@@ -70,19 +70,19 @@ bool fileExists(const string& filename)
 
 void NavDatabase::InitDatabase()
 {	
-	const string& pathToNav = globals->m_PrefManager->GetPrefS("PathToData");
-	const string& pathToWritableNav = globals->m_PrefManager->GetPrefS("PathToCaches");;
+	const string& pathToNav = globals->m_PrefManager->GetPrefS("PathToData") + "Navigation/";
+	const string& pathToWritableNav = globals->m_PrefManager->GetPrefS("PathToCaches") + "Navigation/";
 	
 	// Check for cached binary copies of nav data otherwise convert and cache
 	if (!fileExists(pathToWritableNav + "nav_dat.bin"))
 	{
 		LogPrintf("Generating binary cache of navaid data...\n");
-		BinaryNavData::ConvertNavaidData(pathToNav + "Navigation/nav.dat", pathToWritableNav + "nav_dat.bin");
+		BinaryNavData::ConvertNavaidData(pathToNav + "nav.dat", pathToWritableNav + "nav_dat.bin");
 	}
 	if (!fileExists(pathToWritableNav + "apt_dat.bin"))
 	{
 		LogPrintf("Generating binary cache of airport data...\n");
-		BinaryNavData::ConvertAirportData(pathToNav + "Navigation/apt.dat", pathToWritableNav + "apt_dat.bin");
+		BinaryNavData::ConvertAirportData(pathToNav + "apt.dat", pathToWritableNav + "apt_dat.bin");
 	}
 	
 	printf("NavDatabase: Loading navigation database... "); fflush(stdout);
@@ -101,7 +101,7 @@ void NavDatabase::InitDatabase()
 
 	// Load Waypoint database
 	m_WaypointList = new WaypointList;
-	m_WaypointList->InitializeList(pathToNav + "Navigation/waypoint.dat");
+	m_WaypointList->InitializeList(pathToNav + "waypoint.dat");
 
 	// Load and hash Map database
 	// FIXME actually load the map shapes database

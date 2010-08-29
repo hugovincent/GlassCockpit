@@ -21,6 +21,7 @@
 =========================================================================*/
 
 #include "Debug.h"
+#include <string.h>
 #include <math.h>
 #include "Font_FileStore.h"
 

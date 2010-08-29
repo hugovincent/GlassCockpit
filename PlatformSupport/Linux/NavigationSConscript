@@ -12,16 +12,21 @@ source = [
 	'#../../Source/Navigation/AirportList.cpp',
 	'#../../Source/Navigation/BinaryNavData.cpp',
 	'#../../Source/Navigation/CoursePoint.cpp',
-	'#../../Source/Navigation/GeographicObject.cpp',
 	'#../../Source/Navigation/FlightCourse.cpp',
+	'#../../Source/Navigation/GeographicHash.cpp',
+	'#../../Source/Navigation/GeographicObject.cpp',
+	'#../../Source/Navigation/GeographicObjectList.cpp',
 	'#../../Source/Navigation/NavaidGeoObj.cpp',
 	'#../../Source/Navigation/NavaidList.cpp',
-	'#../../Source/Navigation/GeographicHash.cpp',
-	'#../../Source/Navigation/GeographicObjectList.cpp',
 	'#../../Source/Navigation/NavDatabase.cpp',
+	'#../../Source/Navigation/RasterMapManager.cpp',
+	'#../../Source/Navigation/RasterMapTile.cpp',
+	'#../../Source/Navigation/ShapeFile.cpp',
 	'#../../Source/Navigation/WaypointGeoObj.cpp',
 	'#../../Source/Navigation/WaypointList.cpp'
 ]
+
+conf["inc_path"].append('#../../Source/Navigation/ShapeLib')
 
 # Build the library
 Library('#build/opengc_nav', source, CPPPATH=conf["inc_path"],

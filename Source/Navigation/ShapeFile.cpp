@@ -135,10 +135,10 @@ void ShapeFile::Draw()
 	
 	// Render Line Shapefile
 	glColor3f (0.0, 1.0, 0.0);
-	for (int i = 0; i < m_Lines.size(); i++)
+	for (unsigned int i = 0; i < m_Lines.size(); i++)
 	{
 		glBegin(GL_LINE_STRIP);
-		for(int j = 0; j < m_Lines[i].size(); j++)
+		for(unsigned int j = 0; j < m_Lines[i].size(); j++)
 		{
 			glVertex2f(m_Lines[i][j].dX, m_Lines[i][j].dY);
 		}
@@ -147,10 +147,10 @@ void ShapeFile::Draw()
 	
 	// Render Polygon Shapefile
 	glColor3f(1.0,0.0, 0.0);
-	for (int i = 0; i < m_Polygons.size(); i++)
+	for (unsigned int i = 0; i < m_Polygons.size(); i++)
 	{
 		glBegin(GL_LINE_LOOP);
-		for(int j = 0; j < m_Polygons[i].size(); j++)
+		for(unsigned int j = 0; j < m_Polygons[i].size(); j++)
 		{
 			glVertex2f(m_Polygons[i][j].dX, m_Polygons[i][j].dY);
 		}

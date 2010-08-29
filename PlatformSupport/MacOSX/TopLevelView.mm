@@ -57,7 +57,7 @@ Globals *OpenGC::globals;
 								cStringUsingEncoding:NSASCIIStringEncoding];
 	globals->m_PrefManager->SetPrefS("PathToData", resourcePath);
 	
-	// Set map cache path (map cache is read-only) // FIXME
+	// Set map cache path (map cache is read-only)
 	globals->m_RasterMapManager->SetCachePath(RasterMapManager::RMM_CACHE_MGMAPS, string(resourcePath) + "MGMapsCache", "GoogleTer");
 	
 	// Find paths: writeable directory to cache resources in
@@ -166,7 +166,6 @@ Globals *OpenGC::globals;
 		// Get host/port settings
 		if (dsNode.HasChild("Host"))
 		{
-			printf("here\n"); fflush(stdout);
 			globals->m_PrefManager->SetPrefS("FlightGearHost", 
 											 dsNode.GetChild("Host").GetText());
 		}

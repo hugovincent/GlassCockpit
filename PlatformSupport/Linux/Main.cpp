@@ -31,8 +31,8 @@
 #include "Messageable.h"
 #include "XMLParser.h"
 
-#define DEFAULT_XML_FILE		"Data/Default.xml"
-#define PREFERENCES_XML_FILE	"Data/Preferences.xml"
+#define DEFAULT_XML_FILE		(char*)"Data/Default.xml"
+#define PREFERENCES_XML_FILE	(char*)"Data/Preferences.xml"
 
 using namespace OpenGC;
 
@@ -101,6 +101,10 @@ int main(int argc, char* argv[])
 	{
 		globals->m_PrefManager->SetPrefsFromXML(parser.GetNode("/Preferences"));
 	}
+
+	// Set RasterMaps path
+	globals->m_RasterMapManager->SetCachePath(RasterMapManager::RMM_CACHE_MGMAPS, 
+			globals->m_PrefManager->GetPrefS("PathToData") + "MGMapsCache", "GoogleTer");
 
 	// FIXME debug:
 	globals->m_PrefManager->PrintAll();

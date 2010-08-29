@@ -62,13 +62,8 @@ AppObject::~AppObject()
 
 bool AppObject::Go(XMLNode rootNode)
 {	
-	// Font manager (global)
-	globals->m_FontManager->SetFontPath(
-			globals->m_PrefManager->GetPrefS("FontPath").c_str());
-
 	// Navigation Database (global)
-	globals->m_NavDatabase->InitDatabase(
-			globals->m_PrefManager->GetPrefS("NavPath").c_str());
+	globals->m_NavDatabase->InitDatabase();
 
 	// Create the data source
 	XMLNode dsNode = rootNode.GetChild("DataSource");
@@ -80,7 +75,6 @@ bool AppObject::Go(XMLNode rootNode)
 		// Get host/port settings
 		if (dsNode.HasChild("Host"))
 		{
-			printf("here\n"); fflush(stdout);
 			globals->m_PrefManager->SetPrefS("FlightGearHost", 
 					dsNode.GetChild("Host").GetText());
 		}
@@ -95,17 +89,17 @@ bool AppObject::Go(XMLNode rootNode)
 		{
 			return false;
 		}
-		titleSuffix = " (FlightGear)";
+		titleSuffix = (char *)" (FlightGear)";
 	}
 	else if (dsName == "Albatross")
 	{
 		globals->m_DataSource = new AlbatrossDataSource();
-		titleSuffix = " (Flight Mode)";
+		titleSuffix = (char *)" (Flight Mode)";
 	}
 	else if (dsName == "Test")
 	{
 		globals->m_DataSource = new TestDataSource();
-		titleSuffix = " (Test)";
+		titleSuffix = (char *)" (Test)";
 	}
 	else
 	{
@@ -119,7 +113,7 @@ bool AppObject::Go(XMLNode rootNode)
 
 	// Set up the window title
 	XMLNode windowNode = rootNode.GetChild("Window");
-	string windowTitle = "Albatross Glass Cockpit";
+	string windowTitle = "Glass Cockpit";
 	if (windowNode.HasChild("Title"))
 	{
 		windowTitle = windowNode.GetChild("Title").GetText();

@@ -1,17 +1,26 @@
 #include "BinaryNavData.h"
 #include "Debug.h"
+#include <string>
+
+using namespace std;
 
 int main(int argc, char **argv)
 {
 	OpenGC::BinaryNavData ndtb;
 
+	if (argc != 2)
+	{
+		printf("usage: navconvert Path/To/DataDir/Navigation\n");
+		return 1;
+	}
+
 	LogPrintf("Converting airport data... ");
-	ndtb.ConvertAirportData("/home/hugo/Projects/OpenGC/Data/Navigation/apt.dat", 
-			"/home/hugo/Projects/OpenGC/Data/Navigation/apt_dat.bin");
+	ndtb.ConvertAirportData(string(argv[1]) + "apt.dat", 
+			string(argv[1]) + "apt_dat.bin");
 
 	LogPrintf("Converting navaid data... ");
-	ndtb.ConvertNavaidData("/home/hugo/Projects/OpenGC/Data/Navigation/nav.dat", 
-			"/home/hugo/Projects/OpenGC/Data/Navigation/nav_dat.bin");
+	ndtb.ConvertNavaidData(string(argv[1]) + "nav.dat", 
+			string(argv[1]) + "nav_dat.bin");
 
 	LogPrintf("Done\n");
 	

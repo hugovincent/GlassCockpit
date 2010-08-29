@@ -39,7 +39,7 @@ void computePowerOfTwo(GLshort inDim, GLshort *outDim)
 {	
 	if (!((inDim == 1) || !(inDim & (inDim - 1))))
 	{
-		unsigned int i = 1;
+		GLshort i = 1;
 		while(i < inDim) i <<= 1;
 		*outDim = i;
 	}
@@ -81,7 +81,7 @@ Font_FileStore *Font_FileStore::CreateFromTTF(const std::string& ttfFilename)
 	
 	// Get Freetype character-index mapping
 	charIdx = new FT_UInt[self->store->numGlyphs];
-	for (char i = 0; i < self->store->numGlyphs; ++i)
+	for (int i = 0; i < self->store->numGlyphs; ++i)
 	{
 		charIdx[i] = FT_Get_Char_Index(ftFace, FIRST_CHAR + i);
 		if (charIdx[i] == 0) // undefined character code

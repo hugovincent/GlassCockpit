@@ -10,7 +10,7 @@ Import('conf')
 source = [
 	'Main.cpp',
 	'AppObject.cpp',
-	'#/../../Source/Base/FLTKRenderWindow.cpp',
+	'FLTKRenderWindow.cpp',
 ]
 
 # Build the application

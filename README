@@ -47,33 +47,20 @@ _______________________________________________________________________________
 _______________________________________________________________________________
 
 1) Compile with Scons:
-		$ scons
-		scons: Reading SConscript files ...
-		scons: done reading SConscript files.
-		scons: Building targets ...
-		g++ -O2 -ISource/Base -ISource/Gauges -ISource/Navigation -ISource/Data
-		Sources -IApplication -I/usr/include/freetype2 -I/usr/include/FTGL -c -
-		o Application/AppObject.o Application/AppObject.cpp
-		...
-		<snip>
-		...
-		g++ -o Build/OpenGC Application/main.o Application/AppObject.o -LBuild 
-		-L/usr/X11R6/lib -lopengc_base -lopengc_nav -lopengc_gauges -lopengc_d
-		atasource -lGL -lftgl -lfltk -lfltk_gl -lopengc_base
-		scons: done building targets.
+		$ scons -C PlatformSupport/Linux
 2) Modify default paths in Data/Preferences.xml and Data/Default.xml
 3) Now run it in test mode:
-		$ ./Build/OpenGC -t
+		$ ./PlatformSupport/Linux/build/GlassCockpit -t
    or in flight mode:
-		$ ./Build/OpenGC
+		$ ./PlatformSupport/Linux/build/GlassCockpit
    or attach it to a running FlightGear simulator:
-		$ ./Build/OpenGC -slocalhost:5800 # format is host:port
+		$ ./PlatformSupport/Linux/build/GlassCockpit -slocalhost:5800 # format is host:port
 
 _______________________________________________________________________________
 
 	2. How To - Mac OS X
 _______________________________________________________________________________
 
-1) Open the Xcode project, build and run.
+1) Open the Xcode project (in PlatformSupport/MacOSX), build and run.
 2) That's it :-)
 

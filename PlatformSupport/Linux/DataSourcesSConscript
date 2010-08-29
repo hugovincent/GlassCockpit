@@ -9,11 +9,11 @@ Import('conf')
 # All the source files need to be built (none require special treatment)
 source = [
 	'#../../Source/DataSources/AirframeDataContainer.cpp',
-	'#../../Source/DataSources/DataContainer.cpp',
-	'#../../Source/DataSources/TestDataSource.cpp',
 	'#../../Source/DataSources/AlbatrossDataSource.cpp',
+	'#../../Source/DataSources/DataContainer.cpp',
 	'#../../Source/DataSources/DataSource.cpp',
-	'#../../Source/DataSources/FGDataSource.cpp'
+	'#../../Source/DataSources/FGDataSource.cpp',
+	'#../../Source/DataSources/TestDataSource.cpp'
 ]
 
 # Build the library

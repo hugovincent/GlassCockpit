@@ -15,14 +15,14 @@ them in the Preferences section of your main XML file or Default.xml -->
 	<Preference>
 		<Name>PathToData</Name>
 		<Type>string</Type>
-		<DefaultValue>/Users/hugo/Projects/GlassCockpit/Data/</DefaultValue>
+		<DefaultValue>/home/hugo/Projects/GlassCockpit/Data/</DefaultValue>
 		<!-- Not used on Cocoa port - we use the app resource dir instead -->
 	</Preference>
 
 	<Preference>
 		<Name>PathToCaches</Name>
 		<Type>string</Type>
-		<DefaultValue>/Users/hugo/Projects/GlassCockpit/Data/</DefaultValue>
+		<DefaultValue>/home/hugo/Projects/GlassCockpit/Data/</DefaultValue>
 		<!-- Not used on Cocoa port - we use the ~/Library/Application Support/ instead -->
 	</Preference>
 

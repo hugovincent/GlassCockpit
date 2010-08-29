@@ -11,21 +11,30 @@ source = [
 	'#../../Source/Base/CalcManager.cpp',
 	'#../../Source/Base/CircleEvaluator.cpp',
 	'#../../Source/Base/Font.cpp',
+	'#../../Source/Base/Font_FileStore_BinaryIO.cpp',
+	'#../../Source/Base/Font_FileStore.cpp',
+	'#../../Source/Base/Font_GLTexture.cpp',
 	'#../../Source/Base/FontManager.cpp',
-	'#../../Source/Base/Gauge.cpp',
+	'#../../Source/Base/FontStore_Make.cpp',
 	'#../../Source/Base/GaugeComponent.cpp',
+	'#../../Source/Base/Gauge.cpp',
 	'#../../Source/Base/Globals.cpp',
 	'#../../Source/Base/MessageableList.cpp',
 	'#../../Source/Base/PrefManager.cpp',
-	'#../../Source/Base/RenderWindow.cpp',
 	'#../../Source/Base/RenderObject.cpp',
+	'#../../Source/Base/RenderWindow.cpp',
 	'#../../Source/Base/SoundManager.cpp',
+	'#../../Source/Base/XMLNode.cpp',
 	'#../../Source/Base/XMLParser.cpp',
-	'#../../Source/Base/XMLNode.cpp'
+	'#../../Source/Base/ImageCodecs/jidctflt.c',
+	'#../../Source/Base/ImageCodecs/tinyjpeg.c',
+	'#../../Source/Base/ImageCodecs/lodepng.cpp'
 ]
 
 # FIXME use pkg-config or xml2-config for libxml2
+conf["cflags"] += ' -DTARGET_RT_LITTLE_ENDIAN -DUSE_FREETYPE2'
 conf["inc_path"].append('/usr/include/libxml2')
+conf["inc_path"].append('#../../Source/Base/ImageCodecs')
 conf["linklibs"].append('xml2')
 conf["linklibs"].append('z')
 
