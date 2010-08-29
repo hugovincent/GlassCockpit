@@ -69,9 +69,10 @@ Globals *OpenGC::globals;
 	// Create writable directory if necessary
 	NSFileManager *fm = [NSFileManager defaultManager];
 	BOOL isDir = NO;
-	if (![fm fileExistsAtPath:writeableDir isDirectory:&isDir] || isDir == NO) {
+	NSString *navWriteableDir = [writeableDir stringByAppendingString:@"Navigation/"];
+	if (![fm fileExistsAtPath:navWriteableDir isDirectory:&isDir] || isDir == NO) {
 		
-		[fm createDirectoryAtPath:writeableDir withIntermediateDirectories:YES attributes:nil error:NULL];
+		[fm createDirectoryAtPath:navWriteableDir withIntermediateDirectories:YES attributes:nil error:NULL];
 	}
 	
 	// Read the XML file and do some basic checks about its contents
