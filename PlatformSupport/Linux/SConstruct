@@ -31,7 +31,7 @@ conf = {
 		'opengc_gauges',
 		'opengc_datasource',
 		'GL', 'ftgl', 'fltk', 'fltk_gl', # Core dependencies
-		'plibnet', 'plibul', # Needed for FGDataSource
+		#'plibnet', 'plibul', # Needed for FGDataSource
 		'opengc_base' # don't know why this needs to be included twice, but hey
 	]
 }
