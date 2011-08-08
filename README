@@ -46,6 +46,8 @@ _______________________________________________________________________________
 	2. How To - Linux
 _______________________________________________________________________________
 
+0) Dependencies: On Ubuntu 10.10, these dependencies were needed:
+		$ sudo apt-get install libfltk1.1-dev libxml2-dev libftgl2-dev
 1) Compile with Scons:
 		$ scons -C PlatformSupport/Linux
 2) Modify default paths in Data/Preferences.xml and Data/Default.xml
