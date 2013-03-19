@@ -1,5 +1,6 @@
 /*=========================================================================
 
+  Copyright (c) 2001-2003 Damion Shelton
   Copyright (c) 2005-2010 Hugo Vincent <hugo.vincent@gmail.com>
   All rights reserved.
   
